@@ -1,0 +1,19 @@
+{
+  "constraints": {
+    "taboos": [],
+    "budget_limit": 50,
+    "meal_pref": "正餐"
+  },
+  "goals": "无",
+  "preferences": {
+    "distance": "就近优先",
+    "queue": "接受排队"
+  },
+  "social": {
+    "companions": 1,
+    "room_code": ""
+  },
+  "disliked_ingredients": [],
+  "created_at": "2026-05-17T20:36:43.181851",
+  "updated_at": "2026-05-17T20:59:05.317121"
+}
