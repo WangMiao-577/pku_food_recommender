@@ -80,7 +80,7 @@ def color_with_alpha(color, alpha):
 
 def get_font(size=12, bold=False, italic=False) -> QFont:
     """获取统一字体"""
-    font = QFont("Microsoft YaHei", size)
+    font = QFont("STXinwei", size)
     font.setBold(bold)
     font.setItalic(italic)
     return font

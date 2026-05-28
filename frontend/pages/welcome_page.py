@@ -34,13 +34,13 @@ class FeatureCard(QFrame):
 
         # 标题
         title_lbl = QLabel(title)
-        title_lbl.setFont(get_font(16, bold=True))
+        title_lbl.setFont(get_font(13, bold=True))
         title_lbl.setStyleSheet(f"color: {COLORS[color_key].name()};")
         layout.addWidget(title_lbl)
 
         # 描述
         desc_lbl = QLabel(desc)
-        desc_lbl.setFont(get_font(11))
+        desc_lbl.setFont(get_font(10))
         desc_lbl.setStyleSheet(f"color: {COLORS['text_medium'].name()};")
         desc_lbl.setWordWrap(True)
         desc_lbl.setMinimumHeight(50)
@@ -50,10 +50,23 @@ class FeatureCard(QFrame):
 
         # 按钮
         self.btn = QPushButton(btn_text)
-        self.btn.setFont(get_font(12, bold=True))
-        self.btn.setMinimumHeight(40)
+        self.btn.setFont(get_font(20, bold=True))
+        self.btn.setMinimumHeight(70)
         self.btn.setCursor(Qt.PointingHandCursor)
-        self.btn.setStyleSheet(get_button_style(color_key))
+        self.btn.setStyleSheet(f"""
+            QPushButton {{
+                background-color: {COLORS[color_key].name()};
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-size: 24px;
+                font-weight: bold;
+                padding: 8px 16px;
+            }}
+            QPushButton:hover {{
+                background-color: {COLORS[color_key].lighter(120).name()};
+            }}
+        """)
         layout.addWidget(self.btn)
 
         # 卡片样式
@@ -112,7 +125,7 @@ class TodayCard(QFrame):
 
         # 菜品图片
         self.img_lbl = QLabel()
-        self.img_lbl.setFixedSize(200, 150)
+        self.img_lbl.setFixedSize(500, 375)
         self.img_lbl.setStyleSheet(f"""
             background-color: {COLORS['bg_warm'].name()};
             border-radius: 12px;
@@ -143,17 +156,45 @@ class TodayCard(QFrame):
         # 操作按钮
         btn_row = QHBoxLayout()
         self.eat_btn = QPushButton("这就去吃！")
-        self.eat_btn.setFont(get_font(12, bold=True))
-        self.eat_btn.setMinimumHeight(40)
+        self.eat_btn.setFont(get_font(35, bold=True))
+        self.eat_btn.setMinimumHeight(100)
         self.eat_btn.setCursor(Qt.PointingHandCursor)
-        self.eat_btn.setStyleSheet(get_button_style("primary"))
+        self.eat_btn.setStyleSheet(f"""
+            QPushButton {{
+                background-color: {COLORS["secondary"].name()};
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-size: 30px;
+                font-weight: bold;
+                padding: 8px 16px;
+            }}
+            QPushButton:hover {{
+                background-color: {COLORS["secondary"].lighter(120).name()};
+            }}
+        """)
+        self.eat_btn.setFixedWidth(250)
         btn_row.addWidget(self.eat_btn)
 
         self.alt_btn = QPushButton("换一道")
-        self.alt_btn.setFont(get_font(11))
-        self.alt_btn.setMinimumHeight(40)
+        self.alt_btn.setFont(get_font(35,bold=True))
+        self.alt_btn.setMinimumHeight(100)
         self.alt_btn.setCursor(Qt.PointingHandCursor)
-        self.alt_btn.setStyleSheet(get_button_style("secondary"))
+        self.alt_btn.setStyleSheet(f"""
+            QPushButton {{
+                background-color: {COLORS["secondary"].name()};
+                color: white;
+                border: none;
+                border-radius: 12px;
+                font-size: 30px;
+                font-weight: bold;
+                padding: 8px 16px;
+            }}
+            QPushButton:hover {{
+                background-color: {COLORS["secondary"].lighter(120).name()};
+            }}
+        """)
+        self.alt_btn.setFixedWidth(250)
         btn_row.addWidget(self.alt_btn)
 
         btn_row.addStretch()
@@ -176,6 +217,7 @@ class TodayCard(QFrame):
         shadow.setColor(QColor(0, 0, 0, 30))
         shadow.setOffset(0, 4)
         self.setGraphicsEffect(shadow)
+        self.setMinimumWidth(1300)  
 
         # 加载今日推荐
         self.load_today_recommendation()
@@ -217,7 +259,7 @@ class StatWidget(QFrame):
     def __init__(self, icon, number, label, color, parent=None):
         super().__init__(parent)
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(15, 12, 15, 12)
+        layout.setContentsMargins(15, 10, 15, 10)
         layout.setAlignment(Qt.AlignCenter)
 
         self.num = QLabel(str(number))
@@ -261,8 +303,8 @@ class WelcomePage(QWidget):
 
         # 顶部区域 - 未名湖背景
         top_area = QWidget()
-        top_area.setMinimumHeight(220)
-        top_area.setMaximumHeight(280)
+        top_area.setMinimumHeight(300)
+        top_area.setMaximumHeight(400)
         top_layout = QVBoxLayout(top_area)
         top_layout.setAlignment(Qt.AlignCenter)
 

@@ -31,8 +31,8 @@ class NavButton(QPushButton):
     def __init__(self, text, icon_text="", parent=None):
         super().__init__(text, parent)
         self.icon_text = icon_text
-        self.setFont(get_font(13))
-        self.setMinimumHeight(44)
+        self.setFont(get_font(15))
+        self.setMinimumHeight(60)
         self.setCursor(Qt.PointingHandCursor)
         self.setCheckable(True)
         self.setFlat(True)
@@ -104,14 +104,15 @@ class HeaderWidget(QFrame):
         layout.setSpacing(15)
 
         # Logo/标题
-        self.title = QLabel("今天吃什么？")
-        self.title.setFont(get_font(22, bold=True))
+        self.title = QLabel("What to eat today?")
+        self.title.setFont(get_font(20, bold=True))
         self.title.setStyleSheet(f"color: {COLORS['primary_dark'].name()};")
         layout.addWidget(self.title)
 
         # 副标题
         self.subtitle = QLabel("北京大学食堂智能推荐")
-        self.subtitle.setFont(get_font(11))
+        self.subtitle.setFont(get_font(10))
+        
         self.subtitle.setStyleSheet(f"color: {COLORS['text_light'].name()};")
         layout.addWidget(self.subtitle)
 
@@ -148,7 +149,7 @@ class HeaderWidget(QFrame):
                 stop:1 {COLORS['bg_warm'].name()});
             border-bottom: 1px solid {COLORS['border'].name()};
         """)
-        self.setMaximumHeight(70)
+        self.setMaximumHeight(120)
 
 
 class SidebarWidget(QFrame):
@@ -195,8 +196,8 @@ class SidebarWidget(QFrame):
             background-color: {COLORS['bg_card'].name()};
             border-right: 1px solid {COLORS['border_light'].name()};
         """)
-        self.setMinimumWidth(170)
-        self.setMaximumWidth(200)
+        self.setMinimumWidth(350)
+        self.setMaximumWidth(350)
 
     def on_nav_clicked(self, key):
         self.set_active(key)
@@ -273,7 +274,7 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("今天吃什么？ - 北大食堂智能推荐")
         self.setMinimumSize(1100, 750)
-        self.resize(1200, 800)
+        self.resize(2000, 1600)
 
         self.setup_ui()
         self.apply_styles()
