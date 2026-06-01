@@ -157,14 +157,17 @@ class SurveyPage(QWidget):
 
         # 顶部提示区
         header = QWidget()
-        header.setMaximumHeight(80)
+        header.setMaximumHeight(150)
         header_layout = QVBoxLayout(header)
         header_layout.setContentsMargins(20, 10, 20, 10)
 
         title = QLabel("智能推荐")
         title.setFont(get_font(20, bold=True))
-        title.setStyleSheet(f"color: {COLORS['primary_dark'].name()};")
+        title.setStyleSheet(f"""color: {COLORS['primary_dark'].name()};
+                            padding-bottom: 4px;  
+                            padding-top: 2px;""")
         header_layout.addWidget(title)
+        header_layout.addStretch()
 
         subtitle = QLabel("回答几个简单的问题，我们为你找到最合适的菜品 「人间有味是清欢」")
         subtitle.setFont(get_font(10))

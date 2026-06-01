@@ -1,10 +1,10 @@
 {
   "constraints": {
     "taboos": [],
-    "budget_limit": 50,
+    "budget_limit": 10,
     "meal_pref": "正餐"
   },
-  "goals": "均衡",
+  "goals": "无",
   "preferences": {
     "distance": "就近优先",
     "queue": "接受排队"
@@ -15,5 +15,5 @@
   },
   "disliked_ingredients": [],
   "created_at": "2026-05-18T17:59:51.570211",
-  "updated_at": "2026-05-18T17:59:53.191902"
+  "updated_at": "2026-05-28T14:58:48.347292"
 }
