@@ -14,6 +14,52 @@ from datetime import datetime
 
 from backend.data_manager import DataManager
 from backend.recommender import Recommender
+from backend.ai_backend import create_ai_backend, AIModeBackend
+
+
+# ============ 接口3: AI 模式后端（预留） ============
+
+def connect_ai_backend(config: Optional[Dict] = None) -> Dict:
+    """【预留接口】创建并返回 AI 模式后端实例信息
+
+    Args:
+        config: 可选配置 {"api_key", "api_base", "model"}
+
+    Returns:
+        {
+            "success": bool,
+            "backend": AIModeBackend instance,
+            "configured": bool,
+            "timestamp": str,
+        }
+
+    示例:
+        result = connect_ai_backend({"api_key": "sk-..."})
+        ai = result["backend"]
+        reply = ai.chat_recommend("想吃点清淡的", DataManager().get_profile())
+    """
+    config = config or {}
+    dm = DataManager()
+    backend = create_ai_backend(dm)
+    if config:
+        backend._load_config(
+            api_key=config.get("api_key"),
+            api_base=config.get("api_base"),
+            model=config.get("model"),
+        )
+    return {
+        "success": True,
+        "backend": backend,
+        "configured": backend.is_configured(),
+        "timestamp": datetime.now().isoformat(),
+    }
+
+
+def ai_chat_recommend(message: str, config: Optional[Dict] = None) -> Dict:
+    """【预留接口】单次 AI 对话推荐（无 UI）"""
+    conn = connect_ai_backend(config)
+    backend: AIModeBackend = conn["backend"]
+    return backend.chat_recommend(message, DataManager().get_profile())
 
 
 # ============ 接口1: 菜品数据导入 ============

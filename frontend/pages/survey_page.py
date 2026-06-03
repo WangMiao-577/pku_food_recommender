@@ -1,391 +1,507 @@
 """
-survey_page.py - 问卷调查页面
-评估用户选择困难程度，收集偏好信息，生成推荐
+survey_page.py - 智能推荐四步问卷 v2.0
+Step1 场景 → Step2 模式 → Step3 需求细化 → 获取推荐
 """
 
-import os
+from PyQt5.QtCore import Qt, pyqtSignal
 
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
-    QButtonGroup, QRadioButton, QCheckBox, QComboBox, QSpinBox,
-    QSlider, QGraphicsDropShadowEffect, QFrame, QScrollArea,
-    QGridLayout, QSizePolicy, QSpacerItem, QProgressBar, QMessageBox
+    QButtonGroup, QCheckBox, QGraphicsDropShadowEffect, QFrame,
+    QScrollArea, QGridLayout, QStackedWidget, QMessageBox,
 )
-from PyQt5.QtGui import QColor, QFont
-from PyQt5.QtCore import Qt, pyqtSignal
 
-from frontend.watercolor_style import COLORS, get_font, get_button_style, POEMS
+from frontend.watercolor_style import COLORS, get_font, get_button_style, color_with_alpha
 
 
-class QuestionCard(QFrame):
-    """问题卡片"""
+SCENE_OPTIONS = [
+    ("独自速食", "快速解决，一个人也好", "⚡"),
+    ("独自慢食", "享受独处，慢慢品味", "☕"),
+    ("同伴聚餐", "三五好友，共享美味", "👥"),
+    ("团体宴请", "课题组/社团聚餐", "🎉"),
+]
 
-    def __init__(self, question_num, question_text, parent=None):
+MODE_OPTIONS = [
+    ("stable", "稳定模式", "推荐你常吃的熟悉菜品，安全不出错", "熟悉的味道", "#F0F5EE"),
+    ("explore", "探索模式", "根据偏好探索从未尝试的新菜品", "发现新美味", "#F3F0F8"),
+]
+
+BUDGET_OPTIONS = ["10元以内", "10-20元", "20-30元", "30元以上"]
+FLAVOR_OPTIONS = ["清淡", "微辣", "麻辣", "酸甜", "浓郁"]
+LOCATION_OPTIONS = [
+    "东南门/东门附近", "西南门附近", "西北门/西门附近",
+    "中部教学区", "北部生活区",
+]
+
+BUDGET_MAP = {0: 10, 1: 20, 2: 30, 3: 50}
+
+
+class StepIndicator(QFrame):
+    """四步进度条"""
+
+    STEPS = ["场景", "模式", "需求", "结果"]
+
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.question_num = question_num
-        self.setup_ui(question_text)
+        self.labels = []
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(8)
 
-    def setup_ui(self, question_text):
+        for i, name in enumerate(self.STEPS):
+            lbl = QLabel(f"{i + 1}. {name}")
+            lbl.setFont(get_font(10))
+            lbl.setAlignment(Qt.AlignCenter)
+            lbl.setMinimumWidth(72)
+            self.labels.append(lbl)
+            layout.addWidget(lbl)
+            if i < len(self.STEPS) - 1:
+                arrow = QLabel("→")
+                arrow.setStyleSheet(f"color: {COLORS['text_light'].name()};")
+                layout.addWidget(arrow)
+        layout.addStretch()
+        self.set_current(0)
+
+    def set_current(self, step: int):
+        for i, lbl in enumerate(self.labels):
+            if i == step:
+                lbl.setStyleSheet(f"""
+                    color: white;
+                    background: {COLORS['primary'].name()};
+                    border-radius: 12px;
+                    padding: 6px 10px;
+                """)
+            elif i < step:
+                lbl.setStyleSheet(f"""
+                    color: {COLORS['secondary_dark'].name()};
+                    background: {color_with_alpha(COLORS['secondary'], 60)};
+                    border-radius: 12px;
+                    padding: 6px 10px;
+                """)
+            else:
+                lbl.setStyleSheet(f"""
+                    color: {COLORS['text_light'].name()};
+                    background: {COLORS['border_light'].name()};
+                    border-radius: 12px;
+                    padding: 6px 10px;
+                """)
+
+
+class SelectableCard(QFrame):
+    """可点击选择卡片"""
+
+    clicked = pyqtSignal(int)
+
+    def __init__(self, index, title, desc="", icon="", bg="#FFFDF8", parent=None):
+        super().__init__(parent)
+        self.index = index
+        self.selected = False
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(20, 15, 20, 15)
-        layout.setSpacing(10)
+        layout.setContentsMargins(16, 14, 16, 14)
+        self.bg = bg
 
-        # 问题标题
-        title = QLabel(f"Q{self.question_num}: {question_text}")
-        title.setFont(get_font(13, bold=True))
-        title.setStyleSheet(f"color: {COLORS['text_dark'].name()};")
-        title.setWordWrap(True)
-        layout.addWidget(title)
+        if icon:
+            icon_lbl = QLabel(icon)
+            icon_lbl.setFont(get_font(22))
+            layout.addWidget(icon_lbl)
 
-        # 答案区域（由子类填充）
-        self.answer_area = QWidget()
-        self.answer_layout = QVBoxLayout(self.answer_area)
-        self.answer_layout.setSpacing(8)
-        layout.addWidget(self.answer_area)
+        title_lbl = QLabel(title)
+        title_lbl.setFont(get_font(14, bold=True))
+        title_lbl.setStyleSheet(f"color: {COLORS['text_dark'].name()};")
+        layout.addWidget(title_lbl)
 
-        # 样式
+        if desc:
+            d = QLabel(desc)
+            d.setFont(get_font(10))
+            d.setStyleSheet(f"color: {COLORS['text_light'].name()};")
+            d.setWordWrap(True)
+            layout.addWidget(d)
+
+        self.setCursor(Qt.PointingHandCursor)
+        self.setMinimumHeight(100)
+        self._apply_style()
+
+    def mousePressEvent(self, event):
+        self.clicked.emit(self.index)
+        super().mousePressEvent(event)
+
+    def set_selected(self, selected: bool):
+        self.selected = selected
+        self._apply_style()
+
+    def _apply_style(self):
+        border = COLORS["primary"].name() if self.selected else COLORS["border_light"].name()
+        width = 2 if self.selected else 1
+        bg = self.bg if not self.selected else color_with_alpha(COLORS["primary"], 25)
         self.setStyleSheet(f"""
             QFrame {{
-                background-color: {COLORS['bg_card'].name()};
-                border: 1px solid {COLORS['border_light'].name()};
-                border-radius: 12px;
-            }}
-        """)
-        shadow = QGraphicsDropShadowEffect(self)
-        shadow.setBlurRadius(12)
-        shadow.setColor(QColor(0, 0, 0, 20))
-        shadow.setOffset(0, 2)
-        self.setGraphicsEffect(shadow)
-
-
-class RadioQuestion(QuestionCard):
-    """单选题"""
-
-    def __init__(self, num, text, options, parent=None):
-        super().__init__(num, text, parent)
-        self.group = QButtonGroup(self)
-        self.options = []
-        for i, opt in enumerate(options):
-            rb = QRadioButton(opt)
-            rb.setFont(get_font(11))
-            rb.setStyleSheet(f"color: {COLORS['text_medium'].name()}; padding: 3px;")
-            self.group.addButton(rb, i)
-            self.answer_layout.addWidget(rb)
-            self.options.append(rb)
-
-    def get_answer(self):
-        return self.group.checkedId()
-
-
-class CheckQuestion(QuestionCard):
-    """多选题"""
-
-    def __init__(self, num, text, options, parent=None):
-        super().__init__(num, text, parent)
-        self.checks = []
-        for opt in options:
-            cb = QCheckBox(opt)
-            cb.setFont(get_font(11))
-            cb.setStyleSheet(f"color: {COLORS['text_medium'].name()}; padding: 3px;")
-            self.answer_layout.addWidget(cb)
-            self.checks.append(cb)
-
-    def get_answer(self):
-        return [i for i, cb in enumerate(self.checks) if cb.isChecked()]
-
-
-class SliderQuestion(QuestionCard):
-    """滑块题"""
-
-    def __init__(self, num, text, min_val=1, max_val=5, labels=None, parent=None):
-        super().__init__(num, text, parent)
-
-        self.slider = QSlider(Qt.Horizontal)
-        self.slider.setRange(min_val, max_val)
-        self.slider.setValue((min_val + max_val) // 2)
-        self.slider.setStyleSheet(f"""
-            QSlider::groove:horizontal {{
-                height: 8px;
-                background: {COLORS['border'].name()};
-                border-radius: 4px;
-            }}
-            QSlider::handle:horizontal {{
-                width: 20px;
-                height: 20px;
-                background: {COLORS['primary'].name()};
-                border-radius: 10px;
-                margin: -6px 0;
-            }}
-            QSlider::sub-page:horizontal {{
-                background: {COLORS['primary_light'].name()};
-                border-radius: 4px;
+                background-color: {bg};
+                border: {width}px solid {border};
+                border-radius: 16px;
             }}
         """)
 
-        if labels:
-            label_row = QHBoxLayout()
-            for lbl in labels:
-                l = QLabel(lbl)
-                l.setFont(get_font(9))
-                l.setStyleSheet(f"color: {COLORS['text_light'].name()};")
-                label_row.addWidget(l)
-                label_row.addStretch() if lbl != labels[-1] else None
-            self.answer_layout.addLayout(label_row)
 
-        self.answer_layout.addWidget(self.slider)
+class TagChip(QPushButton):
+    """标签式选项"""
 
-    def get_answer(self):
-        return self.slider.value()
+    def __init__(self, text, index, multi=False, parent=None):
+        super().__init__(text, parent)
+        self.chip_index = index
+        self.multi = multi
+        self.setCheckable(True)
+        self.setFont(get_font(11))
+        self.setCursor(Qt.PointingHandCursor)
+        self.setMinimumHeight(36)
+        self._update_style()
+
+    def _update_style(self):
+        if self.isChecked():
+            self.setStyleSheet(f"""
+                QPushButton {{
+                    background: {COLORS['primary'].name()};
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 6px 14px;
+                }}
+            """)
+        else:
+            self.setStyleSheet(f"""
+                QPushButton {{
+                    background: {COLORS['bg_warm'].name()};
+                    color: {COLORS['text_medium'].name()};
+                    border: 1px solid {COLORS['border'].name()};
+                    border-radius: 8px;
+                    padding: 6px 14px;
+                }}
+                QPushButton:hover {{ background: {COLORS['border_light'].name()}; }}
+            """)
+
+    def setChecked(self, checked):
+        super().setChecked(checked)
+        self._update_style()
 
 
 class SurveyPage(QWidget):
-    """问卷调查页面"""
+    """四步智能推荐问卷"""
 
-    recommendation_ready = pyqtSignal(list)
+    recommendation_ready = pyqtSignal(dict)
 
     def __init__(self, dm, recommender, parent=None):
         super().__init__(parent)
         self.dm = dm
         self.recommender = recommender
-        self.questions = []
+        self.current_step = 0
+        self.answers = {
+            "meal_scene": None,
+            "recommend_mode": "stable",
+            "remember_mode": False,
+            "budget": None,
+            "flavors": [],
+            "location": None,
+        }
+        self.scene_cards = []
+        self.mode_cards = []
+        self.budget_chips = []
+        self.flavor_chips = []
+        self.location_chips = []
         self.setup_ui()
 
     def setup_ui(self):
-        main_layout = QVBoxLayout(self)
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(0)
+        main = QVBoxLayout(self)
+        main.setContentsMargins(0, 0, 0, 0)
+        main.setSpacing(0)
 
-        # 顶部提示区
         header = QWidget()
-        header.setMaximumHeight(150)
         header_layout = QVBoxLayout(header)
-        header_layout.setContentsMargins(20, 10, 20, 10)
+        header_layout.setContentsMargins(24, 12, 24, 8)
 
         title = QLabel("智能推荐")
-        title.setFont(get_font(20, bold=True))
-        title.setStyleSheet(f"""color: {COLORS['primary_dark'].name()};
-                            padding-bottom: 4px;  
-                            padding-top: 2px;""")
+        title.setFont(get_font(22, bold=True))
+        title.setStyleSheet(f"color: {COLORS['text_dark'].name()};")
         header_layout.addWidget(title)
-        header_layout.addStretch()
 
-        subtitle = QLabel("回答几个简单的问题，我们为你找到最合适的菜品 「人间有味是清欢」")
-        subtitle.setFont(get_font(10))
+        subtitle = QLabel("选择你的用餐偏好")
+        subtitle.setFont(get_font(11))
         subtitle.setStyleSheet(f"color: {COLORS['text_light'].name()};")
         header_layout.addWidget(subtitle)
 
-        main_layout.addWidget(header)
+        self.step_indicator = StepIndicator()
+        header_layout.addWidget(self.step_indicator)
+        main.addWidget(header)
 
-        # 滚动内容区
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setStyleSheet("border: none; background: transparent;")
 
-        container = QWidget()
-        self.content = QVBoxLayout(container)
-        self.content.setSpacing(15)
-        self.content.setContentsMargins(20, 10, 20, 20)
+        outer = QWidget()
+        outer_layout = QVBoxLayout(outer)
+        outer_layout.setContentsMargins(24, 8, 24, 16)
 
-        # 进度条
-        self.progress = QProgressBar()
-        self.progress.setMaximumHeight(6)
-        self.progress.setStyleSheet(f"""
-            QProgressBar {{
-                border: none;
-                background: {COLORS['border_light'].name()};
-                border-radius: 3px;
-                max-height: 6px;
-            }}
-            QProgressBar::chunk {{
-                background: {COLORS['primary'].name()};
-                border-radius: 3px;
+        self.stack = QStackedWidget()
+        self.stack.addWidget(self._build_step_scene())
+        self.stack.addWidget(self._build_step_mode())
+        self.stack.addWidget(self._build_step_needs())
+        outer_layout.addWidget(self.stack)
+
+        nav = QHBoxLayout()
+        self.back_btn = QPushButton("上一步")
+        self.back_btn.setFont(get_font(11))
+        self.back_btn.setMinimumHeight(40)
+        self.back_btn.setCursor(Qt.PointingHandCursor)
+        self.back_btn.setStyleSheet(get_button_style("secondary"))
+        self.back_btn.clicked.connect(self.go_back)
+        self.back_btn.setVisible(False)
+        nav.addWidget(self.back_btn)
+
+        nav.addStretch()
+
+        self.next_btn = QPushButton("下一步")
+        self.next_btn.setFont(get_font(12, bold=True))
+        self.next_btn.setMinimumHeight(44)
+        self.next_btn.setMinimumWidth(140)
+        self.next_btn.setCursor(Qt.PointingHandCursor)
+        self.next_btn.setStyleSheet(get_button_style("primary", radius=22))
+        self.next_btn.clicked.connect(self.go_next)
+        nav.addWidget(self.next_btn)
+
+        outer_layout.addLayout(nav)
+        scroll.setWidget(outer)
+        main.addWidget(scroll)
+
+    def _step_frame(self, question: str) -> tuple:
+        frame = QFrame()
+        layout = QVBoxLayout(frame)
+        layout.setSpacing(14)
+        q = QLabel(question)
+        q.setFont(get_font(13, bold=True))
+        q.setStyleSheet(f"color: {COLORS['text_dark'].name()};")
+        q.setWordWrap(True)
+        layout.addWidget(q)
+        return frame, layout
+
+    def _build_step_scene(self):
+        frame, layout = self._step_frame("Step 1 · 今天的用餐场景是？")
+        grid = QGridLayout()
+        grid.setSpacing(12)
+        self.scene_cards.clear()
+        for i, (title, desc, icon) in enumerate(SCENE_OPTIONS):
+            card = SelectableCard(i, title, desc, icon)
+            card.clicked.connect(self._on_scene_selected)
+            self.scene_cards.append(card)
+            grid.addWidget(card, i // 2, i % 2)
+        layout.addLayout(grid)
+        layout.addStretch()
+        return frame
+
+    def _build_step_mode(self):
+        frame, layout = self._step_frame("Step 2 · 选择推荐模式")
+        self.mode_cards.clear()
+        for i, (mode_id, title, desc, tag, bg) in enumerate(MODE_OPTIONS):
+            card = SelectableCard(i, title, f"{desc}\n[{tag}]", bg=bg)
+            card.mode_id = mode_id
+            card.clicked.connect(self._on_mode_selected)
+            self.mode_cards.append(card)
+            layout.addWidget(card)
+
+        self.remember_cb = QCheckBox("记住我的选择")
+        self.remember_cb.setFont(get_font(11))
+        self.remember_cb.setStyleSheet(f"color: {COLORS['text_medium'].name()};")
+        layout.addWidget(self.remember_cb, alignment=Qt.AlignCenter)
+        layout.addStretch()
+        return frame
+
+    def _build_step_needs(self):
+        frame, layout = self._step_frame("Step 3 · 细化你的需求")
+
+        layout.addWidget(self._question_block("今天的预算？", self._make_single_group(BUDGET_OPTIONS, self.budget_chips, False)))
+        layout.addWidget(self._question_block("想吃什么口味？（可多选）", self._make_single_group(FLAVOR_OPTIONS, self.flavor_chips, True)))
+        layout.addWidget(self._question_block("你当前大概在校园哪个位置？", self._make_single_group(LOCATION_OPTIONS, self.location_chips, False)))
+        layout.addStretch()
+        return frame
+
+    def _question_block(self, title, widget):
+        box = QFrame()
+        box.setStyleSheet(f"""
+            QFrame {{
+                background: {COLORS['bg_card'].name()};
+                border: 1px solid {COLORS['border_light'].name()};
+                border-radius: 12px;
+                padding: 4px;
             }}
         """)
-        self.content.addWidget(self.progress)
+        v = QVBoxLayout(box)
+        lbl = QLabel(title)
+        lbl.setFont(get_font(11, bold=True))
+        lbl.setStyleSheet(f"color: {COLORS['text_medium'].name()};")
+        v.addWidget(lbl)
+        v.addWidget(widget)
+        return box
 
-        # 创建问题
-        self.create_questions()
+    def _make_single_group(self, options, store_list, multi):
+        w = QWidget()
+        row = QHBoxLayout(w)
+        row.setSpacing(8)
+        store_list.clear()
+        group = QButtonGroup(w) if not multi else None
+        for i, opt in enumerate(options):
+            chip = TagChip(opt, i, multi)
+            if group:
+                group.addButton(chip, i)
+                chip.clicked.connect(chip._update_style)
+            else:
+                chip.clicked.connect(lambda checked, c=chip: c._update_style())
+            row.addWidget(chip)
+            store_list.append(chip)
+        row.addStretch()
+        return w
 
-        # 提交按钮
-        btn_row = QHBoxLayout()
-        btn_row.addStretch()
+    def _on_scene_selected(self, index):
+        self.answers["meal_scene"] = index
+        for i, c in enumerate(self.scene_cards):
+            c.set_selected(i == index)
 
-        self.submit_btn = QPushButton("获取推荐 ✨")
-        self.submit_btn.setFont(get_font(14, bold=True))
-        self.submit_btn.setMinimumHeight(48)
-        self.submit_btn.setMinimumWidth(180)
-        self.submit_btn.setCursor(Qt.PointingHandCursor)
-        self.submit_btn.setStyleSheet(get_button_style("primary", radius=24))
-        self.submit_btn.clicked.connect(self.on_submit)
-        btn_row.addWidget(self.submit_btn)
+    def _on_mode_selected(self, index):
+        self.answers["recommend_mode"] = MODE_OPTIONS[index][0]
+        for i, c in enumerate(self.mode_cards):
+            c.set_selected(i == index)
 
-        btn_row.addStretch()
-        self.content.addLayout(btn_row)
+    def go_back(self):
+        if self.current_step > 0:
+            self.current_step -= 1
+            self.stack.setCurrentIndex(self.current_step)
+            self.step_indicator.set_current(self.current_step)
+            self.back_btn.setVisible(self.current_step > 0)
+            self.next_btn.setText("下一步" if self.current_step < 2 else "获取推荐 ✨")
 
-        self.content.addStretch()
-
-        scroll.setWidget(container)
-        main_layout.addWidget(scroll)
-
-    def create_questions(self):
-        """创建问卷问题"""
-        self.questions.clear()
-
-        # 问题1：选择困难程度
-        q1 = RadioQuestion(1, "你今天选择困难的程度如何？",
-                          ["完全不纠结，随便吃",
-                           "稍微想一下就行",
-                           "有点纠结，需要建议",
-                           "非常纠结，完全不知道吃什么"])
-        self.questions.append(q1)
-        self.content.addWidget(q1)
-
-        # 问题2：用餐场景
-        q2 = RadioQuestion(2, "今天的用餐场景是？",
-                          ["一个人快速解决",
-                           "一个人慢慢享用",
-                           "和同学/朋友一起",
-                           "聚餐/庆祝"])
-        self.questions.append(q2)
-        self.content.addWidget(q2)
-
-        # 问题3：时间紧迫度
-        q3 = SliderQuestion(3, "你有多少时间用餐？（1=非常赶，5=很充裕）",
-                           1, 5, ["很赶", "", "一般", "", "充裕"])
-        self.questions.append(q3)
-        self.content.addWidget(q3)
-
-        # 问题4：营养目标
-        q4 = RadioQuestion(4, "今天的饮食目标是？",
-                          ["减脂控卡", "均衡饮食", "想多吃点蛋白质", "无所谓，好吃就行"])
-        self.questions.append(q4)
-        self.content.addWidget(q4)
-
-        # 问题5：口味偏好
-        q5 = CheckQuestion(5, "今天想吃的口味？（可多选）",
-                          ["清淡鲜美", "微辣开胃", "麻辣重口", "酸甜可口", "浓郁香醇"])
-        self.questions.append(q5)
-        self.content.addWidget(q5)
-
-        # 问题6：菜系偏好
-        q6 = CheckQuestion(6, "偏好哪些菜系？（可多选）",
-                          ["川湘麻辣", "粤式清淡", "北方家常", "日韩料理", "西式简餐"])
-        self.questions.append(q6)
-        self.content.addWidget(q6)
-
-        # 问题7：距离
-        q7 = RadioQuestion(7, "你愿意走多远去吃饭？",
-                          ["就在附近", "多走几步没问题", "远一点也可以", "无所谓距离"])
-        self.questions.append(q7)
-        self.content.addWidget(q7)
-
-        # 问题8：预算
-        q8 = RadioQuestion(8, "今天的预算大概是？",
-                          ["10元以内", "10-20元", "20-30元", "30元以上"])
-        self.questions.append(q8)
-        self.content.addWidget(q8)
-
-        # 更新进度条
-        self.progress.setMaximum(len(self.questions))
-        self.progress.setValue(0)
-        for q in self.questions:
-            if hasattr(q, 'group'):
-                q.group.buttonClicked.connect(self.update_progress)
-            elif hasattr(q, 'slider'):
-                q.slider.valueChanged.connect(self.update_progress)
-            elif hasattr(q, 'checks'):
-                for cb in q.checks:
-                    cb.stateChanged.connect(self.update_progress)
-
-    def update_progress(self):
-        """更新进度"""
-        answered = sum(1 for q in self.questions if self.is_answered(q))
-        self.progress.setValue(answered)
-
-    def is_answered(self, question):
-        """检查问题是否已回答"""
-        if isinstance(question, RadioQuestion):
-            return question.get_answer() >= 0
-        elif isinstance(question, CheckQuestion):
-            return len(question.get_answer()) > 0
-        elif isinstance(question, SliderQuestion):
-            return True  # 滑块总有值
-        return False
-
-    def on_submit(self):
-        """提交问卷，生成推荐"""
-        # 检查是否都回答了
-        unanswered = [i + 1 for i, q in enumerate(self.questions) if not self.is_answered(q)]
-        if unanswered:
-            QMessageBox.information(self, "提示",
-                                    f"请回答第 {', '.join(map(str, unanswered))} 题后再提交~")
+    def go_next(self):
+        if not self._validate_step():
             return
 
-        # 解析答案，更新用户画像
-        answers = self.collect_answers()
-        self.update_profile(answers)
+        if self.current_step < 2:
+            self.current_step += 1
+            self.stack.setCurrentIndex(self.current_step)
+            self.step_indicator.set_current(self.current_step)
+            self.back_btn.setVisible(True)
+            self.next_btn.setText("获取推荐 ✨" if self.current_step == 2 else "下一步")
+            if self.current_step == 1:
+                self._load_saved_mode()
+            return
 
-        # 确定推荐模式
-        mode = self.determine_mode(answers)
+        self._submit()
 
-        # 生成推荐
-        recommendations = self.recommender.recommend(top_k=5, mode=mode)
-
-        if recommendations:
-            self.recommendation_ready.emit(recommendations)
-        else:
-            QMessageBox.information(self, "提示",
-                                    "没有找到匹配的菜品，建议放宽条件再试~")
-
-    def collect_answers(self):
-        """收集答案"""
-        return [q.get_answer() for q in self.questions]
-
-    def update_profile(self, answers):
-        """根据答案更新用户画像"""
+    def _load_saved_mode(self):
         profile = self.dm.get_profile()
+        mode = profile.get("default_mode", "stable")
+        for i, (mode_id, *_) in enumerate(MODE_OPTIONS):
+            if mode_id == mode:
+                self._on_mode_selected(i)
+                break
 
-        # 问题2：用餐场景 -> 社交属性
-        scene_map = {0: 1, 1: 1, 2: 2, 3: 4}
-        if answers[1] in scene_map:
-            profile["social"]["companions"] = scene_map[answers[1]]
+    def _validate_step(self) -> bool:
+        if self.current_step == 0 and self.answers["meal_scene"] is None:
+            QMessageBox.information(self, "提示", "请选择一个用餐场景~")
+            return False
+        if self.current_step == 1 and not any(c.selected for c in self.mode_cards):
+            QMessageBox.information(self, "提示", "请选择稳定模式或探索模式~")
+            return False
+        if self.current_step == 2:
+            if not any(c.isChecked() for c in self.budget_chips):
+                QMessageBox.information(self, "提示", "请选择预算范围~")
+                return False
+            if not any(c.isChecked() for c in self.flavor_chips):
+                QMessageBox.information(self, "提示", "请至少选择一种口味~")
+                return False
+            if not any(c.isChecked() for c in self.location_chips):
+                QMessageBox.information(self, "提示", "请选择当前位置~")
+                return False
+        return True
 
-        # 问题3：时间 -> 偏好
-        if answers[2] <= 2:
-            profile["preferences"]["distance"] = "就近优先"
+    def _collect_step3(self):
+        for c in self.budget_chips:
+            if c.isChecked():
+                self.answers["budget"] = c.chip_index
+                break
+        self.answers["flavors"] = [c.chip_index for c in self.flavor_chips if c.isChecked()]
+        for c in self.location_chips:
+            if c.isChecked():
+                self.answers["location"] = c.chip_index
+                break
+        self.answers["remember_mode"] = self.remember_cb.isChecked()
+
+    def _submit(self):
+        self._collect_step3()
+        self._update_profile()
+        context = self._build_context()
+        legacy_mode = "social" if self.answers["meal_scene"] in (2, 3) else "normal"
+        if self.answers["meal_scene"] == 0:
+            legacy_mode = "rush"
+
+        result = self.recommender.recommend_full(top_k=5, mode=legacy_mode, context=context)
+        if result.get("dishes"):
+            self.step_indicator.set_current(3)
+            self.recommendation_ready.emit(result)
         else:
-            profile["preferences"]["distance"] = "愿意多走"
+            QMessageBox.information(self, "提示", "没有找到匹配的菜品，建议放宽条件再试~")
 
-        # 问题4：营养目标
-        goal_map = {0: "减脂", 1: "均衡", 2: "增肌", 3: "无"}
-        if answers[3] in goal_map:
-            profile["goals"] = goal_map[answers[3]]
+    def _update_profile(self):
+        profile = self.dm.get_profile()
+        scene_names = [s[0] for s in SCENE_OPTIONS]
+        scene_idx = self.answers["meal_scene"]
+        if scene_idx is not None:
+            profile["meal_scenes"] = [scene_names[scene_idx]]
+            companions_map = {0: 1, 1: 1, 2: 2, 3: 4}
+            profile.setdefault("social", {})["companions"] = companions_map.get(scene_idx, 1)
 
-        # 问题7：距离
-        dist_map = {0: "就近优先", 1: "就近优先", 2: "愿意多走", 3: "愿意多走"}
-        if answers[6] in dist_map:
-            profile["preferences"]["distance"] = dist_map[answers[6]]
+        mode = self.answers["recommend_mode"]
+        profile["default_mode"] = mode
+        if self.answers["remember_mode"]:
+            self.dm.update_settings({"default_recommend_mode": mode, "explore_mode": mode == "explore"})
 
-        # 问题8：预算
-        budget_map = {0: 10, 1: 20, 2: 30, 3: 50}
-        if answers[7] in budget_map:
-            profile["constraints"]["budget_limit"] = budget_map[answers[7]]
+        budget_idx = self.answers.get("budget")
+        if budget_idx is not None:
+            limit = BUDGET_MAP.get(budget_idx, 30)
+            profile.setdefault("constraints", {})["budget_limit"] = limit
+            profile["budget_range"] = {"min": 0, "max": limit}
+
+        profile["preferred_flavors"] = [FLAVOR_OPTIONS[i] for i in self.answers.get("flavors", [])]
+
+        loc_idx = self.answers.get("location")
+        if loc_idx is not None:
+            profile["current_location"] = LOCATION_OPTIONS[loc_idx]
 
         self.dm.update_profile(profile)
 
-    def determine_mode(self, answers):
-        """确定推荐模式"""
-        # 问题1：选择困难程度
-        if answers[0] in [0, 1]:
-            return "normal"
-        # 问题3：时间紧迫
-        if answers[2] == 1:
-            return "rush"
-        # 问题2：聚餐
-        if answers[1] in [2, 3]:
-            return "social"
-        return "normal"
+    def _build_context(self):
+        scene_names = [s[0] for s in SCENE_OPTIONS]
+        scene_idx = self.answers["meal_scene"]
+        budget_idx = self.answers.get("budget", 1)
+
+        return {
+            "recommend_mode": self.answers["recommend_mode"],
+            "meal_scene": scene_names[scene_idx] if scene_idx is not None else None,
+            "budget_limit": BUDGET_MAP.get(budget_idx, 30),
+            "preferred_flavors": [FLAVOR_OPTIONS[i] for i in self.answers.get("flavors", [])],
+            "location": LOCATION_OPTIONS[self.answers["location"]] if self.answers.get("location") is not None else "",
+            "include_combos": scene_idx in (2, 3),
+        }
 
     def refresh(self):
-        """刷新页面"""
-        pass
+        self.current_step = 0
+        self.stack.setCurrentIndex(0)
+        self.step_indicator.set_current(0)
+        self.back_btn.setVisible(False)
+        self.next_btn.setText("下一步")
+        self.answers = {
+            "meal_scene": None,
+            "recommend_mode": "stable",
+            "remember_mode": False,
+            "budget": None,
+            "flavors": [],
+            "location": None,
+        }
+        for c in self.scene_cards:
+            c.set_selected(False)
+        for c in self.mode_cards:
+            c.set_selected(False)

@@ -46,6 +46,30 @@ CANTEENS = [
      "windows": ["咖啡", "简餐", "烘焙"]},
 ]
 
+# 校园区域划分（用于位置推荐）
+CAMPUS_REGIONS = {
+    "east": {"name": "东区", "canteens": ["农园食堂", "成府园"]},
+    "southeast": {"name": "东南区", "canteens": ["家园食堂"]},
+    "southwest": {"name": "西南区", "canteens": ["学一食堂", "松林"]},
+    "west": {"name": "西区", "canteens": ["学五食堂", "艺园"]},
+    "northwest": {"name": "西北区", "canteens": ["勺园", "勺中", "勺西", "佟园"]},
+    "center": {"name": "中区", "canteens": ["燕南美食", "快餐车"]},
+    "south": {"name": "南区", "canteens": ["畅春园"]},
+    "northeast": {"name": "东北区", "canteens": ["二教地下3W"]},
+}
+
+CANTEEN_NAME_TO_ID = {c["name"]: c["id"] for c in CANTEENS}
+CANTEEN_ID_TO_NAME = {c["id"]: c["name"] for c in CANTEENS}
+
+LOCATION_TO_REGIONS = {
+    "东南门/东门附近": ["southeast", "east"],
+    "西南门附近": ["southwest"],
+    "西北门/西门附近": ["northwest"],
+    "中部教学区": ["center", "northeast"],
+    "北部生活区": ["west", "northwest"],
+    "图书馆附近": ["center", "northeast"],
+}
+
 DEFAULT_DISHES = [
     {
         "id": "d001", "name": "麻婆豆腐", "canteen": "家园食堂", "window": "川菜",
@@ -329,6 +353,55 @@ class DataManager:
         return sum(1 for h in self.history
                    if h["dish_id"] == dish_id and datetime.fromisoformat(h["time"]) > cutoff)
 
+    def get_eaten_dish_ids(self, days: int = 30) -> set:
+        """获取近N天内吃过的菜品ID集合"""
+        cutoff = datetime.now() - timedelta(days=days)
+        return {
+            h["dish_id"] for h in self.history
+            if datetime.fromisoformat(h["time"]) > cutoff
+        }
+
+    def get_last_eaten_time(self, dish_id: str) -> Optional[datetime]:
+        """获取某菜品最近一次就餐时间"""
+        latest = None
+        for h in self.history:
+            if h["dish_id"] != dish_id:
+                continue
+            t = datetime.fromisoformat(h["time"])
+            if latest is None or t > latest:
+                latest = t
+        return latest
+
+    def has_eating_history(self) -> bool:
+        """是否有就餐历史"""
+        return len(self.history) > 0
+
+    def get_canteen_region(self, canteen_name: str) -> Optional[str]:
+        """根据食堂名称获取所属校园区域ID"""
+        for region_id, info in CAMPUS_REGIONS.items():
+            if canteen_name in info["canteens"]:
+                return region_id
+        return None
+
+    def get_budget_limit(self) -> float:
+        """从用户画像读取预算上限（兼容新旧格式）"""
+        profile = self.profile
+        if "budget_range" in profile:
+            return profile["budget_range"].get("max", 50)
+        return profile.get("constraints", {}).get("budget_limit", 50)
+
+    def get_nutrition_goal(self) -> str:
+        """读取营养目标（兼容新旧格式）"""
+        return self.profile.get("nutrition_goals") or self.profile.get("goals", "均衡")
+
+    def get_preferred_flavors(self) -> List[str]:
+        """读取口味偏好（兼容新旧格式）"""
+        return self.profile.get("preferred_flavors", [])
+
+    def get_disliked_flavors(self) -> List[str]:
+        """读取不喜欢的口味"""
+        return self.profile.get("disliked_flavors", [])
+
     # ============ 评价数据 ============
 
     def _load_reviews(self) -> List[Dict]:
@@ -400,11 +473,12 @@ class DataManager:
     def _default_settings() -> Dict:
         """默认设置"""
         return {
-            "explore_mode": False,  # 探索模式
+            "explore_mode": False,
             "explore_epsilon": 0.15,
+            "default_recommend_mode": "stable",
             "notifications": True,
-            "theme": "watercolor",  # watercolor / light / dark
-            "font_size": "medium",  # small / medium / large
+            "theme": "watercolor",
+            "font_size": "medium",
         }
 
     def _save_settings(self):

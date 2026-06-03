@@ -1,7 +1,9 @@
 """
 settings_page.py - 设置页面
-用户偏好设置、关于信息、数据管理
+用户偏好设置、AI 配置、关于信息、数据管理
 """
+
+import os
 
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
@@ -143,6 +145,65 @@ class SettingsPage(QWidget):
 
         content.addWidget(explore_group)
 
+        # ===== 默认推荐模式 =====
+        default_mode_group = QGroupBox("默认推荐模式")
+        default_mode_group.setFont(get_font(13, bold=True))
+        dm_layout = QVBoxLayout(default_mode_group)
+
+        self.stable_mode_rb = QCheckBox("稳定模式（推荐熟悉的菜）")
+        self.explore_mode_rb = QCheckBox("探索模式（发现新菜品）")
+        for rb in (self.stable_mode_rb, self.explore_mode_rb):
+            rb.setFont(get_font(11))
+            rb.stateChanged.connect(self._on_default_mode_changed)
+            dm_layout.addWidget(rb)
+
+        content.addWidget(default_mode_group)
+
+        # ===== AI 模式配置 =====
+        ai_group = QGroupBox("AI 模式配置")
+        ai_group.setFont(get_font(13, bold=True))
+        ai_layout = QVBoxLayout(ai_group)
+        ai_layout.setSpacing(10)
+
+        key_row = QHBoxLayout()
+        key_row.addWidget(QLabel("API 密钥:"))
+        self.ai_key = QLineEdit()
+        self.ai_key.setEchoMode(QLineEdit.Password)
+        self.ai_key.setPlaceholderText("请输入你的 API 密钥")
+        self.ai_key.textChanged.connect(self.save_ai_config)
+        key_row.addWidget(self.ai_key)
+        ai_layout.addLayout(key_row)
+
+        base_row = QHBoxLayout()
+        base_row.addWidget(QLabel("API 地址:"))
+        self.ai_base = QLineEdit()
+        self.ai_base.setPlaceholderText("https://api.deepseek.com")
+        self.ai_base.textChanged.connect(self.save_ai_config)
+        base_row.addWidget(self.ai_base)
+        ai_layout.addLayout(base_row)
+
+        model_row = QHBoxLayout()
+        model_row.addWidget(QLabel("模型:"))
+        self.ai_model = QComboBox()
+        self.ai_model.addItems(["deepseek-v4-flash", "DeepSeek Flash", "claude-3-sonnet", "deepseek"])
+        self.ai_model.currentTextChanged.connect(self.save_ai_config)
+        model_row.addWidget(self.ai_model)
+        model_row.addStretch()
+        ai_layout.addLayout(model_row)
+
+        test_row = QHBoxLayout()
+        self.ai_status = QLabel("● 未配置")
+        self.ai_status.setFont(get_font(10))
+        test_btn = QPushButton("测试连接")
+        test_btn.setStyleSheet(get_button_style("secondary"))
+        test_btn.clicked.connect(self.test_ai_connection)
+        test_row.addWidget(self.ai_status)
+        test_row.addStretch()
+        test_row.addWidget(test_btn)
+        ai_layout.addLayout(test_row)
+
+        content.addWidget(ai_group)
+
         # ===== 数据管理 =====
         data_group = QGroupBox("数据管理")
         data_group.setFont(get_font(13, bold=True))
@@ -196,12 +257,10 @@ class SettingsPage(QWidget):
 
         about_text = QLabel(
             "今天吃什么？\n"
-            "北京大学食堂智能推荐系统 v1.0\n\n"
-            "基于多维度决策模型与个性化画像的校园食堂智能推荐系统，\n"
-            "旨在解决\"今天吃什么\"的选择困难问题。\n\n"
+            "北京大学食堂智能推荐系统 v2.0\n\n"
+            "双模式：离线问卷 + AI 对话推荐\n"
+            "召回排序两阶段推荐 · 套餐组合 · 找店指引\n\n"
             "「四方食事，不过一碗人间烟火」\n\n"
-            "技术文档：覆盖20+食堂，10维决策矩阵，\n"
-            "三层流水线推荐逻辑，贝叶斯平均评分。\n\n"
             "© 2025 PKU Food Recommender"
         )
         about_text.setFont(get_font(10))
@@ -231,6 +290,77 @@ class SettingsPage(QWidget):
 
         self.explore_cb.setChecked(settings.get("explore_mode", False))
         self.epsilon.setValue(settings.get("explore_epsilon", 0.15))
+
+        default_mode = settings.get("default_recommend_mode", profile.get("default_mode", "stable"))
+        self._updating_mode = True
+        self.stable_mode_rb.setChecked(default_mode == "stable")
+        self.explore_mode_rb.setChecked(default_mode == "explore")
+        self._updating_mode = False
+
+        ai_cfg = settings.get("ai_config", {})
+        self.ai_key.setText(ai_cfg.get("api_key", ""))
+        self.ai_base.setText(ai_cfg.get("api_base", ""))
+        model = ai_cfg.get("model", "gpt-3.5-turbo")
+        idx = self.ai_model.findText(model)
+        if idx >= 0:
+            self.ai_model.setCurrentIndex(idx)
+        self._refresh_ai_status()
+
+    def _on_default_mode_changed(self):
+        if getattr(self, "_updating_mode", False):
+            return
+        if self.sender() == self.stable_mode_rb and self.stable_mode_rb.isChecked():
+            self.explore_mode_rb.setChecked(False)
+            self.dm.update_settings({"default_recommend_mode": "stable", "explore_mode": False})
+            profile = self.dm.get_profile()
+            profile["default_mode"] = "stable"
+            self.dm.update_profile(profile)
+        elif self.sender() == self.explore_mode_rb and self.explore_mode_rb.isChecked():
+            self.stable_mode_rb.setChecked(False)
+            self.dm.update_settings({"default_recommend_mode": "explore", "explore_mode": True})
+            profile = self.dm.get_profile()
+            profile["default_mode"] = "explore"
+            self.dm.update_profile(profile)
+
+    def save_ai_config(self):
+        self.dm.update_settings({
+            "ai_config": {
+                "api_key": self.ai_key.text().strip(),
+                "api_base": self.ai_base.text().strip(),
+                "model": self.ai_model.currentText(),
+            }
+        })
+        self._refresh_ai_status()
+        if hasattr(self.recommender, "dm"):
+            pass
+        # 通知 AI backend 重新加载（若主窗口注入了 ai_backend 可在 refresh 时处理）
+
+    def _refresh_ai_status(self):
+        key = self.ai_key.text().strip()
+        if key:
+            self.ai_status.setText("● 已填写密钥")
+            self.ai_status.setStyleSheet(f"color: {COLORS['success'].name()};")
+        else:
+            self.ai_status.setText("● 未配置")
+            self.ai_status.setStyleSheet(f"color: {COLORS['error'].name()};")
+
+    def test_ai_connection(self):
+        from backend.ai_backend import AIModeBackend
+        ai = AIModeBackend(
+            self.dm,
+            api_key=self.ai_key.text().strip(),
+            api_base=self.ai_base.text().strip() or None,
+            model=self.ai_model.currentText(),
+        )
+        result = ai.test_connection()
+        if result.get("success"):
+            QMessageBox.information(self, "连接成功", result.get("message", "API 可用"))
+            self.ai_status.setText("● 已连接")
+            self.ai_status.setStyleSheet(f"color: {COLORS['success'].name()};")
+        else:
+            QMessageBox.warning(self, "连接失败", result.get("message", "请检查密钥与网络"))
+            self.ai_status.setText("● 连接失败")
+            self.ai_status.setStyleSheet(f"color: {COLORS['error'].name()};")
 
     def save_profile(self):
         """保存用户画像"""
@@ -295,7 +425,4 @@ class SettingsPage(QWidget):
             self.load_settings()
 
     def refresh(self):
-        pass
-
-
-import os
+        self.load_settings()

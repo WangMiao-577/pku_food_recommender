@@ -1,50 +1,23 @@
 """
-recommender.py - 推荐算法核心模块
-实现三层流水线推荐逻辑：
-  Layer 1: 分层过滤（硬约束）
-  Layer 2: 加权评分（软偏好）
-  Layer 3: 扰动输出（多样性）
+recommender.py - 推荐算法核心模块 v2.0
+实现召回+排序两阶段推荐：
+  Retrieve: 场景召回 / 需求召回 / 模式召回（三路并行）
+  Rank: 多因子加权排序 + ε-greedy 扰动
+  Combo: 同伴/团体场景下的套餐组合生成
 """
 
-import math
 import random
 from datetime import datetime
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Set
 
-from backend.data_manager import DataManager, CANTEENS
+from backend.data_manager import DataManager, CAMPUS_REGIONS, LOCATION_TO_REGIONS
 
 
 # ============ 常量配置 ============
 
-# 全局评分参数（贝叶斯平均）
 GLOBAL_AVG_RATING = 3.8
 BAYESIAN_C = 10
 
-# 菜系权重调整系数
-CUISINE_WEIGHT_ADJUST = 0.15
-
-# 距离权重
-DISTANCE_WEIGHT_HIGH = 1.0
-DISTANCE_WEIGHT_LOW = 0.3
-
-# 时间衰减参数
-FRESHNESS_LAMBDA = 0.3
-
-# 维度默认权重
-DEFAULT_WEIGHTS = {
-    "freshness": 0.9,    # 新鲜度（吃过？）- 高
-    "nutrition": 0.5,    # 营养匹配 - 中
-    "distance": 0.9,     # 距离 - 高
-    "time": 0.9,         # 时间 - 高
-    "special": 0.5,      # 特殊需求 - 中
-    "crowd": 0.5,        # 人流量 - 中
-    "social": 0.2,       # 多人融合 - 低（扩展）
-    "rating": 0.8,       # 评分 - 高
-    "taboo": 999.0,      # 忌口 - 最高（硬约束）
-    "random": 0.2,       # 随机性 - 低
-}
-
-# 营养目标
 NUTRITION_GOALS = {
     "减脂": {"calories": (200, 400), "protein": (20, 40), "fat": (5, 15)},
     "增肌": {"calories": (400, 700), "protein": (25, 50), "fat": (10, 30)},
@@ -52,440 +25,616 @@ NUTRITION_GOALS = {
     "无": None,
 }
 
+# 排序权重：稳定模式 / 探索模式
+RANK_WEIGHTS = {
+    "stable": {"preference": 0.35, "quality": 0.25, "location": 0.20, "freshness": 0.15, "explore": 0.05},
+    "explore": {"preference": 0.25, "quality": 0.20, "location": 0.15, "freshness": 0.10, "explore": 0.30},
+}
+
+# ε-greedy 探索概率
+EPSILON = {"stable": 0.05, "explore": 0.40}
+
+MEAL_SCENES = ["独自速食", "独自慢食", "同伴聚餐", "团体宴请"]
+
+STAPLE_KEYWORDS = {"面食", "米饭", "管饱", "早餐", "面", "饺", "包"}
+MAIN_KEYWORDS = {"招牌", "经典", "下饭", "聚餐", "高蛋白", "热门"}
+SOUP_SIDE_KEYWORDS = {"汤", "粥", "蔬菜", "清淡", "素食", "健康"}
+
+LARGE_CANTEENS = {"家园食堂", "农园食堂", "学一食堂", "学五食堂", "燕南美食"}
+
+# 旧模式 -> 新参数映射（向后兼容）
+LEGACY_MODE_MAP = {
+    "normal": {"recommend_mode": "stable", "meal_scene": None},
+    "rush": {"recommend_mode": "stable", "meal_scene": "独自速食"},
+    "explore": {"recommend_mode": "explore", "meal_scene": None},
+    "healthy": {"recommend_mode": "stable", "meal_scene": "独自慢食"},
+    "social": {"recommend_mode": "stable", "meal_scene": "同伴聚餐"},
+}
+
 
 class Recommender:
-    """推荐引擎 - 三层流水线推荐系统"""
+    """推荐引擎 v2.0 - 召回+排序两阶段"""
 
     def __init__(self, data_manager: DataManager):
         self.dm = data_manager
-        self.weights = DEFAULT_WEIGHTS.copy()
 
-    def set_weights(self, mode: str = "normal"):
-        """根据模式调整权重
-        
-        Args:
-            mode: normal / rush / explore / healthy / social
-        """
-        if mode == "rush":  # 赶时间
-            self.weights["time"] = 1.0
-            self.weights["distance"] = 1.0
-            self.weights["nutrition"] = 0.2
-            self.weights["crowd"] = 0.8
-        elif mode == "explore":  # 探索模式
-            self.weights["random"] = 0.8
-            self.weights["freshness"] = 0.3
-            self.weights["rating"] = 0.4
-        elif mode == "healthy":  # 健康优先
-            self.weights["nutrition"] = 1.0
-            self.weights["rating"] = 0.7
-            self.weights["time"] = 0.4
-        elif mode == "social":  # 聚餐模式
-            self.weights["social"] = 0.9
-            self.weights["nutrition"] = 0.3
-            self.weights["crowd"] = 0.7
-        else:  # normal
-            self.weights = DEFAULT_WEIGHTS.copy()
+    # ==================== 上下文解析 ====================
 
-    # ==================== Layer 1: 分层过滤（硬约束） ====================
+    def _resolve_context(self, mode: str, context: Optional[Dict]) -> Dict:
+        """合并 legacy mode、settings 与调用方 context"""
+        ctx = dict(context or {})
+        legacy = LEGACY_MODE_MAP.get(mode, LEGACY_MODE_MAP["normal"])
 
-    def _filter_hard_constraints(self, dishes: List[Dict]) -> List[Dict]:
-        """第一层：硬约束过滤"""
+        settings = self.dm.get_settings()
         profile = self.dm.get_profile()
-        result = dishes
 
-        # 1. 忌口黑名单过滤（零容错）
-        taboos = profile.get("constraints", {}).get("taboos", [])
-        disliked = profile.get("disliked_ingredients", [])
-        all_taboos = set(taboos + disliked)
-        if all_taboos:
-            result = [d for d in result
-                      if not any(t in d.get("tags", []) or t in d.get("name", "") for t in all_taboos)]
+        recommend_mode = ctx.get("recommend_mode")
+        if not recommend_mode:
+            if settings.get("explore_mode"):
+                recommend_mode = "explore"
+            elif profile.get("default_mode") in ("stable", "explore"):
+                recommend_mode = profile["default_mode"]
+            elif settings.get("default_recommend_mode") in ("stable", "explore"):
+                recommend_mode = settings["default_recommend_mode"]
+            else:
+                recommend_mode = legacy["recommend_mode"]
 
-        # 2. 预算上限过滤
-        budget = profile.get("constraints", {}).get("budget_limit", 50)
-        result = [d for d in result if d["price"] <= budget]
+        meal_scene = ctx.get("meal_scene") or legacy.get("meal_scene")
+        if not meal_scene and profile.get("meal_scenes"):
+            meal_scene = profile["meal_scenes"][-1]
 
-        # 3. 营业时段过滤
-        now = datetime.now()
-        hour = now.hour + now.minute / 60
-        meal_type = self._get_meal_type(hour)
-        result = [d for d in result if d.get("hours", {}).get(meal_type, True)]
-
-        # 4. 过敏原/宗教禁忌（基于标签）
-        result = self._filter_allergens(result, all_taboos)
-
-        # 5. 特殊需求强约束
-        result = self._filter_special_needs(result, profile)
-
-        return result
+        return {
+            "recommend_mode": recommend_mode,
+            "meal_scene": meal_scene,
+            "budget_limit": ctx.get("budget_limit", self.dm.get_budget_limit()),
+            "preferred_flavors": ctx.get("preferred_flavors") or self.dm.get_preferred_flavors(),
+            "location": ctx.get("location") or profile.get("current_location", ""),
+            "include_combos": ctx.get(
+                "include_combos",
+                meal_scene in ("同伴聚餐", "团体宴请"),
+            ),
+        }
 
     @staticmethod
     def _get_meal_type(hour: float) -> str:
-        """判断当前餐别"""
         if 6 <= hour < 10:
             return "breakfast"
-        elif 10 <= hour < 14.5:
+        if 10 <= hour < 14.5:
             return "lunch"
-        elif 14.5 <= hour < 17:
+        if 14.5 <= hour < 17:
             return "afternoon"
-        elif 17 <= hour < 20.5:
+        if 17 <= hour < 20.5:
             return "dinner"
-        else:
-            return "late_night"
+        return "late_night"
 
-    def _filter_allergens(self, dishes: List[Dict], taboos: set) -> List[Dict]:
-        """过敏原过滤"""
-        allergen_map = {
-            "花生": ["花生"], "海鲜": ["鱼", "虾", "蟹", "海鲜"],
-            "辣": ["辣", "川"], "猪肉": [" pork ", "猪", "排骨", "肉"],
-        }
-        filtered = []
-        for d in dishes:
-            safe = True
-            for taboo in taboos:
-                if taboo in allergen_map:
-                    keywords = allergen_map[taboo]
-                    if any(kw in d["name"] or kw in " ".join(d.get("tags", [])) for kw in keywords):
-                        safe = False
-                        break
-            if safe:
-                filtered.append(d)
-        return filtered
+    def _normalize_dish(self, dish: Dict) -> Dict:
+        """补齐 v2 字段默认值"""
+        d = dish.copy()
+        if "window_number" not in d:
+            d["window_number"] = hash(d.get("window", "")) % 6 + 1
+        if "portion_size" not in d:
+            tags = d.get("tags", [])
+            if any(k in tags for k in ("管饱", "聚餐")):
+                d["portion_size"] = "L"
+            elif d.get("price", 0) <= 10:
+                d["portion_size"] = "S"
+            else:
+                d["portion_size"] = "M"
+        if "related_dishes" not in d:
+            d["related_dishes"] = []
+        return d
 
-    def _filter_special_needs(self, dishes: List[Dict], profile: Dict) -> List[Dict]:
-        """特殊需求过滤"""
-        pref = profile.get("preferences", {})
-        # "不排队"强约束
-        if pref.get("queue") == "不排队":
-            # 简化为过滤高prep_time
-            dishes = [d for d in d_ishes if d.get("prep_time", 10) <= 8]
+    # ==================== Retrieve: 三路召回 ====================
+
+    def _recall_scene(self, dishes: List[Dict], scene: Optional[str]) -> List[Dict]:
+        if not scene:
+            return dishes
+
+        if scene == "独自速食":
+            return [
+                d for d in dishes
+                if d.get("prep_time", 10) <= 8 and d["price"] <= 25
+            ]
+        if scene == "独自慢食":
+            return [
+                d for d in dishes
+                if d.get("rating", 0) >= 4.0
+                or d.get("appearance", 0) >= 4
+                or any(t in d.get("tags", []) for t in ("招牌", "特色", "经典"))
+            ]
+        if scene == "同伴聚餐":
+            return [
+                d for d in dishes
+                if d.get("portion_size") == "L"
+                or any(t in d.get("tags", []) for t in ("聚餐", "管饱", "热门", "下饭"))
+                or d.get("rating_count", 0) >= 150
+            ]
+        if scene == "团体宴请":
+            return [
+                d for d in dishes
+                if (d["price"] >= 15 or d.get("rating", 0) >= 4.3)
+                and d["canteen"] in LARGE_CANTEENS
+            ]
         return dishes
 
-    # ==================== Layer 2: 加权评分（软偏好） ====================
-
-    def _score_dishes(self, dishes: List[Dict]) -> List[Tuple[Dict, float]]:
-        """第二层：对过滤后的候选集进行加权评分"""
+    def _recall_demand(self, dishes: List[Dict], ctx: Dict) -> List[Dict]:
         profile = self.dm.get_profile()
+        budget = ctx["budget_limit"]
+        flavors = ctx["preferred_flavors"]
+        disliked = set(self.dm.get_disliked_flavors())
+        taboos = set(profile.get("constraints", {}).get("taboos", []))
+        taboos |= set(profile.get("disliked_ingredients", []))
+
+        now = datetime.now()
+        hour = now.hour + now.minute / 60
+        meal_type = self._get_meal_type(hour)
+
+        result = []
+        for d in dishes:
+            if d["price"] > budget:
+                continue
+            if not d.get("hours", {}).get(meal_type, True):
+                continue
+            if taboos and any(t in d.get("tags", []) or t in d.get("name", "") for t in taboos):
+                continue
+            dish_flavors = set(d.get("flavor", []))
+            if disliked and dish_flavors & disliked:
+                continue
+            if flavors and not (dish_flavors & set(flavors)):
+                continue
+            if not self._passes_location(d, ctx.get("location", "")):
+                continue
+            result.append(d)
+        return result
+
+    def _passes_location(self, dish: Dict, location: str) -> bool:
+        if not location:
+            return True
+        target_regions = LOCATION_TO_REGIONS.get(location)
+        if not target_regions:
+            return True
+        region = self.dm.get_canteen_region(dish["canteen"])
+        return region in target_regions
+
+    def _recall_mode(self, dishes: List[Dict], recommend_mode: str) -> List[Dict]:
+        eaten_7 = self.dm.get_eaten_dish_ids(days=7)
+        eaten_30 = self.dm.get_eaten_dish_ids(days=30)
+
+        if recommend_mode == "stable":
+            if eaten_30:
+                pool = [d for d in dishes if d["id"] in eaten_30]
+                if pool:
+                    return pool
+            return self._get_trending_dishes(max(len(dishes) // 2, 5))
+
+        # 探索模式：排除近7天已吃
+        pool = [d for d in dishes if d["id"] not in eaten_7]
+        return pool if pool else dishes
+
+    def _merge_recall_pools(self, *pools: List[Dict]) -> List[Dict]:
+        seen: Set[str] = set()
+        merged = []
+        for pool in pools:
+            for d in pool:
+                if d["id"] not in seen:
+                    seen.add(d["id"])
+                    merged.append(d)
+        return merged
+
+    def _retrieve(self, ctx: Dict) -> List[Dict]:
+        all_dishes = [self._normalize_dish(d) for d in self.dm.get_all_dishes()]
+        scene_pool = self._recall_scene(all_dishes, ctx.get("meal_scene"))
+        demand_pool = self._recall_demand(all_dishes, ctx)
+        mode_pool = self._recall_mode(all_dishes, ctx["recommend_mode"])
+
+        merged = self._merge_recall_pools(scene_pool, demand_pool, mode_pool)
+        if not merged:
+            merged = self._recall_demand(all_dishes, ctx)
+        if not merged:
+            merged = all_dishes[:]
+        return merged
+
+    # ==================== Rank: 多因子排序 ====================
+
+    def _score_preference(self, dish: Dict, ctx: Dict) -> Tuple[float, str]:
+        score = 50.0
+        notes = []
+
+        flavors = set(ctx.get("preferred_flavors", []))
+        dish_flavors = set(dish.get("flavor", []))
+        if flavors:
+            overlap = len(flavors & dish_flavors)
+            if overlap:
+                score += min(30, overlap * 15)
+                notes.append("口味匹配")
+            else:
+                score -= 20
+
+        budget = ctx.get("budget_limit", 50)
+        if dish["price"] <= budget * 0.7:
+            score += 15
+            notes.append("预算友好")
+        elif dish["price"] > budget * 0.9:
+            score -= 10
+
+        goal = self.dm.get_nutrition_goal()
+        if goal in NUTRITION_GOALS and NUTRITION_GOALS[goal]:
+            target = NUTRITION_GOALS[goal]
+            cal_range = target.get("calories")
+            if cal_range and cal_range[0] <= dish.get("calories", 400) <= cal_range[1]:
+                score += 15
+                notes.append("营养匹配")
+
+        preferred_canteens = self.dm.get_profile().get("preferred_canteens", [])
+        canteen_id = dish.get("canteen_id") or dish.get("canteen", "")
+        if preferred_canteens and canteen_id in preferred_canteens:
+            score += 10
+            notes.append("偏好食堂")
+
+        return min(max(score, 0), 100), "; ".join(notes) or "一般匹配"
+
+    def _score_quality(self, dish: Dict) -> Tuple[float, str]:
+        rating = dish.get("rating", 3.5)
+        count = dish.get("rating_count", 0)
+        appearance = dish.get("appearance", 3)
+        bayesian = (BAYESIAN_C * GLOBAL_AVG_RATING + count * rating) / (BAYESIAN_C + max(count, 1))
+        rating_score = (bayesian / 5.0) * 70
+        appearance_score = (appearance / 5.0) * 15
+        popularity = min(count / 200, 1.0) * 15
+        total = rating_score + appearance_score + popularity
+        return min(total, 100), f"评分{bayesian:.1f}({count}人评)"
+
+    def _score_location(self, dish: Dict, location: str) -> Tuple[float, str]:
+        if not location:
+            return 70.0, "未指定位置"
+
+        target_regions = LOCATION_TO_REGIONS.get(location)
+        if not target_regions:
+            return 70.0, "一般距离"
+
+        region = self.dm.get_canteen_region(dish["canteen"])
+        if region in target_regions:
+            return 100.0, "就在附近"
+        if region and target_regions:
+            return 45.0, "需多走几步"
+        return 60.0, "一般距离"
+
+    def _score_freshness(self, dish: Dict, recommend_mode: str) -> Tuple[float, str]:
+        eaten_count = self.dm.get_eaten_count(dish["id"], days=30)
+        last_eaten = self.dm.get_last_eaten_time(dish["id"])
+
+        if recommend_mode == "stable":
+            if eaten_count >= 3:
+                return 100.0, "常点熟悉"
+            if eaten_count >= 1:
+                return 85.0, "最近吃过"
+            if last_eaten is None:
+                return 40.0, "尚未尝试"
+            return 60.0, "偶尔吃"
+
+        if self.dm.is_recently_eaten(dish["id"], days=7):
+            return 10.0, "刚吃过"
+        if last_eaten is None:
+            return 100.0, "全新菜品"
+        days_ago = (datetime.now() - last_eaten).days
+        return min(60 + days_ago * 3, 100), f"{days_ago}天未吃"
+
+    def _score_explore(self, dish: Dict, recommend_mode: str) -> Tuple[float, str]:
+        if recommend_mode == "explore":
+            if not self.dm.has_eating_history() or self.dm.get_eaten_count(dish["id"], days=365) == 0:
+                return 30.0, "新发现"
+            if self.dm.is_recently_eaten(dish["id"], days=30):
+                return 5.0, "近期已吃"
+            return 20.0, "可尝试"
+
+        if self.dm.get_eaten_count(dish["id"], days=30) >= 2:
+            return 25.0, "熟悉味道"
+        return 10.0, "稳定选择"
+
+    def _rank_dishes(self, dishes: List[Dict], ctx: Dict) -> List[Tuple[Dict, float, Dict]]:
+        weights = RANK_WEIGHTS[ctx["recommend_mode"]]
+        is_cold_start = not self.dm.has_eating_history() and not self.dm.get_preferred_flavors()
+        if is_cold_start:
+            weights = {"preference": 0.20, "quality": 0.50, "location": 0.15, "freshness": 0.10, "explore": 0.05}
+
         scored = []
-
         for dish in dishes:
-            score = 0.0
-            details = {}
+            s_pref, d_pref = self._score_preference(dish, ctx)
+            s_qual, d_qual = self._score_quality(dish)
+            s_loc, d_loc = self._score_location(dish, ctx.get("location", ""))
+            s_fresh, d_fresh = self._score_freshness(dish, ctx["recommend_mode"])
+            s_explore, d_explore = self._score_explore(dish, ctx["recommend_mode"])
 
-            # 1. 新鲜度评分 (吃过？)
-            s_fresh, d_fresh = self._score_freshness(dish)
-            score += self.weights["freshness"] * s_fresh
-            details["freshness"] = d_fresh
+            final = (
+                weights["preference"] * s_pref
+                + weights["quality"] * s_qual
+                + weights["location"] * s_loc
+                + weights["freshness"] * s_fresh
+                + weights["explore"] * s_explore
+            )
+            details = {
+                "preference": d_pref,
+                "quality": d_qual,
+                "location": d_loc,
+                "freshness": d_fresh,
+                "explore": d_explore,
+            }
+            scored.append((dish, final, details))
 
-            # 2. 营养匹配评分
-            s_nutri, d_nutri = self._score_nutrition(dish, profile)
-            score += self.weights["nutrition"] * s_nutri
-            details["nutrition"] = d_nutri
-
-            # 3. 距离评分
-            s_dist, d_dist = self._score_distance(dish, profile)
-            score += self.weights["distance"] * s_dist
-            details["distance"] = d_dist
-
-            # 4. 时间/出餐速度评分
-            s_time, d_time = self._score_time(dish)
-            score += self.weights["time"] * s_time
-            details["time"] = d_time
-
-            # 5. 评分/口碑评分
-            s_rating, d_rating = self._score_rating(dish)
-            score += self.weights["rating"] * s_rating
-            details["rating"] = d_rating
-
-            # 6. 特殊需求评分
-            s_special, d_special = self._score_special(dish, profile)
-            score += self.weights["special"] * s_special
-            details["special"] = d_special
-
-            # 7. 社交评分
-            s_social, d_social = self._score_social(dish, profile)
-            score += self.weights["social"] * s_social
-            details["social"] = d_social
-
-            # 8. 随机性
-            s_rand = random.random() * 100
-            score += self.weights["random"] * s_rand
-
-            scored.append((dish, score, details))
-
-        # 按分数降序排序
         scored.sort(key=lambda x: x[1], reverse=True)
         return scored
 
-    def _score_freshness(self, dish: Dict) -> Tuple[float, str]:
-        """新鲜度评分：3天内吃过降权"""
-        if self.dm.is_recently_eaten(dish["id"], days=3):
-            return 30.0, "3天内吃过"
-        elif self.dm.is_recently_eaten(dish["id"], days=7):
-            return 60.0, "一周内吃过"
-        else:
-            return 100.0, "新鲜推荐"
+    # ==================== ε-greedy 扰动 ====================
 
-    def _score_nutrition(self, dish: Dict, profile: Dict) -> Tuple[float, str]:
-        """营养匹配评分"""
-        goal = profile.get("goals", "无")
-        if goal == "无" or goal not in NUTRITION_GOALS or NUTRITION_GOALS[goal] is None:
-            return 70.0, "无特定目标"
-
-        target = NUTRITION_GOALS[goal]
-        score = 0.0
-        checks = []
-
-        # 热量匹配
-        cal_range = target.get("calories")
-        if cal_range and cal_range[0] <= dish.get("calories", 400) <= cal_range[1]:
-            score += 40
-            checks.append("热量匹配")
-        elif cal_range:
-            # 线性衰减
-            cal = dish.get("calories", 400)
-            mid = (cal_range[0] + cal_range[1]) / 2
-            diff = abs(cal - mid)
-            score += max(0, 40 - diff * 0.2)
-            checks.append(f"热量偏差{diff:.0f}")
-
-        # 蛋白质匹配
-        pro_range = target.get("protein")
-        if pro_range and pro_range[0] <= dish.get("protein", 15) <= pro_range[1]:
-            score += 30
-            checks.append("蛋白质匹配")
-
-        # 脂肪匹配
-        fat_range = target.get("fat")
-        if fat_range and fat_range[0] <= dish.get("fat", 15) <= fat_range[1]:
-            score += 30
-            checks.append("脂肪匹配")
-
-        desc = "; ".join(checks) if checks else "一般匹配"
-        return score, desc
-
-    def _score_distance(self, dish: Dict, profile: Dict) -> Tuple[float, str]:
-        """距离评分：基于用户偏好"""
-        pref = profile.get("preferences", {}).get("distance", "就近优先")
-
-        # 简化为食堂等级的距离
-        # 家园、学一、学五为核心区域（距离0）
-        # 其他食堂距离1-3
-        near_canteens = {"家园食堂", "学一食堂", "学五食堂", "燕南美食"}
-        mid_canteens = {"农园食堂", "佟园", "松林"}
-        far_canteens = {"勺园", "勺中", "勺西", "成府园", "畅春园", "艺园"}
-
-        canteen = dish["canteen"]
-        if canteen in near_canteens:
-            dist_score = 100
-            dist_desc = "核心区域"
-        elif canteen in mid_canteens:
-            dist_score = 70
-            dist_desc = "中等距离"
-        elif canteen in far_canteens:
-            dist_score = 40
-            dist_desc = "较远"
-        else:
-            dist_score = 60
-            dist_desc = "一般"
-
-        if pref == "愿意多走":
-            dist_score = 100 - (100 - dist_score) * 0.3  # 距离权重降低
-            dist_desc += "(愿意多走)"
-
-        return dist_score, dist_desc
-
-    def _score_time(self, dish: Dict) -> Tuple[float, str]:
-        """出餐速度评分"""
-        prep = dish.get("prep_time", 10)
-        if prep <= 3:
-            return 100, f"极速出餐({prep}分钟)"
-        elif prep <= 5:
-            return 85, f"快速出餐({prep}分钟)"
-        elif prep <= 8:
-            return 65, f"正常出餐({prep}分钟)"
-        elif prep <= 12:
-            return 40, f"较慢({prep}分钟)"
-        else:
-            return 20, f"慢速({prep}分钟)"
-
-    def _score_rating(self, dish: Dict) -> Tuple[float, str]:
-        """评分/口碑评分"""
-        rating = dish.get("rating", 3.5)
-        count = dish.get("rating_count", 0)
-        # 贝叶斯平均平滑
-        bayesian = (BAYESIAN_C * GLOBAL_AVG_RATING + count * rating) / (BAYESIAN_C + max(count, 1))
-        # 映射到0-100
-        score = (bayesian / 5.0) * 100
-        return score, f"评分{bayesian:.1f}({count}人评)"
-
-    def _score_special(self, dish: Dict, profile: Dict) -> Tuple[float, str]:
-        """特殊需求评分"""
-        meal_pref = profile.get("constraints", {}).get("meal_pref", "正餐")
-        if meal_pref == "夜宵" and dish.get("hours", {}).get("late_night", False):
-            return 100, "支持夜宵"
-        return 70, "一般"
-
-    def _score_social(self, dish: Dict, profile: Dict) -> Tuple[float, str]:
-        """社交评分：适合聚餐的菜品得分更高"""
-        companions = profile.get("social", {}).get("companions", 1)
-        if companions <= 1:
-            return 70, "单人餐"
-
-        # 聚餐偏好：大份、高评分、热门菜品
-        tags = dish.get("tags", [])
-        score = 50
-        if "聚餐" in tags:
-            score += 30
-        if "管饱" in tags:
-            score += 20
-        if "热门" in tags:
-            score += 15
-        if dish.get("rating", 0) >= 4.3:
-            score += 10
-
-        return min(score, 100), f"聚餐评分({companions}人)"
-
-    # ==================== Layer 3: 扰动输出 ====================
-
-    def _perturb_output(self, scored: List[Tuple], top_k: int = 5) -> List[Dict]:
-        """第三层：ε-greedy扰动，兼顾精准与探索"""
-        settings = self.dm.get_settings()
-        epsilon = settings.get("explore_epsilon", 0.15)
-
+    def _perturb_output(
+        self,
+        scored: List[Tuple[Dict, float, Dict]],
+        top_k: int,
+        recommend_mode: str,
+    ) -> List[Dict]:
+        epsilon = EPSILON.get(recommend_mode, 0.15)
         if not scored:
             return []
 
         result = []
-        used_indices = set()
-
-        # Top-(1-ε)按分数排序
+        used_indices: Set[int] = set()
         greedy_count = max(1, int(top_k * (1 - epsilon)))
+
         for i in range(min(greedy_count, len(scored))):
             dish_data = scored[i][0].copy()
             dish_data["_score"] = round(scored[i][1], 2)
             dish_data["_score_details"] = scored[i][2]
+            dish_data["_recommend_mode"] = recommend_mode
+            if recommend_mode == "stable" and self.dm.get_eaten_count(dish_data["id"], days=30) >= 1:
+                dish_data["_mode_label"] = "常点"
+            elif recommend_mode == "explore":
+                dish_data["_mode_label"] = "新发现"
+                dish_data["_is_explore"] = True
             result.append(dish_data)
             used_indices.add(i)
 
-        # ε部分随机探索长尾
         explore_count = top_k - len(result)
         if explore_count > 0 and len(scored) > len(result):
             remaining = [i for i in range(len(scored)) if i not in used_indices]
             if remaining:
-                # 从剩余候选中随机选择（权重偏向中高评分）
-                candidates = remaining[:max(len(remaining), 20)]
-                chosen = random.sample(candidates, min(explore_count, len(candidates)))
+                sample_size = min(explore_count, len(remaining))
+                chosen = random.sample(remaining[: max(len(remaining), 20)], sample_size)
                 for idx in chosen:
                     dish_data = scored[idx][0].copy()
                     dish_data["_score"] = round(scored[idx][1], 2)
                     dish_data["_score_details"] = scored[idx][2]
-                    dish_data["_is_explore"] = True  # 标记为探索推荐
+                    dish_data["_recommend_mode"] = recommend_mode
+                    dish_data["_is_explore"] = True
+                    dish_data["_mode_label"] = "探索推荐"
                     result.append(dish_data)
 
         return result
 
+    # ==================== 套餐组合 ====================
+
+    def _is_staple(self, dish: Dict) -> bool:
+        text = dish["name"] + " " + " ".join(dish.get("tags", []))
+        return any(k in text for k in STAPLE_KEYWORDS)
+
+    def _is_main(self, dish: Dict) -> bool:
+        text = dish["name"] + " " + " ".join(dish.get("tags", []))
+        return any(k in text for k in MAIN_KEYWORDS) or dish.get("protein", 0) >= 20
+
+    def _is_side_or_soup(self, dish: Dict) -> bool:
+        text = dish["name"] + " " + " ".join(dish.get("tags", []))
+        return any(k in text for k in SOUP_SIDE_KEYWORDS) or dish.get("calories", 999) < 250
+
+    def _flavors_compatible(self, dishes: List[Dict]) -> bool:
+        spicy = {"辣", "麻辣", "麻"}
+        for d in dishes:
+            flavors = set(d.get("flavor", []))
+            others = [o for o in dishes if o["id"] != d["id"]]
+            if flavors & spicy:
+                for o in others:
+                    if set(o.get("flavor", [])) & spicy:
+                        return False
+        return True
+
+    def generate_combos(
+        self,
+        candidates: Optional[List[Dict]] = None,
+        budget: Optional[float] = None,
+        top_n: int = 2,
+    ) -> List[Dict]:
+        """生成套餐推荐（同伴/团体场景）"""
+        budget = budget or self.dm.get_budget_limit()
+        dishes = candidates or self.dm.get_all_dishes()
+        dishes = [self._normalize_dish(d) for d in dishes if d["price"] <= budget]
+
+        by_canteen: Dict[str, List[Dict]] = {}
+        for d in dishes:
+            by_canteen.setdefault(d["canteen"], []).append(d)
+
+        combos = []
+        for canteen, items in by_canteen.items():
+            if len(items) < 2:
+                continue
+            items.sort(key=lambda x: x.get("rating", 0), reverse=True)
+
+            for main in items:
+                if not self._is_main(main):
+                    continue
+                for side in items:
+                    if side["id"] == main["id"]:
+                        continue
+                    if abs(main.get("window_number", 1) - side.get("window_number", 1)) > 2:
+                        continue
+                    if not self._is_side_or_soup(side) and not self._is_staple(side):
+                        continue
+
+                    combo_dishes = [main, side]
+                    total_price = main["price"] + side["price"]
+                    total_cal = main.get("calories", 0) + side.get("calories", 0)
+                    total_protein = main.get("protein", 0) + side.get("protein", 0)
+                    total_fat = main.get("fat", 0) + side.get("fat", 0)
+
+                    staple = next((d for d in items if self._is_staple(d) and d["id"] not in {main["id"], side["id"]}), None)
+                    if staple and total_price + staple["price"] <= budget:
+                        combo_dishes.append(staple)
+                        total_price += staple["price"]
+                        total_cal += staple.get("calories", 0)
+                        total_protein += staple.get("protein", 0)
+                        total_fat += staple.get("fat", 0)
+
+                    if total_price > budget:
+                        continue
+                    if not (500 <= total_cal <= 1400):
+                        continue
+                    if not self._flavors_compatible(combo_dishes):
+                        continue
+
+                    original = sum(d["price"] for d in combo_dishes)
+                    combo = {
+                        "combo_id": f"combo_{canteen}_{main['id']}_{side['id']}",
+                        "name": f"{main['name']}套餐",
+                        "canteen": canteen,
+                        "canteen_id": main.get("canteen_id", ""),
+                        "window": main.get("window", ""),
+                        "dishes": [d["id"] for d in combo_dishes],
+                        "dish_details": combo_dishes,
+                        "total_price": round(total_price, 1),
+                        "original_price": round(original, 1),
+                        "total_calories": int(total_cal),
+                        "total_protein": round(total_protein, 1),
+                        "total_fat": round(total_fat, 1),
+                        "suggested_for": "2-4人" if len(combo_dishes) >= 2 else "1-2人",
+                        "reason": "同窗口取餐，口味互补不冲突",
+                    }
+                    combos.append(combo)
+                    if len(combos) >= top_n * 3:
+                        break
+                if len(combos) >= top_n * 3:
+                    break
+
+        combos.sort(key=lambda c: (c["total_price"], -c["total_calories"]))
+        return combos[:top_n]
+
     # ==================== 主推荐流程 ====================
 
-    def recommend(self, top_k: int = 5, mode: str = "normal") -> List[Dict]:
-        """主推荐入口
-        
-        Args:
-            top_k: 返回推荐数量
-            mode: 推荐模式 normal/rush/explore/healthy/social
-        
-        Returns:
-            推荐菜品列表（包含评分详情）
-        """
-        # 设置权重
-        self.set_weights(mode)
+    def recommend(
+        self,
+        top_k: int = 5,
+        mode: str = "normal",
+        context: Optional[Dict] = None,
+    ) -> List[Dict]:
+        """主推荐入口（向后兼容 mode 参数）"""
+        return self.recommend_full(top_k=top_k, mode=mode, context=context)["dishes"]
 
-        # 获取所有菜品
-        all_dishes = self.dm.get_all_dishes()
+    def recommend_full(
+        self,
+        top_k: int = 5,
+        mode: str = "normal",
+        context: Optional[Dict] = None,
+    ) -> Dict:
+        """完整推荐：菜品列表 + 可选套餐"""
+        ctx = self._resolve_context(mode, context)
+        candidates = self._retrieve(ctx)
+        scored = self._rank_dishes(candidates, ctx)
+        dishes = self._perturb_output(scored, top_k, ctx["recommend_mode"])
 
-        # Layer 1: 硬约束过滤
-        filtered = self._filter_hard_constraints(all_dishes)
+        combos = []
+        if ctx.get("include_combos"):
+            combo_candidates = candidates[: max(top_k * 3, 15)]
+            combos = self.generate_combos(combo_candidates, ctx["budget_limit"], top_n=2)
 
-        # Layer 2: 加权评分
-        scored = self._score_dishes(filtered)
+        return {
+            "dishes": dishes,
+            "combos": combos,
+            "recommend_mode": ctx["recommend_mode"],
+            "meal_scene": ctx.get("meal_scene"),
+            "source": "local_algorithm",
+        }
 
-        # Layer 3: 扰动输出
-        recommendations = self._perturb_output(scored, top_k)
-
-        return recommendations
-
-    def get_quick_pick(self) -> Optional[Dict]:
+    def get_quick_pick(self, mode: str = "stable") -> Optional[Dict]:
         """快速推荐一个今日最佳"""
-        recommendations = self.recommend(top_k=1, mode="normal")
-        return recommendations[0] if recommendations else None
+        recs = self.recommend(top_k=1, mode=mode if mode in LEGACY_MODE_MAP else "normal",
+                              context={"recommend_mode": mode} if mode in ("stable", "explore") else None)
+        return recs[0] if recs else None
 
     def get_alternatives(self, dish_id: str, count: int = 3) -> List[Dict]:
-        """获取某菜品的替代品（同菜系/同口味）"""
+        """获取某菜品的替代品（优先 related_dishes）"""
         dish = self.dm.get_dish_by_id(dish_id)
         if not dish:
             return []
 
+        related_ids = dish.get("related_dishes", [])
+        related = []
+        for rid in related_ids:
+            d = self.dm.get_dish_by_id(rid)
+            if d:
+                related.append(self._normalize_dish(d))
+        if len(related) >= count:
+            return related[:count]
+
         all_dishes = self.dm.get_all_dishes()
-        candidates = [d for d in all_dishes if d["id"] != dish_id]
+        candidates = [d for d in all_dishes if d["id"] != dish_id and d["id"] not in related_ids]
 
-        # 优先同菜系
         same_cuisine = [d for d in candidates if d.get("cuisine") == dish.get("cuisine")]
-        if len(same_cuisine) >= count:
-            return sorted(same_cuisine, key=lambda x: x.get("rating", 0), reverse=True)[:count]
+        if len(same_cuisine) + len(related) >= count:
+            combined = related + same_cuisine
+            return [self._normalize_dish(d) for d in combined[:count]]
 
-        # 次选同口味
         flavors = set(dish.get("flavor", []))
-        same_flavor = [d for d in candidates
-                       if any(f in d.get("flavor", []) for f in flavors)]
-
-        combined = same_cuisine + [d for d in same_flavor if d not in same_cuisine]
+        same_flavor = [d for d in candidates if any(f in d.get("flavor", []) for f in flavors)]
+        combined = related + same_cuisine + [d for d in same_flavor if d not in same_cuisine]
         if len(combined) >= count:
-            return combined[:count]
+            return [self._normalize_dish(d) for d in combined[:count]]
 
-        # 最后返回高评分菜品
-        return sorted(candidates, key=lambda x: x.get("rating", 0), reverse=True)[:count]
+        return [self._normalize_dish(d) for d in
+                sorted(candidates, key=lambda x: x.get("rating", 0), reverse=True)[:count]]
+
+    def _get_trending_dishes(self, count: int) -> List[Dict]:
+        dishes = self.dm.get_all_dishes()
+        return sorted(
+            dishes,
+            key=lambda x: (x.get("rating_count", 0), x.get("rating", 0)),
+            reverse=True,
+        )[:count]
 
     def get_trending(self, count: int = 5) -> List[Dict]:
         """获取热门菜品"""
-        dishes = self.dm.get_all_dishes()
-        return sorted(dishes, key=lambda x: (x.get("rating", 0), x.get("rating_count", 0)),
-                      reverse=True)[:count]
+        return self._get_trending_dishes(count)
 
-
-# ============ 测试入口 ============
 
 def test_recommender():
     """推荐引擎测试"""
     print("=" * 50)
-    print("推荐引擎测试")
+    print("推荐引擎 v2.0 测试")
     print("=" * 50)
 
-    dm = DataManager(data_dir="test_data")
+    dm = DataManager(data_dir="data")
     engine = Recommender(dm)
 
-    # 测试推荐
-    print("\n【测试1】普通模式推荐 top-5:")
-    recs = engine.recommend(top_k=5, mode="normal")
-    for i, r in enumerate(recs, 1):
+    print("\n【测试1】稳定模式推荐 top-5:")
+    result = engine.recommend_full(top_k=5, mode="normal", context={"recommend_mode": "stable"})
+    for i, r in enumerate(result["dishes"], 1):
+        label = r.get("_mode_label", "")
         explore_tag = " [探索]" if r.get("_is_explore") else ""
-        print(f"  {i}. {r['name']} ({r['canteen']}) - 评分:{r['rating']} 综合分:{r['_score']:.1f}{explore_tag}")
+        print(f"  {i}. {r['name']} ({r['canteen']}) 综合分:{r['_score']:.1f} {label}{explore_tag}")
 
-    # 测试快速推荐
-    print("\n【测试2】快速推荐:")
-    quick = engine.get_quick_pick()
-    if quick:
-        print(f"  今日推荐: {quick['name']} @ {quick['canteen']}  ¥{quick['price']}")
-
-    # 测试不同模式
-    print("\n【测试3】赶时间模式:")
-    recs = engine.recommend(top_k=3, mode="rush")
+    print("\n【测试2】探索模式推荐 top-3:")
+    recs = engine.recommend(top_k=3, mode="explore")
     for i, r in enumerate(recs, 1):
-        print(f"  {i}. {r['name']} 出餐{r['prep_time']}分钟")
+        print(f"  {i}. {r['name']} - {r.get('_mode_label', '')}")
+
+    print("\n【测试3】聚餐场景 + 套餐:")
+    combo_result = engine.recommend_full(
+        top_k=3,
+        mode="social",
+        context={"meal_scene": "同伴聚餐", "budget_limit": 40},
+    )
+    for c in combo_result["combos"]:
+        names = " + ".join(d["name"] for d in c["dish_details"])
+        print(f"  combo: {names} @ {c['canteen']}  price={c['total_price']}")
 
     print("\n【测试4】热门推荐:")
-    trending = engine.get_trending(5)
-    for i, d in enumerate(trending, 1):
-        print(f"  {i}. {d['name']} - {d['rating']}分 ({d['rating_count']}人评)")
+    for i, d in enumerate(engine.get_trending(3), 1):
+        print(f"  {i}. {d['name']} - {d['rating']}分")
 
     print("\n所有测试通过!")
 

@@ -17,6 +17,7 @@ from PyQt5.QtCore import Qt, QSize, QTimer, pyqtSignal
 
 from backend.data_manager import DataManager
 from backend.recommender import Recommender
+from backend.ai_backend import create_ai_backend
 from frontend.watercolor_style import (
     COLORS, get_font, get_stylesheet, get_poem,
     get_button_style, get_card_style, color_with_alpha, POEMS
@@ -60,21 +61,6 @@ class NavButton(QPushButton):
         """)
 
 
-class WatercolorFrame(QFrame):
-    """水彩风格卡片框架"""
-
-    def __init__(self, parent=None, bg_color=None):
-        super().__init__(parent)
-        self.bg_color = bg_color or COLORS["bg_card"]
-        self.setStyleSheet(get_card_style(self.bg_color))
-        # 添加阴影效果
-        shadow = QGraphicsDropShadowEffect(self)
-        shadow.setBlurRadius(15)
-        shadow.setColor(QColor(0, 0, 0, 25))
-        shadow.setOffset(0, 3)
-        self.setGraphicsEffect(shadow)
-
-
 class PoemLabel(QLabel):
     """诗句标签 - 以优雅方式显示温馨诗句"""
 
@@ -89,6 +75,68 @@ class PoemLabel(QLabel):
     def refresh_poem(self):
         poem = random.choice(POEMS)
         self.setText(f"「{poem}」")
+
+
+class ModeToggleWidget(QFrame):
+    """离线 / AI 模式切换胶囊"""
+
+    mode_changed = pyqtSignal(str)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self._mode = "offline"
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(4, 4, 4, 4)
+        layout.setSpacing(0)
+
+        self.offline_btn = QPushButton("离线")
+        self.ai_btn = QPushButton("AI")
+        for btn in (self.offline_btn, self.ai_btn):
+            btn.setCheckable(True)
+            btn.setFixedSize(72, 32)
+            btn.setFont(get_font(10))
+            btn.setCursor(Qt.PointingHandCursor)
+
+        self.offline_btn.clicked.connect(lambda: self.set_mode("offline"))
+        self.ai_btn.clicked.connect(lambda: self.set_mode("ai"))
+        layout.addWidget(self.offline_btn)
+        layout.addWidget(self.ai_btn)
+
+        self.setFixedSize(156, 40)
+        self.set_mode("offline", emit=False)
+
+    def set_mode(self, mode: str, emit=True):
+        self._mode = mode
+        offline_active = mode == "offline"
+        self.offline_btn.setChecked(offline_active)
+        self.ai_btn.setChecked(not offline_active)
+        self.setStyleSheet(f"""
+            QFrame {{
+                background: {COLORS['border_light'].name()};
+                border-radius: 20px;
+            }}
+        """)
+        self.offline_btn.setStyleSheet(f"""
+            QPushButton {{
+                background: {COLORS['primary'].name() if offline_active else 'transparent'};
+                color: {'white' if offline_active else COLORS['text_medium'].name()};
+                border: none;
+                border-radius: 16px;
+            }}
+        """)
+        self.ai_btn.setStyleSheet(f"""
+            QPushButton {{
+                background: {COLORS['secondary'].name() if not offline_active else 'transparent'};
+                color: {'white' if not offline_active else COLORS['text_medium'].name()};
+                border: none;
+                border-radius: 16px;
+            }}
+        """)
+        if emit:
+            self.mode_changed.emit(mode)
+
+    def current_mode(self):
+        return self._mode
 
 
 class HeaderWidget(QFrame):
@@ -142,6 +190,10 @@ class HeaderWidget(QFrame):
         self.refresh_btn.clicked.connect(self.poem.refresh_poem)
         layout.addWidget(self.refresh_btn)
 
+        # 离线 / AI 模式切换
+        self.mode_toggle = ModeToggleWidget()
+        layout.addWidget(self.mode_toggle)
+
         self.setStyleSheet(f"""
             background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                 stop:0 {COLORS['bg_warm'].name()},
@@ -186,7 +238,7 @@ class SidebarWidget(QFrame):
         layout.addStretch()
 
         # 底部信息
-        info = QLabel("PKU Food Recommender\nv1.0")
+        info = QLabel("PKU Food Recommender\nv2.0")
         info.setFont(get_font(9))
         info.setStyleSheet(f"color: {COLORS['text_light'].name()}; padding: 10px;")
         info.setAlignment(Qt.AlignCenter)
@@ -270,7 +322,9 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.dm = DataManager()
         self.recommender = Recommender(self.dm)
+        self.ai_backend = create_ai_backend(self.dm)
         self.pages = {}
+        self.app_mode = self.dm.get_settings().get("app_mode", "offline")
 
         self.setWindowTitle("今天吃什么？ - 北大食堂智能推荐")
         self.setMinimumSize(1100, 750)
@@ -299,6 +353,8 @@ class MainWindow(QMainWindow):
 
         # 顶部标题栏
         self.header = HeaderWidget()
+        self.header.mode_toggle.set_mode(self.app_mode, emit=False)
+        self.header.mode_toggle.mode_changed.connect(self.on_app_mode_changed)
         right_area.addWidget(self.header)
 
         # 内容区（水彩背景）
@@ -332,6 +388,7 @@ class MainWindow(QMainWindow):
         from frontend.pages.history_page import HistoryPage
         from frontend.pages.feedback_page import FeedbackPage
         from frontend.pages.settings_page import SettingsPage
+        from frontend.pages.ai_chat_page import AIChatPage
 
         # 主页（欢迎页）
         welcome = WelcomePage(self.dm, self.recommender)
@@ -340,15 +397,21 @@ class MainWindow(QMainWindow):
         welcome.go_canteens.connect(lambda: self.switch_page("canteens"))
         self.add_page("home", welcome)
 
-        # 智能推荐页（含问卷）
+        # 离线智能推荐（四步问卷）
         survey = SurveyPage(self.dm, self.recommender)
         survey.recommendation_ready.connect(self.show_recommendations)
         self.add_page("recommend", survey)
 
+        # AI 美食助手
+        ai_chat = AIChatPage(self.dm, self.ai_backend)
+        ai_chat.recommendation_ready.connect(self.show_recommendations)
+        ai_chat.switch_offline.connect(lambda: self.set_app_mode("offline"))
+        self.add_page("ai_recommend", ai_chat)
+
         # 推荐结果页
         rec_page = RecommendationPage(self.dm, self.recommender)
         rec_page.view_dish.connect(self.show_dish_detail)
-        rec_page.go_back.connect(lambda: self.switch_page("recommend"))
+        rec_page.go_back.connect(self._back_from_recommendations)
         self.add_page("recommend_result", rec_page)
 
         # 食堂浏览
@@ -384,6 +447,9 @@ class MainWindow(QMainWindow):
 
     def switch_page(self, key):
         """切换页面"""
+        if key == "recommend":
+            key = "ai_recommend" if self.app_mode == "ai" else "recommend"
+
         if key in self.pages:
             # 更新页面数据
             page = self.pages[key]
@@ -397,12 +463,33 @@ class MainWindow(QMainWindow):
             if key in ["home", "recommend", "canteens", "history", "feedback", "settings"]:
                 self.sidebar.set_active(key)
 
-    def show_recommendations(self, recommendations):
-        """显示推荐结果"""
+    def _back_from_recommendations(self):
+        self.switch_page("recommend")
+
+    def show_recommendations(self, result):
+        """显示推荐结果（支持 dict 或 list）"""
         rec_page = self.pages.get("recommend_result")
         if rec_page:
-            rec_page.set_recommendations(recommendations)
+            rec_page.set_recommendations(result)
             self.switch_page("recommend_result")
+
+    def set_app_mode(self, mode: str):
+        self.app_mode = mode
+        self.header.mode_toggle.set_mode(mode, emit=False)
+        self.dm.update_settings({"app_mode": mode})
+        if mode == "ai" and not self.ai_backend.is_configured():
+            QMessageBox.information(
+                self, "AI 模式",
+                "AI 模式需要联网并配置 API 密钥。\n可在「设置 → AI 模式配置」中填写。",
+            )
+
+    def on_app_mode_changed(self, mode: str):
+        self.set_app_mode(mode)
+        current = self.stack.currentWidget()
+        survey = self.pages.get("recommend")
+        ai_page = self.pages.get("ai_recommend")
+        if current in (survey, ai_page):
+            self.switch_page("recommend")
 
     def show_dish_detail(self, dish_id):
         """显示菜品详情"""

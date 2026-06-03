@@ -1,0 +1,14 @@
+{
+  "explore_mode": true,
+  "explore_epsilon": 0.15,
+  "default_recommend_mode": "explore",
+  "notifications": true,
+  "theme": "watercolor",
+  "font_size": "medium",
+  "ai_config": {
+    "api_key": "sk-a0d5968687524e9faace69752c5d59ce",
+    "api_base": "",
+    "model": "deepseek-v4-flash"
+  },
+  "app_mode": "ai"
+}
