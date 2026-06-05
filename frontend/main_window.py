@@ -19,6 +19,8 @@ from backend.data_manager import DataManager
 from backend.recommender import Recommender
 from backend.ai_backend import create_ai_backend
 from backend.campus_navigation import CampusNavigationService
+from backend.food_footprint import FoodFootprintManager
+from backend.food_stories import FoodStoryManager
 from frontend.watercolor_style import (
     COLORS, get_font, get_stylesheet, get_poem,
     get_button_style, get_card_style, color_with_alpha, POEMS
@@ -226,6 +228,8 @@ class SidebarWidget(QFrame):
             ("recommend", "智能推荐", "✨"),
             ("canteens", "食堂浏览", "🍽️"),
             ("history", "就餐记录", "📖"),
+            ("footprint", "美食足迹", "👣"),
+            ("stories", "美食故事", "📜"),
             ("feedback", "我的评价", "💬"),
             ("settings", "设置", "⚙️"),
         ]
@@ -325,8 +329,14 @@ class MainWindow(QMainWindow):
         self.nav = CampusNavigationService.get_instance()
         self.recommender = Recommender(self.dm)
         self.ai_backend = create_ai_backend(self.dm)
+        self.footprint = FoodFootprintManager(self.dm.data_dir)
+        self.food_stories = FoodStoryManager(self.dm.data_dir)
+        self._footprint_popup_pending = True
         self.pages = {}
         self.app_mode = self.dm.get_settings().get("app_mode", "offline")
+
+        dishes_map = {d["id"]: d for d in self.dm.get_all_dishes()}
+        self.footprint.backfill_from_history(self.dm.history, dishes_map)
 
         self.setWindowTitle("今天吃什么？ - 北大食堂智能推荐")
         self.setMinimumSize(1100, 750)
@@ -391,12 +401,17 @@ class MainWindow(QMainWindow):
         from frontend.pages.feedback_page import FeedbackPage
         from frontend.pages.settings_page import SettingsPage
         from frontend.pages.ai_chat_page import AIChatPage
+        from frontend.pages.footprint_page import FootprintPage
+        from frontend.pages.food_story_page import FoodStoryPage
 
         # 主页（欢迎页）
-        welcome = WelcomePage(self.dm, self.recommender)
+        welcome = WelcomePage(self.dm, self.recommender, self.food_stories)
         welcome.go_survey.connect(lambda: self.switch_page("recommend"))
         welcome.go_recommend.connect(lambda: self.switch_page("recommend"))
         welcome.go_canteens.connect(lambda: self.switch_page("canteens"))
+        welcome.go_stories.connect(lambda: self.switch_page("stories"))
+        welcome.go_footprint.connect(lambda: self.switch_page("footprint"))
+        welcome.eat_today.connect(self.on_eat_dish)
         self.add_page("home", welcome)
 
         # 离线智能推荐（四步问卷）
@@ -434,6 +449,14 @@ class MainWindow(QMainWindow):
         history.view_dish.connect(self.show_dish_detail)
         self.add_page("history", history)
 
+        footprint_page = FootprintPage(self.footprint)
+        footprint_page.go_back.connect(lambda: self.switch_page("home"))
+        self.add_page("footprint", footprint_page)
+
+        story_page = FoodStoryPage(self.food_stories)
+        story_page.go_back.connect(lambda: self.switch_page("home"))
+        self.add_page("stories", story_page)
+
         # 评价
         feedback = FeedbackPage(self.dm, self.recommender)
         feedback.view_dish.connect(self.show_dish_detail)
@@ -463,7 +486,7 @@ class MainWindow(QMainWindow):
             self.stack.setCurrentIndex(idx)
 
             # 更新导航状态
-            if key in ["home", "recommend", "canteens", "history", "feedback", "settings"]:
+            if key in ["home", "recommend", "canteens", "history", "footprint", "stories", "feedback", "settings"]:
                 self.sidebar.set_active(key)
 
     def _back_from_recommendations(self):
@@ -517,24 +540,64 @@ class MainWindow(QMainWindow):
         QMessageBox.information(self, "评价提交", "感谢你的评价！你的反馈将帮助我们做得更好。")
 
     def on_eat_dish(self, dish_id):
-        """处理就餐记录"""
+        """处理就餐记录 + 美食足迹"""
         dish = self.dm.get_dish_by_id(dish_id)
-        if dish:
-            self.dm.add_history(dish_id, dish["name"], dish["canteen"])
-            QMessageBox.information(self, "就餐记录",
-                                    f"已记录：{dish['name']}\n来自{dish['canteen']}\n\n「四方食事，不过一碗人间烟火」")
+        if not dish:
+            return
+
+        from frontend.dialogs.eat_record_dialog import EatRecordDialog
+        dlg = EatRecordDialog(dish["name"], dish["canteen"], self)
+        mood, companions = "neutral", "alone"
+        if dlg.exec_():
+            mood = dlg.get_mood()
+            companions = dlg.get_companions()
+
+        self.dm.add_history(dish_id, dish["name"], dish["canteen"])
+        self.footprint.add_record(
+            dish_id,
+            dish["name"],
+            dish["canteen"],
+            cuisine=dish.get("cuisine", ""),
+            mood=mood,
+            companions=companions,
+        )
+
+        msg = f"已记录足迹：{dish['name']}\n来自 {dish['canteen']}"
+        if mood == "bad":
+            msg += f"\n\n{self.footprint.random_encouragement()}"
+        QMessageBox.information(self, "美食足迹", msg + "\n\n「四方食事，不过一碗人间烟火」")
+
+        fp_page = self.pages.get("footprint")
+        if fp_page and hasattr(fp_page, "refresh"):
+            fp_page.refresh()
 
     def apply_styles(self):
         """应用全局样式"""
         self.setStyleSheet(get_stylesheet())
 
     def showEvent(self, event):
-        """显示时刷新"""
+        """显示时刷新 + 美食足迹周报弹窗"""
         super().showEvent(event)
-        # 刷新当前页面
         current = self.stack.currentWidget()
-        if current and hasattr(current, 'refresh'):
+        if current and hasattr(current, "refresh"):
             current.refresh()
+        if self._footprint_popup_pending:
+            self._footprint_popup_pending = False
+            QTimer.singleShot(600, self._maybe_show_footprint_popup)
+
+    def _maybe_show_footprint_popup(self):
+        settings = self.dm.get_settings()
+        if not self.footprint.should_show_weekly_popup(settings):
+            return
+        stats = self.footprint.get_week_stats()
+        if not stats.get("has_data"):
+            return
+
+        from frontend.dialogs.footprint_dialog import FootprintWeeklyDialog
+        dlg = FootprintWeeklyDialog(stats, self)
+        dlg.view_footprint.connect(lambda: self.switch_page("footprint"))
+        dlg.exec_()
+        self.dm.update_settings(self.footprint.mark_popup_shown(settings))
 
 
 def main():

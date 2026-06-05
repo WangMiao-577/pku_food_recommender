@@ -10,5 +10,6 @@
     "api_base": "",
     "model": "deepseek-v4-flash"
   },
-  "app_mode": "ai"
+  "app_mode": "ai",
+  "footprint_popup_last": "2026-06-05T15:18:23.116250"
 }

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "fp_0006_1780650047",
+    "dish_id": "d007",
+    "dish_name": "石锅拌饭",
+    "canteen": "农园食堂",
+    "cuisine": "日韩",
+    "time": "2026-06-05T17:00:47.038591",
+    "mood": "neutral",
+    "companions": "alone",
+    "favorite": null,
+    "note": ""
+  },
+  {
+    "id": "fp_0005_1780645818",
+    "dish_id": "d007",
+    "dish_name": "石锅拌饭",
+    "canteen": "农园食堂",
+    "cuisine": "日韩",
+    "time": "2026-06-05T15:50:18.819895",
+    "mood": "good",
+    "companions": "alone",
+    "favorite": null,
+    "note": ""
+  },
+  {
+    "id": "fp_bf_0000",
+    "dish_id": "d004",
+    "dish_name": "西红柿炒鸡蛋",
+    "canteen": "学一食堂",
+    "cuisine": "融合",
+    "time": "2026-06-02T19:24:33.414303",
+    "mood": "good",
+    "companions": "friends",
+    "favorite": null,
+    "note": ""
+  },
+  {
+    "id": "fp_bf_0001",
+    "dish_id": "d001",
+    "dish_name": "麻婆豆腐",
+    "canteen": "家园食堂",
+    "cuisine": "川",
+    "time": "2026-06-02T19:24:32.348192",
+    "mood": "neutral",
+    "companions": "alone",
+    "favorite": null,
+    "note": ""
+  },
+  {
+    "id": "fp_bf_0002",
+    "dish_id": "d011",
+    "dish_name": "蒸饺",
+    "canteen": "松林",
+    "cuisine": "融合",
+    "time": "2026-06-02T19:24:32.130448",
+    "mood": "bad",
+    "companions": "alone",
+    "favorite": null,
+    "note": ""
+  },
+  {
+    "id": "fp_bf_0003",
+    "dish_id": "d004",
+    "dish_name": "西红柿炒鸡蛋",
+    "canteen": "学一食堂",
+    "cuisine": "融合",
+    "time": "2026-06-02T19:24:27.219788",
+    "mood": "neutral",
+    "companions": "alone",
+    "favorite": null,
+    "note": ""
+  }
+]

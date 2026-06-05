@@ -18,6 +18,7 @@ from PyQt5.QtCore import Qt, pyqtSignal, QSize
 from frontend.watercolor_style import (
     COLORS, get_font, get_button_style, get_card_style, POEMS, CANTEEN_TAGS
 )
+from frontend.widgets.food_story_panel import FoodStoryPanel
 
 
 class FeatureCard(QFrame):
@@ -96,6 +97,7 @@ class TodayCard(QFrame):
         super().__init__(parent)
         self.dm = dm
         self.recommender = recommender
+        self._current_dish = None
         self.setup_ui()
 
     def setup_ui(self):
@@ -125,7 +127,7 @@ class TodayCard(QFrame):
 
         # 菜品图片
         self.img_lbl = QLabel()
-        self.img_lbl.setFixedSize(500, 375)
+        self.img_lbl.setFixedSize(280, 160)
         self.img_lbl.setStyleSheet(f"""
             background-color: {COLORS['bg_warm'].name()};
             border-radius: 12px;
@@ -138,7 +140,7 @@ class TodayCard(QFrame):
         info_layout.setSpacing(8)
 
         self.dish_name = QLabel()
-        self.dish_name.setFont(get_font(20, bold=True))
+        self.dish_name.setFont(get_font(15, bold=True))
         self.dish_name.setStyleSheet(f"color: {COLORS['text_dark'].name()};")
         info_layout.addWidget(self.dish_name)
 
@@ -156,8 +158,8 @@ class TodayCard(QFrame):
         # 操作按钮
         btn_row = QHBoxLayout()
         self.eat_btn = QPushButton("这就去吃！")
-        self.eat_btn.setFont(get_font(35, bold=True))
-        self.eat_btn.setMinimumHeight(100)
+        self.eat_btn.setFixedSize(200, 50)
+        self.eat_btn.setFont(get_font(20, bold=True))
         self.eat_btn.setCursor(Qt.PointingHandCursor)
         self.eat_btn.setStyleSheet(f"""
             QPushButton {{
@@ -165,7 +167,7 @@ class TodayCard(QFrame):
                 color: white;
                 border: none;
                 border-radius: 12px;
-                font-size: 30px;
+                font-size: 24px;
                 font-weight: bold;
                 padding: 8px 16px;
             }}
@@ -173,28 +175,27 @@ class TodayCard(QFrame):
                 background-color: {COLORS["secondary"].lighter(120).name()};
             }}
         """)
-        self.eat_btn.setFixedWidth(250)
+        self.eat_btn.setFixedWidth(200)
         btn_row.addWidget(self.eat_btn)
 
         self.alt_btn = QPushButton("换一道")
-        self.alt_btn.setFont(get_font(35,bold=True))
-        self.alt_btn.setMinimumHeight(100)
+        self.alt_btn.setFixedSize(200, 50)
+        self.alt_btn.setFont(get_font(20, bold=True))
         self.alt_btn.setCursor(Qt.PointingHandCursor)
         self.alt_btn.setStyleSheet(f"""
             QPushButton {{
-                background-color: {COLORS["secondary"].name()};
+                background-color: {COLORS["primary"].name()};
                 color: white;
                 border: none;
                 border-radius: 12px;
-                font-size: 30px;
+                font-size: 24px;
                 font-weight: bold;
                 padding: 8px 16px;
             }}
             QPushButton:hover {{
-                background-color: {COLORS["secondary"].lighter(120).name()};
+                background-color: {COLORS["primary"].lighter(120).name()};
             }}
         """)
-        self.alt_btn.setFixedWidth(250)
         btn_row.addWidget(self.alt_btn)
 
         btn_row.addStretch()
@@ -217,40 +218,61 @@ class TodayCard(QFrame):
         shadow.setColor(QColor(0, 0, 0, 30))
         shadow.setOffset(0, 4)
         self.setGraphicsEffect(shadow)
-        self.setMinimumWidth(1300)  
+        self.setMaximumHeight(400)
 
         # 加载今日推荐
         self.load_today_recommendation()
 
     def load_today_recommendation(self):
-        """加载今日推荐"""
-        now = datetime.now()
-        self.time_lbl.setText(now.strftime("%Y年%m月%d日 %H:%M"))
-
+        """加载今日推荐（首次展示）"""
+        self.time_lbl.setText(datetime.now().strftime("%Y年%m月%d日 %H:%M"))
         dish = self.recommender.get_quick_pick()
-        if dish:
-            self.dish_name.setText(dish["name"])
-            canteen_tag = CANTEEN_TAGS.get(dish["canteen"], dish["canteen"])
-            self.dish_info.setText(
-                f"来自：{dish['canteen']} · {dish.get('window', '')}\n"
-                f"{canteen_tag}\n"
-                f"价格：¥{dish['price']}  评分：{dish['rating']}分"
-            )
-            self.dish_tags.setText(" · ".join(dish.get("tags", [])))
+        self._display_dish(dish)
 
-            # 加载菜品图片
-            img_path = os.path.join(os.path.dirname(__file__), "..", "..", "images",
-                                     dish.get("image", ""))
-            if os.path.exists(img_path):
-                self.img_lbl.setPixmap(QPixmap(img_path))
-            else:
-                self.img_lbl.setText("(菜品图片)")
-                self.img_lbl.setAlignment(Qt.AlignCenter)
-                self.img_lbl.setStyleSheet(f"""
-                    background-color: {COLORS['bg_warm'].name()};
-                    border-radius: 12px;
-                    color: {COLORS['text_light'].name()};
-                """)
+    def load_another_recommendation(self):
+        """换一道：从推荐候选中排除当前菜品后随机选取"""
+        current_id = (self._current_dish or {}).get("id")
+        candidates = self.recommender.recommend(
+            top_k=20,
+            mode="explore",
+            context={"recommend_mode": "explore"},
+        )
+        pool = [d for d in candidates if d["id"] != current_id]
+        if not pool:
+            pool = [d for d in self.recommender.get_trending(20) if d["id"] != current_id]
+        dish = random.choice(pool) if pool else self.recommender.get_quick_pick()
+        self._display_dish(dish)
+
+    def _display_dish(self, dish):
+        if not dish:
+            return
+        self._current_dish = dish
+        self.dish_name.setText(dish["name"])
+        canteen_tag = CANTEEN_TAGS.get(dish["canteen"], dish["canteen"])
+        self.dish_info.setText(
+            f"来自：{dish['canteen']} · {dish.get('window', '')}\n"
+            f"{canteen_tag}\n"
+            f"价格：¥{dish['price']}  评分：{dish['rating']}分"
+        )
+        self.dish_tags.setText(" · ".join(dish.get("tags", [])))
+
+        img_path = os.path.join(
+            os.path.dirname(__file__), "..", "..", "images", dish.get("image", "")
+        )
+        if os.path.exists(img_path):
+            self.img_lbl.setPixmap(QPixmap(img_path))
+            self.img_lbl.setAlignment(Qt.AlignCenter)
+        else:
+            self.img_lbl.setText("(菜品图片)")
+            self.img_lbl.setAlignment(Qt.AlignCenter)
+            self.img_lbl.setStyleSheet(f"""
+                background-color: {COLORS['bg_warm'].name()};
+                border-radius: 12px;
+                color: {COLORS['text_light'].name()};
+            """)
+
+    def current_dish_id(self):
+        return self._current_dish["id"] if self._current_dish else None
 
 
 class StatWidget(QFrame):
@@ -289,11 +311,15 @@ class WelcomePage(QWidget):
     go_survey = pyqtSignal()
     go_recommend = pyqtSignal()
     go_canteens = pyqtSignal()
+    go_stories = pyqtSignal()
+    go_footprint = pyqtSignal()
+    eat_today = pyqtSignal(str)
 
-    def __init__(self, dm, recommender, parent=None):
+    def __init__(self, dm, recommender, story_manager=None, parent=None):
         super().__init__(parent)
         self.dm = dm
         self.recommender = recommender
+        self.story_manager = story_manager
         self.setup_ui()
 
     def setup_ui(self):
@@ -344,11 +370,25 @@ class WelcomePage(QWidget):
         mid = QHBoxLayout()
         mid.setSpacing(20)
 
-        # 今日推荐
+        # 左侧：今日推荐 + 美食故事（上下并列）
+        left_col = QVBoxLayout()
+        left_col.setSpacing(5)
+
         self.today = TodayCard(self.dm, self.recommender)
         self.today.eat_btn.clicked.connect(self.on_eat_today)
         self.today.alt_btn.clicked.connect(self.on_change_today)
-        mid.addWidget(self.today, 2)
+        left_col.addWidget(self.today)
+
+        if self.story_manager:
+            self.story_panel = FoodStoryPanel(self.story_manager)
+            self.story_panel.open_stories.connect(self.go_stories.emit)
+            left_col.addWidget(self.story_panel)
+        else:
+            self.story_panel = None
+
+        left_widget = QWidget()
+        left_widget.setLayout(left_col)
+        mid.addWidget(left_widget, 2)
 
         # 快捷功能卡片
         right_cards = QVBoxLayout()
@@ -374,6 +414,16 @@ class WelcomePage(QWidget):
         card2.btn.clicked.connect(self.go_canteens.emit)
         right_cards.addWidget(card2)
 
+        card3 = FeatureCard(
+            "美食足迹",
+            "记录一周用餐心情与同伴，珍藏重要的那一顿饭。",
+            "查看足迹",
+            "accent_gold"
+        )
+        card3.setMaximumHeight(180)
+        card3.btn.clicked.connect(self.go_footprint.emit)
+        right_cards.addWidget(card3)
+
         right_container = QWidget()
         right_container.setLayout(right_cards)
         mid.addWidget(right_container, 1)
@@ -389,16 +439,17 @@ class WelcomePage(QWidget):
         main.addWidget(bottom_poem)
 
     def on_eat_today(self):
-        """记录今日推荐的就餐"""
-        dish = self.recommender.get_quick_pick()
-        if dish:
-            self.dm.add_history(dish["id"], dish["name"], dish["canteen"])
-            self.refresh()
+        """记录今日推荐的就餐（由主窗口处理足迹弹窗）"""
+        dish_id = self.today.current_dish_id()
+        if dish_id:
+            self.eat_today.emit(dish_id)
 
     def on_change_today(self):
         """换一道今日推荐"""
-        self.today.load_today_recommendation()
+        self.today.load_another_recommendation()
 
     def refresh(self):
         """刷新页面"""
         self.today.load_today_recommendation()
+        if self.story_panel:
+            self.story_panel.refresh()
