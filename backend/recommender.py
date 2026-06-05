@@ -26,10 +26,24 @@ NUTRITION_GOALS = {
     "无": None,
 }
 
-# 排序权重：稳定模式 / 探索模式
+# 排序权重：稳定模式 / 探索模式（含出餐/营养/聚餐维度）
 RANK_WEIGHTS = {
-    "stable": {"preference": 0.35, "quality": 0.25, "location": 0.20, "freshness": 0.15, "explore": 0.05},
-    "explore": {"preference": 0.25, "quality": 0.20, "location": 0.15, "freshness": 0.10, "explore": 0.30},
+    "stable": {
+        "preference": 0.28, "quality": 0.22, "location": 0.18,
+        "freshness": 0.12, "explore": 0.05, "time": 0.08, "nutrition": 0.05, "social": 0.02,
+    },
+    "explore": {
+        "preference": 0.20, "quality": 0.18, "location": 0.12,
+        "freshness": 0.08, "explore": 0.28, "time": 0.06, "nutrition": 0.04, "social": 0.04,
+    },
+}
+
+# 场景下动态加权（参考旧版 rush/healthy/social 思路）
+SCENE_WEIGHT_DELTA = {
+    "独自速食": {"time": 0.12, "nutrition": -0.04, "social": -0.02, "location": 0.05},
+    "独自慢食": {"time": -0.06, "nutrition": 0.10, "quality": 0.05, "social": -0.02},
+    "同伴聚餐": {"social": 0.12, "nutrition": 0.04, "time": -0.04, "preference": 0.04},
+    "团体宴请": {"social": 0.15, "quality": 0.06, "time": -0.05, "nutrition": 0.02},
 }
 
 # ε-greedy 探索概率
@@ -96,6 +110,7 @@ class Recommender:
                 "include_combos",
                 meal_scene in ("同伴聚餐", "团体宴请"),
             ),
+            "location_preference": ctx.get("location_preference", ""),
         }
 
     @staticmethod
@@ -125,6 +140,12 @@ class Recommender:
                 d["portion_size"] = "M"
         if "related_dishes" not in d:
             d["related_dishes"] = []
+        if not d.get("location_hint") and d.get("window"):
+            floor = d.get("floor")
+            prefix = f"{d.get('canteen', '')}"
+            if floor:
+                prefix += f"{'地下' if floor == 0 else f'{floor}层'}"
+            d["location_hint"] = f"{prefix}，{d['window']}" if prefix else d["window"]
         return d
 
     # ==================== Retrieve: 三路召回 ====================
@@ -208,24 +229,102 @@ class Recommender:
         return region in target_regions
 
     def _score_location(self, dish: Dict, ctx: Dict) -> Tuple[float, str]:
+        score, note = 70.0, "一般距离"
         node_id = ctx.get("location_node_id")
         if node_id:
-            return self.nav.location_score_for_canteen(node_id, dish["canteen"])
+            score, note = self.nav.location_score_for_canteen(node_id, dish["canteen"])
+        else:
+            location = ctx.get("location", "")
+            if location:
+                target_regions = LOCATION_TO_REGIONS.get(location)
+                if target_regions:
+                    region = self.dm.get_canteen_region(dish["canteen"])
+                    if region in target_regions:
+                        score, note = 100.0, "就在附近"
+                    elif region and target_regions:
+                        score, note = 45.0, "需多走几步"
 
-        location = ctx.get("location", "")
-        if not location:
-            return 70.0, "未指定位置"
+        hint = dish.get("location_hint") or ""
+        window = dish.get("window", "")
+        pref = ctx.get("location_preference", "")
+        if pref:
+            if pref in hint or pref in window:
+                score = min(score + 22, 100)
+                note = f"档口匹配·{pref}"
+            elif any(k in hint for k in pref.split() if len(k) >= 2):
+                score = min(score + 12, 100)
+                note = "位置相近"
+        elif hint:
+            score = min(score + 4, 100)
+            if "层" in hint:
+                note = hint.split("，")[0] if "，" in hint else hint[:12]
 
-        target_regions = LOCATION_TO_REGIONS.get(location)
-        if not target_regions:
-            return 70.0, "一般距离"
+        return score, note
 
-        region = self.dm.get_canteen_region(dish["canteen"])
-        if region in target_regions:
-            return 100.0, "就在附近"
-        if region and target_regions:
-            return 45.0, "需多走几步"
-        return 60.0, "一般距离"
+    def _score_time(self, dish: Dict, ctx: Dict) -> Tuple[float, str]:
+        prep = dish.get("prep_time", 10)
+        scene = ctx.get("meal_scene")
+        if scene == "独自速食":
+            if prep <= 5:
+                return 100.0, f"出餐快·约{prep}分钟"
+            if prep <= 8:
+                return 75.0, f"较快·{prep}分钟"
+            return max(20, 60 - prep * 3), f"需等待·{prep}分钟"
+        if scene in ("同伴聚餐", "团体宴请"):
+            return 60.0, "可接受等待"
+        if prep <= 8:
+            return 85.0, "出餐适中"
+        return 55.0, "现做菜品"
+
+    def _score_nutrition(self, dish: Dict, ctx: Dict) -> Tuple[float, str]:
+        goal = self.dm.get_nutrition_goal()
+        cal = dish.get("calories", 400)
+        protein = dish.get("protein", 0)
+        fat = dish.get("fat", 0)
+        scene = ctx.get("meal_scene")
+
+        if scene == "独自速食" and cal <= 500:
+            return 80.0, "轻量一餐"
+        if scene in ("同伴聚餐", "团体宴请") and cal >= 350:
+            return 75.0, "分量足"
+
+        if goal in NUTRITION_GOALS and NUTRITION_GOALS[goal]:
+            target = NUTRITION_GOALS[goal]
+            score = 50.0
+            notes = []
+            cal_range = target.get("calories")
+            if cal_range and cal_range[0] <= cal <= cal_range[1]:
+                score += 25
+                notes.append("热量合适")
+            prot_range = target.get("protein")
+            if prot_range and prot_range[0] <= protein <= prot_range[1]:
+                score += 15
+                notes.append("蛋白达标")
+            fat_range = target.get("fat")
+            if fat_range and fat_range[0] <= fat <= fat_range[1]:
+                score += 10
+                notes.append("脂肪适中")
+            return min(score, 100), "; ".join(notes) or "营养一般"
+
+        if 300 <= cal <= 600:
+            return 70.0, "营养均衡"
+        return 55.0, "营养一般"
+
+    def _score_social(self, dish: Dict, ctx: Dict) -> Tuple[float, str]:
+        scene = ctx.get("meal_scene")
+        if scene not in ("同伴聚餐", "团体宴请"):
+            return 50.0, "单人适用"
+
+        score = 45.0
+        tags = set(dish.get("tags", []))
+        if dish.get("portion_size") == "L":
+            score += 25
+        if tags & {"聚餐", "管饱", "热门", "下饭"}:
+            score += 20
+        if dish.get("rating_count", 0) >= 100:
+            score += 10
+        note = "适合分享" if score >= 70 else "可搭配点餐"
+        return min(score, 100), note
 
     def _recall_mode(self, dishes: List[Dict], recommend_mode: str) -> List[Dict]:
         eaten_7 = self.dm.get_eaten_dish_ids(days=7)
@@ -301,6 +400,12 @@ class Recommender:
             score += 10
             notes.append("偏好食堂")
 
+        loc_pref = ctx.get("location_preference", "")
+        hint = dish.get("location_hint", "")
+        if loc_pref and (loc_pref in hint or loc_pref in dish.get("window", "")):
+            score += 12
+            notes.append(f"档口·{loc_pref}")
+
         return min(max(score, 0), 100), "; ".join(notes) or "一般匹配"
 
     def _score_quality(self, dish: Dict) -> Tuple[float, str]:
@@ -346,11 +451,27 @@ class Recommender:
             return 25.0, "熟悉味道"
         return 10.0, "稳定选择"
 
-    def _rank_dishes(self, dishes: List[Dict], ctx: Dict) -> List[Tuple[Dict, float, Dict]]:
-        weights = RANK_WEIGHTS[ctx["recommend_mode"]]
+    def _resolve_rank_weights(self, ctx: Dict) -> Dict[str, float]:
+        weights = dict(RANK_WEIGHTS[ctx["recommend_mode"]])
         is_cold_start = not self.dm.has_eating_history() and not self.dm.get_preferred_flavors()
         if is_cold_start:
-            weights = {"preference": 0.20, "quality": 0.50, "location": 0.15, "freshness": 0.10, "explore": 0.05}
+            weights = {
+                "preference": 0.16, "quality": 0.38, "location": 0.14,
+                "freshness": 0.08, "explore": 0.05, "time": 0.08,
+                "nutrition": 0.06, "social": 0.05,
+            }
+
+        scene = ctx.get("meal_scene")
+        if scene in SCENE_WEIGHT_DELTA:
+            for key, delta in SCENE_WEIGHT_DELTA[scene].items():
+                if key in weights:
+                    weights[key] = max(0.0, weights[key] + delta)
+
+        total = sum(weights.values()) or 1.0
+        return {k: v / total for k, v in weights.items()}
+
+    def _rank_dishes(self, dishes: List[Dict], ctx: Dict) -> List[Tuple[Dict, float, Dict]]:
+        weights = self._resolve_rank_weights(ctx)
 
         scored = []
         for dish in dishes:
@@ -359,6 +480,9 @@ class Recommender:
             s_loc, d_loc = self._score_location(dish, ctx)
             s_fresh, d_fresh = self._score_freshness(dish, ctx["recommend_mode"])
             s_explore, d_explore = self._score_explore(dish, ctx["recommend_mode"])
+            s_time, d_time = self._score_time(dish, ctx)
+            s_nutri, d_nutri = self._score_nutrition(dish, ctx)
+            s_social, d_social = self._score_social(dish, ctx)
 
             final = (
                 weights["preference"] * s_pref
@@ -366,6 +490,9 @@ class Recommender:
                 + weights["location"] * s_loc
                 + weights["freshness"] * s_fresh
                 + weights["explore"] * s_explore
+                + weights.get("time", 0) * s_time
+                + weights.get("nutrition", 0) * s_nutri
+                + weights.get("social", 0) * s_social
             )
             details = {
                 "preference": d_pref,
@@ -373,6 +500,9 @@ class Recommender:
                 "location": d_loc,
                 "freshness": d_fresh,
                 "explore": d_explore,
+                "time": d_time,
+                "nutrition": d_nutri,
+                "social": d_social,
             }
             scored.append((dish, final, details))
 
@@ -554,8 +684,15 @@ class Recommender:
 
         combos = []
         if ctx.get("include_combos"):
-            combo_candidates = candidates[: max(top_k * 3, 15)]
-            combos = self.generate_combos(combo_candidates, ctx["budget_limit"], top_n=2)
+            from backend.combo_recommender import ComboRecommender
+            combo_engine = ComboRecommender(self.dm)
+            combo_candidates = candidates[: max(top_k * 3, 20)]
+            combos = combo_engine.recommend_combos(
+                meal_scene=ctx.get("meal_scene"),
+                budget=ctx["budget_limit"],
+                candidates=combo_candidates,
+                top_n=3,
+            )
 
         return {
             "dishes": dishes,

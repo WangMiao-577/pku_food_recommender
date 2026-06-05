@@ -118,7 +118,8 @@ class ComboResultCard(QFrame):
         layout.setSpacing(10)
 
         header = QHBoxLayout()
-        tag = QLabel("套餐推荐")
+        tag_text = "聚餐套餐" if self.combo.get("is_preset") else "套餐推荐"
+        tag = QLabel(tag_text)
         tag.setFont(get_font(10, bold=True))
         tag.setStyleSheet(f"""
             background-color: {COLORS['accent_sage'].name()};
@@ -128,7 +129,16 @@ class ComboResultCard(QFrame):
         """)
         header.addWidget(tag)
 
-        canteen = QLabel(f"{self.combo.get('canteen', '')} · {self.combo.get('window', '')}")
+        if self.combo.get("name"):
+            title = QLabel(self.combo["name"])
+            title.setFont(get_font(12, bold=True))
+            title.setStyleSheet(f"color: {COLORS['text_dark'].name()};")
+            header.addWidget(title)
+
+        loc = self.combo.get("window", "")
+        if self.combo.get("description"):
+            loc = loc or self.combo.get("description", "")[:20]
+        canteen = QLabel(f"{self.combo.get('canteen', '')} · {loc}")
         canteen.setFont(get_font(10))
         canteen.setStyleSheet(f"color: {COLORS['text_light'].name()};")
         header.addWidget(canteen)
@@ -176,9 +186,11 @@ class ComboResultCard(QFrame):
         layout.addLayout(dishes_row)
 
         footer = QHBoxLayout()
-        hint = QLabel("同窗口取餐，不用奔波")
+        reason = self.combo.get("reason") or "同窗口取餐，不用奔波"
+        hint = QLabel(reason)
         hint.setFont(get_font(10))
         hint.setStyleSheet(f"color: {COLORS['secondary_dark'].name()};")
+        hint.setWordWrap(True)
         footer.addWidget(hint)
 
         footer.addStretch()
@@ -304,9 +316,15 @@ class DishResultCard(QFrame):
         title_row.addWidget(price)
         info.addLayout(title_row)
 
-        meta = QLabel(f"{self.dish['canteen']} · {self.dish.get('window', '')}")
+        loc_parts = [self.dish["canteen"]]
+        if self.dish.get("location_hint"):
+            loc_parts.append(self.dish["location_hint"])
+        elif self.dish.get("window"):
+            loc_parts.append(self.dish["window"])
+        meta = QLabel(" · ".join(loc_parts))
         meta.setFont(get_font(10))
         meta.setStyleSheet(f"color: {COLORS['text_light'].name()};")
+        meta.setWordWrap(True)
         info.addWidget(meta)
 
         flavor_row = QHBoxLayout()
@@ -437,3 +455,51 @@ class DishResultCard(QFrame):
         shadow.setOffset(0, 4)
         self.setGraphicsEffect(shadow)
         self.setMinimumHeight(180)
+
+
+class ChatInlineRecommendBlock(QFrame):
+    """AI 对话内嵌推荐块（套餐 + 菜品卡片）"""
+
+    view_dish = pyqtSignal(str)
+    select_combo = pyqtSignal(dict)
+    open_full_result = pyqtSignal(dict)
+
+    def __init__(self, dishes=None, combos=None, parent=None):
+        super().__init__(parent)
+        self.payload = {"dishes": dishes or [], "combos": combos or []}
+        self.setup_ui(dishes or [], combos or [])
+
+    def setup_ui(self, dishes, combos):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(4, 8, 4, 8)
+        layout.setSpacing(12)
+
+        if combos:
+            sec = QLabel("推荐套餐")
+            sec.setFont(get_font(11, bold=True))
+            sec.setStyleSheet(f"color: {COLORS['secondary_dark'].name()};")
+            layout.addWidget(sec)
+            for combo in combos[:3]:
+                card = ComboResultCard(combo)
+                card.view_dish.connect(self.view_dish.emit)
+                card.select_combo.connect(self.select_combo.emit)
+                layout.addWidget(card)
+
+        if dishes:
+            sec = QLabel("推荐菜品")
+            sec.setFont(get_font(11, bold=True))
+            sec.setStyleSheet(f"color: {COLORS['secondary_dark'].name()};")
+            layout.addWidget(sec)
+            for i, dish in enumerate(dishes[:5], 1):
+                card = DishResultCard(dish, i)
+                card.view_clicked.connect(self.view_dish.emit)
+                layout.addWidget(card)
+
+        full_btn = QPushButton("在结果页查看完整推荐")
+        full_btn.setFont(get_font(10))
+        full_btn.setCursor(Qt.PointingHandCursor)
+        full_btn.setStyleSheet(get_button_style("secondary", radius=10))
+        full_btn.clicked.connect(lambda: self.open_full_result.emit(self.payload))
+        layout.addWidget(full_btn)
+
+        self.setStyleSheet("QFrame { background: transparent; border: none; }")

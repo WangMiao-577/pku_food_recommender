@@ -402,5 +402,10125 @@
       "dinner": true,
       "late_night": true
     }
+  },
+  {
+    "id": "ny001",
+    "name": "排骨米粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 15.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "排骨、米粉、青菜、骨头汤",
+    "calories": 480,
+    "protein": 14.4,
+    "fat": 14.9,
+    "carbs": 54.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny002",
+    "name": "招牌牛肉粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "牛肉、米粉、青菜、牛骨汤",
+    "calories": 520,
+    "protein": 15.6,
+    "fat": 16.2,
+    "carbs": 58.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny003",
+    "name": "掌中宝拌粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 15.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "鸡脆骨、米粉、花生米、葱花、辣椒油",
+    "calories": 550,
+    "protein": 16.5,
+    "fat": 17.1,
+    "carbs": 61.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny004",
+    "name": "南昌拌米粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "米粉、酱油、花生米、萝卜干、葱花、辣椒油",
+    "calories": 380,
+    "protein": 11.4,
+    "fat": 11.8,
+    "carbs": 42.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny005",
+    "name": "南昌炒米粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 14.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "米粉、鸡蛋、豆芽、青菜、肉丝、酱油",
+    "calories": 520,
+    "protein": 15.6,
+    "fat": 16.2,
+    "carbs": 58.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny006",
+    "name": "小炒肉米粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 14.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "猪肉、青椒、米粉、青菜、骨头汤",
+    "calories": 510,
+    "protein": 15.3,
+    "fat": 15.9,
+    "carbs": 57.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny007",
+    "name": "牛肉拌粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "牛肉、米粉、花生米、葱花、酱油、辣椒油",
+    "calories": 560,
+    "protein": 16.8,
+    "fat": 17.4,
+    "carbs": 63.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny008",
+    "name": "泡椒鸡杂粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "鸡胗、鸡肝、泡椒、米粉、青菜",
+    "calories": 450,
+    "protein": 13.5,
+    "fat": 14.0,
+    "carbs": 50.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny009",
+    "name": "原味肉丝粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 13.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "猪肉丝、米粉、青菜、骨头汤",
+    "calories": 470,
+    "protein": 14.1,
+    "fat": 14.6,
+    "carbs": 52.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny010",
+    "name": "碎肉米粉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 9.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "碎猪肉、米粉、青菜、骨头汤",
+    "calories": 420,
+    "protein": 12.6,
+    "fat": 13.1,
+    "carbs": 47.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny011",
+    "name": "玉米排骨汤",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 6.0,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "玉米、排骨、胡萝卜、姜片",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny012",
+    "name": "海带排骨汤",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 6.0,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "海带、排骨、姜片、葱花",
+    "calories": 170,
+    "protein": 5.1,
+    "fat": 5.3,
+    "carbs": 19.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny013",
+    "name": "姬松茸老鸡汤",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 8.5,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "姬松茸、老母鸡、枸杞、姜片",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny014",
+    "name": "鸡蛋肉饼汤",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 6.5,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "鸡蛋、猪肉馅、葱花、姜末",
+    "calories": 200,
+    "protein": 6.0,
+    "fat": 6.2,
+    "carbs": 22.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny015",
+    "name": "莲藕排骨汤",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 5.5,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "莲藕、排骨、花生、红枣",
+    "calories": 190,
+    "protein": 5.7,
+    "fat": 5.9,
+    "carbs": 21.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny016",
+    "name": "皮蛋肉饼汤",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 7.0,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "皮蛋、猪肉馅、姜末、葱花",
+    "calories": 210,
+    "protein": 6.3,
+    "fat": 6.5,
+    "carbs": 23.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny017",
+    "name": "冬瓜排骨汤",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 5.5,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "冬瓜、排骨、姜片、葱花",
+    "calories": 160,
+    "protein": 4.8,
+    "fat": 5.0,
+    "carbs": 18.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny018",
+    "name": "木桶毛豆仁烧肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 15.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "猪肉、毛豆仁、米饭、酱油、糖",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny019",
+    "name": "木桶紫苏鳝片饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 18.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "鳝鱼、紫苏叶、米饭、辣椒、姜片",
+    "calories": 580,
+    "protein": 17.4,
+    "fat": 18.0,
+    "carbs": 65.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny020",
+    "name": "木桶小炒双脆饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "猪肚、鸡胗、青椒、米饭、辣椒",
+    "calories": 600,
+    "protein": 18.0,
+    "fat": 18.7,
+    "carbs": 67.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny021",
+    "name": "木桶雪菜蚕豆鲜虾饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "雪菜、蚕豆、鲜虾、米饭",
+    "calories": 560,
+    "protein": 16.8,
+    "fat": 17.4,
+    "carbs": 63.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny022",
+    "name": "木桶鸡肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "鸡肉、香菇、米饭、酱油、葱花",
+    "calories": 550,
+    "protein": 16.5,
+    "fat": 17.1,
+    "carbs": 61.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny023",
+    "name": "木桶烟笋腊肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 18.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "腊肉、烟笋、米饭、辣椒、蒜",
+    "calories": 680,
+    "protein": 20.4,
+    "fat": 21.2,
+    "carbs": 76.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny024",
+    "name": "木桶香辣牛肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "牛肉、辣椒、米饭、花椒、葱花",
+    "calories": 640,
+    "protein": 19.2,
+    "fat": 19.9,
+    "carbs": 72.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny025",
+    "name": "木桶香辣肥肠饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 18.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "猪大肠、辣椒、米饭、花椒、蒜",
+    "calories": 720,
+    "protein": 21.6,
+    "fat": 22.4,
+    "carbs": 81.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny026",
+    "name": "小炒肉木桶饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 15.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "猪肉、青椒、米饭、酱油、蒜",
+    "calories": 630,
+    "protein": 18.9,
+    "fat": 19.6,
+    "carbs": 70.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny027",
+    "name": "木桶红烧肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "湘",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "五花肉、米饭、酱油、糖、姜片",
+    "calories": 750,
+    "protein": 22.5,
+    "fat": 23.3,
+    "carbs": 84.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny028",
+    "name": "木桶酸辣鸭胗饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧窗口",
+    "window_number": 1,
+    "floor": 2,
+    "price": 15.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣",
+      "酸"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧窗口",
+    "ingredients": "鸭胗、泡椒、米饭、酸豆角、辣椒",
+    "calories": 580,
+    "protein": 17.4,
+    "fat": 18.0,
+    "carbs": 65.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny029",
+    "name": "茄汁鲅鱼",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "鲅鱼、番茄酱、白糖、醋、姜",
+    "calories": 260,
+    "protein": 7.8,
+    "fat": 8.1,
+    "carbs": 29.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny030",
+    "name": "蛋黄焗豆花",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "咸蛋黄、嫩豆腐、葱花",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny031",
+    "name": "小鸡炖蘑菇",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "鸡肉、榛蘑、粉条、姜片、八角",
+    "calories": 380,
+    "protein": 11.4,
+    "fat": 11.8,
+    "carbs": 42.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny032",
+    "name": "酸菜汆白肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "酸"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "五花肉、酸菜、粉条、姜片",
+    "calories": 340,
+    "protein": 10.2,
+    "fat": 10.6,
+    "carbs": 38.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny033",
+    "name": "葱油菜心",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "菜心、葱油、生抽、蒜末",
+    "calories": 80,
+    "protein": 2.4,
+    "fat": 2.5,
+    "carbs": 9.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny034",
+    "name": "锅包肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "猪里脊、淀粉、白糖、醋、胡萝卜丝",
+    "calories": 350,
+    "protein": 10.5,
+    "fat": 10.9,
+    "carbs": 39.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny035",
+    "name": "溜肉段",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "猪里脊、青椒、淀粉、酱油、糖",
+    "calories": 340,
+    "protein": 10.2,
+    "fat": 10.6,
+    "carbs": 38.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny036",
+    "name": "木须肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "猪肉、鸡蛋、木耳、黄瓜、胡萝卜",
+    "calories": 280,
+    "protein": 8.4,
+    "fat": 8.7,
+    "carbs": 31.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny037",
+    "name": "肉末酱香茄子",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "茄子、猪肉末、豆瓣酱、蒜末、葱花",
+    "calories": 240,
+    "protein": 7.2,
+    "fat": 7.5,
+    "carbs": 27.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny038",
+    "name": "蒜蓉粉丝娃娃菜",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第二个窗口",
+    "window_number": 2,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第二个窗口",
+    "ingredients": "娃娃菜、粉丝、蒜蓉、生抽、葱花",
+    "calories": 120,
+    "protein": 3.6,
+    "fat": 3.7,
+    "carbs": 13.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny039",
+    "name": "砂锅豆腐",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第三个窗口",
+    "window_number": 3,
+    "floor": 2,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第三个窗口",
+    "ingredients": "嫩豆腐、肉末、豆瓣酱、葱花",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny040",
+    "name": "砂锅腊肠饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第三个窗口",
+    "window_number": 3,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第三个窗口",
+    "ingredients": "腊肠、米饭、青菜、酱油、鸡蛋",
+    "calories": 680,
+    "protein": 20.4,
+    "fat": 21.2,
+    "carbs": 76.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny041",
+    "name": "砂锅腊肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第三个窗口",
+    "window_number": 3,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第三个窗口",
+    "ingredients": "腊肉、米饭、青菜、酱油、蒜末",
+    "calories": 700,
+    "protein": 21.0,
+    "fat": 21.8,
+    "carbs": 78.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny042",
+    "name": "砂锅牛腩饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第三个窗口",
+    "window_number": 3,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第三个窗口",
+    "ingredients": "牛腩、米饭、萝卜、姜片、八角",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny043",
+    "name": "豆豉蒸排骨饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第三个窗口",
+    "window_number": 3,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第三个窗口",
+    "ingredients": "排骨、豆豉、米饭、蒜末、生抽",
+    "calories": 640,
+    "protein": 19.2,
+    "fat": 19.9,
+    "carbs": 72.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny044",
+    "name": "砂锅鸡腿肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第三个窗口",
+    "window_number": 3,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第三个窗口",
+    "ingredients": "鸡腿肉、米饭、香菇、酱油、姜片",
+    "calories": 580,
+    "protein": 17.4,
+    "fat": 18.0,
+    "carbs": 65.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny045",
+    "name": "砂锅浓汤皮肚饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第三个窗口",
+    "window_number": 3,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第三个窗口",
+    "ingredients": "皮肚(炸猪皮)、肉丝、米饭、高汤",
+    "calories": 650,
+    "protein": 19.5,
+    "fat": 20.2,
+    "carbs": 73.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny046",
+    "name": "砂锅芙蓉虾仁饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第三个窗口",
+    "window_number": 3,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第三个窗口",
+    "ingredients": "虾仁、鸡蛋、米饭、青豆、胡萝卜",
+    "calories": 560,
+    "protein": 16.8,
+    "fat": 17.4,
+    "carbs": 63.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny047",
+    "name": "尖椒炒肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "猪肉、尖椒、蒜、酱油、豆瓣酱",
+    "calories": 320,
+    "protein": 9.6,
+    "fat": 10.0,
+    "carbs": 36.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny048",
+    "name": "飘香孜然鸭腿",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "鸭腿、孜然、辣椒、花椒、芝麻",
+    "calories": 380,
+    "protein": 11.4,
+    "fat": 11.8,
+    "carbs": 42.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny049",
+    "name": "回锅肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "五花肉、青椒、豆瓣酱、蒜苗、豆豉",
+    "calories": 420,
+    "protein": 12.6,
+    "fat": 13.1,
+    "carbs": 47.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny050",
+    "name": "歌乐山辣子鸡",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "鸡肉、干辣椒、花椒、芝麻、花生",
+    "calories": 360,
+    "protein": 10.8,
+    "fat": 11.2,
+    "carbs": 40.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny051",
+    "name": "四川烧白",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "五花肉、芽菜、豆瓣酱、姜末、糖",
+    "calories": 480,
+    "protein": 14.4,
+    "fat": 14.9,
+    "carbs": 54.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny052",
+    "name": "番茄炒蛋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "番茄、鸡蛋、葱花、糖、盐",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny053",
+    "name": "泡椒牛肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 11.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "牛肉、泡椒、芹菜、豆瓣酱、姜蒜",
+    "calories": 340,
+    "protein": 10.2,
+    "fat": 10.6,
+    "carbs": 38.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny054",
+    "name": "口水鸡",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "鸡腿肉、花生、芝麻、辣椒油、花椒",
+    "calories": 310,
+    "protein": 9.3,
+    "fat": 9.6,
+    "carbs": 34.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny055",
+    "name": "乱刀土豆",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "土豆、辣椒、蒜末、醋、花椒",
+    "calories": 160,
+    "protein": 4.8,
+    "fat": 5.0,
+    "carbs": 18.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny056",
+    "name": "麻婆豆腐",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "嫩豆腐、猪肉末、豆瓣酱、花椒、辣椒",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny057",
+    "name": "葱油椒麻鸡",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "鸡肉、花椒、葱油、青椒、芝麻",
+    "calories": 300,
+    "protein": 9.0,
+    "fat": 9.3,
+    "carbs": 33.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny058",
+    "name": "香菇青菜",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第四个窗口",
+    "window_number": 4,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第四个窗口",
+    "ingredients": "香菇、青菜、蒜末、生抽",
+    "calories": 90,
+    "protein": 2.7,
+    "fat": 2.8,
+    "carbs": 10.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny059",
+    "name": "麻辣拌虾",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第五个窗口",
+    "window_number": 5,
+    "floor": 2,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "麻辣",
+      "辣",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第五个窗口",
+    "ingredients": "鲜虾、麻辣酱、芝麻、花生碎、香菜",
+    "calories": 150,
+    "protein": 4.5,
+    "fat": 4.7,
+    "carbs": 16.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny060",
+    "name": "麻辣拌牛肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第五个窗口",
+    "window_number": 5,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "麻辣",
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第五个窗口",
+    "ingredients": "牛肉片、麻辣酱、香菜、蒜末、辣椒油",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny061",
+    "name": "麻辣拌羊肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第五个窗口",
+    "window_number": 5,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "麻辣",
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第五个窗口",
+    "ingredients": "羊肉片、麻辣酱、香菜、孜然、辣椒油",
+    "calories": 240,
+    "protein": 7.2,
+    "fat": 7.5,
+    "carbs": 27.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny062",
+    "name": "麻辣拌鸡翅中",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "东侧第五个窗口",
+    "window_number": 5,
+    "floor": 2,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "麻辣",
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，东侧第五个窗口",
+    "ingredients": "鸡翅中、麻辣酱、芝麻、花生碎",
+    "calories": 260,
+    "protein": 7.8,
+    "fat": 8.1,
+    "carbs": 29.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny063",
+    "name": "热牛奶",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "纯牛奶",
+    "calories": 130,
+    "protein": 3.9,
+    "fat": 4.0,
+    "carbs": 14.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny064",
+    "name": "卡布奇诺",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "浓缩咖啡、牛奶、奶泡",
+    "calories": 80,
+    "protein": 2.4,
+    "fat": 2.5,
+    "carbs": 9.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny065",
+    "name": "美式咖啡",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "浓缩咖啡、热水",
+    "calories": 15,
+    "protein": 0.4,
+    "fat": 0.5,
+    "carbs": 1.7,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny066",
+    "name": "拿铁咖啡",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.6,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "浓缩咖啡、牛奶",
+    "calories": 120,
+    "protein": 3.6,
+    "fat": 3.7,
+    "carbs": 13.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny067",
+    "name": "澳式白咖啡",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "浓缩咖啡、牛奶、少量奶泡",
+    "calories": 110,
+    "protein": 3.3,
+    "fat": 3.4,
+    "carbs": 12.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny068",
+    "name": "热豆浆",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "黄豆、水、糖",
+    "calories": 100,
+    "protein": 3.0,
+    "fat": 3.1,
+    "carbs": 11.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny069",
+    "name": "百香果茉莉花茶",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "百香果、茉莉花茶、糖、水",
+    "calories": 80,
+    "protein": 2.4,
+    "fat": 2.5,
+    "carbs": 9.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny070",
+    "name": "金桔柠檬",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "金桔、柠檬、绿茶、糖",
+    "calories": 60,
+    "protein": 1.8,
+    "fat": 1.9,
+    "carbs": 6.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny071",
+    "name": "西柚茉莉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "西柚、茉莉花茶、糖",
+    "calories": 70,
+    "protein": 2.1,
+    "fat": 2.2,
+    "carbs": 7.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny072",
+    "name": "荔枝红茶",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "荔枝、红茶、糖",
+    "calories": 75,
+    "protein": 2.2,
+    "fat": 2.3,
+    "carbs": 8.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny073",
+    "name": "蜜桃乌龙",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "蜜桃、乌龙茶、糖",
+    "calories": 70,
+    "protein": 2.1,
+    "fat": 2.2,
+    "carbs": 7.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny074",
+    "name": "彩虹蛋卷",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 3.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、鸡蛋、奶油、食用色素、糖",
+    "calories": 280,
+    "protein": 8.4,
+    "fat": 8.7,
+    "carbs": 31.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny075",
+    "name": "华夫饼",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、鸡蛋、牛奶、黄油、糖",
+    "calories": 350,
+    "protein": 10.5,
+    "fat": 10.9,
+    "carbs": 39.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny076",
+    "name": "原味手撕面包",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、黄油、鸡蛋、牛奶、酵母、糖",
+    "calories": 400,
+    "protein": 12.0,
+    "fat": 12.4,
+    "carbs": 45.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny077",
+    "name": "黄油曲奇",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、黄油、糖、鸡蛋",
+    "calories": 450,
+    "protein": 13.5,
+    "fat": 14.0,
+    "carbs": 50.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny078",
+    "name": "手指饼干",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、鸡蛋、糖",
+    "calories": 380,
+    "protein": 11.4,
+    "fat": 11.8,
+    "carbs": 42.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny079",
+    "name": "盒装茯苓饼(200g)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 18.8,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "茯苓粉、面粉、糖、芝麻",
+    "calories": 720,
+    "protein": 21.6,
+    "fat": 22.4,
+    "carbs": 81.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny080",
+    "name": "小麻花(200g)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 18.8,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、油、糖、芝麻",
+    "calories": 900,
+    "protein": 27.0,
+    "fat": 28.0,
+    "carbs": 101.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny081",
+    "name": "抹茶三角",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 3.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、抹茶粉、奶油、糖",
+    "calories": 260,
+    "protein": 7.8,
+    "fat": 8.1,
+    "carbs": 29.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny082",
+    "name": "紫薯面包",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 2.6,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、紫薯泥、糖、酵母",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny083",
+    "name": "原味玛芬",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 7.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、鸡蛋、黄油、牛奶、糖",
+    "calories": 420,
+    "protein": 12.6,
+    "fat": 13.1,
+    "carbs": 47.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny084",
+    "name": "巧克力曲奇",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 7.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、黄油、巧克力、糖、鸡蛋",
+    "calories": 480,
+    "protein": 14.4,
+    "fat": 14.9,
+    "carbs": 54.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny085",
+    "name": "咸味曲奇条",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 6.6,
+    "cuisine": "融合",
+    "flavor": [
+      "咸"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、黄油、盐、葱、鸡蛋",
+    "calories": 380,
+    "protein": 11.4,
+    "fat": 11.8,
+    "carbs": 42.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny086",
+    "name": "龙须酥(200g)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 18.8,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、麦芽糖、芝麻、花生油",
+    "calories": 780,
+    "protein": 23.4,
+    "fat": 24.3,
+    "carbs": 87.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny087",
+    "name": "糖葫芦(200g)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 18.8,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "山楂、冰糖、水、芝麻",
+    "calories": 320,
+    "protein": 9.6,
+    "fat": 10.0,
+    "carbs": 36.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny088",
+    "name": "虎皮咖啡卷",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 3.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、鸡蛋、咖啡粉、奶油、糖",
+    "calories": 290,
+    "protein": 8.7,
+    "fat": 9.0,
+    "carbs": 32.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny089",
+    "name": "菠萝面包",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、黄油、菠萝馅、糖、鸡蛋",
+    "calories": 310,
+    "protein": 9.3,
+    "fat": 9.6,
+    "carbs": 34.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny090",
+    "name": "巧克力玛芬",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 9.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、可可粉、巧克力、黄油、糖、鸡蛋",
+    "calories": 480,
+    "protein": 14.4,
+    "fat": 14.9,
+    "carbs": 54.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny091",
+    "name": "蔓越莓切片",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "面粉、黄油、蔓越莓干、糖、鸡蛋",
+    "calories": 420,
+    "protein": 12.6,
+    "fat": 13.1,
+    "carbs": 47.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny092",
+    "name": "果脯(500g)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 28.8,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "各类水果、糖、蜂蜜",
+    "calories": 1600,
+    "protein": 48.0,
+    "fat": 49.8,
+    "carbs": 180.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny093",
+    "name": "山楂糕(200g)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 18.8,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "山楂、冰糖、琼脂",
+    "calories": 340,
+    "protein": 10.2,
+    "fat": 10.6,
+    "carbs": 38.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny094",
+    "name": "椰香绿豆西米露",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "绿豆、西米、椰奶、糖、水",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny095",
+    "name": "番茄虾仁滑蛋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第一个窗口",
+    "window_number": 7,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，西侧第一个窗口",
+    "ingredients": "番茄、虾仁、鸡蛋、葱花、盐",
+    "calories": 350,
+    "protein": 10.5,
+    "fat": 10.9,
+    "carbs": 39.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny096",
+    "name": "奥尔良鸡丁滑蛋饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第一个窗口",
+    "window_number": 7,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，西侧第一个窗口",
+    "ingredients": "鸡肉、奥尔良腌料、鸡蛋、米饭、葱花",
+    "calories": 580,
+    "protein": 17.4,
+    "fat": 18.0,
+    "carbs": 65.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny097",
+    "name": "木耳小白菜",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第一个窗口",
+    "window_number": 7,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，西侧第一个窗口",
+    "ingredients": "黑木耳、小白菜、蒜末、生抽",
+    "calories": 70,
+    "protein": 2.1,
+    "fat": 2.2,
+    "carbs": 7.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny098",
+    "name": "清炖狮子头",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第一个窗口",
+    "window_number": 7,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，西侧第一个窗口",
+    "ingredients": "猪肉馅、荸荠、鸡蛋、葱姜、高汤",
+    "calories": 320,
+    "protein": 9.6,
+    "fat": 10.0,
+    "carbs": 36.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny099",
+    "name": "东坡肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第一个窗口",
+    "window_number": 7,
+    "floor": 2,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，西侧第一个窗口",
+    "ingredients": "五花肉、酱油、冰糖、黄酒、葱姜",
+    "calories": 480,
+    "protein": 14.4,
+    "fat": 14.9,
+    "carbs": 54.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny100",
+    "name": "杭椒牛柳",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第一个窗口",
+    "window_number": 7,
+    "floor": 2,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，西侧第一个窗口",
+    "ingredients": "牛肉、杭椒、蚝油、生抽、淀粉",
+    "calories": 290,
+    "protein": 8.7,
+    "fat": 9.0,
+    "carbs": 32.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny101",
+    "name": "猪肚鸡",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第一个窗口",
+    "window_number": 7,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，西侧第一个窗口",
+    "ingredients": "猪肚、鸡肉、姜片、胡椒、枸杞",
+    "calories": 380,
+    "protein": 11.4,
+    "fat": 11.8,
+    "carbs": 42.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny102",
+    "name": "八喜冰淇淋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、奶油、糖、鸡蛋、香精",
+    "calories": 250,
+    "protein": 7.5,
+    "fat": 7.8,
+    "carbs": 28.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny103",
+    "name": "和路雪梦龙冰淇淋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、奶油、糖",
+    "calories": 280,
+    "protein": 8.4,
+    "fat": 8.7,
+    "carbs": 31.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny104",
+    "name": "伊利甄稀杯",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 9.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、奶油、糖、添加剂",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny105",
+    "name": "伊利巧乐兹熔岩巧巧",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、脆皮、糖",
+    "calories": 260,
+    "protein": 7.8,
+    "fat": 8.1,
+    "carbs": 29.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny106",
+    "name": "伊利冰工厂炫菠萝",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "水、糖、菠萝汁、添加剂",
+    "calories": 80,
+    "protein": 2.4,
+    "fat": 2.5,
+    "carbs": 9.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny107",
+    "name": "伊利巧乐兹大脆筒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、脆皮蛋筒、糖",
+    "calories": 280,
+    "protein": 8.4,
+    "fat": 8.7,
+    "carbs": 31.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny108",
+    "name": "伊利甄稀棒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、奶油、糖",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny109",
+    "name": "伊利甄稀布朗尼杯",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、奶油、巧克力蛋糕、糖",
+    "calories": 320,
+    "protein": 9.6,
+    "fat": 10.0,
+    "carbs": 36.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny110",
+    "name": "和路雪可爱多冰淇淋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、脆皮蛋筒、糖",
+    "calories": 230,
+    "protein": 6.9,
+    "fat": 7.2,
+    "carbs": 25.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny111",
+    "name": "伊利巧乐兹巧丝绒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、白巧克力、红丝绒、糖",
+    "calories": 240,
+    "protein": 7.2,
+    "fat": 7.5,
+    "carbs": 27.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny112",
+    "name": "伊利冰工厂山楂",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "水、糖、山楂汁、添加剂",
+    "calories": 60,
+    "protein": 1.8,
+    "fat": 1.9,
+    "carbs": 6.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny113",
+    "name": "伊利甄稀茉莉荔枝",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、荔枝果酱、茉莉花、糖",
+    "calories": 190,
+    "protein": 5.7,
+    "fat": 5.9,
+    "carbs": 21.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny114",
+    "name": "伊利巧乐兹香奶棒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力脆皮、奶油、糖",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny115",
+    "name": "伊利冰工厂炫白桃",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "水、糖、白桃汁、添加剂",
+    "calories": 75,
+    "protein": 2.2,
+    "fat": 2.3,
+    "carbs": 8.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny116",
+    "name": "礼拜天方糕",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "糯米、红豆、糖、奶油",
+    "calories": 150,
+    "protein": 4.5,
+    "fat": 4.7,
+    "carbs": 16.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny117",
+    "name": "伊利巧乐兹绮炫",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力脆皮、果酱、糖",
+    "calories": 260,
+    "protein": 7.8,
+    "fat": 8.1,
+    "carbs": 29.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny118",
+    "name": "伊利克力棒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、糖",
+    "calories": 130,
+    "protein": 3.9,
+    "fat": 4.0,
+    "carbs": 14.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny119",
+    "name": "伊利甄稀牛乳黑巧",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、黑巧克力、奶油、糖",
+    "calories": 210,
+    "protein": 6.3,
+    "fat": 6.5,
+    "carbs": 23.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny120",
+    "name": "奥雪椰子灰",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "椰奶、活性炭粉、巧克力、糖",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny121",
+    "name": "伊利巧乐兹中脆筒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、脆皮蛋筒、糖",
+    "calories": 200,
+    "protein": 6.0,
+    "fat": 6.2,
+    "carbs": 22.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny122",
+    "name": "伊利须尽欢",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、奶油、水果、巧克力、糖",
+    "calories": 320,
+    "protein": 9.6,
+    "fat": 10.0,
+    "carbs": 36.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny123",
+    "name": "伊利青提甜杏",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "水、糖、青提汁、杏肉",
+    "calories": 90,
+    "protein": 2.7,
+    "fat": 2.8,
+    "carbs": 10.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny124",
+    "name": "伊利红枣牛奶",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、红枣、糖",
+    "calories": 140,
+    "protein": 4.2,
+    "fat": 4.4,
+    "carbs": 15.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny125",
+    "name": "伊利蒙古酸奶",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "酸"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、乳酸菌、糖",
+    "calories": 80,
+    "protein": 2.4,
+    "fat": 2.5,
+    "carbs": 9.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny126",
+    "name": "伊利牧场奶提子",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、葡萄干、糖",
+    "calories": 110,
+    "protein": 3.3,
+    "fat": 3.4,
+    "carbs": 12.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny127",
+    "name": "伊利牧场牛奶棒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、奶油、糖",
+    "calories": 120,
+    "protein": 3.6,
+    "fat": 3.7,
+    "carbs": 13.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny128",
+    "name": "伊利火炬",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、脆皮、糖",
+    "calories": 200,
+    "protein": 6.0,
+    "fat": 6.2,
+    "carbs": 22.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny129",
+    "name": "伊利巧乐兹四个圈",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力多层、糖",
+    "calories": 210,
+    "protein": 6.3,
+    "fat": 6.5,
+    "carbs": 23.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny130",
+    "name": "伊利苦咖啡",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、咖啡、糖",
+    "calories": 100,
+    "protein": 3.0,
+    "fat": 3.1,
+    "carbs": 11.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny131",
+    "name": "伊利小雪生",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、糖",
+    "calories": 130,
+    "protein": 3.9,
+    "fat": 4.0,
+    "carbs": 14.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny132",
+    "name": "蒙牛随便",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力脆皮、糖",
+    "calories": 190,
+    "protein": 5.7,
+    "fat": 5.9,
+    "carbs": 21.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny133",
+    "name": "奥雪双黄蛋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、咸蛋黄、糖",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny134",
+    "name": "伊利芋见波波",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、芋头、珍珠、糖",
+    "calories": 170,
+    "protein": 5.1,
+    "fat": 5.3,
+    "carbs": 19.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny135",
+    "name": "伊利低糖厚乳",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、奶油、代糖",
+    "calories": 130,
+    "protein": 3.9,
+    "fat": 4.0,
+    "carbs": 14.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny136",
+    "name": "伊利绮炫炫玲珑",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "牛奶、巧克力、奶油、糖",
+    "calories": 260,
+    "protein": 7.8,
+    "fat": 8.1,
+    "carbs": 29.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny137",
+    "name": "伊利玉米香",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "玉米、牛奶、糖",
+    "calories": 90,
+    "protein": 2.7,
+    "fat": 2.8,
+    "carbs": 10.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny138",
+    "name": "伊利心情",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "绿豆沙、牛奶、糖",
+    "calories": 100,
+    "protein": 3.0,
+    "fat": 3.1,
+    "carbs": 11.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny139",
+    "name": "天凯乐珍珠奶茶",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 2,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园二层，水吧",
+    "ingredients": "红茶、牛奶、珍珠、糖",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny140",
+    "name": "A套餐",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "综合",
+    "window_number": 8,
+    "floor": 3,
+    "price": 323.0,
+    "cuisine": "融合",
+    "flavor": [
+      "酸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园三层",
+    "ingredients": "口水鸡、抹茶冰淇淋土豆色拉、蒜蓉粉丝蒸海白虾、九层塔三杯鸡、黄汤酸菜鱼、清炒空心菜、米饭(不限量)、时鲜果盘",
+    "calories": 2800,
+    "protein": 84.0,
+    "fat": 87.1,
+    "carbs": 315.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny141",
+    "name": "B套餐",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "综合",
+    "window_number": 8,
+    "floor": 3,
+    "price": 330.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园三层",
+    "ingredients": "红油肚丝、马兰头香干、葱烤油爆虾、农园精品烤鸭(半只)、传统水煮鱼、拍蒜炒苋菜、米饭(不限量)、时鲜果盘",
+    "calories": 2900,
+    "protein": 87.0,
+    "fat": 90.2,
+    "carbs": 326.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny142",
+    "name": "C套餐",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "综合",
+    "window_number": 8,
+    "floor": 3,
+    "price": 295.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园三层",
+    "ingredients": "清酒浸猪肝、葱油三丝蜇皮、砂煲芥辣焗大虾、当红脆皮鸡(半只)、水煮牛肉、上汤豌豆苗、米饭(不限量)、时鲜果盘",
+    "calories": 2600,
+    "protein": 78.0,
+    "fat": 80.9,
+    "carbs": 292.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny143",
+    "name": "A套餐(豪华)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "综合",
+    "window_number": 8,
+    "floor": 3,
+    "price": 562.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园三层",
+    "ingredients": "姜蓉黄油鸡、老醋蛰头、马兰头拌香干、油爆大虾球、剁椒鱼头、卤牛肉烧上海青、苏式煨三鲜、红烧肉鹌鹑蛋、上汤豌豆苗、米饭(不限量)、时鲜果盘",
+    "calories": 4500,
+    "protein": 135.0,
+    "fat": 140.0,
+    "carbs": 506.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny144",
+    "name": "B套餐(豪华)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "综合",
+    "window_number": 8,
+    "floor": 3,
+    "price": 598.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园三层",
+    "ingredients": "新派口水鸡、葱油三丝拌蜇皮、五香小素鸡、葱烤油爆虾、清蒸鲈鱼、水煮牛肉、农园精品烤鸭(半只)、意大利面鲍汁鮰鱼肚、清炒空心菜、米饭(不限量)、时鲜果盘",
+    "calories": 4800,
+    "protein": 144.0,
+    "fat": 149.3,
+    "carbs": 540.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny145",
+    "name": "C套餐(豪华)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "综合",
+    "window_number": 8,
+    "floor": 3,
+    "price": 0.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园三层",
+    "ingredients": "盐边干拌牛肉、清酒浸猪肝、捞汁秋葵、美极干煎海白虾、鸡油蒸翘嘴鱼、青椒拍蒜烧牛肉、避风塘鸡翅、醋溜木须、白灼广东菜心、米饭(不限量)、时鲜果盘",
+    "calories": 4200,
+    "protein": 126.0,
+    "fat": 130.7,
+    "carbs": 472.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny146",
+    "name": "卤鹅饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "卤鹅、米饭、卤汁、青菜",
+    "calories": 680,
+    "protein": 20.4,
+    "fat": 21.2,
+    "carbs": 76.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny147",
+    "name": "盐水鸭饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 15.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "盐水鸭、米饭、青菜、卤汁",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny148",
+    "name": "盐水梅肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "梅肉、米饭、青菜、卤汁",
+    "calories": 650,
+    "protein": 19.5,
+    "fat": 20.2,
+    "carbs": 73.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny149",
+    "name": "无锡排骨饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "排骨、米饭、青菜、酱油、糖",
+    "calories": 640,
+    "protein": 19.2,
+    "fat": 19.9,
+    "carbs": 72.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny150",
+    "name": "小炒牛肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 18.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "牛肉、辣椒、米饭、蒜、酱油",
+    "calories": 680,
+    "protein": 20.4,
+    "fat": 21.2,
+    "carbs": 76.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny151",
+    "name": "小炒肥肠饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 18.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "猪大肠、辣椒、米饭、蒜、酱油",
+    "calories": 750,
+    "protein": 22.5,
+    "fat": 23.3,
+    "carbs": 84.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny152",
+    "name": "肥肠鸡饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "鸡肉、猪大肠、米饭、辣椒、花椒",
+    "calories": 720,
+    "protein": 21.6,
+    "fat": 22.4,
+    "carbs": 81.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny153",
+    "name": "四喜丸子饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "猪肉馅、米饭、青菜、酱油、荸荠",
+    "calories": 580,
+    "protein": 17.4,
+    "fat": 18.0,
+    "carbs": 65.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny154",
+    "name": "酱鸭饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 13.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "酱鸭、米饭、青菜、卤汁",
+    "calories": 600,
+    "protein": 18.0,
+    "fat": 18.7,
+    "carbs": 67.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny155",
+    "name": "香辣牛肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 18.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "牛肉、干辣椒、花椒、米饭、芝麻",
+    "calories": 700,
+    "protein": 21.0,
+    "fat": 21.8,
+    "carbs": 78.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny156",
+    "name": "照烧肥牛饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 18.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "肥牛、洋葱、照烧汁、米饭、芝麻",
+    "calories": 680,
+    "protein": 20.4,
+    "fat": 21.2,
+    "carbs": 76.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny157",
+    "name": "肥牛抱蛋饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "肥牛、鸡蛋、米饭、洋葱、酱油",
+    "calories": 660,
+    "protein": 19.8,
+    "fat": 20.5,
+    "carbs": 74.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny158",
+    "name": "咖喱鸡肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 13.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "鸡肉、咖喱块、土豆、胡萝卜、米饭",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny159",
+    "name": "香酥鸡排饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 13.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "鸡胸肉、面包糠、米饭、青菜、番茄酱",
+    "calories": 600,
+    "protein": 18.0,
+    "fat": 18.7,
+    "carbs": 67.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny160",
+    "name": "香酥猪排饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 14.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "猪里脊、面包糠、米饭、青菜、酱油",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny161",
+    "name": "卤肉饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 13.0,
+    "cuisine": "融合",
+    "flavor": [
+      "酸"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "五花肉、卤蛋、米饭、酸菜、酱油",
+    "calories": 640,
+    "protein": 19.2,
+    "fat": 19.9,
+    "carbs": 72.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny162",
+    "name": "白切鸡饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 13.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "鸡肉、米饭、姜葱蓉、酱油",
+    "calories": 560,
+    "protein": 16.8,
+    "fat": 17.4,
+    "carbs": 63.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny163",
+    "name": "猪油拌饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "猪油、酱油、米饭、葱花、猪油渣",
+    "calories": 520,
+    "protein": 15.6,
+    "fat": 16.2,
+    "carbs": 58.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny164",
+    "name": "老式拌饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "米饭、鸡蛋、酱油、猪油、葱花",
+    "calories": 480,
+    "protein": 14.4,
+    "fat": 14.9,
+    "carbs": 54.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny165",
+    "name": "烤鸡腿饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 13.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "鸡腿、米饭、青菜、孜然、辣椒",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny166",
+    "name": "红烧鲜排饭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "排骨、米饭、青菜、酱油、糖",
+    "calories": 660,
+    "protein": 19.8,
+    "fat": 20.5,
+    "carbs": 74.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny167",
+    "name": "馒头",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 0.2,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、水、酵母",
+    "calories": 120,
+    "protein": 3.6,
+    "fat": 3.7,
+    "carbs": 13.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny168",
+    "name": "花卷",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 0.3,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、水、酵母、葱花、油、盐",
+    "calories": 140,
+    "protein": 4.2,
+    "fat": 4.4,
+    "carbs": 15.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny169",
+    "name": "发糕",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 1.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、红糖、酵母、水",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny170",
+    "name": "糖三角",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 1.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、红糖、芝麻、花生碎",
+    "calories": 200,
+    "protein": 6.0,
+    "fat": 6.2,
+    "carbs": 22.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny171",
+    "name": "豆沙包",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 0.6,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、红豆沙、糖、酵母",
+    "calories": 160,
+    "protein": 4.8,
+    "fat": 5.0,
+    "carbs": 18.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny172",
+    "name": "红豆卷",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 1.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、红豆、糖、酵母",
+    "calories": 190,
+    "protein": 5.7,
+    "fat": 5.9,
+    "carbs": 21.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny173",
+    "name": "红豆窝头",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 1.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "玉米面、红豆、糖",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny174",
+    "name": "燕麦馒头",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 1.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、燕麦、酵母、水",
+    "calories": 140,
+    "protein": 4.2,
+    "fat": 4.4,
+    "carbs": 15.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny175",
+    "name": "猪肉白菜包子",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 0.6,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、猪肉、白菜、葱姜、酱油",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny176",
+    "name": "茴香鸡蛋包子",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 1.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、茴香、鸡蛋、虾皮、香油",
+    "calories": 160,
+    "protein": 4.8,
+    "fat": 5.0,
+    "carbs": 18.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny177",
+    "name": "白菜粉丝汆丸子",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "白菜、粉丝、猪肉馅、鸡蛋、姜末",
+    "calories": 280,
+    "protein": 8.4,
+    "fat": 8.7,
+    "carbs": 31.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny178",
+    "name": "蔬菜馒头",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间拌饭窗口",
+    "window_number": 9,
+    "floor": 1,
+    "price": 1.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间拌饭窗口",
+    "ingredients": "面粉、菠菜汁/南瓜泥、酵母",
+    "calories": 130,
+    "protein": 3.9,
+    "fat": 4.0,
+    "carbs": 14.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny179",
+    "name": "朝鲜冷面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧窗口",
+    "window_number": 10,
+    "floor": 1,
+    "price": 12.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧窗口",
+    "ingredients": "荞麦面、牛肉汤、泡菜、鸡蛋、黄瓜、牛肉片、苹果片、醋、辣酱",
+    "calories": 450,
+    "protein": 13.5,
+    "fat": 14.0,
+    "carbs": 50.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny180",
+    "name": "朝鲜冷面(加牛肉)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧窗口",
+    "window_number": 10,
+    "floor": 1,
+    "price": 6.0,
+    "cuisine": "湘",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧窗口",
+    "ingredients": "牛肉",
+    "calories": 80,
+    "protein": 2.4,
+    "fat": 2.5,
+    "carbs": 9.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny181",
+    "name": "过油肉拌面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第一个拉条子窗口",
+    "window_number": 11,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第一个拉条子窗口",
+    "ingredients": "拉条子面、羊肉/牛肉、青椒、洋葱、番茄、酱油、孜然",
+    "calories": 680,
+    "protein": 20.4,
+    "fat": 21.2,
+    "carbs": 76.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny182",
+    "name": "猪肉大葱水饺(小份)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第二个窗口",
+    "window_number": 12,
+    "floor": 1,
+    "price": 2.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白",
+      "经典"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第二个窗口",
+    "ingredients": "面粉、猪肉、大葱、姜、酱油、香油",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny183",
+    "name": "猪肉大葱水饺(中份)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第二个窗口",
+    "window_number": 12,
+    "floor": 1,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白",
+      "经典"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第二个窗口",
+    "ingredients": "面粉、猪肉、大葱、姜、酱油、香油",
+    "calories": 430,
+    "protein": 12.9,
+    "fat": 13.4,
+    "carbs": 48.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny184",
+    "name": "猪肉大葱水饺(大份)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第二个窗口",
+    "window_number": 12,
+    "floor": 1,
+    "price": 7.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白",
+      "经典"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第二个窗口",
+    "ingredients": "面粉、猪肉、大葱、姜、酱油、香油",
+    "calories": 650,
+    "protein": 19.5,
+    "fat": 20.2,
+    "carbs": 73.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny185",
+    "name": "烧饼夹肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第三个窗口",
+    "window_number": 13,
+    "floor": 1,
+    "price": 5.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第三个窗口",
+    "ingredients": "烧饼、猪肉、青椒、香菜",
+    "calories": 380,
+    "protein": 11.4,
+    "fat": 11.8,
+    "carbs": 42.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny186",
+    "name": "烧饼夹牛肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第三个窗口",
+    "window_number": 13,
+    "floor": 1,
+    "price": 6.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第三个窗口",
+    "ingredients": "烧饼、酱牛肉、青椒、香菜",
+    "calories": 350,
+    "protein": 10.5,
+    "fat": 10.9,
+    "carbs": 39.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny187",
+    "name": "鸡蛋西红柿米线",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第三个窗口",
+    "window_number": 13,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第三个窗口",
+    "ingredients": "米线、鸡蛋、番茄、青菜、葱花",
+    "calories": 420,
+    "protein": 12.6,
+    "fat": 13.1,
+    "carbs": 47.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny188",
+    "name": "肥肠米线",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第三个窗口",
+    "window_number": 13,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第三个窗口",
+    "ingredients": "米线、猪大肠、豆芽、青菜、辣椒油",
+    "calories": 580,
+    "protein": 17.4,
+    "fat": 18.0,
+    "carbs": 65.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny189",
+    "name": "红烧牛肉米线",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第三个窗口",
+    "window_number": 13,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第三个窗口",
+    "ingredients": "米线、牛肉、萝卜、香菜、辣油",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny190",
+    "name": "香辣牛肉米线",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第三个窗口",
+    "window_number": 13,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第三个窗口",
+    "ingredients": "米线、牛肉、辣椒、花椒、香菜",
+    "calories": 640,
+    "protein": 19.2,
+    "fat": 19.9,
+    "carbs": 72.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny191",
+    "name": "红烧排骨米线",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第三个窗口",
+    "window_number": 13,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第三个窗口",
+    "ingredients": "米线、排骨、青菜、香菜、酱油",
+    "calories": 600,
+    "protein": 18.0,
+    "fat": 18.7,
+    "carbs": 67.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny192",
+    "name": "鸡汤馄饨面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、馄饨、鸡汤、虾皮、紫菜、葱花",
+    "calories": 480,
+    "protein": 14.4,
+    "fat": 14.9,
+    "carbs": 54.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny193",
+    "name": "鸡汤面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、鸡汤、青菜、葱花",
+    "calories": 420,
+    "protein": 12.6,
+    "fat": 13.1,
+    "carbs": 47.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny194",
+    "name": "鸡汤馄饨",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "馄饨皮、猪肉馅、鸡汤、虾皮、紫菜、葱花",
+    "calories": 450,
+    "protein": 13.5,
+    "fat": 14.0,
+    "carbs": 50.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny195",
+    "name": "鸡汤米线",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "米线、鸡汤、青菜、葱花",
+    "calories": 400,
+    "protein": 12.0,
+    "fat": 12.4,
+    "carbs": 45.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny196",
+    "name": "炸酱面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 10.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、猪肉末、黄豆酱、黄瓜丝、豆芽、葱花",
+    "calories": 520,
+    "protein": 15.6,
+    "fat": 16.2,
+    "carbs": 58.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny197",
+    "name": "鸡蛋西红柿面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、鸡蛋、番茄、青菜、葱花",
+    "calories": 450,
+    "protein": 13.5,
+    "fat": 14.0,
+    "carbs": 50.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny198",
+    "name": "麻酱肥牛面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、肥牛、芝麻酱、黄瓜丝、辣椒油",
+    "calories": 580,
+    "protein": 17.4,
+    "fat": 18.0,
+    "carbs": 65.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny199",
+    "name": "麻酱肥牛米线",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "米线、肥牛、芝麻酱、黄瓜丝、辣椒油",
+    "calories": 540,
+    "protein": 16.2,
+    "fat": 16.8,
+    "carbs": 60.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny200",
+    "name": "肥肠面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、猪大肠、辣椒、豆芽、香菜",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny201",
+    "name": "红烧牛肉面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、牛肉、萝卜、香菜、辣椒油",
+    "calories": 640,
+    "protein": 19.2,
+    "fat": 19.9,
+    "carbs": 72.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny202",
+    "name": "香辣牛肉面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、牛肉、辣椒、花椒、香菜",
+    "calories": 660,
+    "protein": 19.8,
+    "fat": 20.5,
+    "carbs": 74.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny203",
+    "name": "红烧排骨面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、排骨、青菜、香菜、酱油",
+    "calories": 620,
+    "protein": 18.6,
+    "fat": 19.3,
+    "carbs": 69.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny204",
+    "name": "宜宾燃面(素)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、花生碎、芽菜、辣椒油、葱花、芝麻",
+    "calories": 480,
+    "protein": 14.4,
+    "fat": 14.9,
+    "carbs": 54.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny205",
+    "name": "宜宾燃面(荤)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、猪肉末、花生碎、芽菜、辣椒油、葱花",
+    "calories": 560,
+    "protein": 16.8,
+    "fat": 17.4,
+    "carbs": 63.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny206",
+    "name": "重庆小面(素)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、辣椒油、花椒、芽菜、花生碎、葱花",
+    "calories": 460,
+    "protein": 13.8,
+    "fat": 14.3,
+    "carbs": 51.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny207",
+    "name": "重庆小面(荤)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第四个窗口",
+    "window_number": 14,
+    "floor": 1,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第四个窗口",
+    "ingredients": "面条、猪肉末、辣椒油、花椒、芽菜、花生碎、葱花",
+    "calories": 550,
+    "protein": 16.5,
+    "fat": 17.1,
+    "carbs": 61.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny208",
+    "name": "锅贴",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 1.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "面粉、猪肉、白菜、葱姜、酱油",
+    "calories": 90,
+    "protein": 2.7,
+    "fat": 2.8,
+    "carbs": 10.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny209",
+    "name": "小米饼",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "小米面、糖、油",
+    "calories": 260,
+    "protein": 7.8,
+    "fat": 8.1,
+    "carbs": 29.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny210",
+    "name": "黄金大饼",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "面粉、鸡蛋、油、盐",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny211",
+    "name": "烧饼夹火腿煎蛋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "烧饼、火腿、鸡蛋、生菜、酱",
+    "calories": 320,
+    "protein": 9.6,
+    "fat": 10.0,
+    "carbs": 36.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny212",
+    "name": "烧饼夹辣味煎蛋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "烧饼、鸡蛋、辣椒酱、生菜",
+    "calories": 340,
+    "protein": 10.2,
+    "fat": 10.6,
+    "carbs": 38.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny213",
+    "name": "煎饺(份)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "经典"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "面粉、猪肉、白菜、油、酱油",
+    "calories": 400,
+    "protein": 12.0,
+    "fat": 12.4,
+    "carbs": 45.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny214",
+    "name": "芝麻烧饼",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 1.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "面粉、芝麻、油、五香粉",
+    "calories": 180,
+    "protein": 5.4,
+    "fat": 5.6,
+    "carbs": 20.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny215",
+    "name": "椒盐烧饼",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 1.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "面粉、花椒盐、油",
+    "calories": 170,
+    "protein": 5.1,
+    "fat": 5.3,
+    "carbs": 19.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny216",
+    "name": "牛肉馅饼",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 3.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "面粉、牛肉、洋葱、葱姜、花椒粉",
+    "calories": 280,
+    "protein": 8.4,
+    "fat": 8.7,
+    "carbs": 31.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny217",
+    "name": "鸡蛋粉条馅饼",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 2.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "面粉、鸡蛋、粉条、韭菜、虾皮",
+    "calories": 240,
+    "protein": 7.2,
+    "fat": 7.5,
+    "carbs": 27.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny218",
+    "name": "黑鱼片",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "黑鱼",
+    "calories": 45,
+    "protein": 1.3,
+    "fat": 1.4,
+    "carbs": 5.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny219",
+    "name": "蛋饺",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 1.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱",
+      "经典"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "鸡蛋皮、猪肉馅、葱姜",
+    "calories": 60,
+    "protein": 1.8,
+    "fat": 1.9,
+    "carbs": 6.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny220",
+    "name": "方便面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "面饼、油、盐",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny221",
+    "name": "肥牛",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "牛肉",
+    "calories": 65,
+    "protein": 1.9,
+    "fat": 2.0,
+    "carbs": 7.3,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny222",
+    "name": "羊肉片",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "羊肉",
+    "calories": 65,
+    "protein": 1.9,
+    "fat": 2.0,
+    "carbs": 7.3,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny223",
+    "name": "乌鸡卷",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 2.8,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "乌鸡肉",
+    "calories": 40,
+    "protein": 1.2,
+    "fat": 1.2,
+    "carbs": 4.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny224",
+    "name": "烟熏鸡胸肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 2.8,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "鸡胸肉、烟熏料",
+    "calories": 35,
+    "protein": 1.1,
+    "fat": 1.1,
+    "carbs": 3.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny225",
+    "name": "煮玉米",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 1.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "玉米",
+    "calories": 110,
+    "protein": 3.3,
+    "fat": 3.4,
+    "carbs": 12.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny226",
+    "name": "蒸杂粮",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "红薯、紫薯、玉米、山药、南瓜",
+    "calories": 150,
+    "protein": 4.5,
+    "fat": 4.7,
+    "carbs": 16.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny227",
+    "name": "咸鸭蛋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 1.8,
+    "cuisine": "融合",
+    "flavor": [
+      "咸"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "鸭蛋、盐",
+    "calories": 100,
+    "protein": 3.0,
+    "fat": 3.1,
+    "carbs": 11.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny228",
+    "name": "卤大鹅",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第五个窗口",
+    "window_number": 15,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第五个窗口",
+    "ingredients": "鹅肉、卤汁、八角、桂皮",
+    "calories": 70,
+    "protein": 2.1,
+    "fat": 2.2,
+    "carbs": 7.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny229",
+    "name": "酱猪肝",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 2.3,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "猪肝、酱油、八角、桂皮、葱姜",
+    "calories": 35,
+    "protein": 1.1,
+    "fat": 1.1,
+    "carbs": 3.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny230",
+    "name": "酱鸭",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 2.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "鸭肉、酱油、冰糖、八角、桂皮",
+    "calories": 55,
+    "protein": 1.6,
+    "fat": 1.7,
+    "carbs": 6.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny231",
+    "name": "酱鸡腿",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 2.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "鸡腿、酱油、冰糖、八角、桂皮",
+    "calories": 50,
+    "protein": 1.5,
+    "fat": 1.6,
+    "carbs": 5.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny232",
+    "name": "酱猪耳朵",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "猪耳朵、酱油、八角、桂皮、辣椒",
+    "calories": 60,
+    "protein": 1.8,
+    "fat": 1.9,
+    "carbs": 6.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny233",
+    "name": "哈尔滨红肠",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 3.5,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "猪肉、淀粉、大蒜、胡椒、肠衣",
+    "calories": 70,
+    "protein": 2.1,
+    "fat": 2.2,
+    "carbs": 7.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny234",
+    "name": "老北京蒜肠",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 2.7,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "猪肉、大蒜、淀粉、肠衣",
+    "calories": 65,
+    "protein": 1.9,
+    "fat": 2.0,
+    "carbs": 7.3,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny235",
+    "name": "无锡排骨",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "排骨、酱油、冰糖、黄酒、葱姜",
+    "calories": 75,
+    "protein": 2.2,
+    "fat": 2.3,
+    "carbs": 8.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny236",
+    "name": "酱肘子",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "猪肘、酱油、冰糖、八角、桂皮",
+    "calories": 80,
+    "protein": 2.4,
+    "fat": 2.5,
+    "carbs": 9.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny237",
+    "name": "酱牛肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "牛肉、酱油、八角、桂皮、香叶",
+    "calories": 65,
+    "protein": 1.9,
+    "fat": 2.0,
+    "carbs": 7.3,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny238",
+    "name": "酱纯排",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "猪排骨、酱油、冰糖、葱姜",
+    "calories": 75,
+    "protein": 2.2,
+    "fat": 2.3,
+    "carbs": 8.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny239",
+    "name": "卤猪头肉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "猪头肉、卤汁、八角、桂皮、辣椒",
+    "calories": 85,
+    "protein": 2.5,
+    "fat": 2.6,
+    "carbs": 9.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny240",
+    "name": "酱牛蹄筋",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "牛蹄筋、酱油、八角、桂皮、葱姜",
+    "calories": 45,
+    "protein": 1.3,
+    "fat": 1.4,
+    "carbs": 5.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny241",
+    "name": "盐水虾",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 5.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "虾、盐、葱姜、料酒",
+    "calories": 40,
+    "protein": 1.2,
+    "fat": 1.2,
+    "carbs": 4.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny242",
+    "name": "卤肥肠",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "中间窗口",
+    "window_number": 17,
+    "floor": 1,
+    "price": 8.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，中间窗口",
+    "ingredients": "猪大肠、卤汁、八角、桂皮、辣椒",
+    "calories": 90,
+    "protein": 2.7,
+    "fat": 2.8,
+    "carbs": 10.1,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny243",
+    "name": "富士苹果",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 7.2,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "苹果",
+    "calories": 52,
+    "protein": 1.6,
+    "fat": 1.6,
+    "carbs": 5.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny244",
+    "name": "皇冠梨",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 4.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "梨",
+    "calories": 50,
+    "protein": 1.5,
+    "fat": 1.6,
+    "carbs": 5.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny245",
+    "name": "香蕉",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 6.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "香蕉",
+    "calories": 89,
+    "protein": 2.7,
+    "fat": 2.8,
+    "carbs": 10.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny246",
+    "name": "小台芒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 10.3,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "芒果",
+    "calories": 60,
+    "protein": 1.8,
+    "fat": 1.9,
+    "carbs": 6.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny247",
+    "name": "红心火龙果",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 5.7,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "火龙果",
+    "calories": 55,
+    "protein": 1.6,
+    "fat": 1.7,
+    "carbs": 6.2,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny248",
+    "name": "白心火龙果",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 5.8,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "火龙果",
+    "calories": 52,
+    "protein": 1.6,
+    "fat": 1.6,
+    "carbs": 5.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny249",
+    "name": "青芒",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 7.3,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "芒果",
+    "calories": 58,
+    "protein": 1.7,
+    "fat": 1.8,
+    "carbs": 6.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny250",
+    "name": "海南哈密瓜",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 3.4,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "哈密瓜",
+    "calories": 34,
+    "protein": 1.0,
+    "fat": 1.1,
+    "carbs": 3.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny251",
+    "name": "荔枝",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 12.3,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "荔枝",
+    "calories": 66,
+    "protein": 2.0,
+    "fat": 2.1,
+    "carbs": 7.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny252",
+    "name": "黄心油桃",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 13.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "油桃",
+    "calories": 44,
+    "protein": 1.3,
+    "fat": 1.4,
+    "carbs": 5.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny253",
+    "name": "蓝莓",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 7.1,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "蓝莓",
+    "calories": 57,
+    "protein": 1.7,
+    "fat": 1.8,
+    "carbs": 6.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny254",
+    "name": "黄干禧",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 8.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "小番茄",
+    "calories": 25,
+    "protein": 0.8,
+    "fat": 0.8,
+    "carbs": 2.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny255",
+    "name": "猕猴桃",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 10.5,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "猕猴桃",
+    "calories": 61,
+    "protein": 1.8,
+    "fat": 1.9,
+    "carbs": 6.9,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny256",
+    "name": "绿宝",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 8.3,
+    "cuisine": "融合",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "甜瓜",
+    "calories": 30,
+    "protein": 0.9,
+    "fat": 0.9,
+    "carbs": 3.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny257",
+    "name": "阳光玫瑰",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 23.1,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "葡萄",
+    "calories": 69,
+    "protein": 2.1,
+    "fat": 2.1,
+    "carbs": 7.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny258",
+    "name": "千禧小番茄",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 6.2,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "小番茄",
+    "calories": 25,
+    "protein": 0.8,
+    "fat": 0.8,
+    "carbs": 2.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny259",
+    "name": "菠萝",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 4.3,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "菠萝",
+    "calories": 50,
+    "protein": 1.5,
+    "fat": 1.6,
+    "carbs": 5.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny260",
+    "name": "木瓜",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 8.2,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "木瓜",
+    "calories": 43,
+    "protein": 1.3,
+    "fat": 1.3,
+    "carbs": 4.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny261",
+    "name": "网纹瓜",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 6.5,
+    "cuisine": "融合",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "甜瓜",
+    "calories": 34,
+    "protein": 1.0,
+    "fat": 1.1,
+    "carbs": 3.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny262",
+    "name": "沃柑",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 5.2,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "柑橘",
+    "calories": 44,
+    "protein": 1.3,
+    "fat": 1.4,
+    "carbs": 5.0,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny263",
+    "name": "枇杷",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 24.7,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "家常"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "枇杷",
+    "calories": 41,
+    "protein": 1.2,
+    "fat": 1.3,
+    "carbs": 4.6,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny264",
+    "name": "雪花梨",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "水吧",
+    "window_number": 6,
+    "floor": 1,
+    "price": 2.8,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，水吧",
+    "ingredients": "梨",
+    "calories": 42,
+    "protein": 1.3,
+    "fat": 1.3,
+    "carbs": 4.7,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny265",
+    "name": "麻辣拌肉类(称重)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 3.0,
+    "cuisine": "融合",
+    "flavor": [
+      "麻辣",
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "高蛋白"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "各类肉片、麻辣酱、花生碎、芝麻、香菜",
+    "calories": 120,
+    "protein": 3.6,
+    "fat": 3.7,
+    "carbs": 13.5,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny266",
+    "name": "麻辣拌蔬菜菌豆制品(称重)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 1.2,
+    "cuisine": "融合",
+    "flavor": [
+      "麻辣",
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "各类蔬菜、菌菇、豆制品、麻辣酱",
+    "calories": 30,
+    "protein": 0.9,
+    "fat": 0.9,
+    "carbs": 3.4,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny267",
+    "name": "麻辣拌方便面",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 1.5,
+    "cuisine": "融合",
+    "flavor": [
+      "麻辣",
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济",
+      "管饱"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "方便面、麻辣酱、配菜",
+    "calories": 220,
+    "protein": 6.6,
+    "fat": 6.8,
+    "carbs": 24.8,
+    "fiber": 2.0
+  },
+  {
+    "id": "ny268",
+    "name": "麻辣拌半成品腌类(称重)",
+    "canteen": "农园食堂",
+    "canteen_id": "nongyuan",
+    "window": "西侧第六个窗口（麻辣拌，配料可自选）",
+    "window_number": 16,
+    "floor": 1,
+    "price": 1.8,
+    "cuisine": "融合",
+    "flavor": [
+      "麻辣",
+      "辣"
+    ],
+    "cooking": "现做",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "",
+    "tags": [
+      "经济"
+    ],
+    "rating": 4.0,
+    "rating_count": 0,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "农园一层，西侧第六个窗口（麻辣拌，配料可自选）",
+    "ingredients": "各类腌制半成品、麻辣酱",
+    "calories": 80,
+    "protein": 2.4,
+    "fat": 2.5,
+    "carbs": 9.0,
+    "fiber": 2.0
   }
 ]

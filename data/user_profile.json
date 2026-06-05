@@ -1,10 +1,10 @@
 {
   "constraints": {
     "taboos": [],
-    "budget_limit": 10,
+    "budget_limit": 30,
     "meal_pref": "正餐"
   },
-  "goals": "无",
+  "goals": "均衡",
   "preferences": {
     "distance": "就近优先",
     "queue": "接受排队"
@@ -15,15 +15,14 @@
   },
   "disliked_ingredients": [],
   "created_at": "2026-05-18T17:59:51.570211",
-  "updated_at": "2026-06-05T11:27:18.918278",
+  "updated_at": "2026-06-05T14:28:42.951103",
   "default_mode": "stable",
   "preferred_flavors": [
-    "甜",
-    "酸"
+    "辣"
   ],
   "budget_range": {
     "min": 0,
-    "max": 10
+    "max": 30
   },
   "meal_scenes": [
     "正餐"

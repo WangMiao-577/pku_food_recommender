@@ -11,6 +11,7 @@ from typing import List, Dict, Optional, Any
 from backend.data_manager import DataManager
 from backend.recommender import Recommender
 from backend.campus_navigation import CampusNavigationService
+from backend.ai_conversation import AIConversationManager
 from backend import ai_config
 
 
@@ -28,6 +29,7 @@ class AIModeBackend:
         self.recommender = Recommender(data_manager)
         self.nav = CampusNavigationService.get_instance()
         self.conversation_history: List[Dict[str, str]] = []
+        self.conv = AIConversationManager()
         self._load_config(api_key, api_base, model)
 
     def _load_config(self, api_key=None, api_base=None, model=None):
@@ -48,54 +50,113 @@ class AIModeBackend:
 
     def chat_recommend(self, user_message: str, user_profile: Optional[Dict] = None) -> Dict:
         """
-        对话式推荐入口
+        对话式推荐入口（3-4 轮确认需求后再出推荐）
 
         Returns:
-            {
-                "success": bool,
-                "reply": str,
-                "recommended_dishes": [dict, ...],
-                "dish_ids": ["d001", ...],
-                "reasoning": str,
-                "extracted_preferences": dict,
-                "fallback": bool,
-            }
+            success, reply, ready, phase, recommended_dishes, combos, reasoning, fallback, ...
         """
         profile = user_profile or self.dm.get_profile()
+        self._sync_location_to_conv(profile)
+        self.conv.record_user(user_message)
         self.conversation_history.append({"role": "user", "content": user_message})
 
-        if not self.is_configured():
-            return self._fallback_recommend(user_message, profile, reason="未配置 API 密钥")
+        if not self.conv.is_ready_to_recommend():
+            return self._conversation_turn(user_message, profile)
 
-        try:
-            raw = self._call_llm_api(user_message, profile)
-            parsed = self._parse_llm_response(raw)
-            self.conversation_history.append({"role": "assistant", "content": parsed.get("reply", raw)})
+        return self._deliver_recommendation(user_message, profile)
 
-            prefs = parsed.get("extracted_preferences") or {}
-            if prefs:
-                self._merge_preferences(prefs)
+    def _sync_location_to_conv(self, profile: Dict):
+        nid = profile.get("current_location_node_id")
+        if nid:
+            node = self.nav.get_node(nid)
+            if node:
+                self.conv.set_location(nid, node["name"])
 
-            dish_ids = parsed.get("recommended_dish_ids") or []
-            dishes = [self.dm.get_dish_by_id(did) for did in dish_ids if self.dm.get_dish_by_id(did)]
+    def _conversation_turn(self, user_message: str, profile: Dict) -> Dict:
+        follow_up = self.conv.get_follow_up() or "还有什么想补充的吗？"
+        reply = follow_up
 
-            if not dishes:
-                context = self._preferences_to_context(prefs, user_message)
-                result = self.recommender.recommend_full(top_k=5, mode="normal", context=context)
-                dishes = result.get("dishes", [])
-                dish_ids = [d["id"] for d in dishes]
+        if self.is_configured():
+            try:
+                hint = (
+                    f"【对话阶段】{self.conv.get_phase_label()}，第{self.conv.turn_count}轮。"
+                    f"请用一句话自然追问，不要推荐具体菜品。参考问题：{follow_up}"
+                )
+                raw = self._call_llm_api(user_message, profile, system_override=self._build_system_prompt(profile) + "\n" + hint)
+                parsed = self._parse_llm_response(raw)
+                reply = (parsed.get("reply") or raw).split("```")[0].strip() or follow_up
+                prefs = parsed.get("extracted_preferences") or {}
+                if prefs.get("location_preference"):
+                    self.conv.slots["location_preference"] = prefs["location_preference"]
+                if prefs.get("preferred_flavors"):
+                    self.conv.slots["flavors"] = prefs["preferred_flavors"]
+            except Exception:
+                reply = follow_up
 
-            return {
-                "success": True,
-                "reply": parsed.get("reply", raw),
-                "recommended_dishes": dishes,
-                "dish_ids": dish_ids,
-                "reasoning": parsed.get("reasoning", ""),
-                "extracted_preferences": prefs,
-                "fallback": False,
-            }
-        except Exception as e:
-            return self._fallback_recommend(user_message, profile, reason=str(e))
+        self.conv.record_assistant(reply)
+        self.conversation_history.append({"role": "assistant", "content": reply})
+        return {
+            "success": True,
+            "ready": False,
+            "phase": self.conv.get_phase_label(),
+            "reply": reply,
+            "recommended_dishes": [],
+            "combos": [],
+            "dish_ids": [],
+            "reasoning": "",
+            "extracted_preferences": self.conv.slots.copy(),
+            "fallback": not self.is_configured(),
+            "summary": self.conv.build_summary(),
+        }
+
+    def _deliver_recommendation(self, user_message: str, profile: Dict) -> Dict:
+        context = self.conv.to_context()
+        context["location"] = context.get("location") or profile.get("current_location", "")
+        context["location_node_id"] = context.get("location_node_id") or profile.get("current_location_node_id")
+
+        result = self.recommender.recommend_full(top_k=5, mode="normal", context=context)
+        dishes = result.get("dishes", [])
+        combos = result.get("combos", [])
+        summary = self.conv.build_summary()
+        reply = f"好的，根据你的需求（{summary}），我为你挑了这些："
+
+        prefs = {}
+        fallback = not self.is_configured()
+        if self.is_configured():
+            try:
+                raw = self._call_llm_api(
+                    user_message,
+                    profile,
+                    system_override=self._build_system_prompt(profile)
+                    + f"\n【可以推荐】用亲切语气总结推荐，提及档口位置。用户摘要：{summary}",
+                )
+                parsed = self._parse_llm_response(raw)
+                reply = (parsed.get("reply") or raw).split("```")[0].strip() or reply
+                prefs = parsed.get("extracted_preferences") or {}
+                if prefs:
+                    self._merge_preferences(prefs)
+            except Exception as e:
+                fallback = True
+                reply += f"\n（AI 润色暂不可用，已用离线算法）"
+
+        self.conv.record_assistant(reply)
+        self.conversation_history.append({"role": "assistant", "content": reply})
+        self._merge_preferences(self._preferences_to_context(prefs or self.conv.slots, user_message))
+
+        return {
+            "success": True,
+            "ready": True,
+            "phase": "已推荐",
+            "reply": reply,
+            "recommended_dishes": dishes,
+            "combos": combos,
+            "dish_ids": [d["id"] for d in dishes],
+            "reasoning": result.get("meal_scene") or summary,
+            "extracted_preferences": self.conv.slots.copy(),
+            "fallback": fallback,
+            "recommend_mode": result.get("recommend_mode", "stable"),
+            "summary": summary,
+        }
 
     def extract_preferences(self, conversation: Optional[List[Dict]] = None) -> Dict:
         """从对话历史中提取用户偏好（与 offline user_profile 格式一致）"""
@@ -167,12 +228,20 @@ class AIModeBackend:
 
     def reset_conversation(self):
         self.conversation_history.clear()
+        self.conv.reset()
+
+    @property
+    def conversation_manager(self) -> AIConversationManager:
+        return self.conv
 
     def get_opening_message(self) -> str:
         return (
-            "你好！我是你的 AI 美食助手。\n"
-            "请先在上方选择你的当前位置，或告诉我你在哪里（如：图书馆、东南门、未名湖）。\n"
-            "然后说说今天想吃点什么~"
+            "你好！我是你的 AI 美食助手 🍜\n\n"
+            "我会先跟你聊几句，确认位置、预算和口味，再给你推荐。\n"
+            "请先在上方选好「我的位置」，然后告诉我：\n"
+            "· 今天心情怎么样？\n"
+            "· 大概想花多少钱？\n"
+            "· 一个人吃还是和同学一起？"
         )
 
     # ==================== LLM 调用（预留实现） ====================
@@ -308,25 +377,11 @@ class AIModeBackend:
             return None
 
     def _fallback_recommend(self, user_message: str, profile: Dict, reason: str = "") -> Dict:
-        """API 不可用时的离线降级"""
-        context = self._extract_preferences_local([{"role": "user", "content": user_message}])
-        context = self._preferences_to_context(context, user_message)
-        result = self.recommender.recommend_full(top_k=5, mode="normal", context=context)
-        dishes = result.get("dishes", [])
-        msg = "AI 服务暂时不可用，已切换到离线推荐模式。"
-        if reason and "未配置" not in reason:
-            msg += f" ({reason})"
-        return {
-            "success": True,
-            "reply": msg + " 根据你的描述，为你挑选了以下菜品：",
-            "recommended_dishes": dishes,
-            "dish_ids": [d["id"] for d in dishes],
-            "reasoning": "离线算法推荐",
-            "extracted_preferences": context,
-            "fallback": True,
-            "combos": result.get("combos", []),
-            "recommend_mode": result.get("recommend_mode", "stable"),
-        }
+        """API 不可用时的离线降级（仍遵守多轮对话门控）"""
+        self._sync_location_to_conv(profile)
+        if not self.conv.is_ready_to_recommend():
+            return self._conversation_turn(user_message, profile)
+        return self._deliver_recommendation(user_message, profile)
 
     def _extract_preferences_local(self, conversation: List[Dict]) -> Dict:
         """简单关键词提取（无 API 时使用）"""
@@ -374,14 +429,22 @@ class AIModeBackend:
         profile = self.dm.get_profile()
         node_id = prefs.get("current_location_node_id") or profile.get("current_location_node_id")
         loc_name = prefs.get("current_location") or profile.get("current_location", "")
+        loc_pref = prefs.get("location_preference", "")
+        if isinstance(prefs, dict) and prefs.get("location_preference"):
+            loc_pref = prefs["location_preference"]
         return {
             "recommend_mode": "explore" if explore >= 0.5 else "stable",
-            "meal_scene": (prefs.get("meal_scenes") or [None])[0],
-            "budget_limit": prefs.get("budget_range", {}).get("max", self.dm.get_budget_limit()),
-            "preferred_flavors": prefs.get("preferred_flavors", []),
+            "meal_scene": (prefs.get("meal_scenes") or [None])[0] or prefs.get("meal_scene"),
+            "budget_limit": prefs.get("budget_range", {}).get("max", prefs.get("budget_max", self.dm.get_budget_limit())),
+            "preferred_flavors": prefs.get("preferred_flavors", prefs.get("flavors", [])),
             "location": loc_name,
             "location_node_id": node_id,
-            "include_combos": "同伴聚餐" in (prefs.get("meal_scenes") or []) or "聚餐" in text,
+            "location_preference": loc_pref,
+            "include_combos": (
+                "同伴聚餐" in (prefs.get("meal_scenes") or [])
+                or prefs.get("companions", 1) >= 2
+                or "聚餐" in text
+            ),
         }
 
     def _merge_preferences(self, prefs: Dict):

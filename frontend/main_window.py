@@ -407,6 +407,7 @@ class MainWindow(QMainWindow):
         # AI 美食助手
         ai_chat = AIChatPage(self.dm, self.ai_backend, self.nav)
         ai_chat.recommendation_ready.connect(self.show_recommendations)
+        ai_chat.view_dish.connect(self.show_dish_detail)
         ai_chat.switch_offline.connect(lambda: self.set_app_mode("offline"))
         self.add_page("ai_recommend", ai_chat)
 
