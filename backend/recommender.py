@@ -11,6 +11,7 @@ from datetime import datetime
 from typing import List, Dict, Tuple, Optional, Set
 
 from backend.data_manager import DataManager, CAMPUS_REGIONS, LOCATION_TO_REGIONS
+from backend.campus_navigation import CampusNavigationService
 
 
 # ============ 常量配置 ============
@@ -57,6 +58,7 @@ class Recommender:
 
     def __init__(self, data_manager: DataManager):
         self.dm = data_manager
+        self.nav = CampusNavigationService.get_instance()
 
     # ==================== 上下文解析 ====================
 
@@ -89,6 +91,7 @@ class Recommender:
             "budget_limit": ctx.get("budget_limit", self.dm.get_budget_limit()),
             "preferred_flavors": ctx.get("preferred_flavors") or self.dm.get_preferred_flavors(),
             "location": ctx.get("location") or profile.get("current_location", ""),
+            "location_node_id": ctx.get("location_node_id") or profile.get("current_location_node_id"),
             "include_combos": ctx.get(
                 "include_combos",
                 meal_scene in ("同伴聚餐", "团体宴请"),
@@ -182,12 +185,20 @@ class Recommender:
                 continue
             if flavors and not (dish_flavors & set(flavors)):
                 continue
-            if not self._passes_location(d, ctx.get("location", "")):
+            if not self._passes_location(d, ctx):
                 continue
             result.append(d)
         return result
 
-    def _passes_location(self, dish: Dict, location: str) -> bool:
+    def _passes_location(self, dish: Dict, ctx: Dict) -> bool:
+        node_id = ctx.get("location_node_id")
+        if node_id:
+            dist = self.nav.graph_distance_to_canteen(node_id, dish["canteen"])
+            if dist is not None and dist > 0.32:
+                return False
+            return True
+
+        location = ctx.get("location", "")
         if not location:
             return True
         target_regions = LOCATION_TO_REGIONS.get(location)
@@ -195,6 +206,26 @@ class Recommender:
             return True
         region = self.dm.get_canteen_region(dish["canteen"])
         return region in target_regions
+
+    def _score_location(self, dish: Dict, ctx: Dict) -> Tuple[float, str]:
+        node_id = ctx.get("location_node_id")
+        if node_id:
+            return self.nav.location_score_for_canteen(node_id, dish["canteen"])
+
+        location = ctx.get("location", "")
+        if not location:
+            return 70.0, "未指定位置"
+
+        target_regions = LOCATION_TO_REGIONS.get(location)
+        if not target_regions:
+            return 70.0, "一般距离"
+
+        region = self.dm.get_canteen_region(dish["canteen"])
+        if region in target_regions:
+            return 100.0, "就在附近"
+        if region and target_regions:
+            return 45.0, "需多走几步"
+        return 60.0, "一般距离"
 
     def _recall_mode(self, dishes: List[Dict], recommend_mode: str) -> List[Dict]:
         eaten_7 = self.dm.get_eaten_dish_ids(days=7)
@@ -207,7 +238,6 @@ class Recommender:
                     return pool
             return self._get_trending_dishes(max(len(dishes) // 2, 5))
 
-        # 探索模式：排除近7天已吃
         pool = [d for d in dishes if d["id"] not in eaten_7]
         return pool if pool else dishes
 
@@ -284,21 +314,6 @@ class Recommender:
         total = rating_score + appearance_score + popularity
         return min(total, 100), f"评分{bayesian:.1f}({count}人评)"
 
-    def _score_location(self, dish: Dict, location: str) -> Tuple[float, str]:
-        if not location:
-            return 70.0, "未指定位置"
-
-        target_regions = LOCATION_TO_REGIONS.get(location)
-        if not target_regions:
-            return 70.0, "一般距离"
-
-        region = self.dm.get_canteen_region(dish["canteen"])
-        if region in target_regions:
-            return 100.0, "就在附近"
-        if region and target_regions:
-            return 45.0, "需多走几步"
-        return 60.0, "一般距离"
-
     def _score_freshness(self, dish: Dict, recommend_mode: str) -> Tuple[float, str]:
         eaten_count = self.dm.get_eaten_count(dish["id"], days=30)
         last_eaten = self.dm.get_last_eaten_time(dish["id"])
@@ -341,7 +356,7 @@ class Recommender:
         for dish in dishes:
             s_pref, d_pref = self._score_preference(dish, ctx)
             s_qual, d_qual = self._score_quality(dish)
-            s_loc, d_loc = self._score_location(dish, ctx.get("location", ""))
+            s_loc, d_loc = self._score_location(dish, ctx)
             s_fresh, d_fresh = self._score_freshness(dish, ctx["recommend_mode"])
             s_explore, d_explore = self._score_explore(dish, ctx["recommend_mode"])
 

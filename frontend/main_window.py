@@ -18,6 +18,7 @@ from PyQt5.QtCore import Qt, QSize, QTimer, pyqtSignal
 from backend.data_manager import DataManager
 from backend.recommender import Recommender
 from backend.ai_backend import create_ai_backend
+from backend.campus_navigation import CampusNavigationService
 from frontend.watercolor_style import (
     COLORS, get_font, get_stylesheet, get_poem,
     get_button_style, get_card_style, color_with_alpha, POEMS
@@ -321,6 +322,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.dm = DataManager()
+        self.nav = CampusNavigationService.get_instance()
         self.recommender = Recommender(self.dm)
         self.ai_backend = create_ai_backend(self.dm)
         self.pages = {}
@@ -398,18 +400,18 @@ class MainWindow(QMainWindow):
         self.add_page("home", welcome)
 
         # 离线智能推荐（四步问卷）
-        survey = SurveyPage(self.dm, self.recommender)
+        survey = SurveyPage(self.dm, self.recommender, self.nav)
         survey.recommendation_ready.connect(self.show_recommendations)
         self.add_page("recommend", survey)
 
         # AI 美食助手
-        ai_chat = AIChatPage(self.dm, self.ai_backend)
+        ai_chat = AIChatPage(self.dm, self.ai_backend, self.nav)
         ai_chat.recommendation_ready.connect(self.show_recommendations)
         ai_chat.switch_offline.connect(lambda: self.set_app_mode("offline"))
         self.add_page("ai_recommend", ai_chat)
 
         # 推荐结果页
-        rec_page = RecommendationPage(self.dm, self.recommender)
+        rec_page = RecommendationPage(self.dm, self.recommender, self.nav)
         rec_page.view_dish.connect(self.show_dish_detail)
         rec_page.go_back.connect(self._back_from_recommendations)
         self.add_page("recommend_result", rec_page)
@@ -480,7 +482,8 @@ class MainWindow(QMainWindow):
         if mode == "ai" and not self.ai_backend.is_configured():
             QMessageBox.information(
                 self, "AI 模式",
-                "AI 模式需要联网并配置 API 密钥。\n可在「设置 → AI 模式配置」中填写。",
+                "AI 模式需要联网并配置 API 密钥。\n可在「设置 → AI 模式配置」中填写。\n"
+                "未配置时将使用离线推荐降级。",
             )
 
     def on_app_mode_changed(self, mode: str):

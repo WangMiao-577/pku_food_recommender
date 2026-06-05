@@ -12,6 +12,8 @@ from PyQt5.QtWidgets import (
 )
 
 from frontend.watercolor_style import COLORS, get_font, get_button_style, color_with_alpha
+from frontend.widgets.location_selector import MapLocationSelector
+from backend.campus_navigation import CampusNavigationService
 
 
 SCENE_OPTIONS = [
@@ -28,10 +30,6 @@ MODE_OPTIONS = [
 
 BUDGET_OPTIONS = ["10元以内", "10-20元", "20-30元", "30元以上"]
 FLAVOR_OPTIONS = ["清淡", "微辣", "麻辣", "酸甜", "浓郁"]
-LOCATION_OPTIONS = [
-    "东南门/东门附近", "西南门附近", "西北门/西门附近",
-    "中部教学区", "北部生活区",
-]
 
 BUDGET_MAP = {0: 10, 1: 20, 2: 30, 3: 50}
 
@@ -188,10 +186,11 @@ class SurveyPage(QWidget):
 
     recommendation_ready = pyqtSignal(dict)
 
-    def __init__(self, dm, recommender, parent=None):
+    def __init__(self, dm, recommender, nav=None, parent=None):
         super().__init__(parent)
         self.dm = dm
         self.recommender = recommender
+        self.nav = nav or CampusNavigationService.get_instance()
         self.current_step = 0
         self.answers = {
             "meal_scene": None,
@@ -199,13 +198,13 @@ class SurveyPage(QWidget):
             "remember_mode": False,
             "budget": None,
             "flavors": [],
-            "location": None,
+            "location_node_id": None,
         }
         self.scene_cards = []
         self.mode_cards = []
         self.budget_chips = []
         self.flavor_chips = []
-        self.location_chips = []
+        self.location_selector = None
         self.setup_ui()
 
     def setup_ui(self):
@@ -317,7 +316,25 @@ class SurveyPage(QWidget):
 
         layout.addWidget(self._question_block("今天的预算？", self._make_single_group(BUDGET_OPTIONS, self.budget_chips, False)))
         layout.addWidget(self._question_block("想吃什么口味？（可多选）", self._make_single_group(FLAVOR_OPTIONS, self.flavor_chips, True)))
-        layout.addWidget(self._question_block("你当前大概在校园哪个位置？", self._make_single_group(LOCATION_OPTIONS, self.location_chips, False)))
+
+        loc_box = QFrame()
+        loc_box.setStyleSheet(f"""
+            QFrame {{
+                background: {COLORS['bg_card'].name()};
+                border: 1px solid {COLORS['border_light'].name()};
+                border-radius: 12px;
+                padding: 4px;
+            }}
+        """)
+        loc_layout = QVBoxLayout(loc_box)
+        loc_lbl = QLabel("你当前在校园的哪个位置？（必选，用于路线规划）")
+        loc_lbl.setFont(get_font(11, bold=True))
+        loc_lbl.setStyleSheet(f"color: {COLORS['text_medium'].name()};")
+        loc_layout.addWidget(loc_lbl)
+        self.location_selector = MapLocationSelector(self.nav)
+        self.location_selector.location_changed.connect(self._on_location_changed)
+        loc_layout.addWidget(self.location_selector)
+        layout.addWidget(loc_box)
         layout.addStretch()
         return frame
 
@@ -356,6 +373,9 @@ class SurveyPage(QWidget):
             store_list.append(chip)
         row.addStretch()
         return w
+
+    def _on_location_changed(self, node_id, name):
+        self.answers["location_node_id"] = node_id
 
     def _on_scene_selected(self, index):
         self.answers["meal_scene"] = index
@@ -413,8 +433,8 @@ class SurveyPage(QWidget):
             if not any(c.isChecked() for c in self.flavor_chips):
                 QMessageBox.information(self, "提示", "请至少选择一种口味~")
                 return False
-            if not any(c.isChecked() for c in self.location_chips):
-                QMessageBox.information(self, "提示", "请选择当前位置~")
+            if not self.location_selector or not self.location_selector.has_selection():
+                QMessageBox.information(self, "提示", "请在地图节点中选择当前位置~")
                 return False
         return True
 
@@ -424,10 +444,7 @@ class SurveyPage(QWidget):
                 self.answers["budget"] = c.chip_index
                 break
         self.answers["flavors"] = [c.chip_index for c in self.flavor_chips if c.isChecked()]
-        for c in self.location_chips:
-            if c.isChecked():
-                self.answers["location"] = c.chip_index
-                break
+        self.answers["location_node_id"] = self.location_selector.get_node_id() if self.location_selector else None
         self.answers["remember_mode"] = self.remember_cb.isChecked()
 
     def _submit(self):
@@ -467,9 +484,12 @@ class SurveyPage(QWidget):
 
         profile["preferred_flavors"] = [FLAVOR_OPTIONS[i] for i in self.answers.get("flavors", [])]
 
-        loc_idx = self.answers.get("location")
-        if loc_idx is not None:
-            profile["current_location"] = LOCATION_OPTIONS[loc_idx]
+        loc_id = self.answers.get("location_node_id")
+        if loc_id is not None:
+            node = self.nav.get_node(loc_id)
+            if node:
+                profile["current_location_node_id"] = loc_id
+                profile["current_location"] = node["name"]
 
         self.dm.update_profile(profile)
 
@@ -477,13 +497,16 @@ class SurveyPage(QWidget):
         scene_names = [s[0] for s in SCENE_OPTIONS]
         scene_idx = self.answers["meal_scene"]
         budget_idx = self.answers.get("budget", 1)
+        loc_id = self.answers.get("location_node_id")
+        loc_name = self.nav.get_node(loc_id)["name"] if loc_id and self.nav.get_node(loc_id) else ""
 
         return {
             "recommend_mode": self.answers["recommend_mode"],
             "meal_scene": scene_names[scene_idx] if scene_idx is not None else None,
             "budget_limit": BUDGET_MAP.get(budget_idx, 30),
             "preferred_flavors": [FLAVOR_OPTIONS[i] for i in self.answers.get("flavors", [])],
-            "location": LOCATION_OPTIONS[self.answers["location"]] if self.answers.get("location") is not None else "",
+            "location": loc_name,
+            "location_node_id": loc_id,
             "include_combos": scene_idx in (2, 3),
         }
 
@@ -499,9 +522,13 @@ class SurveyPage(QWidget):
             "remember_mode": False,
             "budget": None,
             "flavors": [],
-            "location": None,
+            "location_node_id": None,
         }
         for c in self.scene_cards:
             c.set_selected(False)
         for c in self.mode_cards:
             c.set_selected(False)
+        if self.location_selector:
+            profile = self.dm.get_profile()
+            saved = profile.get("current_location_node_id")
+            self.location_selector.set_node_id(saved)

@@ -4,7 +4,7 @@
     "budget_limit": 10,
     "meal_pref": "正餐"
   },
-  "goals": "均衡",
+  "goals": "无",
   "preferences": {
     "distance": "就近优先",
     "queue": "接受排队"
@@ -15,7 +15,7 @@
   },
   "disliked_ingredients": [],
   "created_at": "2026-05-18T17:59:51.570211",
-  "updated_at": "2026-06-02T21:29:00.051370",
+  "updated_at": "2026-06-05T11:27:18.918278",
   "default_mode": "stable",
   "preferred_flavors": [
     "甜",
@@ -29,6 +29,7 @@
     "正餐"
   ],
   "nutrition_goals": "均衡",
-  "current_location": "学一食堂、家园食堂附近",
-  "explore_stability_ratio": 0.3
+  "current_location": "博雅塔",
+  "explore_stability_ratio": 0.3,
+  "current_location_node_id": 9
 }

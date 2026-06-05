@@ -10,6 +10,8 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, pyqtSignal
 
 from frontend.watercolor_style import COLORS, get_font, get_button_style, color_with_alpha
+from frontend.widgets.location_selector import MapLocationSelector
+from backend.campus_navigation import CampusNavigationService
 
 
 class ChatBubble(QFrame):
@@ -54,10 +56,11 @@ class AIChatPage(QWidget):
     recommendation_ready = pyqtSignal(dict)
     switch_offline = pyqtSignal()
 
-    def __init__(self, dm, ai_backend, parent=None):
+    def __init__(self, dm, ai_backend, nav=None, parent=None):
         super().__init__(parent)
         self.dm = dm
         self.ai = ai_backend
+        self.nav = nav or CampusNavigationService.get_instance()
         self.setup_ui()
         self._show_opening()
 
@@ -96,6 +99,22 @@ class AIChatPage(QWidget):
         offline_btn.clicked.connect(self.switch_offline.emit)
         status_row.addWidget(offline_btn)
         hl.addLayout(status_row)
+
+        loc_row = QHBoxLayout()
+        loc_lbl = QLabel("我的位置：")
+        loc_lbl.setFont(get_font(10))
+        loc_lbl.setStyleSheet(f"color: {COLORS['text_medium'].name()};")
+        loc_row.addWidget(loc_lbl)
+        self.location_selector = MapLocationSelector(self.nav)
+        self.location_selector.location_changed.connect(self._save_location)
+        loc_row.addWidget(self.location_selector, 1)
+        hl.addLayout(loc_row)
+
+        profile = self.dm.get_profile()
+        saved = profile.get("current_location_node_id")
+        if saved:
+            self.location_selector.set_node_id(saved)
+
         main.addWidget(header)
 
         self._update_status()
@@ -184,12 +203,40 @@ class AIChatPage(QWidget):
         insert_at = self.chat_layout.count() - 1
         self.chat_layout.insertWidget(insert_at, wrapper)
 
+    def _save_location(self, node_id, name):
+        profile = self.dm.get_profile()
+        profile["current_location_node_id"] = node_id
+        profile["current_location"] = name
+        self.dm.update_profile(profile)
+
+    def _has_location(self) -> bool:
+        return bool(self.dm.get_profile().get("current_location_node_id"))
+
+    def _try_resolve_from_text(self, text: str) -> bool:
+        node_id = self.ai.resolve_location_from_text(text)
+        if node_id:
+            node = self.nav.get_node(node_id)
+            if node:
+                self.location_selector.set_node_id(node_id)
+                self._save_location(node_id, node["name"])
+                return True
+        return False
+
     def send_message(self):
         text = self.input.text().strip()
         if not text:
             return
         self.input.clear()
         self._append_bubble(text, is_user=True)
+
+        if not self._has_location():
+            if not self._try_resolve_from_text(text):
+                self._append_bubble(
+                    "请先在上方的「我的位置」中选择当前地点，"
+                    "或在消息中说明你在哪里（例如：图书馆、东南门、未名湖）。",
+                    is_user=False,
+                )
+                return
 
         thinking = QLabel("思考中…")
         thinking.setFont(get_font(10))
@@ -206,12 +253,14 @@ class AIChatPage(QWidget):
         if dishes:
             summary = result.get("reasoning") or "为你找到以下推荐："
             self._append_bubble(summary, is_user=False)
+            profile = self.dm.get_profile()
             payload = {
                 "dishes": dishes,
                 "combos": result.get("combos", []),
                 "recommend_mode": result.get("recommend_mode", "stable"),
                 "source": "ai" if not result.get("fallback") else "local_algorithm",
                 "reasoning": result.get("reasoning", ""),
+                "location_node_id": profile.get("current_location_node_id"),
             }
             self.recommendation_ready.emit(payload)
 

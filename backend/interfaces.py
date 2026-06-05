@@ -62,6 +62,30 @@ def ai_chat_recommend(message: str, config: Optional[Dict] = None) -> Dict:
     return backend.chat_recommend(message, DataManager().get_profile())
 
 
+def get_campus_navigation() -> Dict:
+    """【预留接口】获取校园导航服务"""
+    from backend.campus_navigation import CampusNavigationService
+    nav = CampusNavigationService.get_instance()
+    return {
+        "success": True,
+        "service": nav,
+        "node_count": len(nav.list_nodes()),
+        "timestamp": datetime.now().isoformat(),
+    }
+
+
+def plan_campus_route(start, goal) -> Dict:
+    """【预留接口】A* 路径规划"""
+    from backend.campus_navigation import CampusNavigationService
+    nav = CampusNavigationService.get_instance()
+    route = nav.plan_route(start, goal)
+    if not route:
+        return {"success": False, "route": None}
+    image = nav.render_route_image(route["path_ids"])
+    route["image_path"] = image
+    return {"success": True, "route": route}
+
+
 # ============ 接口1: 菜品数据导入 ============
 
 def import_dish_data(data_source: str, data_format: str = "json",

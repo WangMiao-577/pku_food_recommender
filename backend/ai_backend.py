@@ -10,6 +10,7 @@ from typing import List, Dict, Optional, Any
 
 from backend.data_manager import DataManager
 from backend.recommender import Recommender
+from backend.campus_navigation import CampusNavigationService
 from backend import ai_config
 
 
@@ -25,6 +26,7 @@ class AIModeBackend:
     ):
         self.dm = data_manager
         self.recommender = Recommender(data_manager)
+        self.nav = CampusNavigationService.get_instance()
         self.conversation_history: List[Dict[str, str]] = []
         self._load_config(api_key, api_base, model)
 
@@ -140,21 +142,17 @@ class AIModeBackend:
             return {"success": False, "error": str(e), "concept": None}
 
     def get_location_from_ip(self) -> str:
-        """
-        AI 模式下自动获取用户地理位置（IP 定位）
-        【预留接口】需网络权限
-        """
-        try:
-            import requests
-            resp = requests.get("https://ipapi.co/json/", timeout=5)
-            resp.raise_for_status()
-            data = resp.json()
-            city = data.get("city", "")
-            if "北京" in city or data.get("country_code") == "CN":
-                return "中部教学区"
-            return "中部教学区"
-        except Exception:
-            return self.dm.get_profile().get("current_location", "中部教学区")
+        """已弃用：离线运行需用户手动选择位置。返回当前已保存位置名称。"""
+        return self.dm.get_profile().get("current_location", "")
+
+    def resolve_location_from_text(self, text: str) -> Optional[int]:
+        """从自然语言中解析地图节点 ID"""
+        if not text:
+            return None
+        for node in self.nav.list_nodes():
+            if node["name"] in text:
+                return node["node_id"]
+        return self.nav.resolve_node(text)
 
     def test_connection(self) -> Dict:
         """测试 API 连接"""
@@ -172,8 +170,9 @@ class AIModeBackend:
 
     def get_opening_message(self) -> str:
         return (
-            "你好！我是你的 AI 美食助手。今天想吃点什么？"
-            "可以告诉我你的心情、时间、或者任何想法~"
+            "你好！我是你的 AI 美食助手。\n"
+            "请先在上方选择你的当前位置，或告诉我你在哪里（如：图书馆、东南门、未名湖）。\n"
+            "然后说说今天想吃点什么~"
         )
 
     # ==================== LLM 调用（预留实现） ====================
@@ -254,10 +253,19 @@ class AIModeBackend:
         ]
         dishes_summary = "\n".join(summary_lines)
 
+        node_lines = [
+            f"- 节点{n['node_id']}: {n['name']} ({n['category']})"
+            for n in self.nav.list_nodes()[:30]
+        ]
+        nodes_summary = "\n".join(node_lines)
+
         return f"""{ai_config.DEFAULT_SYSTEM_PROMPT}
 
 可用菜品数据库（摘要）:
 {dishes_summary}
+
+校园地图节点（current_location 请填节点名称，如「图书馆」「东南门」）:
+{nodes_summary}
 
 当前用户画像:
 {json.dumps(profile, ensure_ascii=False)}
@@ -273,7 +281,7 @@ class AIModeBackend:
     "meal_scenes": [],
     "nutrition_goals": "均衡",
     "explore_stability_ratio": 0.3,
-    "current_location": ""
+    "current_location": "图书馆"
   }}
 }}
 """
@@ -339,12 +347,15 @@ class AIModeBackend:
             if kw in text and flavor not in prefs["preferred_flavors"]:
                 prefs["preferred_flavors"].append(flavor)
 
-        if any(w in text for w in ("图书馆", "二教", "理教")):
-            prefs["current_location"] = "中部教学区"
-        elif "东门" in text or "东南" in text:
-            prefs["current_location"] = "东南门/东门附近"
-        elif "西南" in text or "学一" in text:
-            prefs["current_location"] = "西南门附近"
+        node_id = self.resolve_location_from_text(text)
+        if node_id:
+            node = self.nav.get_node(node_id)
+            if node:
+                prefs["current_location"] = node["name"]
+                prefs["current_location_node_id"] = node_id
+        elif profile_loc := self.dm.get_profile().get("current_location"):
+            prefs["current_location"] = profile_loc
+            prefs["current_location_node_id"] = self.dm.get_profile().get("current_location_node_id")
 
         for label, val in [("10元", 10), ("20元", 20), ("30元", 30)]:
             if label in text:
@@ -360,12 +371,16 @@ class AIModeBackend:
     def _preferences_to_context(self, prefs: Dict, user_message: str = "") -> Dict:
         text = user_message or ""
         explore = prefs.get("explore_stability_ratio", 0.3)
+        profile = self.dm.get_profile()
+        node_id = prefs.get("current_location_node_id") or profile.get("current_location_node_id")
+        loc_name = prefs.get("current_location") or profile.get("current_location", "")
         return {
             "recommend_mode": "explore" if explore >= 0.5 else "stable",
             "meal_scene": (prefs.get("meal_scenes") or [None])[0],
             "budget_limit": prefs.get("budget_range", {}).get("max", self.dm.get_budget_limit()),
             "preferred_flavors": prefs.get("preferred_flavors", []),
-            "location": prefs.get("current_location", ""),
+            "location": loc_name,
+            "location_node_id": node_id,
             "include_combos": "同伴聚餐" in (prefs.get("meal_scenes") or []) or "聚餐" in text,
         }
 
@@ -383,6 +398,9 @@ class AIModeBackend:
             profile["goals"] = prefs["nutrition_goals"]
         if prefs.get("current_location"):
             profile["current_location"] = prefs["current_location"]
+            nid = prefs.get("current_location_node_id") or self.nav.resolve_node(prefs["current_location"])
+            if nid:
+                profile["current_location_node_id"] = nid
         if "explore_stability_ratio" in prefs:
             profile["explore_stability_ratio"] = prefs["explore_stability_ratio"]
             profile["default_mode"] = "explore" if prefs["explore_stability_ratio"] >= 0.5 else "stable"

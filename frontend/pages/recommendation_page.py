@@ -12,9 +12,9 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, pyqtSignal
 
 from frontend.watercolor_style import COLORS, get_font, color_with_alpha
-from frontend.widgets.recommend_cards import (
-    DishResultCard, ComboResultCard, StoreGuideDialog,
-)
+from frontend.widgets.recommend_cards import DishResultCard, ComboResultCard
+from frontend.widgets.map_guide_dialog import MapGuideDialog
+from backend.campus_navigation import CampusNavigationService
 
 
 class RecommendationPage(QWidget):
@@ -24,10 +24,11 @@ class RecommendationPage(QWidget):
     go_back = pyqtSignal()
     eat_dish = pyqtSignal(str)
 
-    def __init__(self, dm, recommender, parent=None):
+    def __init__(self, dm, recommender, nav=None, parent=None):
         super().__init__(parent)
         self.dm = dm
         self.recommender = recommender
+        self.nav = nav or CampusNavigationService.get_instance()
         self.result = {}
         self.setup_ui()
 
@@ -182,9 +183,9 @@ class RecommendationPage(QWidget):
             self.set_result({"dishes": recommendations or [], "combos": [], "recommend_mode": "stable"})
 
     def _show_guide(self, canteen_name):
-        dishes = self.dm.get_dishes_by_canteen(canteen_name)
-        hint = dishes[0].get("location_hint", "") if dishes else ""
-        dlg = StoreGuideDialog(canteen_name, hint, self)
+        profile = self.dm.get_profile()
+        start_id = profile.get("current_location_node_id")
+        dlg = MapGuideDialog(canteen_name, start_id, self.nav, self)
         dlg.exec_()
 
     def _on_select_combo(self, combo):
