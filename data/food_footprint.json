@@ -1,5 +1,29 @@
 [
   {
+    "id": "fp_0008_1780667622",
+    "dish_id": "jy3053",
+    "dish_name": "凉拌牛肉米线",
+    "canteen": "家园食堂",
+    "cuisine": "川",
+    "time": "2026-06-05T21:53:42.968435",
+    "mood": "neutral",
+    "companions": "alone",
+    "favorite": "perm",
+    "note": ""
+  },
+  {
+    "id": "fp_0007_1780665361",
+    "dish_id": "ynd003",
+    "dish_name": "柴鸡炖鲜蘑",
+    "canteen": "燕南美食",
+    "cuisine": "中式",
+    "time": "2026-06-05T21:16:01.937286",
+    "mood": "neutral",
+    "companions": "alone",
+    "favorite": null,
+    "note": ""
+  },
+  {
     "id": "fp_0006_1780650047",
     "dish_id": "d007",
     "dish_name": "石锅拌饭",
@@ -20,7 +44,7 @@
     "time": "2026-06-05T15:50:18.819895",
     "mood": "good",
     "companions": "alone",
-    "favorite": null,
+    "favorite": "perm",
     "note": ""
   },
   {
@@ -32,7 +56,7 @@
     "time": "2026-06-02T19:24:33.414303",
     "mood": "good",
     "companions": "friends",
-    "favorite": null,
+    "favorite": "perm",
     "note": ""
   },
   {
@@ -56,7 +80,7 @@
     "time": "2026-06-02T19:24:32.130448",
     "mood": "bad",
     "companions": "alone",
-    "favorite": null,
+    "favorite": "perm",
     "note": ""
   },
   {

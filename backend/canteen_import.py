@@ -10,7 +10,19 @@ from typing import Dict, List, Optional, Tuple
 
 CANTEEN_META = {
     "农园食堂": {"canteen_id": "nongyuan", "cuisine_default": "融合"},
+    "燕南美食": {"canteen_id": "yannan", "cuisine_default": "融合"},
+    "家园食堂": {"canteen_id": "jiayuan", "cuisine_default": "融合"},
 }
+
+# 导入时统一归并到的食堂名（源 JSON 中的别名 -> 标准名）
+CANTEEN_ALIASES = {
+    "雁南地下": "燕南美食",
+    "燕南地下": "燕南美食",
+    "家园三楼": "家园食堂",
+    "家园三层": "家园食堂",
+}
+
+REPLACE_CANTEENS = {"燕南美食", "雁南地下", "燕南地下", "家园食堂", "家园三楼", "家园三层"}
 
 WINDOW_CUISINE = {
     "日韩料理": "日韩", "西北风味": "西北", "西式简餐": "西式",
@@ -190,3 +202,151 @@ def merge_nongyuan_dishes(
 
     path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
     return added, skipped
+
+
+def _default_price(price, window: str) -> float:
+    if price is not None and price != "":
+        return float(price)
+    if "称重" in window:
+        return 15.0
+    return 0.0
+
+
+def normalize_imported_dish(
+    raw: Dict,
+    dish_id: str,
+    canteen: str,
+    floor: int,
+    location_prefix: str,
+    window_numbers: Dict[str, int],
+) -> Dict:
+    """将外部 JSON 菜品规范为系统 dishes.json 结构"""
+    window = (raw.get("window") or "综合").strip()
+    if window not in window_numbers:
+        window_numbers[window] = len(window_numbers) + 1
+
+    meta = CANTEEN_META.get(canteen, {"canteen_id": canteen, "cuisine_default": "融合"})
+    price = _default_price(raw.get("price"), window)
+    hint = f"{location_prefix}，{window}" if location_prefix else window
+
+    dish = {
+        "id": dish_id,
+        "name": raw["name"],
+        "canteen": canteen,
+        "canteen_id": meta["canteen_id"],
+        "window": window,
+        "window_number": window_numbers[window],
+        "floor": floor,
+        "price": price,
+        "cuisine": raw.get("cuisine") or meta["cuisine_default"],
+        "flavor": raw.get("flavor") or ["鲜"],
+        "cooking": raw.get("cooking") or "现做",
+        "appearance": raw.get("appearance", 3),
+        "portion_size": raw.get("portion_size") or ("M" if price < 14 else "L"),
+        "prep_time": raw.get("prep_time", 8),
+        "image": raw.get("image") or "",
+        "tags": raw.get("tags") or ["家常"],
+        "rating": raw.get("rating", 4.0),
+        "rating_count": raw.get("rating_count", 0),
+        "hours": raw.get("hours") or {"lunch": True, "dinner": True, "late_night": False},
+        "related_dishes": raw.get("related_dishes") or [],
+        "location_hint": hint,
+        "calories": int(raw.get("calories") or 400),
+        "protein": raw.get("protein", 0),
+        "fat": raw.get("fat", 0),
+        "carbs": raw.get("carbs", 0),
+        "fiber": raw.get("fiber", 2),
+    }
+    if price == 15.0 and raw.get("price") is None and "称重" in window:
+        if "称重" not in dish["tags"]:
+            dish["tags"] = list(dish["tags"]) + ["称重"]
+    return dish
+
+
+def merge_json_canteen_file(
+    dishes_file: str,
+    json_path: str,
+    *,
+    target_canteen: str,
+    floor: int,
+    location_prefix: str,
+    id_prefix: str,
+    replace_existing: bool = True,
+) -> Tuple[int, int]:
+    """
+    从食堂 JSON 文件导入并合并到 dishes.json。
+    replace_existing=True 时先移除该食堂已有菜品再写入。
+    返回 (新增, 跳过重复名)
+    """
+    path = Path(dishes_file)
+    existing = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+
+    if replace_existing:
+        remove_names = {target_canteen}
+        for alias, canonical in CANTEEN_ALIASES.items():
+            if canonical == target_canteen:
+                remove_names.add(alias)
+        existing = [d for d in existing if d.get("canteen") not in remove_names]
+
+    raw_list = json.loads(Path(json_path).read_text(encoding="utf-8"))
+    existing_names = {(d["canteen"], d["name"]) for d in existing}
+    existing_ids = {d["id"] for d in existing}
+    window_numbers: Dict[str, int] = {}
+    added = 0
+    skipped = 0
+    idx = 1
+
+    for raw in raw_list:
+        name = (raw.get("name") or "").strip()
+        if not name:
+            skipped += 1
+            continue
+        if (target_canteen, name) in existing_names:
+            skipped += 1
+            continue
+
+        dish_id = f"{id_prefix}{idx:03d}"
+        while dish_id in existing_ids:
+            idx += 1
+            dish_id = f"{id_prefix}{idx:03d}"
+
+        dish = normalize_imported_dish(
+            raw, dish_id, target_canteen, floor, location_prefix, window_numbers
+        )
+        existing.append(dish)
+        existing_names.add((target_canteen, name))
+        existing_ids.add(dish_id)
+        added += 1
+        idx += 1
+
+    path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
+    return added, skipped
+
+
+def merge_yannan_and_jiayuan(
+    dishes_file: str,
+    yannan_json: str,
+    jiayuan_json: str,
+) -> Dict[str, Tuple[int, int]]:
+    """一次性导入燕南地下 + 家园三层"""
+    results = {}
+    results["燕南美食"] = merge_json_canteen_file(
+        dishes_file,
+        yannan_json,
+        target_canteen="燕南美食",
+        floor=0,
+        location_prefix="燕南地下",
+        id_prefix="ynd",
+        replace_existing=True,
+    )
+    # 燕南已清空；家园需在第二次合并时保留刚导入的燕南
+    results["家园食堂"] = merge_json_canteen_file(
+        dishes_file,
+        jiayuan_json,
+        target_canteen="家园食堂",
+        floor=3,
+        location_prefix="家园三层",
+        id_prefix="jy3",
+        replace_existing=True,
+    )
+    return results

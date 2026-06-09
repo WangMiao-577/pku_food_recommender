@@ -1,73 +1,5 @@
 [
   {
-    "id": "d001",
-    "name": "麻婆豆腐",
-    "canteen": "家园食堂",
-    "window": "川菜",
-    "price": 8,
-    "cuisine": "川",
-    "flavor": [
-      "辣",
-      "鲜",
-      "咸"
-    ],
-    "cooking": "红烧",
-    "appearance": 4,
-    "calories": 220,
-    "protein": 12,
-    "carbs": 8,
-    "fat": 15,
-    "fiber": 3,
-    "prep_time": 5,
-    "image": "dish_1_mapo_tofu.jpg",
-    "tags": [
-      "下饭",
-      "经典",
-      "素食可选"
-    ],
-    "rating": 3.55,
-    "rating_count": 1,
-    "hours": {
-      "lunch": true,
-      "dinner": true,
-      "late_night": false
-    }
-  },
-  {
-    "id": "d002",
-    "name": "宫保鸡丁",
-    "canteen": "家园食堂",
-    "window": "川菜",
-    "price": 15,
-    "cuisine": "川",
-    "flavor": [
-      "酸",
-      "甜",
-      "辣"
-    ],
-    "cooking": "现炒",
-    "appearance": 4,
-    "calories": 320,
-    "protein": 25,
-    "carbs": 15,
-    "fat": 18,
-    "fiber": 2,
-    "prep_time": 8,
-    "image": "dish_2_kung_pao_chicken.jpg",
-    "tags": [
-      "下饭",
-      "经典",
-      "高蛋白"
-    ],
-    "rating": 4.5,
-    "rating_count": 203,
-    "hours": {
-      "lunch": true,
-      "dinner": true,
-      "late_night": false
-    }
-  },
-  {
     "id": "d003",
     "name": "红烧肉",
     "canteen": "农园食堂",
@@ -167,39 +99,6 @@
       "lunch": true,
       "dinner": true,
       "late_night": false
-    }
-  },
-  {
-    "id": "d006",
-    "name": "红烧牛肉面",
-    "canteen": "家园食堂",
-    "window": "面食",
-    "price": 14,
-    "cuisine": "西北",
-    "flavor": [
-      "咸",
-      "鲜"
-    ],
-    "cooking": "现炒",
-    "appearance": 4,
-    "calories": 520,
-    "protein": 22,
-    "carbs": 65,
-    "fat": 18,
-    "fiber": 4,
-    "prep_time": 8,
-    "image": "dish_6_beef_noodle.jpg",
-    "tags": [
-      "管饱",
-      "面食",
-      "经典"
-    ],
-    "rating": 4.3,
-    "rating_count": 178,
-    "hours": {
-      "lunch": true,
-      "dinner": true,
-      "late_night": true
     }
   },
   {
@@ -304,39 +203,6 @@
     }
   },
   {
-    "id": "d010",
-    "name": "糖醋里脊",
-    "canteen": "家园食堂",
-    "window": "鲁菜",
-    "price": 16,
-    "cuisine": "鲁",
-    "flavor": [
-      "酸",
-      "甜"
-    ],
-    "cooking": "油炸",
-    "appearance": 4,
-    "calories": 420,
-    "protein": 18,
-    "carbs": 35,
-    "fat": 22,
-    "fiber": 1,
-    "prep_time": 8,
-    "image": "dish_10_sweet_sour.jpg",
-    "tags": [
-      "下饭",
-      "人气",
-      "油炸"
-    ],
-    "rating": 4.4,
-    "rating_count": 167,
-    "hours": {
-      "lunch": true,
-      "dinner": true,
-      "late_night": false
-    }
-  },
-  {
     "id": "d011",
     "name": "蒸饺",
     "canteen": "松林",
@@ -363,40 +229,6 @@
     ],
     "rating": 4.0,
     "rating_count": 234,
-    "hours": {
-      "lunch": true,
-      "dinner": true,
-      "late_night": true
-    }
-  },
-  {
-    "id": "d012",
-    "name": "黄焖鸡米饭",
-    "canteen": "燕南美食",
-    "window": "地上：精品菜",
-    "price": 18,
-    "cuisine": "融合",
-    "flavor": [
-      "咸",
-      "鲜",
-      "辣"
-    ],
-    "cooking": "红烧",
-    "appearance": 4,
-    "calories": 550,
-    "protein": 28,
-    "carbs": 45,
-    "fat": 26,
-    "fiber": 4,
-    "prep_time": 10,
-    "image": "dish_12_claypot.jpg",
-    "tags": [
-      "管饱",
-      "热门",
-      "下饭"
-    ],
-    "rating": 4.5,
-    "rating_count": 201,
     "hours": {
       "lunch": true,
       "dinner": true,
@@ -10522,5 +10354,4490 @@
     "fat": 2.5,
     "carbs": 9.0,
     "fiber": 2.0
+  },
+  {
+    "id": "ynd001",
+    "name": "乌鸡炖土豆",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "炖制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 5,
+    "image": "dish_073_wuji_tudou.jpg",
+    "tags": [
+      "热销",
+      "下饭菜",
+      "称重"
+    ],
+    "rating": 4.2,
+    "rating_count": 98,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 320,
+    "protein": 18,
+    "fat": 18,
+    "carbs": 22,
+    "fiber": 2
+  },
+  {
+    "id": "ynd002",
+    "name": "红烧茄子",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "甜"
+    ],
+    "cooking": "烧制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_074_hongshao_qiezi.jpg",
+    "tags": [
+      "素食",
+      "下饭菜",
+      "称重"
+    ],
+    "rating": 4.0,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 280,
+    "protein": 4,
+    "fat": 22,
+    "carbs": 18,
+    "fiber": 4
+  },
+  {
+    "id": "ynd003",
+    "name": "柴鸡炖鲜蘑",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "炖制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 5,
+    "image": "dish_075_chaiji_xianmo.jpg",
+    "tags": [
+      "热销",
+      "滋补",
+      "称重"
+    ],
+    "rating": 4.3,
+    "rating_count": 87,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 290,
+    "protein": 20,
+    "fat": 19,
+    "carbs": 10,
+    "fiber": 2
+  },
+  {
+    "id": "ynd004",
+    "name": "红烧鮰鱼块",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "烧制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 5,
+    "image": "dish_076_hongshao_huiyu.jpg",
+    "tags": [
+      "海鲜",
+      "高蛋白",
+      "称重"
+    ],
+    "rating": 4.1,
+    "rating_count": 76,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 260,
+    "protein": 22,
+    "fat": 16,
+    "carbs": 8,
+    "fiber": 0
+  },
+  {
+    "id": "ynd005",
+    "name": "木耳炒山药",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_077_muer_shanyao.jpg",
+    "tags": [
+      "素食",
+      "清淡",
+      "健康",
+      "称重"
+    ],
+    "rating": 3.9,
+    "rating_count": 65,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 150,
+    "protein": 3,
+    "fat": 6,
+    "carbs": 22,
+    "fiber": 4
+  },
+  {
+    "id": "ynd006",
+    "name": "豉油丝瓜",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_078_chiyou_sigua.jpg",
+    "tags": [
+      "素食",
+      "清淡",
+      "健康",
+      "称重"
+    ],
+    "rating": 3.8,
+    "rating_count": 54,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 80,
+    "protein": 2,
+    "fat": 4,
+    "carbs": 10,
+    "fiber": 3
+  },
+  {
+    "id": "ynd007",
+    "name": "藤椒鸡腿",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "特色档口",
+    "window_number": 2,
+    "floor": 0,
+    "price": 5.0,
+    "cuisine": "中式",
+    "flavor": [
+      "麻",
+      "辣"
+    ],
+    "cooking": "炸制",
+    "appearance": 5,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_079_tengjiao_jitui.jpg",
+    "tags": [
+      "热销",
+      "麻辣",
+      "推荐"
+    ],
+    "rating": 4.5,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，特色档口",
+    "calories": 280,
+    "protein": 22,
+    "fat": 16,
+    "carbs": 12,
+    "fiber": 0
+  },
+  {
+    "id": "ynd008",
+    "name": "香芹肉丝",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_080_xiangqin_rousi.jpg",
+    "tags": [
+      "家常",
+      "下饭菜",
+      "称重"
+    ],
+    "rating": 4.0,
+    "rating_count": 89,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 200,
+    "protein": 15,
+    "fat": 12,
+    "carbs": 8,
+    "fiber": 2
+  },
+  {
+    "id": "ynd009",
+    "name": "肉片佛手瓜",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_081_roupian_foshougua.jpg",
+    "tags": [
+      "家常",
+      "称重"
+    ],
+    "rating": 3.9,
+    "rating_count": 67,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 180,
+    "protein": 10,
+    "fat": 11,
+    "carbs": 12,
+    "fiber": 3
+  },
+  {
+    "id": "ynd010",
+    "name": "青椒炒肉",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "辣"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_082_qingjiao_chaorou.jpg",
+    "tags": [
+      "热销",
+      "下饭菜",
+      "称重"
+    ],
+    "rating": 4.1,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 220,
+    "protein": 14,
+    "fat": 14,
+    "carbs": 10,
+    "fiber": 2
+  },
+  {
+    "id": "ynd011",
+    "name": "虎皮鸡蛋",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "卤制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_083_hupi_jidan.jpg",
+    "tags": [
+      "高蛋白",
+      "推荐",
+      "称重"
+    ],
+    "rating": 4.3,
+    "rating_count": 145,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 160,
+    "protein": 13,
+    "fat": 11,
+    "carbs": 2,
+    "fiber": 0
+  },
+  {
+    "id": "ynd012",
+    "name": "脆皮鸡块",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "西式",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "炸制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_084_cuipi_jikuai.jpg",
+    "tags": [
+      "热销",
+      "油炸",
+      "称重"
+    ],
+    "rating": 4.4,
+    "rating_count": 178,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 320,
+    "protein": 18,
+    "fat": 20,
+    "carbs": 16,
+    "fiber": 0
+  },
+  {
+    "id": "ynd013",
+    "name": "水煮花生",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_085_shuizhu_huasheng.jpg",
+    "tags": [
+      "小食",
+      "下酒",
+      "称重"
+    ],
+    "rating": 4.0,
+    "rating_count": 92,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 290,
+    "protein": 12,
+    "fat": 22,
+    "carbs": 16,
+    "fiber": 5
+  },
+  {
+    "id": "ynd014",
+    "name": "蒸饺",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 0.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_086_zhengjiao.jpg",
+    "tags": [
+      "主食",
+      "面食"
+    ],
+    "rating": 4.1,
+    "rating_count": 120,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 240,
+    "protein": 10,
+    "fat": 8,
+    "carbs": 32,
+    "fiber": 2
+  },
+  {
+    "id": "ynd015",
+    "name": "玉米段",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 0.0,
+    "cuisine": "中式",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_087_yumiduan.jpg",
+    "tags": [
+      "主食",
+      "粗粮",
+      "健康"
+    ],
+    "rating": 4.2,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 120,
+    "protein": 4,
+    "fat": 1,
+    "carbs": 26,
+    "fiber": 3
+  },
+  {
+    "id": "ynd016",
+    "name": "豉油鲜蚕豆",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_088_chiyou_xiancandou.jpg",
+    "tags": [
+      "素食",
+      "时令",
+      "称重"
+    ],
+    "rating": 3.8,
+    "rating_count": 56,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 160,
+    "protein": 8,
+    "fat": 5,
+    "carbs": 22,
+    "fiber": 6
+  },
+  {
+    "id": "ynd017",
+    "name": "家常莜面鱼",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 0.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_089_jiachang_youmianyu.jpg",
+    "tags": [
+      "主食",
+      "面食",
+      "粗粮"
+    ],
+    "rating": 4.0,
+    "rating_count": 78,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 280,
+    "protein": 8,
+    "fat": 7,
+    "carbs": 48,
+    "fiber": 3
+  },
+  {
+    "id": "ynd018",
+    "name": "麻辣兔肉",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "川菜",
+    "flavor": [
+      "麻",
+      "辣"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_090_mala_turou.jpg",
+    "tags": [
+      "麻辣",
+      "高蛋白",
+      "称重"
+    ],
+    "rating": 4.2,
+    "rating_count": 88,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 240,
+    "protein": 24,
+    "fat": 14,
+    "carbs": 6,
+    "fiber": 1
+  },
+  {
+    "id": "ynd019",
+    "name": "木须肉",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_091_musurou.jpg",
+    "tags": [
+      "家常",
+      "经典",
+      "下饭菜",
+      "称重"
+    ],
+    "rating": 4.1,
+    "rating_count": 132,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 220,
+    "protein": 16,
+    "fat": 14,
+    "carbs": 10,
+    "fiber": 2
+  },
+  {
+    "id": "ynd020",
+    "name": "酒香坛肉",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "甜",
+      "香"
+    ],
+    "cooking": "炖制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 5,
+    "image": "dish_092_jiuxiang_tanrou.jpg",
+    "tags": [
+      "红烧",
+      "肥而不腻",
+      "称重"
+    ],
+    "rating": 4.3,
+    "rating_count": 95,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 380,
+    "protein": 16,
+    "fat": 28,
+    "carbs": 18,
+    "fiber": 0
+  },
+  {
+    "id": "ynd021",
+    "name": "烧饼葱油饼",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 0.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "煎制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_093_shaobing_congyoubing.jpg",
+    "tags": [
+      "主食",
+      "面食"
+    ],
+    "rating": 4.2,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 300,
+    "protein": 6,
+    "fat": 12,
+    "carbs": 42,
+    "fiber": 2
+  },
+  {
+    "id": "ynd022",
+    "name": "番茄蛋花汤",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 1.0,
+    "cuisine": "中式",
+    "flavor": [
+      "酸",
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_094_fanqie_danhuatang.jpg",
+    "tags": [
+      "汤品",
+      "清淡",
+      "推荐"
+    ],
+    "rating": 4.4,
+    "rating_count": 203,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 60,
+    "protein": 4,
+    "fat": 2,
+    "carbs": 8,
+    "fiber": 1
+  },
+  {
+    "id": "ynd023",
+    "name": "银耳羹",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 3.0,
+    "cuisine": "中式",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_095_yinergeng.jpg",
+    "tags": [
+      "甜品",
+      "养颜",
+      "养生"
+    ],
+    "rating": 4.1,
+    "rating_count": 87,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 80,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 18,
+    "fiber": 2
+  },
+  {
+    "id": "ynd024",
+    "name": "豌豆尖鸡蛋汤",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 5.0,
+    "cuisine": "中式",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_096_wandoujian_jidantang.jpg",
+    "tags": [
+      "汤品",
+      "时令",
+      "清淡"
+    ],
+    "rating": 4.0,
+    "rating_count": 65,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 70,
+    "protein": 5,
+    "fat": 3,
+    "carbs": 6,
+    "fiber": 1
+  },
+  {
+    "id": "ynd025",
+    "name": "酸辣汤",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 6.0,
+    "cuisine": "中式",
+    "flavor": [
+      "酸",
+      "辣"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_097_suanlatang.jpg",
+    "tags": [
+      "汤品",
+      "开胃"
+    ],
+    "rating": 4.0,
+    "rating_count": 98,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 90,
+    "protein": 4,
+    "fat": 3,
+    "carbs": 12,
+    "fiber": 2
+  },
+  {
+    "id": "ynd026",
+    "name": "胡辣汤",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 5.0,
+    "cuisine": "中式",
+    "flavor": [
+      "辣",
+      "咸"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_098_hulatang.jpg",
+    "tags": [
+      "汤品",
+      "早餐",
+      "暖胃"
+    ],
+    "rating": 4.2,
+    "rating_count": 76,
+    "hours": {
+      "lunch": true,
+      "dinner": false,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 100,
+    "protein": 5,
+    "fat": 3,
+    "carbs": 14,
+    "fiber": 2
+  },
+  {
+    "id": "ynd027",
+    "name": "紫菜鸡蛋汤",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 1.0,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_099_zicai_jidantang.jpg",
+    "tags": [
+      "汤品",
+      "清淡"
+    ],
+    "rating": 3.8,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 50,
+    "protein": 4,
+    "fat": 2,
+    "carbs": 4,
+    "fiber": 0
+  },
+  {
+    "id": "ynd028",
+    "name": "蛋花玉米羹",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 4.0,
+    "cuisine": "中式",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_100_danhua_yumigeng.jpg",
+    "tags": [
+      "甜品",
+      "汤品"
+    ],
+    "rating": 4.0,
+    "rating_count": 82,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 120,
+    "protein": 3,
+    "fat": 2,
+    "carbs": 22,
+    "fiber": 1
+  },
+  {
+    "id": "ynd029",
+    "name": "醪糟小圆子",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 5.0,
+    "cuisine": "中式",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 2,
+    "image": "dish_101_laozao_xiaoyuanzi.jpg",
+    "tags": [
+      "甜品",
+      "汤品",
+      "传统"
+    ],
+    "rating": 4.3,
+    "rating_count": 95,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 180,
+    "protein": 2,
+    "fat": 2,
+    "carbs": 36,
+    "fiber": 0
+  },
+  {
+    "id": "ynd030",
+    "name": "荠菜口蘑汤",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "汤档",
+    "window_number": 4,
+    "floor": 0,
+    "price": 5.0,
+    "cuisine": "中式",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_102_jicai_koumotang.jpg",
+    "tags": [
+      "汤品",
+      "时令",
+      "清淡"
+    ],
+    "rating": 3.9,
+    "rating_count": 54,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，汤档",
+    "calories": 55,
+    "protein": 3,
+    "fat": 2,
+    "carbs": 6,
+    "fiber": 2
+  },
+  {
+    "id": "ynd031",
+    "name": "贝贝南瓜",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 1.0,
+    "cuisine": "中式",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_103_beibei_nangua.jpg",
+    "tags": [
+      "主食",
+      "粗粮",
+      "健康"
+    ],
+    "rating": 4.2,
+    "rating_count": 88,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 90,
+    "protein": 2,
+    "fat": 0,
+    "carbs": 20,
+    "fiber": 3
+  },
+  {
+    "id": "ynd032",
+    "name": "铁棍山药",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 1.0,
+    "cuisine": "中式",
+    "flavor": [
+      "淡"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_104_tiegun_shanyao.jpg",
+    "tags": [
+      "主食",
+      "粗粮",
+      "养生"
+    ],
+    "rating": 4.0,
+    "rating_count": 72,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 80,
+    "protein": 3,
+    "fat": 0,
+    "carbs": 16,
+    "fiber": 3
+  },
+  {
+    "id": "ynd033",
+    "name": "紫玉米",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 0.0,
+    "cuisine": "中式",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_105_ziyumi.jpg",
+    "tags": [
+      "主食",
+      "粗粮",
+      "花青素"
+    ],
+    "rating": 4.1,
+    "rating_count": 65,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 130,
+    "protein": 4,
+    "fat": 1,
+    "carbs": 28,
+    "fiber": 3
+  },
+  {
+    "id": "ynd034",
+    "name": "水煮蛋",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 1.0,
+    "cuisine": "中式",
+    "flavor": [
+      "淡"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_106_shuizhudan.jpg",
+    "tags": [
+      "高蛋白",
+      "早餐",
+      "健康"
+    ],
+    "rating": 4.3,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 75,
+    "protein": 6,
+    "fat": 5,
+    "carbs": 1,
+    "fiber": 0
+  },
+  {
+    "id": "ynd035",
+    "name": "全麦馒头",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 0.5,
+    "cuisine": "中式",
+    "flavor": [
+      "淡"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_107_quanmai_mantou.jpg",
+    "tags": [
+      "主食",
+      "粗粮",
+      "健康"
+    ],
+    "rating": 4.0,
+    "rating_count": 98,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 140,
+    "protein": 5,
+    "fat": 1,
+    "carbs": 28,
+    "fiber": 3
+  },
+  {
+    "id": "ynd036",
+    "name": "杂粮馒头",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "主食档",
+    "window_number": 3,
+    "floor": 0,
+    "price": 0.7,
+    "cuisine": "中式",
+    "flavor": [
+      "淡",
+      "香"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_108_zaliang_mantou.jpg",
+    "tags": [
+      "主食",
+      "粗粮",
+      "健康"
+    ],
+    "rating": 4.1,
+    "rating_count": 87,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，主食档",
+    "calories": 150,
+    "protein": 5,
+    "fat": 1,
+    "carbs": 30,
+    "fiber": 4
+  },
+  {
+    "id": "ynd037",
+    "name": "蛋挞",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "点心档",
+    "window_number": 5,
+    "floor": 0,
+    "price": 2.5,
+    "cuisine": "西式",
+    "flavor": [
+      "甜",
+      "香"
+    ],
+    "cooking": "烘焙",
+    "appearance": 5,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_109_danta.jpg",
+    "tags": [
+      "甜品",
+      "烘焙",
+      "推荐"
+    ],
+    "rating": 4.5,
+    "rating_count": 198,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，点心档",
+    "calories": 220,
+    "protein": 4,
+    "fat": 14,
+    "carbs": 18,
+    "fiber": 0
+  },
+  {
+    "id": "ynd038",
+    "name": "烧麦",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "点心档",
+    "window_number": 5,
+    "floor": 0,
+    "price": 1.2,
+    "cuisine": "中式",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_110_shaomai.jpg",
+    "tags": [
+      "点心",
+      "早餐",
+      "面食"
+    ],
+    "rating": 4.2,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，点心档",
+    "calories": 180,
+    "protein": 6,
+    "fat": 5,
+    "carbs": 28,
+    "fiber": 1
+  },
+  {
+    "id": "ynd039",
+    "name": "水晶虾饺",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "点心档",
+    "window_number": 5,
+    "floor": 0,
+    "price": 0.0,
+    "cuisine": "粤式",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "蒸制",
+    "appearance": 5,
+    "portion_size": "M",
+    "prep_time": 1,
+    "image": "dish_111_shuijing_xiajiao.jpg",
+    "tags": [
+      "点心",
+      "海鲜",
+      "推荐"
+    ],
+    "rating": 4.4,
+    "rating_count": 145,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，点心档",
+    "calories": 80,
+    "protein": 5,
+    "fat": 2,
+    "carbs": 12,
+    "fiber": 0
+  },
+  {
+    "id": "ynd040",
+    "name": "西兰花",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "淡"
+    ],
+    "cooking": "煮制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_112_xilanhua.jpg",
+    "tags": [
+      "素食",
+      "健康",
+      "减脂",
+      "高纤维",
+      "称重"
+    ],
+    "rating": 4.1,
+    "rating_count": 102,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 55,
+    "protein": 4,
+    "fat": 1,
+    "carbs": 10,
+    "fiber": 4
+  },
+  {
+    "id": "ynd041",
+    "name": "水煮鸡胸肉",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "淡"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_113_shuizhu_jixiongrou.jpg",
+    "tags": [
+      "高蛋白",
+      "减脂",
+      "健身",
+      "健康",
+      "称重"
+    ],
+    "rating": 4.0,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 165,
+    "protein": 31,
+    "fat": 3,
+    "carbs": 0,
+    "fiber": 0
+  },
+  {
+    "id": "ynd042",
+    "name": "清炒蘑菇",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "鲜"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_114_qingchao_mogu.jpg",
+    "tags": [
+      "素食",
+      "健康",
+      "清淡",
+      "称重"
+    ],
+    "rating": 3.9,
+    "rating_count": 76,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 90,
+    "protein": 4,
+    "fat": 3,
+    "carbs": 12,
+    "fiber": 3
+  },
+  {
+    "id": "ynd043",
+    "name": "白灼青菜",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "淡"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_115_baizhuo_qingcai.jpg",
+    "tags": [
+      "素食",
+      "健康",
+      "减脂",
+      "清淡",
+      "称重"
+    ],
+    "rating": 3.8,
+    "rating_count": 88,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 45,
+    "protein": 3,
+    "fat": 1,
+    "carbs": 6,
+    "fiber": 3
+  },
+  {
+    "id": "ynd044",
+    "name": "清炒莴笋",
+    "canteen": "燕南美食",
+    "canteen_id": "yannan",
+    "window": "自选称重档",
+    "window_number": 1,
+    "floor": 0,
+    "price": 15.0,
+    "cuisine": "中式",
+    "flavor": [
+      "淡",
+      "脆"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 3,
+    "image": "dish_116_qingchao_wosun.jpg",
+    "tags": [
+      "素食",
+      "健康",
+      "清淡",
+      "爽口",
+      "称重"
+    ],
+    "rating": 3.9,
+    "rating_count": 72,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "燕南地下，自选称重档",
+    "calories": 50,
+    "protein": 2,
+    "fat": 2,
+    "carbs": 8,
+    "fiber": 3
+  },
+  {
+    "id": "jy3001",
+    "name": "酸辣排骨米线",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "米线面食档",
+    "window_number": 1,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "川",
+    "flavor": [
+      "酸辣",
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "dish_001_suanla_paigu_mixian.jpg",
+    "tags": [
+      "酸辣",
+      "米线"
+    ],
+    "rating": 4.2,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，米线面食档",
+    "calories": 480,
+    "protein": 20,
+    "fat": 18,
+    "carbs": 55,
+    "fiber": 3
+  },
+  {
+    "id": "jy3002",
+    "name": "西红柿牛肉米线",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "米线面食档",
+    "window_number": 1,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "酸",
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "dish_002_xihongshi_niurou_mixian.jpg",
+    "tags": [
+      "番茄",
+      "牛肉"
+    ],
+    "rating": 4.3,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，米线面食档",
+    "calories": 460,
+    "protein": 22,
+    "fat": 16,
+    "carbs": 52,
+    "fiber": 3
+  },
+  {
+    "id": "jy3003",
+    "name": "酸菜鱼米线",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "米线面食档",
+    "window_number": 1,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "酸辣",
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_003_suncai_yu_mixian.jpg",
+    "tags": [
+      "酸菜鱼",
+      "酸辣"
+    ],
+    "rating": 4.4,
+    "rating_count": 178,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，米线面食档",
+    "calories": 450,
+    "protein": 24,
+    "fat": 18,
+    "carbs": 48,
+    "fiber": 2
+  },
+  {
+    "id": "jy3004",
+    "name": "豌杂米线",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "米线面食档",
+    "window_number": 1,
+    "floor": 3,
+    "price": 13.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_004_wanza_mixian.jpg",
+    "tags": [
+      "豌杂",
+      "人气"
+    ],
+    "rating": 4.3,
+    "rating_count": 198,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，米线面食档",
+    "calories": 470,
+    "protein": 16,
+    "fat": 16,
+    "carbs": 62,
+    "fiber": 5
+  },
+  {
+    "id": "jy3005",
+    "name": "豌杂面",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "米线面食档",
+    "window_number": 1,
+    "floor": 3,
+    "price": 13.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_005_wanza_mian.jpg",
+    "tags": [
+      "豌杂",
+      "面食",
+      "人气"
+    ],
+    "rating": 4.5,
+    "rating_count": 267,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，米线面食档",
+    "calories": 490,
+    "protein": 17,
+    "fat": 15,
+    "carbs": 65,
+    "fiber": 5
+  },
+  {
+    "id": "jy3006",
+    "name": "掉渣饼",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "掉渣饼档",
+    "window_number": 2,
+    "floor": 3,
+    "price": 7.0,
+    "cuisine": "西北",
+    "flavor": [
+      "香",
+      "酥"
+    ],
+    "cooking": "烤制",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 5,
+    "image": "dish_006_diaozha_bing.jpg",
+    "tags": [
+      "饼",
+      "夜宵",
+      "实惠"
+    ],
+    "rating": 4.3,
+    "rating_count": 423,
+    "hours": {
+      "lunch": false,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，掉渣饼档",
+    "calories": 380,
+    "protein": 12,
+    "fat": 15,
+    "carbs": 50,
+    "fiber": 2
+  },
+  {
+    "id": "jy3007",
+    "name": "锅巴土豆",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "米线面食档",
+    "window_number": 1,
+    "floor": 3,
+    "price": 5.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "香",
+      "酥"
+    ],
+    "cooking": "炸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 6,
+    "image": "dish_007_guoba_tudou.jpg",
+    "tags": [
+      "小吃",
+      "酥脆"
+    ],
+    "rating": 4.4,
+    "rating_count": 234,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，米线面食档",
+    "calories": 280,
+    "protein": 4,
+    "fat": 13,
+    "carbs": 38,
+    "fiber": 3
+  },
+  {
+    "id": "jy3008",
+    "name": "红抄手",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "米线面食档",
+    "window_number": 1,
+    "floor": 3,
+    "price": 10.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_008_hong_chaoshou.jpg",
+    "tags": [
+      "抄手",
+      "麻辣"
+    ],
+    "rating": 4.1,
+    "rating_count": 145,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，米线面食档",
+    "calories": 350,
+    "protein": 16,
+    "fat": 12,
+    "carbs": 42,
+    "fiber": 1
+  },
+  {
+    "id": "jy3009",
+    "name": "渣渣牛肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "现炒",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_009_zhazha_niurou_fan.jpg",
+    "tags": [
+      "下饭",
+      "牛肉"
+    ],
+    "rating": 4.3,
+    "rating_count": 187,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 560,
+    "protein": 30,
+    "fat": 24,
+    "carbs": 50,
+    "fiber": 3
+  },
+  {
+    "id": "jy3010",
+    "name": "水煮滑肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 10.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "麻",
+      "鲜"
+    ],
+    "cooking": "水煮",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 10,
+    "image": "dish_010_shuizhu_huarou_fan.jpg",
+    "tags": [
+      "水煮",
+      "实惠"
+    ],
+    "rating": 4.0,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 420,
+    "protein": 20,
+    "fat": 18,
+    "carbs": 45,
+    "fiber": 3
+  },
+  {
+    "id": "jy3011",
+    "name": "干煸仔鸡饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 12.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "干煸",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 10,
+    "image": "dish_011_ganbian_zaiji_fan.jpg",
+    "tags": [
+      "干煸",
+      "鸡肉"
+    ],
+    "rating": 4.2,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 510,
+    "protein": 26,
+    "fat": 22,
+    "carbs": 48,
+    "fiber": 2
+  },
+  {
+    "id": "jy3012",
+    "name": "美味烧鸡饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "鲁",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "卤制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "dish_012_meiwei_shaoji_fan.jpg",
+    "tags": [
+      "烧鸡",
+      "卤味"
+    ],
+    "rating": 4.4,
+    "rating_count": 198,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 540,
+    "protein": 32,
+    "fat": 22,
+    "carbs": 48,
+    "fiber": 2
+  },
+  {
+    "id": "jy3013",
+    "name": "麻辣香锅饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 14.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "麻",
+      "香"
+    ],
+    "cooking": "干锅",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_013_mala_xiangguo_fan.jpg",
+    "tags": [
+      "香锅",
+      "下饭"
+    ],
+    "rating": 4.3,
+    "rating_count": 245,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 580,
+    "protein": 24,
+    "fat": 28,
+    "carbs": 52,
+    "fiber": 4
+  },
+  {
+    "id": "jy3014",
+    "name": "藤椒肉片饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 12.0,
+    "cuisine": "川",
+    "flavor": [
+      "麻",
+      "辣",
+      "香"
+    ],
+    "cooking": "现炒",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_014_tengjiao_roupian_fan.jpg",
+    "tags": [
+      "藤椒",
+      "麻辣"
+    ],
+    "rating": 4.1,
+    "rating_count": 98,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 480,
+    "protein": 22,
+    "fat": 20,
+    "carbs": 48,
+    "fiber": 2
+  },
+  {
+    "id": "jy3015",
+    "name": "焦叶烤鱼饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 15.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "烤制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 12,
+    "image": "dish_015_jiaoye_kaoyu_fan.jpg",
+    "tags": [
+      "烤鱼",
+      "蕉叶"
+    ],
+    "rating": 4.4,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 520,
+    "protein": 28,
+    "fat": 22,
+    "carbs": 45,
+    "fiber": 3
+  },
+  {
+    "id": "jy3016",
+    "name": "咖喱牛肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咖喱",
+      "香"
+    ],
+    "cooking": "炖煮",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_016_gali_niurou_fan.jpg",
+    "tags": [
+      "咖喱",
+      "牛肉"
+    ],
+    "rating": 4.2,
+    "rating_count": 167,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 560,
+    "protein": 28,
+    "fat": 24,
+    "carbs": 55,
+    "fiber": 3
+  },
+  {
+    "id": "jy3017",
+    "name": "把子肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 12.0,
+    "cuisine": "鲁",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "卤制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_017_bazirou_fan.jpg",
+    "tags": [
+      "卤肉",
+      "经典"
+    ],
+    "rating": 4.3,
+    "rating_count": 189,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 620,
+    "protein": 25,
+    "fat": 35,
+    "carbs": 48,
+    "fiber": 1
+  },
+  {
+    "id": "jy3018",
+    "name": "爆汁鸡排饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 14.0,
+    "cuisine": "融合",
+    "flavor": [
+      "香",
+      "酥"
+    ],
+    "cooking": "炸制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_018_baozhi_jipai_fan.jpg",
+    "tags": [
+      "鸡排",
+      "酥脆"
+    ],
+    "rating": 4.2,
+    "rating_count": 212,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 580,
+    "protein": 26,
+    "fat": 28,
+    "carbs": 52,
+    "fiber": 1
+  },
+  {
+    "id": "jy3019",
+    "name": "飘香卤肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 12.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "卤制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_019_piaoxiang_lurou_fan.jpg",
+    "tags": [
+      "卤肉",
+      "经典"
+    ],
+    "rating": 4.3,
+    "rating_count": 178,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 550,
+    "protein": 20,
+    "fat": 26,
+    "carbs": 50,
+    "fiber": 1
+  },
+  {
+    "id": "jy3020",
+    "name": "宫保鸡丁饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 7.0,
+    "cuisine": "川",
+    "flavor": [
+      "酸甜",
+      "微辣"
+    ],
+    "cooking": "现炒",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_020_gongbao_jiding_fan.jpg",
+    "tags": [
+      "宫保",
+      "酸甜"
+    ],
+    "rating": 4.0,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 480,
+    "protein": 22,
+    "fat": 18,
+    "carbs": 55,
+    "fiber": 2
+  },
+  {
+    "id": "jy3021",
+    "name": "肉末酱茄子饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 9.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "现炒",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_021_roumo_qiezi_fan.jpg",
+    "tags": [
+      "茄子",
+      "下饭"
+    ],
+    "rating": 4.1,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 450,
+    "protein": 14,
+    "fat": 20,
+    "carbs": 52,
+    "fiber": 4
+  },
+  {
+    "id": "jy3022",
+    "name": "山东炒鸡饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "鲁",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "现炒",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_022_shandong_chaoji_fan.jpg",
+    "tags": [
+      "新品",
+      "炒鸡"
+    ],
+    "rating": 4.3,
+    "rating_count": 128,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 580,
+    "protein": 28,
+    "fat": 28,
+    "carbs": 50,
+    "fiber": 3
+  },
+  {
+    "id": "jy3023",
+    "name": "酸辣猪肘饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "酸辣",
+      "香"
+    ],
+    "cooking": "炖煮",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 12,
+    "image": "dish_023_suanla_zhuzhou_fan.jpg",
+    "tags": [
+      "新品",
+      "猪肘"
+    ],
+    "rating": 4.2,
+    "rating_count": 89,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 650,
+    "protein": 35,
+    "fat": 38,
+    "carbs": 35,
+    "fiber": 2
+  },
+  {
+    "id": "jy3024",
+    "name": "梅菜扣肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_024_meicai_kourou_fan.jpg",
+    "tags": [
+      "梅菜",
+      "扣肉"
+    ],
+    "rating": 4.3,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 620,
+    "protein": 22,
+    "fat": 35,
+    "carbs": 48,
+    "fiber": 3
+  },
+  {
+    "id": "jy3025",
+    "name": "焦香炒烤肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 9.0,
+    "cuisine": "西北",
+    "flavor": [
+      "孜然",
+      "香"
+    ],
+    "cooking": "炒制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 10,
+    "image": "dish_025_jiaoxiang_kaorou_fan.jpg",
+    "tags": [
+      "烤肉",
+      "孜然"
+    ],
+    "rating": 4.2,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 520,
+    "protein": 24,
+    "fat": 24,
+    "carbs": 48,
+    "fiber": 2
+  },
+  {
+    "id": "jy3026",
+    "name": "黑椒牛肉拌饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "西式",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "铁板",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_026_heijiao_niurou_banfan.jpg",
+    "tags": [
+      "新品",
+      "铁板",
+      "黑椒"
+    ],
+    "rating": 4.2,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 600,
+    "protein": 32,
+    "fat": 28,
+    "carbs": 52,
+    "fiber": 3
+  },
+  {
+    "id": "jy3027",
+    "name": "干锅菌菇饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 15.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "干锅",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_027_ganguo_jungu_fan.jpg",
+    "tags": [
+      "干锅",
+      "菌菇",
+      "素食"
+    ],
+    "rating": 4.0,
+    "rating_count": 87,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 420,
+    "protein": 14,
+    "fat": 16,
+    "carbs": 55,
+    "fiber": 6
+  },
+  {
+    "id": "jy3028",
+    "name": "金汤肥牛饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "酸辣",
+      "鲜"
+    ],
+    "cooking": "现炒",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_028_jintang_feiniu_fan.jpg",
+    "tags": [
+      "金汤",
+      "肥牛",
+      "酸辣"
+    ],
+    "rating": 4.5,
+    "rating_count": 198,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 550,
+    "protein": 30,
+    "fat": 24,
+    "carbs": 42,
+    "fiber": 3
+  },
+  {
+    "id": "jy3029",
+    "name": "农家小炒肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 15.0,
+    "cuisine": "湘",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "现炒",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "dish_029_nongjia_xiaochaorou_fan.jpg",
+    "tags": [
+      "小炒肉",
+      "下饭"
+    ],
+    "rating": 4.3,
+    "rating_count": 167,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 560,
+    "protein": 22,
+    "fat": 28,
+    "carbs": 50,
+    "fiber": 3
+  },
+  {
+    "id": "jy3030",
+    "name": "酸菜鸭汤饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 12.0,
+    "cuisine": "川",
+    "flavor": [
+      "酸",
+      "鲜"
+    ],
+    "cooking": "炖煮",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 10,
+    "image": "dish_030_suncai_yatang_fan.jpg",
+    "tags": [
+      "酸菜",
+      "鸭肉",
+      "汤饭"
+    ],
+    "rating": 4.0,
+    "rating_count": 76,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 480,
+    "protein": 22,
+    "fat": 20,
+    "carbs": 48,
+    "fiber": 2
+  },
+  {
+    "id": "jy3031",
+    "name": "锅包肉饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "东北",
+    "flavor": [
+      "酸甜",
+      "香"
+    ],
+    "cooking": "炸制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 12,
+    "image": "dish_031_guobaorou_fan.jpg",
+    "tags": [
+      "锅包肉",
+      "酸甜"
+    ],
+    "rating": 4.5,
+    "rating_count": 234,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 620,
+    "protein": 24,
+    "fat": 30,
+    "carbs": 55,
+    "fiber": 1
+  },
+  {
+    "id": "jy3032",
+    "name": "糖沙翁",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "甜品档",
+    "window_number": 4,
+    "floor": 3,
+    "price": 3.0,
+    "cuisine": "粤",
+    "flavor": [
+      "甜"
+    ],
+    "cooking": "炸制",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_032_tang_shaweng.jpg",
+    "tags": [
+      "甜品",
+      "小吃",
+      "新品"
+    ],
+    "rating": 3.9,
+    "rating_count": 67,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，甜品档",
+    "calories": 180,
+    "protein": 3,
+    "fat": 6,
+    "carbs": 28,
+    "fiber": 0
+  },
+  {
+    "id": "jy3033",
+    "name": "群菇砂锅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "砂锅档",
+    "window_number": 5,
+    "floor": 3,
+    "price": 13.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜",
+      "香"
+    ],
+    "cooking": "炖煮",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 10,
+    "image": "dish_033_qungu_shaguo.jpg",
+    "tags": [
+      "菌菇",
+      "素食",
+      "清淡"
+    ],
+    "rating": 4.0,
+    "rating_count": 89,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，砂锅档",
+    "calories": 280,
+    "protein": 10,
+    "fat": 10,
+    "carbs": 35,
+    "fiber": 5
+  },
+  {
+    "id": "jy3034",
+    "name": "培根砂锅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "砂锅档",
+    "window_number": 5,
+    "floor": 3,
+    "price": 15.0,
+    "cuisine": "西式",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "炖煮",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_034_peigen_shaguo.jpg",
+    "tags": [
+      "培根",
+      "西式"
+    ],
+    "rating": 4.1,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，砂锅档",
+    "calories": 420,
+    "protein": 20,
+    "fat": 24,
+    "carbs": 30,
+    "fiber": 2
+  },
+  {
+    "id": "jy3035",
+    "name": "脆骨肠砂锅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "砂锅档",
+    "window_number": 5,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "炖煮",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_035_cuigu_chang_shaguo.jpg",
+    "tags": [
+      "脆骨肠",
+      "砂锅"
+    ],
+    "rating": 4.2,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，砂锅档",
+    "calories": 480,
+    "protein": 22,
+    "fat": 28,
+    "carbs": 28,
+    "fiber": 2
+  },
+  {
+    "id": "jy3036",
+    "name": "招牌鱼砂锅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "砂锅档",
+    "window_number": 5,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "鲜"
+    ],
+    "cooking": "炖煮",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 12,
+    "image": "dish_036_zhaopai_yu_shaguo.jpg",
+    "tags": [
+      "招牌",
+      "鱼肉",
+      "麻辣"
+    ],
+    "rating": 4.5,
+    "rating_count": 198,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，砂锅档",
+    "calories": 420,
+    "protein": 30,
+    "fat": 20,
+    "carbs": 25,
+    "fiber": 2
+  },
+  {
+    "id": "jy3037",
+    "name": "肥肠砂锅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "砂锅档",
+    "window_number": 5,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "炖煮",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 12,
+    "image": "dish_037_feichang_shaguo.jpg",
+    "tags": [
+      "肥肠",
+      "重口味"
+    ],
+    "rating": 4.3,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，砂锅档",
+    "calories": 520,
+    "protein": 25,
+    "fat": 32,
+    "carbs": 22,
+    "fiber": 2
+  },
+  {
+    "id": "jy3038",
+    "name": "鸡肉砂锅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "砂锅档",
+    "window_number": 5,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "融合",
+    "flavor": [
+      "鲜",
+      "香"
+    ],
+    "cooking": "炖煮",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_038_jirou_shaguo.jpg",
+    "tags": [
+      "鸡肉",
+      "清淡"
+    ],
+    "rating": 4.2,
+    "rating_count": 145,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，砂锅档",
+    "calories": 460,
+    "protein": 30,
+    "fat": 22,
+    "carbs": 28,
+    "fiber": 3
+  },
+  {
+    "id": "jy3039",
+    "name": "肥牛砂锅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "砂锅档",
+    "window_number": 5,
+    "floor": 3,
+    "price": 20.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "鲜",
+      "麻"
+    ],
+    "cooking": "炖煮",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 12,
+    "image": "dish_039_feiniu_shaguo.jpg",
+    "tags": [
+      "肥牛",
+      "招牌",
+      "麻辣"
+    ],
+    "rating": 4.6,
+    "rating_count": 245,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，砂锅档",
+    "calories": 520,
+    "protein": 30,
+    "fat": 28,
+    "carbs": 25,
+    "fiber": 4
+  },
+  {
+    "id": "jy3040",
+    "name": "卤牛腩煲仔饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "煲仔饭档",
+    "window_number": 6,
+    "floor": 3,
+    "price": 25.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "煲制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_040_luniunan_baozai.jpg",
+    "tags": [
+      "牛腩",
+      "卤味",
+      "高价"
+    ],
+    "rating": 4.6,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，煲仔饭档",
+    "calories": 650,
+    "protein": 38,
+    "fat": 28,
+    "carbs": 55,
+    "fiber": 2
+  },
+  {
+    "id": "jy3041",
+    "name": "排骨煲仔饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "煲仔饭档",
+    "window_number": 6,
+    "floor": 3,
+    "price": 25.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "煲制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_041_paigu_baozai.jpg",
+    "tags": [
+      "排骨",
+      "锅巴"
+    ],
+    "rating": 4.5,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，煲仔饭档",
+    "calories": 620,
+    "protein": 32,
+    "fat": 26,
+    "carbs": 58,
+    "fiber": 2
+  },
+  {
+    "id": "jy3042",
+    "name": "叉烧煲仔饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "煲仔饭档",
+    "window_number": 6,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "粤",
+    "flavor": [
+      "甜",
+      "香"
+    ],
+    "cooking": "煲制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_042_chashao_baozai.jpg",
+    "tags": [
+      "叉烧",
+      "广式"
+    ],
+    "rating": 4.4,
+    "rating_count": 178,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，煲仔饭档",
+    "calories": 580,
+    "protein": 28,
+    "fat": 22,
+    "carbs": 60,
+    "fiber": 1
+  },
+  {
+    "id": "jy3043",
+    "name": "广式腊肠煲仔饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "煲仔饭档",
+    "window_number": 6,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸甜",
+      "香"
+    ],
+    "cooking": "煲制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_043_guangshi_lachang_baozai.jpg",
+    "tags": [
+      "腊肠",
+      "广式",
+      "经典"
+    ],
+    "rating": 4.4,
+    "rating_count": 234,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，煲仔饭档",
+    "calories": 580,
+    "protein": 20,
+    "fat": 26,
+    "carbs": 62,
+    "fiber": 1
+  },
+  {
+    "id": "jy3044",
+    "name": "咸鱼鸡粒茄子煲仔饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "煲仔饭档",
+    "window_number": 6,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "煲制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_044_xianyu_qiezi_baozai.jpg",
+    "tags": [
+      "咸鱼",
+      "茄子"
+    ],
+    "rating": 4.2,
+    "rating_count": 98,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，煲仔饭档",
+    "calories": 540,
+    "protein": 22,
+    "fat": 24,
+    "carbs": 58,
+    "fiber": 3
+  },
+  {
+    "id": "jy3045",
+    "name": "腊味菌菇煲仔饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "煲仔饭档",
+    "window_number": 6,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "煲制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_045_lawei_jungu_baozai.jpg",
+    "tags": [
+      "腊味",
+      "菌菇"
+    ],
+    "rating": 4.2,
+    "rating_count": 87,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，煲仔饭档",
+    "calories": 500,
+    "protein": 18,
+    "fat": 20,
+    "carbs": 60,
+    "fiber": 4
+  },
+  {
+    "id": "jy3046",
+    "name": "盐焗鸡煲仔饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "煲仔饭档",
+    "window_number": 6,
+    "floor": 3,
+    "price": 14.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "煲制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_046_yanju_ji_baozai.jpg",
+    "tags": [
+      "盐焗鸡",
+      "清淡"
+    ],
+    "rating": 4.3,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，煲仔饭档",
+    "calories": 520,
+    "protein": 32,
+    "fat": 18,
+    "carbs": 55,
+    "fiber": 1
+  },
+  {
+    "id": "jy3047",
+    "name": "滑蛋牛肉煲仔饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "煲仔饭档",
+    "window_number": 6,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "粤",
+    "flavor": [
+      "鲜",
+      "香",
+      "嫩滑"
+    ],
+    "cooking": "煲制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_047_huadan_niurou_baozai.jpg",
+    "tags": [
+      "滑蛋",
+      "牛肉",
+      "锅巴"
+    ],
+    "rating": 4.7,
+    "rating_count": 289,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，煲仔饭档",
+    "calories": 580,
+    "protein": 35,
+    "fat": 22,
+    "carbs": 55,
+    "fiber": 1
+  },
+  {
+    "id": "jy3048",
+    "name": "原味肠粉",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 5.5,
+    "cuisine": "粤",
+    "flavor": [
+      "鲜",
+      "清淡"
+    ],
+    "cooking": "蒸制",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 5,
+    "image": "dish_048_yuanwei_changfen.jpg",
+    "tags": [
+      "肠粉",
+      "清淡",
+      "早餐"
+    ],
+    "rating": 4.0,
+    "rating_count": 234,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 220,
+    "protein": 6,
+    "fat": 3,
+    "carbs": 40,
+    "fiber": 1
+  },
+  {
+    "id": "jy3049",
+    "name": "肉末鸡蛋肠粉",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 8.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸",
+      "鲜"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 6,
+    "image": "dish_049_roumu_jidan_changfen.jpg",
+    "tags": [
+      "肠粉",
+      "肉末",
+      "鸡蛋"
+    ],
+    "rating": 4.2,
+    "rating_count": 198,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 320,
+    "protein": 16,
+    "fat": 10,
+    "carbs": 42,
+    "fiber": 1
+  },
+  {
+    "id": "jy3050",
+    "name": "培根肠粉",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 12.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸",
+      "香"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 6,
+    "image": "dish_050_peigen_changfen.jpg",
+    "tags": [
+      "肠粉",
+      "培根"
+    ],
+    "rating": 4.1,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 380,
+    "protein": 18,
+    "fat": 16,
+    "carbs": 40,
+    "fiber": 1
+  },
+  {
+    "id": "jy3051",
+    "name": "煌上煌腊味肠粉",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 15.0,
+    "cuisine": "粤",
+    "flavor": [
+      "咸甜",
+      "香"
+    ],
+    "cooking": "蒸制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 6,
+    "image": "dish_051_huangshanghuang_lawei_changfen.jpg",
+    "tags": [
+      "肠粉",
+      "腊味"
+    ],
+    "rating": 4.3,
+    "rating_count": 89,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 420,
+    "protein": 18,
+    "fat": 18,
+    "carbs": 45,
+    "fiber": 1
+  },
+  {
+    "id": "jy3052",
+    "name": "鲜虾肠粉",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "粤",
+    "flavor": [
+      "鲜",
+      "甜"
+    ],
+    "cooking": "蒸制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "dish_052_xianxia_changfen.jpg",
+    "tags": [
+      "肠粉",
+      "海鲜",
+      "鲜虾"
+    ],
+    "rating": 4.5,
+    "rating_count": 167,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 350,
+    "protein": 20,
+    "fat": 10,
+    "carbs": 42,
+    "fiber": 1
+  },
+  {
+    "id": "jy3053",
+    "name": "凉拌牛肉米线",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "麻辣",
+      "鲜"
+    ],
+    "cooking": "凉拌",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "dish_053_liangban_niurou_mixian.jpg",
+    "tags": [
+      "凉拌",
+      "牛肉",
+      "夏季"
+    ],
+    "rating": 4.3,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 420,
+    "protein": 26,
+    "fat": 14,
+    "carbs": 48,
+    "fiber": 3
+  },
+  {
+    "id": "jy3054",
+    "name": "凉拌鸡肉米线",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 13.0,
+    "cuisine": "川",
+    "flavor": [
+      "麻辣",
+      "鲜"
+    ],
+    "cooking": "凉拌",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_054_liangban_jirou_mixian.jpg",
+    "tags": [
+      "凉拌",
+      "鸡肉",
+      "夏季"
+    ],
+    "rating": 4.2,
+    "rating_count": 112,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 380,
+    "protein": 24,
+    "fat": 10,
+    "carbs": 45,
+    "fiber": 3
+  },
+  {
+    "id": "jy3055",
+    "name": "奶油蘑菇汤",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 6.0,
+    "cuisine": "西式",
+    "flavor": [
+      "奶香",
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 5,
+    "image": "dish_055_naiyou_mogu_tang.jpg",
+    "tags": [
+      "汤",
+      "西式",
+      "暖胃"
+    ],
+    "rating": 4.0,
+    "rating_count": 145,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 180,
+    "protein": 6,
+    "fat": 12,
+    "carbs": 14,
+    "fiber": 1
+  },
+  {
+    "id": "jy3056",
+    "name": "香酥鸡翅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "肠粉档",
+    "window_number": 7,
+    "floor": 3,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "酥",
+      "香"
+    ],
+    "cooking": "炸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 6,
+    "image": "dish_056_xiangsu_jichi.jpg",
+    "tags": [
+      "鸡翅",
+      "酥脆",
+      "小吃"
+    ],
+    "rating": 4.3,
+    "rating_count": 267,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，肠粉档",
+    "calories": 220,
+    "protein": 16,
+    "fat": 12,
+    "carbs": 12,
+    "fiber": 0
+  },
+  {
+    "id": "jy3057",
+    "name": "麻辣烫",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "麻辣烫档",
+    "window_number": 8,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "麻",
+      "鲜"
+    ],
+    "cooking": "煮制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "dish_057_malatang.jpg",
+    "tags": [
+      "自选",
+      "麻辣",
+      "人气"
+    ],
+    "rating": 4.5,
+    "rating_count": 567,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，麻辣烫档",
+    "calories": 450,
+    "protein": 22,
+    "fat": 20,
+    "carbs": 45,
+    "fiber": 6
+  },
+  {
+    "id": "jy3058",
+    "name": "麻辣香锅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "麻辣香锅档",
+    "window_number": 9,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "麻",
+      "香"
+    ],
+    "cooking": "干锅",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 10,
+    "image": "dish_058_mala_xiangguo.jpg",
+    "tags": [
+      "自选",
+      "香锅",
+      "下饭"
+    ],
+    "rating": 4.4,
+    "rating_count": 423,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，麻辣香锅档",
+    "calories": 550,
+    "protein": 24,
+    "fat": 28,
+    "carbs": 48,
+    "fiber": 5
+  },
+  {
+    "id": "jy3059",
+    "name": "锡纸烤鲫鱼饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "锡纸烧档",
+    "window_number": 10,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "辣",
+      "鲜"
+    ],
+    "cooking": "烤制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_059_xizhi_kaojiyu_fan.jpg",
+    "tags": [
+      "烤鱼",
+      "锡纸",
+      "麻辣"
+    ],
+    "rating": 4.5,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，锡纸烧档",
+    "calories": 480,
+    "protein": 32,
+    "fat": 20,
+    "carbs": 40,
+    "fiber": 2
+  },
+  {
+    "id": "jy3060",
+    "name": "锡纸蒜蓉粉丝虾饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "锡纸烧档",
+    "window_number": 10,
+    "floor": 3,
+    "price": 16.0,
+    "cuisine": "融合",
+    "flavor": [
+      "蒜香",
+      "鲜"
+    ],
+    "cooking": "烤制",
+    "appearance": 5,
+    "portion_size": "L",
+    "prep_time": 15,
+    "image": "dish_060_xizhi_suanrong_fanxiatu_fan.jpg",
+    "tags": [
+      "海鲜",
+      "蒜蓉",
+      "锡纸"
+    ],
+    "rating": 4.6,
+    "rating_count": 178,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，锡纸烧档",
+    "calories": 460,
+    "protein": 28,
+    "fat": 16,
+    "carbs": 45,
+    "fiber": 2
+  },
+  {
+    "id": "jy3061",
+    "name": "芝士烤玉米粒",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "锡纸烧档",
+    "window_number": 10,
+    "floor": 3,
+    "price": 9.8,
+    "cuisine": "西式",
+    "flavor": [
+      "奶香",
+      "甜"
+    ],
+    "cooking": "烤制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 10,
+    "image": "dish_061_zhishi_kaoyumi.jpg",
+    "tags": [
+      "芝士",
+      "玉米",
+      "甜品"
+    ],
+    "rating": 4.4,
+    "rating_count": 198,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，锡纸烧档",
+    "calories": 280,
+    "protein": 8,
+    "fat": 12,
+    "carbs": 35,
+    "fiber": 3
+  },
+  {
+    "id": "jy3062",
+    "name": "芝士烤榴莲",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "锡纸烧档",
+    "window_number": 10,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "融合",
+    "flavor": [
+      "奶香",
+      "甜"
+    ],
+    "cooking": "烤制",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 12,
+    "image": "dish_062_zhishi_kaoliulian.jpg",
+    "tags": [
+      "芝士",
+      "榴莲",
+      "重口味"
+    ],
+    "rating": 4.2,
+    "rating_count": 89,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，锡纸烧档",
+    "calories": 320,
+    "protein": 6,
+    "fat": 18,
+    "carbs": 38,
+    "fiber": 4
+  },
+  {
+    "id": "jy3063",
+    "name": "羊肉串",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "烧烤档",
+    "window_number": 11,
+    "floor": 3,
+    "price": 6.0,
+    "cuisine": "西北",
+    "flavor": [
+      "孜然",
+      "香"
+    ],
+    "cooking": "炭烤",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 6,
+    "image": "dish_063_yangrou_chuan.jpg",
+    "tags": [
+      "烧烤",
+      "夜宵",
+      "人气"
+    ],
+    "rating": 4.5,
+    "rating_count": 389,
+    "hours": {
+      "lunch": false,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，烧烤档",
+    "calories": 120,
+    "protein": 14,
+    "fat": 6,
+    "carbs": 2,
+    "fiber": 0
+  },
+  {
+    "id": "jy3064",
+    "name": "牛肉串",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "烧烤档",
+    "window_number": 11,
+    "floor": 3,
+    "price": 6.0,
+    "cuisine": "西北",
+    "flavor": [
+      "孜然",
+      "香"
+    ],
+    "cooking": "炭烤",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 6,
+    "image": "dish_064_niurou_chuan.jpg",
+    "tags": [
+      "烧烤",
+      "夜宵"
+    ],
+    "rating": 4.4,
+    "rating_count": 312,
+    "hours": {
+      "lunch": false,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，烧烤档",
+    "calories": 110,
+    "protein": 16,
+    "fat": 4,
+    "carbs": 2,
+    "fiber": 0
+  },
+  {
+    "id": "jy3065",
+    "name": "猪肉串",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "烧烤档",
+    "window_number": 11,
+    "floor": 3,
+    "price": 5.0,
+    "cuisine": "西北",
+    "flavor": [
+      "孜然",
+      "香"
+    ],
+    "cooking": "炭烤",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 6,
+    "image": "dish_065_zhurou_chuan.jpg",
+    "tags": [
+      "烧烤",
+      "夜宵"
+    ],
+    "rating": 4.2,
+    "rating_count": 198,
+    "hours": {
+      "lunch": false,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，烧烤档",
+    "calories": 130,
+    "protein": 12,
+    "fat": 8,
+    "carbs": 3,
+    "fiber": 0
+  },
+  {
+    "id": "jy3066",
+    "name": "烤鱿鱼",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "烧烤档",
+    "window_number": 11,
+    "floor": 3,
+    "price": 5.0,
+    "cuisine": "西北",
+    "flavor": [
+      "孜然",
+      "鲜"
+    ],
+    "cooking": "炭烤",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 6,
+    "image": "dish_066_kaoyouyu.jpg",
+    "tags": [
+      "烧烤",
+      "海鲜",
+      "夜宵"
+    ],
+    "rating": 4.3,
+    "rating_count": 234,
+    "hours": {
+      "lunch": false,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，烧烤档",
+    "calories": 90,
+    "protein": 16,
+    "fat": 2,
+    "carbs": 3,
+    "fiber": 0
+  },
+  {
+    "id": "jy3067",
+    "name": "烤鸡翅",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "烧烤档",
+    "window_number": 11,
+    "floor": 3,
+    "price": 8.0,
+    "cuisine": "西北",
+    "flavor": [
+      "孜然",
+      "香"
+    ],
+    "cooking": "炭烤",
+    "appearance": 5,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_067_kaojichi.jpg",
+    "tags": [
+      "烧烤",
+      "鸡翅",
+      "夜宵"
+    ],
+    "rating": 4.5,
+    "rating_count": 356,
+    "hours": {
+      "lunch": false,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，烧烤档",
+    "calories": 160,
+    "protein": 18,
+    "fat": 8,
+    "carbs": 4,
+    "fiber": 0
+  },
+  {
+    "id": "jy3068",
+    "name": "烤面筋",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "烧烤档",
+    "window_number": 11,
+    "floor": 3,
+    "price": 2.0,
+    "cuisine": "西北",
+    "flavor": [
+      "孜然",
+      "辣"
+    ],
+    "cooking": "炭烤",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 5,
+    "image": "dish_068_kaomianjin.jpg",
+    "tags": [
+      "烧烤",
+      "素食",
+      "实惠"
+    ],
+    "rating": 4.1,
+    "rating_count": 267,
+    "hours": {
+      "lunch": false,
+      "dinner": true,
+      "late_night": true
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，烧烤档",
+    "calories": 80,
+    "protein": 8,
+    "fat": 2,
+    "carbs": 10,
+    "fiber": 1
+  },
+  {
+    "id": "jy3069",
+    "name": "鸡肉米线(凉拌)",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "夏季凉拌档",
+    "window_number": 12,
+    "floor": 3,
+    "price": 13.0,
+    "cuisine": "川",
+    "flavor": [
+      "麻辣",
+      "清凉"
+    ],
+    "cooking": "凉拌",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 8,
+    "image": "dish_069_jirou_mixian_liangban.jpg",
+    "tags": [
+      "凉拌",
+      "夏季",
+      "清凉"
+    ],
+    "rating": 4.2,
+    "rating_count": 156,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，夏季凉拌档",
+    "calories": 380,
+    "protein": 22,
+    "fat": 10,
+    "carbs": 48,
+    "fiber": 3
+  },
+  {
+    "id": "jy3070",
+    "name": "牛肉米线(凉拌)",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "夏季凉拌档",
+    "window_number": 12,
+    "floor": 3,
+    "price": 18.0,
+    "cuisine": "川",
+    "flavor": [
+      "麻辣",
+      "清凉"
+    ],
+    "cooking": "凉拌",
+    "appearance": 4,
+    "portion_size": "L",
+    "prep_time": 8,
+    "image": "dish_070_niurou_mixian_liangban.jpg",
+    "tags": [
+      "凉拌",
+      "夏季",
+      "牛肉"
+    ],
+    "rating": 4.3,
+    "rating_count": 134,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，夏季凉拌档",
+    "calories": 440,
+    "protein": 28,
+    "fat": 14,
+    "carbs": 48,
+    "fiber": 3
+  },
+  {
+    "id": "jy3071",
+    "name": "家园梨汤",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "甜品档",
+    "window_number": 4,
+    "floor": 3,
+    "price": 6.0,
+    "cuisine": "融合",
+    "flavor": [
+      "甜",
+      "润"
+    ],
+    "cooking": "煮制",
+    "appearance": 3,
+    "portion_size": "M",
+    "prep_time": 3,
+    "image": "dish_071_jiayuan_litang.jpg",
+    "tags": [
+      "梨汤",
+      "甜品",
+      "润喉"
+    ],
+    "rating": 4.4,
+    "rating_count": 312,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，甜品档",
+    "calories": 120,
+    "protein": 1,
+    "fat": 0,
+    "carbs": 28,
+    "fiber": 2
+  },
+  {
+    "id": "jy3072",
+    "name": "香辣鸡腿饭",
+    "canteen": "家园食堂",
+    "canteen_id": "jiayuan",
+    "window": "盖饭档",
+    "window_number": 3,
+    "floor": 3,
+    "price": 7.0,
+    "cuisine": "融合",
+    "flavor": [
+      "辣",
+      "香"
+    ],
+    "cooking": "炸制",
+    "appearance": 4,
+    "portion_size": "M",
+    "prep_time": 10,
+    "image": "dish_072_xiangla_jitui_fan.jpg",
+    "tags": [
+      "鸡腿",
+      "香辣",
+      "酥脆"
+    ],
+    "rating": 4.2,
+    "rating_count": 245,
+    "hours": {
+      "lunch": true,
+      "dinner": true,
+      "late_night": false
+    },
+    "related_dishes": [],
+    "location_hint": "家园三层，盖饭档",
+    "calories": 580,
+    "protein": 28,
+    "fat": 28,
+    "carbs": 52,
+    "fiber": 1
   }
 ]

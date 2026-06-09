@@ -12,13 +12,16 @@ from PyQt5.QtWidgets import (
     QDoubleSpinBox, QFileDialog
 )
 from PyQt5.QtGui import QColor
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 
 from frontend.watercolor_style import COLORS, get_font, get_button_style
+from frontend.season_theme import detect_beijing_season, SEASON_LABELS
 
 
 class SettingsPage(QWidget):
     """设置页面"""
+
+    theme_changed = pyqtSignal()
 
     def __init__(self, dm, recommender, parent=None):
         super().__init__(parent)
@@ -145,6 +148,48 @@ class SettingsPage(QWidget):
 
         content.addWidget(explore_group)
 
+        # ===== 四季主题 =====
+        season_group = QGroupBox("四季主题")
+        season_group.setFont(get_font(13, bold=True))
+        season_layout = QVBoxLayout(season_group)
+        season_layout.setSpacing(10)
+
+        season_desc = QLabel(
+            "根据北大未名湖四季水彩背景自动切换配色。默认跟随北京当前季节，"
+            "也可手动选择。背景保持较高清晰度，整体温馨淡雅。"
+        )
+        season_desc.setFont(get_font(10))
+        season_desc.setStyleSheet(f"color: {COLORS['text_light'].name()};")
+        season_desc.setWordWrap(True)
+        season_layout.addWidget(season_desc)
+
+        mode_row = QHBoxLayout()
+        mode_row.addWidget(QLabel("主题模式:"))
+        self.season_mode = QComboBox()
+        self.season_mode.addItems(["跟随系统时间", "春季", "夏季", "秋季", "冬季"])
+        self.season_mode.currentIndexChanged.connect(self._on_season_changed)
+        mode_row.addWidget(self.season_mode)
+        mode_row.addStretch()
+        season_layout.addLayout(mode_row)
+
+        self.season_hint = QLabel()
+        self.season_hint.setFont(get_font(10))
+        self.season_hint.setStyleSheet(f"color: {COLORS['secondary_dark'].name()};")
+        season_layout.addWidget(self.season_hint)
+
+        opacity_row = QHBoxLayout()
+        opacity_row.addWidget(QLabel("背景清晰度:"))
+        self.season_opacity = QDoubleSpinBox()
+        self.season_opacity.setRange(0.55, 0.92)
+        self.season_opacity.setSingleStep(0.02)
+        self.season_opacity.setValue(0.78)
+        self.season_opacity.valueChanged.connect(self._on_season_changed)
+        opacity_row.addWidget(self.season_opacity)
+        opacity_row.addStretch()
+        season_layout.addLayout(opacity_row)
+
+        content.addWidget(season_group)
+
         # ===== 默认推荐模式 =====
         default_mode_group = QGroupBox("默认推荐模式")
         default_mode_group.setFont(get_font(13, bold=True))
@@ -185,7 +230,7 @@ class SettingsPage(QWidget):
         model_row = QHBoxLayout()
         model_row.addWidget(QLabel("模型:"))
         self.ai_model = QComboBox()
-        self.ai_model.addItems(["deepseek-v4-flash", "DeepSeek Flash", "claude-3-sonnet", "deepseek"])
+        self.ai_model.addItems(["deepseek-v4-flash", "DeepSeek Flash", "claude-3-sonnet", "deepseek", "qwen-plus", "Qwen Model"])
         self.ai_model.currentTextChanged.connect(self.save_ai_config)
         model_row.addWidget(self.ai_model)
         model_row.addStretch()
@@ -305,6 +350,45 @@ class SettingsPage(QWidget):
         if idx >= 0:
             self.ai_model.setCurrentIndex(idx)
         self._refresh_ai_status()
+        self._load_season_ui(settings)
+
+    def _season_mode_to_key(self, index: int) -> str:
+        return ["auto", "spring", "summer", "autumn", "winter"][index]
+
+    def _key_to_season_index(self, key: str) -> int:
+        mapping = {"auto": 0, "spring": 1, "summer": 2, "autumn": 3, "winter": 4}
+        return mapping.get(key, 0)
+
+    def _load_season_ui(self, settings):
+        self._updating_season = True
+        self.season_mode.setCurrentIndex(self._key_to_season_index(settings.get("season_mode", "auto")))
+        opacity = settings.get("season_bg_opacity")
+        if opacity is not None:
+            self.season_opacity.setValue(float(opacity))
+        self._updating_season = False
+        self._update_season_hint()
+
+    def _update_season_hint(self):
+        mode = self._season_mode_to_key(self.season_mode.currentIndex())
+        if mode == "auto":
+            active = detect_beijing_season()
+            self.season_hint.setText(f"当前生效：{SEASON_LABELS.get(active, active)}（自动）")
+        else:
+            self.season_hint.setText(f"当前生效：{SEASON_LABELS.get(mode, mode)}（手动）")
+
+    def _on_season_changed(self):
+        if getattr(self, "_updating_season", False):
+            return
+        mode = self._season_mode_to_key(self.season_mode.currentIndex())
+        manual = mode if mode != "auto" else detect_beijing_season()
+        self.dm.update_settings({
+            "season_mode": mode,
+            "season_manual": manual,
+            "season_bg_opacity": self.season_opacity.value(),
+            "season_active": manual if mode != "auto" else detect_beijing_season(),
+        })
+        self._update_season_hint()
+        self.theme_changed.emit()
 
     def _on_default_mode_changed(self):
         if getattr(self, "_updating_mode", False):

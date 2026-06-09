@@ -25,6 +25,8 @@ from frontend.watercolor_style import (
     COLORS, get_font, get_stylesheet, get_poem,
     get_button_style, get_card_style, color_with_alpha, POEMS
 )
+from frontend.season_theme import SeasonThemeManager, SEASON_LABELS
+from frontend.widgets.frameless_titlebar import FramelessTitleBar, WindowDragFilter
 
 # 页面导入（延迟导入避免循环依赖）
 
@@ -62,6 +64,9 @@ class NavButton(QPushButton):
                 font-weight: bold;
             }}
         """)
+
+    def refresh_theme(self):
+        self.update_style()
 
 
 class PoemLabel(QLabel):
@@ -206,6 +211,30 @@ class HeaderWidget(QFrame):
         """)
         self.setMaximumHeight(120)
 
+    def refresh_theme(self):
+        self.title.setStyleSheet(f"color: {COLORS['primary_dark'].name()};")
+        self.subtitle.setStyleSheet(f"color: {COLORS['text_light'].name()};")
+        self.refresh_btn.setStyleSheet(f"""
+            QPushButton {{
+                background-color: transparent;
+                color: {COLORS['accent_gold'].name()};
+                border: 1px solid {COLORS['accent_gold'].name()};
+                border-radius: 12px;
+                padding: 3px 10px;
+            }}
+            QPushButton:hover {{
+                background-color: {COLORS['accent_gold'].name()};
+                color: white;
+            }}
+        """)
+        overlay = COLORS.get("header_overlay", COLORS["bg_card"].name())
+        self.setStyleSheet(f"""
+            background: {overlay};
+            border-bottom: 1px solid {COLORS['border'].name()};
+        """)
+        self.poem.setStyleSheet(f"color: {COLORS['text_light'].name()}; padding: 8px;")
+        self.mode_toggle.set_mode(self.mode_toggle.current_mode(), emit=False)
+
 
 class SidebarWidget(QFrame):
     """侧边导航栏"""
@@ -249,12 +278,21 @@ class SidebarWidget(QFrame):
         info.setAlignment(Qt.AlignCenter)
         layout.addWidget(info)
 
+        self._apply_panel_style()
+
+    def _apply_panel_style(self):
+        overlay = COLORS.get("sidebar_overlay", COLORS["bg_card"].name())
         self.setStyleSheet(f"""
-            background-color: {COLORS['bg_card'].name()};
+            background: {overlay};
             border-right: 1px solid {COLORS['border_light'].name()};
         """)
         self.setMinimumWidth(350)
         self.setMaximumWidth(350)
+
+    def refresh_theme(self):
+        self._apply_panel_style()
+        for btn in self.nav_buttons.values():
+            btn.refresh_theme()
 
     def on_nav_clicked(self, key):
         self.set_active(key)
@@ -266,57 +304,51 @@ class SidebarWidget(QFrame):
 
 
 class WatercolorBackgroundWidget(QWidget):
-    """带水彩背景的主内容区"""
+    """四季背景主内容区（高可见度水彩底图 + 淡雅蒙层）"""
 
-    def __init__(self, parent=None):
+    def __init__(self, season_manager: SeasonThemeManager, parent=None):
         super().__init__(parent)
+        self.season_manager = season_manager
         self.bg_image = None
         self.load_background()
 
     def load_background(self):
-        """加载未名湖水彩背景图"""
-        bg_path = os.path.join(os.path.dirname(__file__), "..", "images", "bg_weiminghu.jpg")
-        if os.path.exists(bg_path):
+        bg_path = self.season_manager.get_background_path()
+        if bg_path and os.path.exists(bg_path):
             self.bg_image = QPixmap(bg_path)
+        else:
+            fallback = os.path.join(os.path.dirname(__file__), "..", "images", "bg_weiminghu.jpg")
+            if os.path.exists(fallback):
+                self.bg_image = QPixmap(fallback)
+
+    def refresh_theme(self):
+        self.load_background()
+        self.update()
 
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.SmoothPixmapTransform)
 
-        # 绘制温暖渐变底色
         gradient = QLinearGradient(0, 0, 0, self.height())
-        gradient.setColorAt(0, QColor("#FFF8F0"))
-        gradient.setColorAt(1, QColor("#FFF0E0"))
+        gradient.setColorAt(0, COLORS["bg_main"])
+        gradient.setColorAt(1, COLORS["bg_warm"])
         painter.fillRect(self.rect(), gradient)
 
-        # 绘制水彩背景图（低透明度作为水印）
         if self.bg_image and not self.bg_image.isNull():
             painter.save()
-            painter.setOpacity(0.08)
-            scaled = self.bg_image.scaled(self.size(), Qt.KeepAspectRatioByExpanding,
-                                           Qt.SmoothTransformation)
+            painter.setOpacity(self.season_manager.get_bg_opacity())
+            scaled = self.bg_image.scaled(
+                self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation
+            )
             x = (self.width() - scaled.width()) // 2
             y = (self.height() - scaled.height()) // 2
             painter.drawPixmap(x, y, scaled)
             painter.restore()
 
-        # 绘制柔和水彩斑块装饰
         painter.save()
-        painter.setRenderHint(QPainter.Antialiasing)
-        colors = [COLORS["accent_rose"], COLORS["accent_sage"],
-                  COLORS["accent_sky"], COLORS["accent_lavender"]]
-        random.seed(42)
-
-        for i, color in enumerate(colors):
-            c = QColor(color)
-            c.setAlpha(20)
-            painter.setBrush(QBrush(c))
-            painter.setPen(Qt.NoPen)
-            for j in range(2):
-                cx = random.randint(50, max(100, self.width() - 50))
-                cy = random.randint(50, max(100, self.height() - 50))
-                r = random.randint(80, 180)
-                painter.drawEllipse(cx - r, cy - r, r * 2, r * 2)
+        veil = QColor(COLORS["bg_card"])
+        veil.setAlpha(38)
+        painter.fillRect(self.rect(), veil)
         painter.restore()
 
 
@@ -334,6 +366,7 @@ class MainWindow(QMainWindow):
         self._footprint_popup_pending = True
         self.pages = {}
         self.app_mode = self.dm.get_settings().get("app_mode", "offline")
+        self.season_manager = SeasonThemeManager(self.dm.get_settings())
 
         dishes_map = {d["id"]: d for d in self.dm.get_all_dishes()}
         self.footprint.backfill_from_history(self.dm.history, dishes_map)
@@ -342,50 +375,67 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(1100, 750)
         self.resize(2000, 1600)
 
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.Window)
+        self.setAttribute(Qt.WA_TranslucentBackground, False)
+
         self.setup_ui()
-        self.apply_styles()
+        self.apply_season_theme()
+        self._drag_filter = WindowDragFilter(self)
+        self.header.installEventFilter(self._drag_filter)
 
     def setup_ui(self):
-        # 中心部件
         central = QWidget()
         self.setCentralWidget(central)
-        main_layout = QHBoxLayout(central)
-        main_layout.setContentsMargins(0, 0, 0, 0)
-        main_layout.setSpacing(0)
+        root = QVBoxLayout(central)
+        root.setContentsMargins(0, 0, 0, 0)
+        root.setSpacing(0)
 
-        # 侧边栏
+        self.title_bar = FramelessTitleBar(self)
+        self.title_bar.bind_window(self)
+        self.title_bar.close_clicked.connect(self.close)
+        self.title_bar.minimize_clicked.connect(self.showMinimized)
+        root.addWidget(self.title_bar)
+
+        body = QHBoxLayout()
+        body.setContentsMargins(0, 0, 0, 0)
+        body.setSpacing(0)
+
         self.sidebar = SidebarWidget()
         self.sidebar.nav_clicked.connect(self.switch_page)
-        main_layout.addWidget(self.sidebar)
 
-        # 右侧主区域
+        self.sidebar_scroll = QScrollArea()
+        self.sidebar_scroll.setWidget(self.sidebar)
+        self.sidebar_scroll.setWidgetResizable(True)
+        self.sidebar_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.sidebar_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.sidebar_scroll.setFrameShape(QFrame.NoFrame)
+        self.sidebar_scroll.setMinimumWidth(350)
+        self.sidebar_scroll.setMaximumWidth(350)
+        self.sidebar_scroll.setStyleSheet("QScrollArea { border: none; background: transparent; }")
+        body.addWidget(self.sidebar_scroll)
+
         right_area = QVBoxLayout()
         right_area.setContentsMargins(0, 0, 0, 0)
         right_area.setSpacing(0)
 
-        # 顶部标题栏
         self.header = HeaderWidget()
         self.header.mode_toggle.set_mode(self.app_mode, emit=False)
         self.header.mode_toggle.mode_changed.connect(self.on_app_mode_changed)
         right_area.addWidget(self.header)
 
-        # 内容区（水彩背景）
-        self.content_bg = WatercolorBackgroundWidget()
+        self.content_bg = WatercolorBackgroundWidget(self.season_manager)
         content_layout = QVBoxLayout(self.content_bg)
         content_layout.setContentsMargins(20, 15, 20, 15)
 
-        # 页面栈
         self.stack = QStackedWidget()
         self.stack.setStyleSheet("background-color: transparent;")
         content_layout.addWidget(self.stack)
 
         right_area.addWidget(self.content_bg, 1)
-        main_layout.addLayout(right_area, 1)
+        body.addLayout(right_area, 1)
+        root.addLayout(body, 1)
 
-        # 创建页面
         self.create_pages()
-
-        # 默认显示主页
         self.switch_page("home")
         self.sidebar.set_active("home")
 
@@ -464,6 +514,7 @@ class MainWindow(QMainWindow):
 
         # 设置
         settings = SettingsPage(self.dm, self.recommender)
+        settings.theme_changed.connect(self.apply_season_theme)
         self.add_page("settings", settings)
 
     def add_page(self, key, widget):
@@ -571,9 +622,26 @@ class MainWindow(QMainWindow):
         if fp_page and hasattr(fp_page, "refresh"):
             fp_page.refresh()
 
-    def apply_styles(self):
-        """应用全局样式"""
+    def apply_season_theme(self):
+        """应用四季主题（配色 + 背景 + 控件刷新）"""
+        self.season_manager.update_from_settings(self.dm.get_settings())
+        self.season_manager.apply_to_colors_dict(COLORS)
         self.setStyleSheet(get_stylesheet())
+        QApplication.instance().setStyleSheet(get_stylesheet())
+
+        label = SEASON_LABELS.get(self.season_manager.season, "")
+        self.title_bar.set_season_label(label)
+        self.title_bar.refresh_theme()
+        self.sidebar.refresh_theme()
+        self.header.refresh_theme()
+        self.content_bg.refresh_theme()
+
+        page = self.stack.currentWidget()
+        if page and hasattr(page, "refresh"):
+            page.refresh()
+
+    def apply_styles(self):
+        self.apply_season_theme()
 
     def showEvent(self, event):
         """显示时刷新 + 美食足迹周报弹窗"""
@@ -611,6 +679,7 @@ def main():
 
     window = MainWindow()
     window.show()
+    window.apply_season_theme()
 
     sys.exit(app.exec_())
 

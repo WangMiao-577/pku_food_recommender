@@ -63,7 +63,12 @@ class AIModeBackend:
         if not self.conv.is_ready_to_recommend():
             return self._conversation_turn(user_message, profile)
 
-        return self._deliver_recommendation(user_message, profile)
+        if self.is_configured():
+            try:
+                return self._deliver_ai_recommendation(user_message, profile)
+            except Exception:
+                pass
+        return self._deliver_offline_recommendation(user_message, profile, fallback=not self.is_configured())
 
     def _sync_location_to_conv(self, profile: Dict):
         nid = profile.get("current_location_node_id")
@@ -109,39 +114,142 @@ class AIModeBackend:
             "summary": self.conv.build_summary(),
         }
 
-    def _deliver_recommendation(self, user_message: str, profile: Dict) -> Dict:
+    def _recommendation_context(self, profile: Dict) -> Dict:
         context = self.conv.to_context()
         context["location"] = context.get("location") or profile.get("current_location", "")
         context["location_node_id"] = context.get("location_node_id") or profile.get("current_location_node_id")
+        return context
 
-        result = self.recommender.recommend_full(top_k=5, mode="normal", context=context)
-        dishes = result.get("dishes", [])
-        combos = result.get("combos", [])
-        summary = self.conv.build_summary()
-        reply = f"好的，根据你的需求（{summary}），我为你挑了这些："
-
-        prefs = {}
-        fallback = not self.is_configured()
-        if self.is_configured():
-            try:
-                raw = self._call_llm_api(
-                    user_message,
-                    profile,
-                    system_override=self._build_system_prompt(profile)
-                    + f"\n【可以推荐】用亲切语气总结推荐，提及档口位置。用户摘要：{summary}",
+    def _format_candidate_catalog(self, dishes: List[Dict], combos: List[Dict]) -> str:
+        lines = []
+        for d in dishes:
+            hint = d.get("location_hint") or d.get("window", "")
+            flavors = ",".join(d.get("flavor", []))
+            lines.append(
+                f"- id={d['id']} | {d['name']} | {d['canteen']} | {hint} | "
+                f"¥{d['price']} | {flavors} | {d.get('calories', 0)}kcal"
+            )
+        if combos:
+            lines.append("\n候选套餐:")
+            for c in combos:
+                names = "+".join(dd["name"] for dd in c.get("dish_details", [])[:4])
+                lines.append(
+                    f"- combo_id={c['combo_id']} | {c.get('name', names)} | {c['canteen']} | ¥{c.get('total_price', 0)}"
                 )
-                parsed = self._parse_llm_response(raw)
-                reply = (parsed.get("reply") or raw).split("```")[0].strip() or reply
-                prefs = parsed.get("extracted_preferences") or {}
-                if prefs:
-                    self._merge_preferences(prefs)
-            except Exception as e:
-                fallback = True
-                reply += f"\n（AI 润色暂不可用，已用离线算法）"
+        return "\n".join(lines)
+
+    def _build_recommendation_system_prompt(self, profile: Dict) -> str:
+        return f"""{ai_config.DEFAULT_SYSTEM_PROMPT}
+
+【推荐决策阶段】你是决策者，不是润色助手。
+- 从给出的候选列表中自主选择 3-5 道菜（填写 recommended_dish_ids，必须用列表中的 id）
+- 可选 0-2 个套餐（recommended_combo_ids，必须用列表中的 combo_id）
+- reasoning 写整体推荐理由；dish_reasons 为每道菜写一句理由
+- 综合考虑用户位置、预算、口味、人数、心情与对话内容
+
+当前用户画像:
+{json.dumps(profile, ensure_ascii=False)}
+
+JSON 格式:
+{{
+  "reply": "给用户的中文回复（含你的推荐决定）",
+  "reasoning": "整体推荐理由，2-4句",
+  "recommended_dish_ids": ["id1", "id2"],
+  "dish_reasons": {{"id1": "理由", "id2": "理由"}},
+  "recommended_combo_ids": [],
+  "extracted_preferences": {{}}
+}}
+"""
+
+    def _resolve_ai_dishes(
+        self,
+        dish_ids: List[str],
+        dish_reasons: Dict,
+        overall_reasoning: str,
+        fallback_pool: List[Dict],
+    ) -> List[Dict]:
+        dishes = []
+        for did in dish_ids:
+            raw = self.dm.get_dish_by_id(did)
+            if not raw:
+                continue
+            dish = dict(raw)
+            reason = dish_reasons.get(did) or overall_reasoning or "综合你的需求挑选"
+            dish["_score_details"] = {
+                "preference": reason,
+                "location": dish.get("location_hint") or dish.get("window", ""),
+                "freshness": "AI推荐",
+            }
+            dish["_mode_label"] = "AI推荐"
+            dish["_recommend_mode"] = "ai"
+            dishes.append(dish)
+        if not dishes and fallback_pool:
+            dishes = [dict(d) for d in fallback_pool[:5]]
+            for dish in dishes:
+                details = dish.get("_score_details") or {}
+                dish["_score_details"] = {
+                    "preference": details.get("preference") or overall_reasoning,
+                    "location": details.get("location", ""),
+                    "freshness": "AI降级",
+                }
+        return dishes
+
+    def _deliver_ai_recommendation(self, user_message: str, profile: Dict) -> Dict:
+        """AI 自主选菜并撰写推荐理由"""
+        context = self._recommendation_context(profile)
+        summary = self.conv.build_summary()
+
+        candidate_result = self.recommender.recommend_full(top_k=30, mode="normal", context=context)
+        candidates = candidate_result.get("dishes", [])
+        combo_candidates = candidate_result.get("combos", [])
+
+        conv_text = "\n".join(
+            f"{'用户' if m['role'] == 'user' else '助手'}: {m['content']}"
+            for m in self.conversation_history[-10:]
+        )
+        catalog = self._format_candidate_catalog(candidates, combo_candidates)
+
+        decision_prompt = (
+            f"用户最新发言：{user_message}\n"
+            f"需求摘要：{summary}\n\n"
+            f"对话记录：\n{conv_text}\n\n"
+            f"候选菜品与套餐（只能从中选择）：\n{catalog}\n\n"
+            "请自主决定推荐内容，并说明理由。"
+        )
+
+        raw = self._call_llm_api(
+            decision_prompt,
+            profile,
+            system_override=self._build_recommendation_system_prompt(profile),
+        )
+        parsed = self._parse_llm_response(raw)
+        prefs = parsed.get("extracted_preferences") or {}
+
+        dish_ids = parsed.get("recommended_dish_ids") or []
+        dish_reasons = parsed.get("dish_reasons") or {}
+        overall_reasoning = parsed.get("reasoning", "")
+        reply = (parsed.get("reply") or "").split("```")[0].strip()
+        if not reply:
+            reply = f"根据你的情况（{summary}），我为你选了这些："
+
+        dishes = self._resolve_ai_dishes(dish_ids, dish_reasons, overall_reasoning, candidates)
+
+        combo_map = {c["combo_id"]: c for c in combo_candidates}
+        combos = []
+        for cid in parsed.get("recommended_combo_ids") or []:
+            if cid in combo_map:
+                c = dict(combo_map[cid])
+                c["reason"] = overall_reasoning or c.get("reason", "")
+                combos.append(c)
+        if not combos and context.get("include_combos") and combo_candidates:
+            combos = combo_candidates[:2]
+
+        if prefs:
+            self._merge_preferences(prefs)
+        self._merge_preferences(self._preferences_to_context(self.conv.slots, user_message))
 
         self.conv.record_assistant(reply)
         self.conversation_history.append({"role": "assistant", "content": reply})
-        self._merge_preferences(self._preferences_to_context(prefs or self.conv.slots, user_message))
 
         return {
             "success": True,
@@ -151,11 +259,62 @@ class AIModeBackend:
             "recommended_dishes": dishes,
             "combos": combos,
             "dish_ids": [d["id"] for d in dishes],
-            "reasoning": result.get("meal_scene") or summary,
+            "reasoning": overall_reasoning or summary,
+            "extracted_preferences": self.conv.slots.copy(),
+            "fallback": False,
+            "recommend_mode": "ai",
+            "summary": summary,
+            "source": "ai",
+        }
+
+    def _offline_reasoning_text(self, dishes: List[Dict], meal_scene: Optional[str], summary: str) -> str:
+        parts = []
+        for d in dishes[:5]:
+            details = d.get("_score_details") or {}
+            seg = details.get("preference") or details.get("location") or details.get("freshness")
+            if seg:
+                parts.append(f"{d['name']}：{seg}")
+        if parts:
+            return "；".join(parts)
+        return meal_scene or summary or "离线算法综合推荐"
+
+    def _deliver_offline_recommendation(
+        self,
+        user_message: str,
+        profile: Dict,
+        fallback: bool = True,
+    ) -> Dict:
+        """离线算法决策 + 算法生成的推荐理由"""
+        context = self._recommendation_context(profile)
+        result = self.recommender.recommend_full(top_k=5, mode="normal", context=context)
+        dishes = result.get("dishes", [])
+        combos = result.get("combos", [])
+        summary = self.conv.build_summary()
+        reasoning = self._offline_reasoning_text(dishes, result.get("meal_scene"), summary)
+
+        if fallback:
+            reply = f"根据你的需求（{summary}），离线推荐如下：\n{reasoning}"
+        else:
+            reply = f"好的，根据你的需求（{summary}），我为你挑了这些：\n{reasoning}"
+
+        self.conv.record_assistant(reply)
+        self.conversation_history.append({"role": "assistant", "content": reply})
+        self._merge_preferences(self._preferences_to_context(self.conv.slots, user_message))
+
+        return {
+            "success": True,
+            "ready": True,
+            "phase": "已推荐",
+            "reply": reply,
+            "recommended_dishes": dishes,
+            "combos": combos,
+            "dish_ids": [d["id"] for d in dishes],
+            "reasoning": reasoning,
             "extracted_preferences": self.conv.slots.copy(),
             "fallback": fallback,
             "recommend_mode": result.get("recommend_mode", "stable"),
             "summary": summary,
+            "source": "local_algorithm",
         }
 
     def extract_preferences(self, conversation: Optional[List[Dict]] = None) -> Dict:
@@ -294,11 +453,12 @@ class AIModeBackend:
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
         }
+        is_decision = system_override and "推荐决策阶段" in (system_override or "")
         payload = {
             "model": self.model,
             "messages": messages,
-            "temperature": 0.2, # 降低随机性有利于返回干净的JSON
-            "max_tokens": 1500, # 适当放大生成空间，防止被截断
+            "temperature": 0.35 if is_decision else 0.2,
+            "max_tokens": 2200 if is_decision else 1500,
         }
 
         # 如果还是报错，你可以取消下面这行注释，在终端看看打印出的完整Payload到底长什么样
@@ -381,7 +541,7 @@ class AIModeBackend:
         self._sync_location_to_conv(profile)
         if not self.conv.is_ready_to_recommend():
             return self._conversation_turn(user_message, profile)
-        return self._deliver_recommendation(user_message, profile)
+        return self._deliver_offline_recommendation(user_message, profile, fallback=True)
 
     def _extract_preferences_local(self, conversation: List[Dict]) -> Dict:
         """简单关键词提取（无 API 时使用）"""

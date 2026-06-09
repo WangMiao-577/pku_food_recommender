@@ -164,131 +164,140 @@ def paint_watercolor_background(painter: QPainter, rect: QRect,
 
 
 def get_stylesheet() -> str:
-    """获取全局样式表"""
-    return """
-    QMainWindow {
-        background-color: #FFF8F0;
-    }
-    QWidget {
+    """获取全局样式表（随四季 COLORS 动态变化）"""
+    bg = COLORS["bg_main"].name()
+    text = COLORS["text_dark"].name()
+    bg_card = COLORS["bg_card"].name()
+    border = COLORS["border"].name()
+    border_light = COLORS["border_light"].name()
+    primary = COLORS["primary"].name()
+    secondary = COLORS["secondary"].name()
+    text_light = COLORS["text_light"].name()
+    bg_warm = COLORS["bg_warm"].name()
+    return f"""
+    QMainWindow {{
+        background-color: {bg};
+    }}
+    QWidget {{
         font-family: "Microsoft YaHei";
-        color: #4A3728;
-    }
-    QLabel {
-        color: #4A3728;
-    }
-    QPushButton {
+        color: {text};
+    }}
+    QLabel {{
+        color: {text};
+    }}
+    QPushButton {{
         font-family: "Microsoft YaHei";
-    }
-    QComboBox {
-        background-color: #FFFDF8;
-        border: 1px solid #D4C4B0;
+    }}
+    QComboBox {{
+        background-color: {bg_card};
+        border: 1px solid {border};
         border-radius: 6px;
         padding: 5px 10px;
-        color: #4A3728;
-    }
-    QComboBox:hover {
-        border-color: #D4847C;
-    }
-    QSpinBox, QDoubleSpinBox {
-        background-color: #FFFDF8;
-        border: 1px solid #D4C4B0;
+        color: {text};
+    }}
+    QComboBox:hover {{
+        border-color: {primary};
+    }}
+    QSpinBox, QDoubleSpinBox {{
+        background-color: {bg_card};
+        border: 1px solid {border};
         border-radius: 6px;
         padding: 5px;
-    }
-    QLineEdit {
-        background-color: #FFFDF8;
-        border: 1px solid #D4C4B0;
+    }}
+    QLineEdit {{
+        background-color: {bg_card};
+        border: 1px solid {border};
         border-radius: 6px;
         padding: 8px;
-        color: #4A3728;
-    }
-    QTextEdit {
-        background-color: #FFFDF8;
-        border: 1px solid #D4C4B0;
+        color: {text};
+    }}
+    QTextEdit {{
+        background-color: {bg_card};
+        border: 1px solid {border};
         border-radius: 8px;
         padding: 8px;
-        color: #4A3728;
-    }
-    QScrollArea {
+        color: {text};
+    }}
+    QScrollArea {{
         border: none;
         background-color: transparent;
-    }
-    QScrollBar:vertical {
-        background-color: #F0E8E0;
+    }}
+    QScrollBar:vertical {{
+        background-color: {border_light};
         width: 8px;
         border-radius: 4px;
-    }
-    QScrollBar::handle:vertical {
-        background-color: #D4C4B0;
+    }}
+    QScrollBar::handle:vertical {{
+        background-color: {border};
         border-radius: 4px;
         min-height: 30px;
-    }
-    QScrollBar::handle:vertical:hover {
-        background-color: #D4847C;
-    }
-    QProgressBar {
-        border: 1px solid #D4C4B0;
+    }}
+    QScrollBar::handle:vertical:hover {{
+        background-color: {primary};
+    }}
+    QProgressBar {{
+        border: 1px solid {border};
         border-radius: 5px;
         text-align: center;
-        color: #4A3728;
-    }
-    QProgressBar::chunk {
-        background-color: #7BA598;
+        color: {text};
+    }}
+    QProgressBar::chunk {{
+        background-color: {secondary};
         border-radius: 5px;
-    }
-    QCheckBox {
-        color: #4A3728;
+    }}
+    QCheckBox {{
+        color: {text};
         spacing: 6px;
-    }
-    QCheckBox::indicator {
+    }}
+    QCheckBox::indicator {{
         width: 18px;
         height: 18px;
-    }
-    QRadioButton {
-        color: #4A3728;
+    }}
+    QRadioButton {{
+        color: {text};
         spacing: 6px;
-    }
-    QGroupBox {
-        border: 1px solid #E8DDD0;
+    }}
+    QGroupBox {{
+        border: 1px solid {border_light};
         border-radius: 8px;
         margin-top: 10px;
         padding-top: 10px;
-        color: #6B5344;
-    }
-    QGroupBox::title {
+        color: {COLORS["text_medium"].name()};
+    }}
+    QGroupBox::title {{
         subcontrol-origin: margin;
         left: 10px;
         padding: 0 5px;
-    }
-    QListWidget {
-        background-color: #FFFDF8;
-        border: 1px solid #E8DDD0;
+    }}
+    QListWidget {{
+        background-color: {bg_card};
+        border: 1px solid {border_light};
         border-radius: 8px;
         outline: none;
-    }
-    QListWidget::item {
+    }}
+    QListWidget::item {{
         padding: 8px;
-        border-bottom: 1px solid #F0E8E0;
-    }
-    QListWidget::item:selected {
-        background-color: #E8AFA8;
-        color: #4A3728;
-    }
-    QListWidget::item:hover {
-        background-color: #FFF0E0;
-    }
-    QSlider::groove:horizontal {
+        border-bottom: 1px solid {bg_warm};
+    }}
+    QListWidget::item:selected {{
+        background-color: {COLORS["primary_light"].name()};
+        color: {text};
+    }}
+    QListWidget::item:hover {{
+        background-color: {bg_warm};
+    }}
+    QSlider::groove:horizontal {{
         height: 6px;
-        background: #E8DDD0;
+        background: {border_light};
         border-radius: 3px;
-    }
-    QSlider::handle:horizontal {
+    }}
+    QSlider::handle:horizontal {{
         width: 16px;
         height: 16px;
-        background: #D4847C;
+        background: {primary};
         border-radius: 8px;
         margin: -5px 0;
-    }
+    }}
     """
 
 

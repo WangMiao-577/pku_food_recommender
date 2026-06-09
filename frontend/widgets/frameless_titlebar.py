@@ -1,0 +1,140 @@
+"""
+frameless_titlebar.py - 无边框窗口标题栏（左上角关闭/最小化 + 拖动）
+"""
+
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QPushButton, QLabel
+from PyQt5.QtCore import Qt, pyqtSignal, QPoint
+from PyQt5.QtGui import QFont
+from PyQt5.QtCore import QObject
+from frontend.watercolor_style import COLORS, get_font, color_with_alpha
+
+
+class FramelessTitleBar(QWidget):
+    """自定义标题栏：控件在左上角，整条可拖动"""
+
+    close_clicked = pyqtSignal()
+    minimize_clicked = pyqtSignal()
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self._drag_start: QPoint = None
+        self._window = None
+        self.setFixedHeight(36)
+        self.setup_ui()
+
+    def setup_ui(self):
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(10, 4, 12, 4)
+        layout.setSpacing(6)
+
+        self.min_btn = QPushButton("—")
+        self.close_btn = QPushButton("✕")
+        for btn in (self.min_btn, self.close_btn):
+            btn.setFixedSize(32, 26)
+            btn.setFont(QFont("Segoe UI", 11))
+            btn.setCursor(Qt.PointingHandCursor)
+
+        self.min_btn.clicked.connect(self.minimize_clicked.emit)
+        self.close_btn.clicked.connect(self.close_clicked.emit)
+        layout.addWidget(self.min_btn)
+        layout.addWidget(self.close_btn)
+
+        self.title_lbl = QLabel("今天吃什么？ · 北大食堂智能推荐")
+        self.title_lbl.setFont(get_font(10))
+        layout.addWidget(self.title_lbl)
+        layout.addStretch()
+
+        self.season_lbl = QLabel()
+        self.season_lbl.setFont(get_font(9))
+        layout.addWidget(self.season_lbl)
+
+        self._apply_style()
+
+    def bind_window(self, window):
+        self._window = window
+
+    def set_season_label(self, text: str):
+        self.season_lbl.setText(text)
+
+    def _apply_style(self):
+        self.setStyleSheet(f"""
+            QWidget {{
+                background: {COLORS.get('header_overlay', color_with_alpha(COLORS['bg_card'], 220))};
+                border-bottom: 1px solid {COLORS['border_light'].name()};
+            }}
+        """)
+        self.title_lbl.setStyleSheet(f"color: {COLORS['text_medium'].name()};")
+        self.season_lbl.setStyleSheet(f"color: {COLORS['text_light'].name()};")
+        self.min_btn.setStyleSheet(f"""
+            QPushButton {{
+                background: {color_with_alpha(COLORS['accent_sky'], 80)};
+                color: {COLORS['text_dark'].name()};
+                border: none;
+                border-radius: 6px;
+            }}
+            QPushButton:hover {{ background: {COLORS['accent_sky'].name()}; }}
+        """)
+        self.close_btn.setStyleSheet(f"""
+            QPushButton {{
+                background: {color_with_alpha(COLORS['primary_light'], 90)};
+                color: {COLORS['primary_dark'].name()};
+                border: none;
+                border-radius: 6px;
+            }}
+            QPushButton:hover {{
+                background: {COLORS['primary'].name()};
+                color: white;
+            }}
+        """)
+
+    def refresh_theme(self):
+        self._apply_style()
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton and self._window:
+            self._drag_start = event.globalPos() - self._window.frameGeometry().topLeft()
+            event.accept()
+        super().mousePressEvent(event)
+
+    def mouseMoveEvent(self, event):
+        if self._drag_start is not None and event.buttons() & Qt.LeftButton and self._window:
+            self._window.move(event.globalPos() - self._drag_start)
+            event.accept()
+        super().mouseMoveEvent(event)
+
+    def mouseReleaseEvent(self, event):
+        self._drag_start = None
+        super().mouseReleaseEvent(event)
+
+
+class WindowDragFilter(QObject):
+    """为空白区域（标题栏、页眉等）启用拖动"""
+
+    def __init__(self, window):
+        super().__init__()
+        self._window = window
+        self._origin = None
+
+    def eventFilter(self, obj, event):
+        from PyQt5.QtCore import QEvent
+        if event.type() == QEvent.MouseButtonPress and event.button() == Qt.LeftButton:
+            if self._is_draggable(obj, event.pos()):
+                self._origin = event.globalPos() - self._window.frameGeometry().topLeft()
+                return False
+        if event.type() == QEvent.MouseMove and self._origin and event.buttons() & Qt.LeftButton:
+            if self._is_draggable(obj, event.pos()):
+                self._window.move(event.globalPos() - self._origin)
+                return True
+        if event.type() == QEvent.MouseButtonRelease:
+            self._origin = None
+        return False
+
+    @staticmethod
+    def _is_draggable(widget, pos):
+        child = widget.childAt(pos)
+        if child is None:
+            return True
+        from PyQt5.QtWidgets import QPushButton, QLineEdit, QComboBox, QSpinBox
+        if isinstance(child, (QPushButton, QLineEdit, QComboBox, QSpinBox)):
+            return False
+        return child.__class__.__name__ in ("QLabel", "QWidget", "QFrame", "PoemLabel")

@@ -1,15 +1,19 @@
 {
-  "explore_mode": true,
+  "explore_mode": false,
   "explore_epsilon": 0.15,
-  "default_recommend_mode": "explore",
+  "default_recommend_mode": "stable",
   "notifications": true,
   "theme": "watercolor",
   "font_size": "medium",
   "ai_config": {
-    "api_key": "sk-a0d5968687524e9faace69752c5d59ce",
+    "api_key": "sk-462bea8184f64e469f993b01bc920d05",
     "api_base": "",
-    "model": "deepseek-v4-flash"
+    "model": "qwen-plus"
   },
   "app_mode": "ai",
-  "footprint_popup_last": "2026-06-05T15:18:23.116250"
+  "footprint_popup_last": "2026-06-05T15:18:23.116250",
+  "season_mode": "auto",
+  "season_manual": "summer",
+  "season_bg_opacity": 0.55,
+  "season_active": "summer"
 }
