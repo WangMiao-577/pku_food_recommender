@@ -13,16 +13,21 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QPixmap, QColor
 from PyQt5.QtCore import Qt, pyqtSignal
 
-from frontend.watercolor_style import COLORS, get_font, get_button_style, color_with_alpha
+from frontend.watercolor_style import (
+    COLORS, get_font, get_button_style, get_dialog_style, color_with_alpha, button_hover_background,
+)
+from frontend.ui_scale import dish_dim
 
 PORTION_LABELS = {"S": "小份", "M": "标准", "L": "大份"}
-IMAGES_DIR = os.path.join(os.path.dirname(__file__), "..", "..", "images")
+from backend.paths import dish_image_path as _dish_image_path
 
 
-def load_dish_image(image_name: str, size=(120, 120)) -> QPixmap:
-    path = os.path.join(IMAGES_DIR, image_name or "")
-    if os.path.exists(path):
-        return QPixmap(path).scaled(*size, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
+def load_dish_image(image_name: str, size=None) -> QPixmap:
+    if size is None:
+        size = (dish_dim(120), dish_dim(120))
+    path = _dish_image_path(image_name or "")
+    if path.exists():
+        return QPixmap(str(path)).scaled(*size, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
     return QPixmap()
 
 
@@ -100,6 +105,8 @@ class StoreGuideDialog(QDialog):
         close_btn.clicked.connect(self.accept)
         layout.addWidget(close_btn)
 
+        self.setStyleSheet(get_dialog_style())
+
 
 class ComboResultCard(QFrame):
     """套餐推荐卡片"""
@@ -157,9 +164,10 @@ class ComboResultCard(QFrame):
 
             cell = QVBoxLayout()
             img = QLabel()
-            img.setFixedSize(80, 80)
+            combo_img = dish_dim(80)
+            img.setFixedSize(combo_img, combo_img)
             img.setScaledContents(True)
-            pix = load_dish_image(dish.get("image", ""), (80, 80))
+            pix = load_dish_image(dish.get("image", ""), (combo_img, combo_img))
             if not pix.isNull():
                 img.setPixmap(pix)
             else:
@@ -268,10 +276,11 @@ class DishResultCard(QFrame):
         )
         main.addWidget(rank_lbl)
 
+        card_img = dish_dim(120)
         img_lbl = QLabel()
-        img_lbl.setFixedSize(120, 120)
+        img_lbl.setFixedSize(card_img, card_img)
         img_lbl.setScaledContents(True)
-        pix = load_dish_image(self.dish.get("image", ""), (120, 120))
+        pix = load_dish_image(self.dish.get("image", ""), (card_img, card_img))
         if not pix.isNull():
             img_lbl.setPixmap(pix)
         else:
@@ -418,8 +427,8 @@ class DishResultCard(QFrame):
                 border-radius: 8px; padding: 4px 10px;
             }}
             QPushButton:hover {{
-                background: {COLORS['primary'].name()};
-                color: white;
+                background: {button_hover_background('primary')};
+                color: {COLORS['primary_dark'].name()};
             }}
         """)
         guide_btn.clicked.connect(lambda: self.guide_clicked.emit(self.dish["canteen"]))

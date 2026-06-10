@@ -6,7 +6,13 @@ import json
 from pathlib import Path
 from typing import Dict, List, Optional
 
-PRESET_FILE = Path(__file__).parent.parent / "data" / "preset_combos.json"
+def _preset_file() -> Path:
+    from backend.paths import bundled_data_dir, user_data_dir, is_frozen
+    if is_frozen():
+        user = user_data_dir() / "preset_combos.json"
+        if user.exists():
+            return user
+    return bundled_data_dir() / "preset_combos.json"
 
 SCENE_CALORIE_RANGE = {
     "独自速食": (300, 650),
@@ -22,9 +28,10 @@ class ComboRecommender:
         self.presets = self._load_presets()
 
     def _load_presets(self) -> List[Dict]:
-        if not PRESET_FILE.exists():
+        preset_file = _preset_file()
+        if not preset_file.exists():
             return []
-        with open(PRESET_FILE, encoding="utf-8") as f:
+        with open(preset_file, encoding="utf-8") as f:
             return json.load(f)
 
     def _find_dish_by_name(self, name: str, canteen: Optional[str] = None) -> Optional[Dict]:

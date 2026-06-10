@@ -8,6 +8,8 @@ import random
 from datetime import datetime
 from typing import Dict, List, Optional
 
+from backend.paths import delete_user_story_image
+
 
 class FoodStoryManager:
     def __init__(self, data_dir: str = "data"):
@@ -69,10 +71,49 @@ class FoodStoryManager:
         self._save_user()
         return story
 
-    def delete_user_story(self, story_id: str) -> bool:
-        before = len(self.user_stories)
-        self.user_stories = [s for s in self.user_stories if s.get("story_id") != story_id]
-        if len(self.user_stories) < before:
+    def get_user_story(self, story_id: str) -> Optional[Dict]:
+        for s in self.user_stories:
+            if s.get("story_id") == story_id:
+                return dict(s)
+        return None
+
+    def update_user_story(
+        self,
+        story_id: str,
+        title: str,
+        summary: str,
+        image: str = "",
+        link: str = "",
+        author: str = "我",
+    ) -> Optional[Dict]:
+        for s in self.user_stories:
+            if s.get("story_id") != story_id:
+                continue
+            old_image = s.get("image", "")
+            new_image = image.strip()
+            s["title"] = title.strip()
+            s["summary"] = summary.strip()
+            s["image"] = new_image
+            s["link"] = link.strip()
+            s["author"] = author
+            s["updated_at"] = datetime.now().isoformat()
+            if old_image and old_image != new_image:
+                delete_user_story_image(old_image)
             self._save_user()
-            return True
-        return False
+            return dict(s)
+        return None
+
+    def delete_user_story(self, story_id: str) -> bool:
+        removed = None
+        kept = []
+        for s in self.user_stories:
+            if s.get("story_id") == story_id:
+                removed = s
+            else:
+                kept.append(s)
+        if removed is None:
+            return False
+        delete_user_story_image(removed.get("image", ""))
+        self.user_stories = kept
+        self._save_user()
+        return True

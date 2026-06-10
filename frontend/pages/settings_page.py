@@ -287,7 +287,7 @@ class SettingsPage(QWidget):
                 padding: 8px 20px;
             }}
             QPushButton:hover {{
-                background-color: #A85A52;
+                background-color: {COLORS['error'].lighter(115).name()};
             }}
         """)
         reset_btn.clicked.connect(self.on_reset)

@@ -49,3 +49,31 @@ node_id,name,name_en,category,x,y,description
 48,电教楼,Audio-Visual Building,building,0.520,0.550,电化教育大楼
 49,考古文博学院,Archaeology School,building,0.320,0.400,考古与文博学院
 50,生命科学楼,Life Science Building,building,0.620,0.400,生命科学学院大楼
+51,学一食堂,Students' Canteen No.1,canteen,0.340,0.720,38楼北侧的老牌食堂，以经济实惠著称，著名学一肘子和冬菜包
+52,学五食堂,Students' Canteen No.5,canteen,0.380,0.730,燕南园西南角，全天供餐，一层中式快餐二层合利屋
+53,艺园食堂,Yi Yuan Canteen,canteen,0.370,0.760,学五南侧，二楼设有点餐、烧烤和夜宵窗口
+54,家园食堂,Jia Yuan Canteen,canteen,0.290,0.850,燕园西南角新建的最大食堂，共四层，餐位约4200个
+55,农园食堂,Nong Yuan Canteen,canteen,0.500,0.440,二教西侧，离教学楼最近的食堂，共三层
+56,燕南美食,Yan Nan Food Court,canteen,0.560,0.570,百周年纪念讲堂北侧地下食堂，称重自选与风味面食
+57,勺园食堂,Shao Yuan Canteen,canteen,0.230,0.570,勺园2号楼位置，一层基本伙二层地方风味和教师餐厅
+58,佟园食堂,Tong Yuan Canteen,canteen,0.690,0.450,清真食堂，北临国际关系学院，供应手抓饭羊肉串等清真风味
+59,松林快餐,Songlin Fast Food,canteen,0.330,0.660,38楼北侧，以包子生煎烧麦粥品著称，晚餐后持续营业
+60,畅春园食堂,Chang Chun Yuan Canteen,canteen,0.180,0.720,西门外畅春园区域，一层风味档口三层宴会餐厅
+61,中关园食堂,Zhong Guan Yuan Canteen,canteen,0.700,0.620,东门外中关园社区，量足味好的特色手工面食
+62,成府园食堂,Cheng Fu Yuan Canteen,canteen,0.630,0.540,校医院B座西北角，小份菜和称重自选，校园东区优选
+63,化学北楼,North Chemistry Building,building,0.590,0.390,化学学院北侧教学楼
+64,老生物楼,Former Biology Building,building,0.640,0.430,原生物系老楼，位于生命科学楼附近
+65,哲学楼,Philosophy Building,building,0.450,0.460,哲学系教学楼，位于静园与图书馆之间
+66,外文楼,Foreign Languages Building,building,0.460,0.470,外国语学院教学楼，位于图书馆西侧
+67,俄文楼,Russian Building,building,0.440,0.490,俄语教学专用楼，紧邻外文楼
+68,第一教学楼,Teaching Building No.1,building,0.500,0.460,第一教学楼，位于图书馆与二教之间
+69,数学学院,School of Mathematical Sciences,building,0.640,0.380,数学科学学院，位于校园东部
+70,国际关系学院,School of International Studies,building,0.710,0.440,国际关系学院教学楼，位于校园东部
+71,政府管理学院,School of Government,building,0.630,0.480,政府管理学院教学楼，位于校园东部
+72,李兆基人文学苑,Lee Shau Kee Humanities Academy,building,0.550,0.400,李兆基人文学苑，位于校园东北部
+73,北京国际数学研究中心,Beijing Int'l Center for Math Research,building,0.520,0.420,北京国际数学研究中心，位于校园北部
+74,中国经济研究中心,China Center for Economic Research,building,0.570,0.440,中国经济研究中心CCER，位于校园中部偏东
+75,英杰交流中心,Ying Jie Exchange Center,building,0.760,0.530,英杰交流中心，位于邱德拔体育馆附近
+76,正大国际中心,Choi International Center,building,0.750,0.480,正大国际中心，位于校园东部
+77,新太阳学生中心,New Sun Student Center,building,0.650,0.460,新太阳学生中心，位于校园东部
+78,校医院,University Hospital,building,0.660,0.570,北京大学校医院，位于校园东部偏南

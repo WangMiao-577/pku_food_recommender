@@ -14,8 +14,11 @@ class CampusGraph:
     """校园路网图（相对坐标 0-1）"""
 
     def __init__(self, nodes_csv: Optional[str] = None, k_neighbors: int = 6, max_edge_dist: float = 0.14):
-        base = Path(__file__).parent.parent / "pku_map"
-        self.nodes_csv = nodes_csv or str(base / "pku_nodes.csv")
+        if nodes_csv is None:
+            from backend.paths import pku_map_dir
+            self.nodes_csv = str(pku_map_dir() / "pku_nodes.csv")
+        else:
+            self.nodes_csv = nodes_csv
         self.k_neighbors = k_neighbors
         self.max_edge_dist = max_edge_dist
         self.nodes: Dict[int, Dict] = {}

@@ -12,6 +12,7 @@ CANTEEN_META = {
     "农园食堂": {"canteen_id": "nongyuan", "cuisine_default": "融合"},
     "燕南美食": {"canteen_id": "yannan", "cuisine_default": "融合"},
     "家园食堂": {"canteen_id": "jiayuan", "cuisine_default": "融合"},
+    "畅春园": {"canteen_id": "changchun", "cuisine_default": "融合"},
 }
 
 # 导入时统一归并到的食堂名（源 JSON 中的别名 -> 标准名）
@@ -29,7 +30,112 @@ WINDOW_CUISINE = {
     "清真": "清真", "家常菜": "融合", "粤菜": "粤",
     "东侧窗口": "湘", "西侧窗口": "湘", "水饺": "融合",
     "水果": "轻食", "铁板炒饭": "融合", "麻辣烫": "川",
+    "蜀湘风味": "湘", "广东风味": "粤", "西北风味档": "西北",
+    "家常小炒": "融合", "面食档口": "融合", "家园素食": "融合",
+    "风味面食": "融合", "北侧 主食窗口": "融合", "南侧 风味窗口": "融合",
 }
+
+
+def parse_calories(raw) -> float:
+    if raw is None:
+        return 400.0
+    s = str(raw).strip()
+    m = re.search(r"([\d.]+)\s*kcal", s, re.I)
+    if m:
+        return float(m.group(1))
+    m = re.search(r"([\d.]+)", s)
+    return float(m.group(1)) if m else 400.0
+
+
+def parse_gram_value(raw) -> float:
+    if raw is None or raw == "":
+        return 0.0
+    m = re.search(r"([\d.]+)", str(raw))
+    return float(m.group(1)) if m else 0.0
+
+
+def parse_flavor_text(text: str) -> List[str]:
+    text = (text or "").strip()
+    if not text:
+        return ["鲜"]
+    tags = []
+    rules = [
+        ("麻辣", "麻辣"), ("微辣", "微辣"), ("鲜辣", "辣"), ("香辣", "辣"),
+        ("酸辣", "酸"), ("酸甜", "甜"), ("咸香", "咸"), ("清淡", "清淡"),
+        ("甜", "甜"), ("酸", "酸"), ("辣", "辣"), ("鲜", "鲜"), ("咸", "咸"),
+        ("糯", "鲜"), ("嫩", "鲜"), ("香", "鲜"),
+    ]
+    for kw, tag in rules:
+        if kw in text and tag not in tags:
+            tags.append(tag)
+    return tags[:3] or ["鲜"]
+
+
+def parse_csv_location(raw: str, default_prefix: str) -> Tuple[str, int, str]:
+    """解析 CSV 首列档口：如「家园二层 家园素食」「燕南地上 北侧 主食窗口」"""
+    loc = (raw or "").strip()
+    if not loc:
+        loc = default_prefix
+
+    floor = 1
+    if "地下" in loc:
+        floor = 0
+    elif "二层" in loc or "二楼" in loc:
+        floor = 2
+    elif "三层" in loc or "三楼" in loc:
+        floor = 3
+    elif "地上" in loc:
+        floor = 1
+
+    window = "综合"
+    for sep in ("，", ","):
+        if sep in loc:
+            window = loc.split(sep, 1)[1].strip()
+            break
+    else:
+        parts = loc.split()
+        if len(parts) >= 2:
+            window = " ".join(parts[1:]) if " " in loc else parts[-1]
+        elif parts:
+            window = parts[0]
+
+    hint = loc if "，" in loc or "," in loc else loc.replace("  ", "，").replace(" ", "，", 1) if " " in loc else loc
+    if "，" not in hint and default_prefix and default_prefix not in hint:
+        hint = f"{default_prefix}，{window}"
+
+    return window, floor, hint
+
+
+def infer_price_from_context(name: str, window: str, calories: float) -> float:
+    if any(k in window for k in ("称重", "自选")):
+        return 15.0
+    if any(k in name for k in ("粥", "馒头", "窝头", "小菜")):
+        return 3.0
+    if calories >= 600 or any(k in name for k in ("套餐", "大碗", "排骨")):
+        return 18.0
+    if any(k in window for k in ("素食", "小炒")):
+        return 10.0
+    if any(k in name for k in ("面", "粉", "饭")):
+        return 14.0
+    if any(k in window for k in ("烘焙", "点心", "主食")):
+        return 8.0
+    return 12.0
+
+
+def infer_cuisine(window: str, canteen: str, flavor_text: str = "") -> str:
+    for key, cuisine in WINDOW_CUISINE.items():
+        if key in window:
+            return cuisine
+    text = window + flavor_text
+    if any(k in text for k in ("湘", "辣")):
+        return "湘"
+    if "粤" in text or "广" in text:
+        return "粤"
+    if "川" in text or "麻辣" in text:
+        return "川"
+    if "西北" in text or "拉面" in text:
+        return "西北"
+    return CANTEEN_META.get(canteen, {}).get("cuisine_default", "融合")
 
 
 def parse_price(raw) -> float:
@@ -312,6 +418,204 @@ def merge_json_canteen_file(
 
         dish = normalize_imported_dish(
             raw, dish_id, target_canteen, floor, location_prefix, window_numbers
+        )
+        existing.append(dish)
+        existing_names.add((target_canteen, name))
+        existing_ids.add(dish_id)
+        added += 1
+        idx += 1
+
+    path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
+    return added, skipped
+
+
+def _next_dish_id(prefix: str, idx: int, existing_ids: set) -> Tuple[str, int]:
+    dish_id = f"{prefix}{idx:03d}"
+    while dish_id in existing_ids:
+        idx += 1
+        dish_id = f"{prefix}{idx:03d}"
+    return dish_id, idx
+
+
+def load_nutrition_csv(csv_path: str, encoding: str = "gbk") -> List[Dict]:
+    """家园/燕南格式：图片编号, 菜品名称, 主要原料, 口味特点, 营养成分, 热量"""
+    import csv
+
+    rows = []
+    current_loc = ""
+    with open(csv_path, encoding=encoding, newline="") as f:
+        reader = csv.reader(f)
+        header = next(reader, None)
+        for row in reader:
+            if not row or not any(str(c).strip() for c in row):
+                continue
+            if row[0].strip():
+                current_loc = row[0].strip()
+            name = row[1].strip() if len(row) > 1 else ""
+            if not name or name in ("菜品名称",):
+                continue
+            rows.append({
+                "location": current_loc,
+                "name": name,
+                "ingredients": row[2].strip() if len(row) > 2 else "",
+                "flavor_text": row[3].strip() if len(row) > 3 else "",
+                "nutrition_text": row[4].strip() if len(row) > 4 else "",
+                "calories_raw": row[5].strip() if len(row) > 5 else "",
+            })
+    return rows
+
+
+def load_changchun_csv(csv_path: str, encoding: str = "gbk") -> List[Dict]:
+    """畅春园格式：地点, 菜品名称, 原料, 口味, 蛋白质…热量"""
+    import csv
+
+    rows = []
+    current_loc = ""
+    with open(csv_path, encoding=encoding, newline="") as f:
+        reader = csv.reader(f)
+        next(reader, None)
+        for row in reader:
+            if not row or not any(str(c).strip() for c in row):
+                continue
+            if row[0].strip():
+                current_loc = row[0].strip()
+            name = row[1].strip() if len(row) > 1 else ""
+            if not name:
+                continue
+            rows.append({
+                "location": current_loc,
+                "name": name,
+                "ingredients": row[2].strip() if len(row) > 2 else "",
+                "flavor_text": row[3].strip() if len(row) > 3 else "",
+                "protein": parse_gram_value(row[4] if len(row) > 4 else ""),
+                "fat": parse_gram_value(row[5] if len(row) > 5 else ""),
+                "carbs": parse_gram_value(row[6] if len(row) > 6 else ""),
+                "fiber": parse_gram_value(row[7] if len(row) > 7 else ""),
+                "sodium": parse_gram_value(row[8] if len(row) > 8 else ""),
+                "calcium": parse_gram_value(row[9] if len(row) > 9 else ""),
+                "iron": parse_gram_value(row[10] if len(row) > 10 else ""),
+                "vitamin_c": parse_gram_value(row[11] if len(row) > 11 else ""),
+                "calories": parse_calories(row[12] if len(row) > 12 else ""),
+            })
+    return rows
+
+
+def csv_row_to_dish(
+    row: Dict,
+    dish_id: str,
+    canteen: str,
+    location_prefix: str,
+    window_numbers: Dict[str, int],
+    *,
+    floor_override: int = None,
+) -> Dict:
+    window, floor, hint = parse_csv_location(row.get("location", ""), location_prefix)
+    if floor_override is not None:
+        floor = floor_override
+
+    if window not in window_numbers:
+        window_numbers[window] = len(window_numbers) + 1
+
+    name = row["name"]
+    ingredients = row.get("ingredients", "")
+    flavor_text = row.get("flavor_text", "")
+    calories = row.get("calories") or parse_calories(row.get("calories_raw", 400))
+
+    if row.get("protein"):
+        nutrition = {
+            "calories": int(calories),
+            "protein": row.get("protein", 0),
+            "fat": row.get("fat", 0),
+            "carbs": row.get("carbs", 0),
+            "fiber": row.get("fiber", 2),
+        }
+    else:
+        nutrition = infer_nutrition(calories)
+
+    price = infer_price_from_context(name, window, calories)
+    cuisine = infer_cuisine(window, canteen, flavor_text)
+    meta = CANTEEN_META.get(canteen, {"canteen_id": canteen, "cuisine_default": "融合"})
+
+    dish = {
+        "id": dish_id,
+        "name": name,
+        "canteen": canteen,
+        "canteen_id": meta["canteen_id"],
+        "window": window,
+        "window_number": window_numbers[window],
+        "floor": floor,
+        "price": price,
+        "cuisine": cuisine,
+        "flavor": parse_flavor_text(flavor_text) or infer_flavor(name, ingredients),
+        "cooking": "现做",
+        "appearance": 3,
+        "portion_size": "M" if calories < 350 else "L",
+        "prep_time": 8,
+        "image": "",
+        "tags": infer_tags(name, window, price),
+        "rating": 4.0,
+        "rating_count": 0,
+        "hours": {"lunch": True, "dinner": True, "late_night": "夜宵" in window or "风味" in window},
+        "related_dishes": [],
+        "location_hint": hint,
+        "ingredients": ingredients,
+        **nutrition,
+    }
+    if row.get("nutrition_text"):
+        dish["nutrition_notes"] = row["nutrition_text"]
+    if row.get("sodium"):
+        dish["sodium_mg"] = row.get("sodium")
+    return dish
+
+
+def merge_csv_canteen(
+    dishes_file: str,
+    csv_path: str,
+    *,
+    target_canteen: str,
+    location_prefix: str,
+    id_prefix: str,
+    loader: str = "nutrition",
+    encoding: str = "gbk",
+    floor_override: int = None,
+    replace_existing: bool = False,
+) -> Tuple[int, int]:
+    """
+    从 CSV 导入菜品并合并到 dishes.json。
+    loader: nutrition（家园/燕南）| changchun
+    replace_existing=True 时先移除该食堂已有菜品。
+    """
+    path = Path(dishes_file)
+    existing = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+
+    if replace_existing:
+        existing = [d for d in existing if d.get("canteen") != target_canteen]
+
+    if loader == "changchun":
+        raw_rows = load_changchun_csv(csv_path, encoding=encoding)
+    else:
+        raw_rows = load_nutrition_csv(csv_path, encoding=encoding)
+
+    existing_names = {(d["canteen"], d["name"]) for d in existing}
+    existing_ids = {d["id"] for d in existing}
+    window_numbers: Dict[str, int] = {}
+    added = 0
+    skipped = 0
+    idx = 1
+
+    for row in raw_rows:
+        name = (row.get("name") or "").strip()
+        if not name:
+            skipped += 1
+            continue
+        if (target_canteen, name) in existing_names:
+            skipped += 1
+            continue
+
+        dish_id, idx = _next_dish_id(id_prefix, idx, existing_ids)
+        dish = csv_row_to_dish(
+            row, dish_id, target_canteen, location_prefix, window_numbers,
+            floor_override=floor_override,
         )
         existing.append(dish)
         existing_names.add((target_canteen, name))

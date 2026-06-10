@@ -4,12 +4,13 @@ map_guide_dialog.py - 可视化找店指引（地图 + A* 路线）
 
 from PyQt5.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
-    QScrollArea, QWidget,
+    QScrollArea, QWidget, QFrame,
 )
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
-from frontend.watercolor_style import COLORS, get_font, get_button_style
+from frontend.watercolor_style import COLORS, get_font, get_button_style, get_dialog_style
+from frontend.ui_scale import fit_pixmap_size
 from backend.campus_navigation import CampusNavigationService
 
 
@@ -29,37 +30,93 @@ class MapGuideDialog(QDialog):
         self.nav = nav or CampusNavigationService.get_instance()
         self.setWindowTitle("找店指引")
         self.setMinimumSize(640, 520)
+        self._apply_dialog_style()
         self._build_ui()
         self._load_route()
 
+    def showEvent(self, event):
+        super().showEvent(event)
+        if self.parent():
+            pg = self.parent().geometry()
+            self.resize(
+                max(640, min(int(pg.width() * 0.82), 1100)),
+                max(520, min(int(pg.height() * 0.82), 860)),
+            )
+
+    def _fit_map_pixmap(self, pix: QPixmap) -> QPixmap:
+        max_w = max(360, self.width() - 64)
+        max_h = max(260, self.height() - 200)
+        size = fit_pixmap_size(pix.width(), pix.height(), max_w, max_h)
+        return pix.scaled(size, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+
+    def _apply_dialog_style(self):
+        self.setStyleSheet(f"""
+            {get_dialog_style()}
+            QLabel {{
+                background-color: transparent;
+                color: {COLORS['text_dark'].name()};
+            }}
+            QScrollArea {{
+                background-color: white;
+                border: 1px solid {COLORS['border_light'].name()};
+                border-radius: 12px;
+            }}
+            QScrollArea > QWidget > QWidget {{
+                background-color: white;
+            }}
+        """)
+
     def _build_ui(self):
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(20, 20, 20, 16)
         layout.setSpacing(12)
 
         title = QLabel(f"前往 {self.canteen_name}")
         title.setFont(get_font(18, bold=True))
-        title.setStyleSheet(f"color: {COLORS['text_dark'].name()};")
+        title.setStyleSheet(f"color: {COLORS['text_dark'].name()}; background: transparent;")
         layout.addWidget(title)
 
         self.route_lbl = QLabel()
         self.route_lbl.setFont(get_font(11))
         self.route_lbl.setWordWrap(True)
-        self.route_lbl.setStyleSheet(f"color: {COLORS['text_medium'].name()};")
+        self.route_lbl.setStyleSheet(f"color: {COLORS['text_medium'].name()}; background: transparent;")
         layout.addWidget(self.route_lbl)
 
         self.meta_lbl = QLabel()
         self.meta_lbl.setFont(get_font(10))
-        self.meta_lbl.setStyleSheet(f"color: {COLORS['text_light'].name()};")
+        self.meta_lbl.setStyleSheet(f"color: {COLORS['text_light'].name()}; background: transparent;")
         layout.addWidget(self.meta_lbl)
+
+        hint = QLabel("下方为校园地图，红线为推荐步行路线")
+        hint.setFont(get_font(10))
+        hint.setStyleSheet(f"color: {COLORS['text_light'].name()}; background: transparent;")
+        layout.addWidget(hint)
 
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setAlignment(Qt.AlignCenter)
-        scroll.setStyleSheet(f"border: 1px solid {COLORS['border_light'].name()}; border-radius: 12px;")
+        scroll.setStyleSheet(f"""
+            QScrollArea {{
+                background-color: white;
+                border: 1px solid {COLORS['border_light'].name()};
+                border-radius: 12px;
+            }}
+        """)
+
+        map_container = QFrame()
+        map_container.setStyleSheet("QFrame { background-color: white; border: none; }")
+        map_layout = QVBoxLayout(map_container)
+        map_layout.setContentsMargins(12, 12, 12, 12)
 
         self.map_lbl = QLabel("正在加载地图…")
         self.map_lbl.setAlignment(Qt.AlignCenter)
-        scroll.setWidget(self.map_lbl)
+        self.map_lbl.setStyleSheet(
+            f"color: {COLORS['text_medium'].name()}; background-color: white; padding: 24px;"
+        )
+        self.map_lbl.setMinimumHeight(200)
+        map_layout.addWidget(self.map_lbl)
+
+        scroll.setWidget(map_container)
         layout.addWidget(scroll, 1)
 
         btn_row = QHBoxLayout()
@@ -94,12 +151,16 @@ class MapGuideDialog(QDialog):
             img_path = self.nav.render_route_image(route["path_ids"])
             pix = QPixmap(img_path)
             if not pix.isNull():
-                scaled = pix.scaled(900, 650, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+                scaled = self._fit_map_pixmap(pix)
                 self.map_lbl.setPixmap(scaled)
+                self.map_lbl.setText("")
+                self.map_lbl.setStyleSheet("background-color: white;")
                 self.map_lbl.setMinimumSize(scaled.size())
             else:
-                self.map_lbl.setText("地图加载失败")
+                self.map_lbl.setPixmap(QPixmap())
+                self.map_lbl.setText("地图加载失败，请稍后重试")
         except Exception as e:
+            self.map_lbl.setPixmap(QPixmap())
             self.map_lbl.setText(f"地图渲染失败: {e}")
 
     def _show_base_map(self):
@@ -110,6 +171,11 @@ class MapGuideDialog(QDialog):
             )
             pix = QPixmap(path)
             if not pix.isNull():
-                self.map_lbl.setPixmap(pix.scaled(900, 650, Qt.KeepAspectRatio, Qt.SmoothTransformation))
+                scaled = self._fit_map_pixmap(pix)
+                self.map_lbl.setPixmap(scaled)
+                self.map_lbl.setText("")
+                self.map_lbl.setStyleSheet("background-color: white;")
+            else:
+                self.map_lbl.setText("（校园地图暂不可用）")
         except Exception:
             self.map_lbl.setText("（校园地图暂不可用）")

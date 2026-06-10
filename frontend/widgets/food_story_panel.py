@@ -2,7 +2,9 @@
 food_story_panel.py - 主页美食故事面板（随机展示 + 入口）
 """
 
-from PyQt5.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushButton
+from PyQt5.QtWidgets import (
+    QFrame, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QWidget, QSizePolicy,
+)
 from PyQt5.QtCore import Qt, pyqtSignal
 
 from frontend.watercolor_style import (
@@ -42,18 +44,18 @@ class FoodStoryPanel(QFrame):
         header.addStretch()
 
         self.shuffle_btn = QPushButton("换一个")
-        self.shuffle_btn.setFixedSize(200, 50)
-        self.shuffle_btn.setFont(get_font(20, bold=True))
+        self.shuffle_btn.setFixedSize(170, 43)
+        self.shuffle_btn.setFont(get_font(17, bold=True))
         self.shuffle_btn.setCursor(Qt.PointingHandCursor)
         self.shuffle_btn.setStyleSheet(f"""
             QPushButton {{
                 background-color: {COLORS["secondary"].name()};
                 color: white;
                 border: none;
-                border-radius: 12px;
-                font-size: 24px;
+                border-radius: 10px;
+                font-size: 20px;
                 font-weight: bold;
-                padding: 8px 16px;
+                padding: 7px 14px;
             }}
             QPushButton:hover {{
                 background-color: {COLORS["secondary"].lighter(120).name()};
@@ -63,18 +65,18 @@ class FoodStoryPanel(QFrame):
         header.addWidget(self.shuffle_btn)
 
         self.more_btn = QPushButton("故事集")
-        self.more_btn.setFixedSize(200, 50)
-        self.more_btn.setFont(get_font(20, bold=True))
+        self.more_btn.setFixedSize(170, 43)
+        self.more_btn.setFont(get_font(17, bold=True))
         self.more_btn.setCursor(Qt.PointingHandCursor)
         self.more_btn.setStyleSheet(f"""
             QPushButton {{
                 background-color: {COLORS["primary"].name()};
                 color: white;
                 border: none;
-                border-radius: 12px;
-                font-size: 24px;
+                border-radius: 10px;
+                font-size: 20px;
                 font-weight: bold;
-                padding: 8px 16px;
+                padding: 7px 14px;
             }}
             QPushButton:hover {{
                 background-color: {COLORS["primary"].lighter(120).name()};
@@ -84,8 +86,13 @@ class FoodStoryPanel(QFrame):
         header.addWidget(self.more_btn)
         layout.addLayout(header)
 
-        self.card_host = QVBoxLayout()
-        layout.addLayout(self.card_host)
+        self.card_container = QWidget()
+        self.card_container.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.card_container.setStyleSheet("background: transparent;")
+        self.card_host = QVBoxLayout(self.card_container)
+        self.card_host.setContentsMargins(0, 0, 0, 0)
+        self.card_host.setSpacing(0)
+        layout.addWidget(self.card_container)
 
         self.setStyleSheet(f"""
             QFrame {{
@@ -97,10 +104,15 @@ class FoodStoryPanel(QFrame):
         self.setMaximumHeight(400)
 
     def _clear_card(self):
+        """立即移除旧卡片，避免 deleteLater 延迟导致故事重叠"""
         while self.card_host.count():
             item = self.card_host.takeAt(0)
-            if item.widget():
-                item.widget().deleteLater()
+            widget = item.widget()
+            if widget:
+                widget.hide()
+                widget.setParent(None)
+                widget.deleteLater()
+        self.card_container.update()
 
     def show_random(self):
         self._clear_card()
@@ -111,11 +123,13 @@ class FoodStoryPanel(QFrame):
             empty.setStyleSheet(f"color: {COLORS['text_light'].name()};")
             empty.setWordWrap(True)
             self.card_host.addWidget(empty)
+            self.card_container.updateGeometry()
             return
         self._current = story
         card = FoodStoryCard(story, compact=True)
         card.open_link.connect(self.story_link.emit)
         self.card_host.addWidget(card)
+        self.card_container.updateGeometry()
 
     def refresh(self):
         self.show_random()

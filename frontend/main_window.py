@@ -10,12 +10,13 @@ import random
 from PyQt5.QtWidgets import (
     QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QStackedWidget,
     QPushButton, QLabel, QFrame, QSizePolicy, QScrollArea, QGridLayout,
-    QGraphicsDropShadowEffect, QSpacerItem, QMessageBox, QApplication
+    QSpacerItem, QMessageBox, QApplication, QGraphicsDropShadowEffect
 )
 from PyQt5.QtGui import QFont, QPixmap, QIcon, QColor, QPainter, QLinearGradient, QBrush
-from PyQt5.QtCore import Qt, QSize, QTimer, pyqtSignal
+from PyQt5.QtCore import Qt, QSize, QTimer, pyqtSignal, QEvent
 
 from backend.data_manager import DataManager
+from backend.paths import icon_path
 from backend.recommender import Recommender
 from backend.ai_backend import create_ai_backend
 from backend.campus_navigation import CampusNavigationService
@@ -26,7 +27,9 @@ from frontend.watercolor_style import (
     get_button_style, get_card_style, color_with_alpha, POEMS
 )
 from frontend.season_theme import SeasonThemeManager, SEASON_LABELS
+from frontend.ui_scale import sidebar_width_for, set_viewport_size
 from frontend.widgets.frameless_titlebar import FramelessTitleBar, WindowDragFilter
+from frontend.widgets.edge_resize import FramelessResizeController
 
 # 页面导入（延迟导入避免循环依赖）
 
@@ -124,12 +127,16 @@ class ModeToggleWidget(QFrame):
                 border-radius: 20px;
             }}
         """)
+        hover_bg = color_with_alpha(COLORS["primary_light"], 72)
         self.offline_btn.setStyleSheet(f"""
             QPushButton {{
                 background: {COLORS['primary'].name() if offline_active else 'transparent'};
                 color: {'white' if offline_active else COLORS['text_medium'].name()};
                 border: none;
                 border-radius: 16px;
+            }}
+            QPushButton:hover {{
+                background: {COLORS['primary'].lighter(115).name() if offline_active else hover_bg};
             }}
         """)
         self.ai_btn.setStyleSheet(f"""
@@ -138,6 +145,9 @@ class ModeToggleWidget(QFrame):
                 color: {'white' if not offline_active else COLORS['text_medium'].name()};
                 border: none;
                 border-radius: 16px;
+            }}
+            QPushButton:hover {{
+                background: {COLORS['secondary'].lighter(115).name() if not offline_active else hover_bg};
             }}
         """)
         if emit:
@@ -190,8 +200,8 @@ class HeaderWidget(QFrame):
                 padding: 3px 10px;
             }}
             QPushButton:hover {{
-                background-color: {COLORS['accent_gold'].name()};
-                color: white;
+                background-color: {COLORS['accent_gold'].lighter(125).name()};
+                color: {COLORS['text_dark'].name()};
             }}
         """)
         self.refresh_btn.setCursor(Qt.PointingHandCursor)
@@ -223,8 +233,8 @@ class HeaderWidget(QFrame):
                 padding: 3px 10px;
             }}
             QPushButton:hover {{
-                background-color: {COLORS['accent_gold'].name()};
-                color: white;
+                background-color: {COLORS['accent_gold'].lighter(125).name()};
+                color: {COLORS['text_dark'].name()};
             }}
         """)
         overlay = COLORS.get("header_overlay", COLORS["bg_card"].name())
@@ -286,8 +296,7 @@ class SidebarWidget(QFrame):
             background: {overlay};
             border-right: 1px solid {COLORS['border_light'].name()};
         """)
-        self.setMinimumWidth(350)
-        self.setMaximumWidth(350)
+        self.setMinimumWidth(200)
 
     def refresh_theme(self):
         self._apply_panel_style()
@@ -317,7 +326,8 @@ class WatercolorBackgroundWidget(QWidget):
         if bg_path and os.path.exists(bg_path):
             self.bg_image = QPixmap(bg_path)
         else:
-            fallback = os.path.join(os.path.dirname(__file__), "..", "images", "bg_weiminghu.jpg")
+            from backend.paths import images_dir
+            fallback = str(images_dir() / "bg_weiminghu.jpg")
             if os.path.exists(fallback):
                 self.bg_image = QPixmap(fallback)
 
@@ -372,28 +382,51 @@ class MainWindow(QMainWindow):
         self.footprint.backfill_from_history(self.dm.history, dishes_map)
 
         self.setWindowTitle("今天吃什么？ - 北大食堂智能推荐")
-        self.setMinimumSize(1100, 750)
-        self.resize(2000, 1600)
+        ico = icon_path()
+        if ico.exists():
+            self.setWindowIcon(QIcon(str(ico)))
+        self.setMinimumSize(960, 640)
 
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.Window)
-        self.setAttribute(Qt.WA_TranslucentBackground, False)
+        self.setAttribute(Qt.WA_TranslucentBackground, True)
 
+        self.page_shells = {}
         self.setup_ui()
         self.apply_season_theme()
+
+        self.title_bar.close_clicked.connect(self.close)
+        self.title_bar.minimize_clicked.connect(self.showMinimized)
+        self.title_bar.fullscreen_clicked.connect(self.toggle_fullscreen)
+        self.title_bar.update_fullscreen_button(False)
+
+        self._resize_ctrl = FramelessResizeController(self, self._outer_shell)
+        self._resize_ctrl.relayout()
+
         self._drag_filter = WindowDragFilter(self)
         self.header.installEventFilter(self._drag_filter)
 
     def setup_ui(self):
-        central = QWidget()
-        self.setCentralWidget(central)
-        root = QVBoxLayout(central)
+        self._outer_shell = QWidget()
+        outer = self._outer_shell
+        self.setCentralWidget(outer)
+        outer_layout = QVBoxLayout(outer)
+        outer_layout.setContentsMargins(18, 14, 18, 22)
+        outer_layout.setSpacing(0)
+
+        self.window_frame = QFrame()
+        self.window_frame.setObjectName("mainWindowFrame")
+        frame_shadow = QGraphicsDropShadowEffect(self.window_frame)
+        frame_shadow.setBlurRadius(52)
+        frame_shadow.setOffset(0, 14)
+        frame_shadow.setColor(QColor(0, 0, 0, 110))
+        self.window_frame.setGraphicsEffect(frame_shadow)
+
+        root = QVBoxLayout(self.window_frame)
         root.setContentsMargins(0, 0, 0, 0)
         root.setSpacing(0)
 
         self.title_bar = FramelessTitleBar(self)
         self.title_bar.bind_window(self)
-        self.title_bar.close_clicked.connect(self.close)
-        self.title_bar.minimize_clicked.connect(self.showMinimized)
         root.addWidget(self.title_bar)
 
         body = QHBoxLayout()
@@ -409,8 +442,7 @@ class MainWindow(QMainWindow):
         self.sidebar_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.sidebar_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.sidebar_scroll.setFrameShape(QFrame.NoFrame)
-        self.sidebar_scroll.setMinimumWidth(350)
-        self.sidebar_scroll.setMaximumWidth(350)
+        self.sidebar_scroll.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
         self.sidebar_scroll.setStyleSheet("QScrollArea { border: none; background: transparent; }")
         body.addWidget(self.sidebar_scroll)
 
@@ -419,21 +451,28 @@ class MainWindow(QMainWindow):
         right_area.setSpacing(0)
 
         self.header = HeaderWidget()
+        self.header.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.header.mode_toggle.set_mode(self.app_mode, emit=False)
         self.header.mode_toggle.mode_changed.connect(self.on_app_mode_changed)
         right_area.addWidget(self.header)
 
         self.content_bg = WatercolorBackgroundWidget(self.season_manager)
+        self.content_bg.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         content_layout = QVBoxLayout(self.content_bg)
         content_layout.setContentsMargins(20, 15, 20, 15)
 
         self.stack = QStackedWidget()
+        self.stack.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.stack.setStyleSheet("background-color: transparent;")
-        content_layout.addWidget(self.stack)
+        content_layout.addWidget(self.stack, 1)
 
         right_area.addWidget(self.content_bg, 1)
         body.addLayout(right_area, 1)
         root.addLayout(body, 1)
+
+        outer_layout.addWidget(self.window_frame)
+        self._update_window_frame_style()
+        self._update_sidebar_width()
 
         self.create_pages()
         self.switch_page("home")
@@ -518,25 +557,38 @@ class MainWindow(QMainWindow):
         self.add_page("settings", settings)
 
     def add_page(self, key, widget):
-        """添加页面到栈"""
+        """添加页面到栈（外包滚动区以支持窗口缩放）"""
+        widget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        shell = QScrollArea()
+        shell.setWidgetResizable(True)
+        shell.setFrameShape(QFrame.NoFrame)
+        shell.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        shell.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        shell.setStyleSheet("QScrollArea { background: transparent; border: none; }")
+        shell.setWidget(widget)
+
         self.pages[key] = widget
-        self.stack.addWidget(widget)
+        self.page_shells[key] = shell
+        self.stack.addWidget(shell)
+
+    def _current_page_widget(self):
+        shell = self.stack.currentWidget()
+        if isinstance(shell, QScrollArea):
+            return shell.widget()
+        return shell
 
     def switch_page(self, key):
         """切换页面"""
         if key == "recommend":
             key = "ai_recommend" if self.app_mode == "ai" else "recommend"
 
-        if key in self.pages:
-            # 更新页面数据
+        if key in self.page_shells:
             page = self.pages[key]
-            if hasattr(page, 'refresh'):
+            if hasattr(page, "refresh"):
                 page.refresh()
 
-            idx = self.stack.indexOf(page)
-            self.stack.setCurrentIndex(idx)
+            self.stack.setCurrentWidget(self.page_shells[key])
 
-            # 更新导航状态
             if key in ["home", "recommend", "canteens", "history", "footprint", "stories", "feedback", "settings"]:
                 self.sidebar.set_active(key)
 
@@ -564,9 +616,7 @@ class MainWindow(QMainWindow):
     def on_app_mode_changed(self, mode: str):
         self.set_app_mode(mode)
         current = self.stack.currentWidget()
-        survey = self.pages.get("recommend")
-        ai_page = self.pages.get("ai_recommend")
-        if current in (survey, ai_page):
+        if current in (self.page_shells.get("recommend"), self.page_shells.get("ai_recommend")):
             self.switch_page("recommend")
 
     def show_dish_detail(self, dish_id):
@@ -579,8 +629,7 @@ class MainWindow(QMainWindow):
     def go_back(self):
         """返回上一页"""
         current = self.stack.currentWidget()
-        # 简单的返回逻辑
-        if current == self.pages.get("dish_detail"):
+        if current == self.page_shells.get("dish_detail"):
             self.switch_page("canteens")
         else:
             self.switch_page("home")
@@ -622,11 +671,53 @@ class MainWindow(QMainWindow):
         if fp_page and hasattr(fp_page, "refresh"):
             fp_page.refresh()
 
+    def _update_window_frame_style(self):
+        if hasattr(self, "window_frame"):
+            self.window_frame.setStyleSheet(f"""
+                QFrame#mainWindowFrame {{
+                    background: {COLORS['bg_main'].name()};
+                    border-radius: 14px;
+                    border: 1px solid {COLORS['border_light'].name()};
+                }}
+            """)
+
+    def _update_sidebar_width(self):
+        if hasattr(self, "sidebar_scroll"):
+            w = sidebar_width_for(max(self.width(), 900))
+            self.sidebar_scroll.setFixedWidth(w)
+            if hasattr(self, "sidebar"):
+                self.sidebar.setMinimumWidth(w)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        set_viewport_size(self.width(), self.height())
+        self._update_sidebar_width()
+        if hasattr(self, "_resize_ctrl"):
+            self._resize_ctrl.relayout()
+        page = self._current_page_widget()
+        if page and hasattr(page, "on_viewport_resize"):
+            page.on_viewport_resize(self.width(), self.height())
+
+    def toggle_fullscreen(self):
+        if self.isFullScreen():
+            self.showNormal()
+        else:
+            self.showFullScreen()
+
+    def changeEvent(self, event):
+        super().changeEvent(event)
+        if event.type() == QEvent.WindowStateChange:
+            fullscreen = self.isFullScreen()
+            self.title_bar.update_fullscreen_button(fullscreen)
+            if hasattr(self, "_resize_ctrl"):
+                self._resize_ctrl.set_enabled(not fullscreen)
+
     def apply_season_theme(self):
         """应用四季主题（配色 + 背景 + 控件刷新）"""
         self.season_manager.update_from_settings(self.dm.get_settings())
         self.season_manager.apply_to_colors_dict(COLORS)
-        self.setStyleSheet(get_stylesheet())
+        self._update_window_frame_style()
+        self.setStyleSheet("background: transparent;")
         QApplication.instance().setStyleSheet(get_stylesheet())
 
         label = SEASON_LABELS.get(self.season_manager.season, "")
@@ -636,7 +727,7 @@ class MainWindow(QMainWindow):
         self.header.refresh_theme()
         self.content_bg.refresh_theme()
 
-        page = self.stack.currentWidget()
+        page = self._current_page_widget()
         if page and hasattr(page, "refresh"):
             page.refresh()
 
@@ -646,7 +737,7 @@ class MainWindow(QMainWindow):
     def showEvent(self, event):
         """显示时刷新 + 美食足迹周报弹窗"""
         super().showEvent(event)
-        current = self.stack.currentWidget()
+        current = self._current_page_widget()
         if current and hasattr(current, "refresh"):
             current.refresh()
         if self._footprint_popup_pending:

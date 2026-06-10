@@ -10,25 +10,26 @@
     "queue": "接受排队"
   },
   "social": {
-    "companions": 1,
+    "companions": 4,
     "room_code": ""
   },
   "disliked_ingredients": [],
   "created_at": "2026-05-18T17:59:51.570211",
-  "updated_at": "2026-06-09T10:55:07.998123",
+  "updated_at": "2026-06-10T16:53:07.908403",
   "default_mode": "stable",
   "preferred_flavors": [
-    "微辣"
+    "微辣",
+    "酸甜"
   ],
   "budget_range": {
     "min": 0,
     "max": 50
   },
   "meal_scenes": [
-    "独自速食"
+    "团体宴请"
   ],
   "nutrition_goals": "均衡",
-  "current_location": "博雅塔",
+  "current_location": "东侧门",
   "explore_stability_ratio": 0.3,
-  "current_location_node_id": 9
+  "current_location_node_id": 2
 }

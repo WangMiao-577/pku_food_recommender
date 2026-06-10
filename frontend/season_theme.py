@@ -9,7 +9,11 @@ from typing import Dict, Optional
 
 from PyQt5.QtGui import QColor
 
-IMAGES_DIR = os.path.join(os.path.dirname(__file__), "..", "images", "Season background")
+def _season_images_dir():
+    from backend.paths import images_dir
+    return str(images_dir() / "Season background")
+
+IMAGES_DIR = _season_images_dir()
 
 SEASON_LABELS = {
     "spring": "春·未名湖畔",

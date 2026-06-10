@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 
-from frontend.watercolor_style import COLORS, get_font, get_button_style
+from frontend.watercolor_style import COLORS, get_font, get_button_style, get_dialog_style
 
 
 class EatRecordDialog(QDialog):
@@ -58,10 +58,17 @@ class EatRecordDialog(QDialog):
         layout.addLayout(comp_row)
 
         buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        buttons.button(QDialogButtonBox.Ok).setText("记录足迹")
+        ok_btn = buttons.button(QDialogButtonBox.Ok)
+        ok_btn.setText("记录足迹")
+        ok_btn.setStyleSheet(get_button_style("primary", radius=8))
+        cancel_btn = buttons.button(QDialogButtonBox.Cancel)
+        cancel_btn.setText("取消")
+        cancel_btn.setStyleSheet(get_button_style("secondary", radius=8))
         buttons.accepted.connect(self.accept)
         buttons.rejected.connect(self.reject)
         layout.addWidget(buttons)
+
+        self.setStyleSheet(get_dialog_style())
 
     def get_mood(self) -> str:
         btn = self.mood_group.checkedButton()

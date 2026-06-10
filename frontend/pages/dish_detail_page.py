@@ -16,6 +16,7 @@ from PyQt5.QtGui import QPixmap, QColor, QFont
 from PyQt5.QtCore import Qt, pyqtSignal
 
 from frontend.watercolor_style import COLORS, get_font, get_button_style, POEMS
+from frontend.ui_scale import dish_dim
 
 
 class NutritionBar(QFrame):
@@ -130,7 +131,7 @@ class DishDetailPage(QWidget):
 
         # 图片区
         self.img_lbl = QLabel()
-        self.img_lbl.setFixedHeight(280)
+        self.img_lbl.setFixedHeight(dish_dim(280))
         self.img_lbl.setScaledContents(True)
         self.img_lbl.setStyleSheet(f"""
             background-color: {COLORS['bg_warm'].name()};

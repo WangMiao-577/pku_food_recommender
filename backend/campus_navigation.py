@@ -11,38 +11,40 @@ from typing import Dict, List, Optional, Union
 
 from backend.campus_graph import CampusGraph
 
-PKU_MAP_DIR = Path(__file__).parent.parent / "pku_map"
+from backend.paths import pku_map_dir
+
+PKU_MAP_DIR = pku_map_dir()
 if str(PKU_MAP_DIR) not in sys.path:
     sys.path.insert(0, str(PKU_MAP_DIR))
 
 from pku_map_mapper import PKUMapMapper  # noqa: E402
 
 
-# 食堂 -> 最近地图节点
-CANTEEN_NODE_MAP = {
-    "家园食堂": 4,       # 东南门附近
-    "农园食堂": 10,      # 图书馆
-    "学一食堂": 6,       # 西南门
-    "学五食堂": 7,       # 西侧门
-    "燕南美食": 12,      # 百周年纪念讲堂
-    "佟园": 19,          # 勺园
-    "畅春园": 24,
-    "艺园": 29,          # 五四体育场
-    "勺园": 19,
-    "勺中": 19,
-    "勺西": 19,
-    "成府园": 3,         # 东门
-    "松林": 6,
-    "快餐车": 41,        # 二教
-    "二教地下3W": 41,
+# 菜品/业务数据中的食堂名 -> pku_nodes.csv 中 category=canteen 的节点名
+CANTEEN_NAME_ALIASES: Dict[str, str] = {
+    "艺园": "艺园食堂",
+    "佟园": "佟园食堂",
+    "勺园": "勺园食堂",
+    "勺中": "勺园食堂",
+    "勺西": "勺园食堂",
+    "松林": "松林快餐",
+    "畅春园": "畅春园食堂",
+    "成府园": "成府园食堂",
+    "家园三楼": "家园食堂",
+    "家园三层": "家园食堂",
+    "燕南地下": "燕南美食",
+    "雁南地下": "燕南美食",
+    # CSV 无独立节点，按地理位置就近落到食堂节点
+    "快餐车": "农园食堂",
+    "二教地下3W": "农园食堂",
 }
 
-# 旧版区域名 -> 默认节点（兼容）
+# 旧版区域名 -> 默认节点（兼容问卷/设置中的区域描述）
 REGION_NODE_FALLBACK = {
     "东南门/东门附近": 4,
     "西南门附近": 6,
     "西北门/西门附近": 1,
-    "中部教学区": 10,
+    "中部教学区": 55,
     "北部生活区": 8,
     "图书馆附近": 10,
 }
@@ -54,6 +56,7 @@ CATEGORY_LABELS = {
     "garden": "园林",
     "landscape": "景观",
     "sports": "体育",
+    "canteen": "食堂",
 }
 
 
@@ -69,12 +72,34 @@ class CampusNavigationService:
         self.mapper = PKUMapMapper(str(map_path), str(nodes_csv))
         self._temp_dir = Path(tempfile.gettempdir()) / "pku_food_nav"
         self._temp_dir.mkdir(parents=True, exist_ok=True)
+        self._canteen_nodes: Dict[str, int] = self._build_canteen_node_index()
 
     @classmethod
     def get_instance(cls) -> "CampusNavigationService":
         if cls._instance is None:
             cls._instance = cls()
         return cls._instance
+
+    @classmethod
+    def reset_instance(cls):
+        """测试或热重载时清空单例"""
+        cls._instance = None
+
+    def _build_canteen_node_index(self) -> Dict[str, int]:
+        """从 pku_nodes.csv 读取 category=canteen 的节点作为路径终点"""
+        index: Dict[str, int] = {}
+        for nid, node in self.graph.nodes.items():
+            if node.get("category") == "canteen":
+                index[node["name"]] = nid
+        return index
+
+    def list_canteen_nodes(self) -> List[Dict]:
+        nodes = []
+        for name, nid in sorted(self._canteen_nodes.items(), key=lambda x: x[1]):
+            item = self.graph.nodes[nid].copy()
+            item["node_id"] = nid
+            nodes.append(item)
+        return nodes
 
     def list_nodes(self) -> List[Dict]:
         return [self.graph.nodes[nid].copy() for nid in sorted(self.graph.nodes)]
@@ -115,13 +140,40 @@ class CampusNavigationService:
                 return nid
         return None
 
+    def _normalize_canteen_name(self, canteen_name: str) -> str:
+        name = (canteen_name or "").strip()
+        return CANTEEN_NAME_ALIASES.get(name, name)
+
     def canteen_to_node(self, canteen_name: str) -> Optional[int]:
-        if canteen_name in CANTEEN_NODE_MAP:
-            return CANTEEN_NODE_MAP[canteen_name]
-        for name, nid in CANTEEN_NODE_MAP.items():
-            if name in canteen_name or canteen_name in name:
+        """
+        将业务食堂名解析为地图食堂节点 ID。
+        优先使用 pku_nodes.csv 中 category=canteen 的精确坐标节点。
+        """
+        if not canteen_name:
+            return None
+
+        canonical = self._normalize_canteen_name(canteen_name)
+
+        if canonical in self._canteen_nodes:
+            return self._canteen_nodes[canonical]
+
+        # 去掉「食堂」「快餐」后缀再匹配
+        stripped = canonical.replace("食堂", "").replace("快餐", "").strip()
+        for node_name, nid in self._canteen_nodes.items():
+            node_core = node_name.replace("食堂", "").replace("快餐", "").strip()
+            if stripped and stripped == node_core:
                 return nid
-        return None
+
+        # 双向包含（如「燕南美食」↔ 节点名）
+        best_nid = None
+        best_len = -1
+        for node_name, nid in self._canteen_nodes.items():
+            if canonical in node_name or node_name in canonical:
+                match_len = min(len(canonical), len(node_name))
+                if match_len > best_len:
+                    best_len = match_len
+                    best_nid = nid
+        return best_nid
 
     def plan_route(self, start: Union[int, str], goal: Union[int, str]) -> Optional[Dict]:
         start_id = self.resolve_node(start) if not isinstance(start, int) else start
@@ -156,7 +208,11 @@ class CampusNavigationService:
         route = self.plan_route(start, goal_id)
         if route:
             route["canteen"] = canteen_name
+            route["goal_node_name"] = self.graph.nodes[goal_id]["name"]
             route["goal_name"] = canteen_name
+            if route["path_names"]:
+                route["path_names"][-1] = route["goal_node_name"]
+                route["route_text"] = " → ".join(route["path_names"])
         return route
 
     def render_route_image(

@@ -19,6 +19,8 @@ from frontend.watercolor_style import (
     COLORS, get_font, get_button_style, get_card_style, POEMS, CANTEEN_TAGS
 )
 from frontend.widgets.food_story_panel import FoodStoryPanel
+from frontend.ui_scale import scale_value, scale_pair, dish_dim
+from backend.paths import dish_image_path
 
 
 class FeatureCard(QFrame):
@@ -51,18 +53,18 @@ class FeatureCard(QFrame):
 
         # 按钮
         self.btn = QPushButton(btn_text)
-        self.btn.setFont(get_font(20, bold=True))
-        self.btn.setMinimumHeight(70)
+        self.btn.setFont(get_font(16, bold=True))
+        self.btn.setMinimumHeight(56)
         self.btn.setCursor(Qt.PointingHandCursor)
         self.btn.setStyleSheet(f"""
             QPushButton {{
                 background-color: {COLORS[color_key].name()};
                 color: white;
                 border: none;
-                border-radius: 12px;
-                font-size: 24px;
+                border-radius: 10px;
+                font-size: 19px;
                 font-weight: bold;
-                padding: 8px 16px;
+                padding: 6px 13px;
             }}
             QPushButton:hover {{
                 background-color: {COLORS[color_key].lighter(120).name()};
@@ -102,8 +104,8 @@ class TodayCard(QFrame):
 
     def setup_ui(self):
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(25, 20, 25, 20)
-        layout.setSpacing(15)
+        layout.setContentsMargins(18, 12, 18, 12)
+        layout.setSpacing(8)
 
         # 标题行
         title_row = QHBoxLayout()
@@ -123,11 +125,10 @@ class TodayCard(QFrame):
 
         # 推荐内容
         self.content = QHBoxLayout()
-        self.content.setSpacing(20)
+        self.content.setSpacing(16)
 
         # 菜品图片
         self.img_lbl = QLabel()
-        self.img_lbl.setFixedSize(280, 160)
         self.img_lbl.setStyleSheet(f"""
             background-color: {COLORS['bg_warm'].name()};
             border-radius: 12px;
@@ -138,6 +139,7 @@ class TodayCard(QFrame):
         # 菜品信息
         info_layout = QVBoxLayout()
         info_layout.setSpacing(8)
+        info_layout.setContentsMargins(8, 14, 0, 0)
 
         self.dish_name = QLabel()
         self.dish_name.setFont(get_font(15, bold=True))
@@ -158,39 +160,36 @@ class TodayCard(QFrame):
         # 操作按钮
         btn_row = QHBoxLayout()
         self.eat_btn = QPushButton("这就去吃！")
-        self.eat_btn.setFixedSize(200, 50)
-        self.eat_btn.setFont(get_font(20, bold=True))
+        self.eat_btn.setFont(get_font(17, bold=True))
         self.eat_btn.setCursor(Qt.PointingHandCursor)
         self.eat_btn.setStyleSheet(f"""
             QPushButton {{
                 background-color: {COLORS["secondary"].name()};
                 color: white;
                 border: none;
-                border-radius: 12px;
-                font-size: 24px;
+                border-radius: 10px;
+                font-size: 20px;
                 font-weight: bold;
-                padding: 8px 16px;
+                padding: 7px 14px;
             }}
             QPushButton:hover {{
                 background-color: {COLORS["secondary"].lighter(120).name()};
             }}
         """)
-        self.eat_btn.setFixedWidth(200)
         btn_row.addWidget(self.eat_btn)
 
         self.alt_btn = QPushButton("换一道")
-        self.alt_btn.setFixedSize(200, 50)
-        self.alt_btn.setFont(get_font(20, bold=True))
+        self.alt_btn.setFont(get_font(17, bold=True))
         self.alt_btn.setCursor(Qt.PointingHandCursor)
         self.alt_btn.setStyleSheet(f"""
             QPushButton {{
                 background-color: {COLORS["primary"].name()};
                 color: white;
                 border: none;
-                border-radius: 12px;
-                font-size: 24px;
+                border-radius: 10px;
+                font-size: 20px;
                 font-weight: bold;
-                padding: 8px 16px;
+                padding: 7px 14px;
             }}
             QPushButton:hover {{
                 background-color: {COLORS["primary"].lighter(120).name()};
@@ -218,10 +217,24 @@ class TodayCard(QFrame):
         shadow.setColor(QColor(0, 0, 0, 30))
         shadow.setOffset(0, 4)
         self.setGraphicsEffect(shadow)
-        self.setMaximumHeight(400)
+        self.setMinimumHeight(280)
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        # 加载今日推荐
+        self.apply_scaled_layout()
         self.load_today_recommendation()
+
+    def apply_scaled_layout(self, window_width: int = None):
+        iw, ih = scale_pair(
+            dish_dim(190), dish_dim(120), window_width,
+            min_w=dish_dim(178), min_h=dish_dim(115),
+        )
+        self.img_lbl.setMinimumSize(iw, ih)
+        self.img_lbl.setMaximumSize(iw + 16, ih + 8)
+        bw, bh = scale_pair(170, 43, window_width, min_w=119, min_h=34)
+        for btn in (self.eat_btn, self.alt_btn):
+            btn.setMinimumSize(bw, bh)
+            btn.setMaximumSize(bw + 34, bh + 7)
+            btn.setFont(get_font(scale_value(17, window_width, lo=12, hi=19), bold=True))
 
     def load_today_recommendation(self):
         """加载今日推荐（首次展示）"""
@@ -256,11 +269,9 @@ class TodayCard(QFrame):
         )
         self.dish_tags.setText(" · ".join(dish.get("tags", [])))
 
-        img_path = os.path.join(
-            os.path.dirname(__file__), "..", "..", "images", dish.get("image", "")
-        )
-        if os.path.exists(img_path):
-            self.img_lbl.setPixmap(QPixmap(img_path))
+        img_path = dish_image_path(dish.get("image", ""))
+        if img_path.exists():
+            self.img_lbl.setPixmap(QPixmap(str(img_path)))
             self.img_lbl.setAlignment(Qt.AlignCenter)
         else:
             self.img_lbl.setText("(菜品图片)")
@@ -323,14 +334,15 @@ class WelcomePage(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         main = QVBoxLayout(self)
         main.setContentsMargins(0, 0, 0, 0)
         main.setSpacing(20)
 
         # 顶部区域 - 未名湖背景
         top_area = QWidget()
-        top_area.setMinimumHeight(300)
-        top_area.setMaximumHeight(400)
+        top_area.setMinimumHeight(260)
+        top_area.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
         top_layout = QVBoxLayout(top_area)
         top_layout.setAlignment(Qt.AlignCenter)
 
@@ -420,7 +432,6 @@ class WelcomePage(QWidget):
             "查看足迹",
             "accent_gold"
         )
-        card3.setMaximumHeight(180)
         card3.btn.clicked.connect(self.go_footprint.emit)
         right_cards.addWidget(card3)
 
@@ -447,6 +458,9 @@ class WelcomePage(QWidget):
     def on_change_today(self):
         """换一道今日推荐"""
         self.today.load_another_recommendation()
+
+    def on_viewport_resize(self, width: int, height: int):
+        self.today.apply_scaled_layout(width)
 
     def refresh(self):
         """刷新页面"""

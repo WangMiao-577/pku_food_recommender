@@ -37,6 +37,7 @@ class PKUMapMapper:
         'garden': '#44CC44',     # 园林 - 绿色
         'landscape': '#00CED1',  # 景观 - 青色
         'sports': '#FF8844',     # 体育 - 橙色
+        'canteen': '#E85D75',    # 食堂 - 玫红
     }
     
     # 类别中文名称
@@ -47,6 +48,7 @@ class PKUMapMapper:
         'garden': '园林',
         'landscape': '景观',
         'sports': '体育',
+        'canteen': '食堂',
     }
     
     def __init__(self, map_path=None, nodes_csv_path=None):

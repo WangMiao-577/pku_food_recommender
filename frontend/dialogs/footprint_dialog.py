@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt, QTimer, QPropertyAnimation, QEasingCurve, pyqtSignal
 
-from frontend.watercolor_style import COLORS, get_font, get_button_style, color_with_alpha
+from frontend.watercolor_style import COLORS, get_font, get_button_style, get_dialog_style, color_with_alpha
 
 
 class FadeSlidePage(QWidget):
@@ -75,6 +75,7 @@ class FootprintWeeklyDialog(QDialog):
         btn_row = QHBoxLayout()
         self.prev_btn = QPushButton("上一条")
         self.prev_btn.setFont(get_font(10))
+        self.prev_btn.setStyleSheet(get_button_style("secondary", radius=10))
         self.prev_btn.clicked.connect(self._show_prev)
         btn_row.addWidget(self.prev_btn)
 
@@ -96,18 +97,13 @@ class FootprintWeeklyDialog(QDialog):
 
         close_btn = QPushButton("知道了")
         close_btn.setFont(get_font(10))
+        close_btn.setStyleSheet(get_button_style("primary", radius=10))
         close_btn.clicked.connect(self.reject)
         btn_row.addWidget(close_btn)
 
         layout.addLayout(btn_row)
 
-        self.setStyleSheet(f"""
-            QDialog {{
-                background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
-                    stop:0 {COLORS['bg_warm'].name()},
-                    stop:1 {COLORS['bg_card'].name()});
-            }}
-        """)
+        self.setStyleSheet(get_dialog_style())
 
     def _card(self, text: str, accent: str = "primary") -> FadeSlidePage:
         page = FadeSlidePage()

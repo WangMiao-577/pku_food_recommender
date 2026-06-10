@@ -14,7 +14,9 @@ from PyQt5.QtGui import QPixmap, QColor
 from PyQt5.QtCore import Qt, pyqtSignal
 
 from backend.data_manager import CANTEENS
+from backend.paths import dish_image_path
 from frontend.watercolor_style import COLORS, get_font, get_button_style, CANTEEN_TAGS
+from frontend.ui_scale import grid_columns, scale_value, viewport_width, dish_dim
 
 
 class CanteenCard(QFrame):
@@ -98,17 +100,18 @@ class DishSmallCard(QFrame):
 
         # 图片
         self.img = QLabel()
-        self.img.setFixedSize(130, 100)
+        iw, ih = scale_value(dish_dim(130)), scale_value(dish_dim(100), lo=dish_dim(72))
+        self.img.setMinimumSize(iw, ih)
+        self.img.setMaximumSize(iw + 20, ih + 16)
         self.img.setScaledContents(True)
         self.img.setStyleSheet(f"""
             background-color: {COLORS['bg_warm'].name()};
             border-radius: 8px;
         """)
 
-        img_path = os.path.join(os.path.dirname(__file__), "..", "..", "images",
-                                self.dish.get("image", ""))
-        if os.path.exists(img_path):
-            self.img.setPixmap(QPixmap(img_path))
+        img_path = dish_image_path(self.dish.get("image", ""))
+        if img_path.exists():
+            self.img.setPixmap(QPixmap(str(img_path)))
         else:
             self.img.setText("(图片)")
             self.img.setAlignment(Qt.AlignCenter)
@@ -170,6 +173,8 @@ class CanteenPage(QWidget):
         self.recommender = recommender
         self.current_canteen = None
         self.canteen_cards = {}
+        self._grid_cols = 4
+        self._filter_state = {}
         self.setup_ui()
 
     def setup_ui(self):
@@ -259,9 +264,32 @@ class CanteenPage(QWidget):
         # 加载所有菜品
         self.load_dishes()
 
+    def _compute_grid_cols(self, width: int = None) -> int:
+        width = width or self.width() or viewport_width()
+        content_w = max(320, width - scale_value(360))
+        return grid_columns(content_w, card_min_width=scale_value(220), max_cols=5)
+
+    def on_viewport_resize(self, width: int, height: int):
+        cols = self._compute_grid_cols(width)
+        if cols != self._grid_cols:
+            self._grid_cols = cols
+            fs = self._filter_state
+            self.load_dishes(
+                canteen_filter=fs.get("canteen"),
+                search_text=fs.get("search"),
+                cuisine_filter=fs.get("cuisine"),
+            )
+
     def load_dishes(self, canteen_filter=None, search_text=None, cuisine_filter=None):
         """加载菜品"""
-        # 清除
+        self._filter_state = {
+            "canteen": canteen_filter,
+            "search": search_text,
+            "cuisine": cuisine_filter,
+        }
+        cols = self._compute_grid_cols()
+        self._grid_cols = cols
+
         while self.dishes_layout.count():
             item = self.dishes_layout.takeAt(0)
             if item.widget():
@@ -287,17 +315,16 @@ class CanteenPage(QWidget):
         for i, dish in enumerate(dishes):
             card = DishSmallCard(dish)
             card.clicked.connect(self.view_dish.emit)
-            row = i // 4
-            col = i % 4
+            row = i // cols
+            col = i % cols
             self.dishes_layout.addWidget(card, row, col)
 
-        # 空状态
         if not dishes:
             empty = QLabel("没有找到匹配的菜品")
             empty.setFont(get_font(14))
             empty.setStyleSheet(f"color: {COLORS['text_light'].name()}; padding: 40px;")
             empty.setAlignment(Qt.AlignCenter)
-            self.dishes_layout.addWidget(empty, 0, 0, 1, 4)
+            self.dishes_layout.addWidget(empty, 0, 0, 1, cols)
 
     def on_canteen_select(self, canteen_name):
         """选择食堂"""

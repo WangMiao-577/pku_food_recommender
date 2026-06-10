@@ -173,7 +173,10 @@ DEFAULT_DISHES = [
 class DataManager:
     """数据管理器 - 负责所有数据的CRUD操作"""
 
-    def __init__(self, data_dir: str = "data"):
+    def __init__(self, data_dir: str = None):
+        if data_dir is None:
+            from backend.paths import get_data_dir
+            data_dir = get_data_dir()
         self.data_dir = data_dir
         os.makedirs(data_dir, exist_ok=True)
 

@@ -97,10 +97,50 @@ def get_card_style(bg_color=None, border_color=None, radius=12) -> str:
     """
 
 
-def get_button_style(color_key="primary", text_color="text_white", radius=8) -> str:
-    """获取按钮样式"""
+DIALOG_BG = "#FFFFFF"
+
+
+def button_hover_background(color_key: str = "primary") -> str:
+    """悬停时使用的更浅背景色"""
+    light = COLORS.get(f"{color_key}_light", COLORS[color_key])
+    return light.lighter(108).name()
+
+
+def button_hover_from_color(color: QColor) -> str:
+    """从任意 QColor 生成悬停浅色"""
+    return color.lighter(115).name()
+
+
+def get_dialog_style() -> str:
+    """弹窗纯白背景"""
+    return f"QDialog {{ background-color: {DIALOG_BG}; }}"
+
+
+def get_outline_button_style(color_key="secondary", radius=8) -> str:
+    """描边按钮（悬停变浅填充）"""
     color = COLORS[color_key].name()
-    color_dark = COLORS.get(f"{color_key}_dark", color)
+    hover = button_hover_background(color_key)
+    return f"""
+        QPushButton {{
+            background-color: transparent;
+            color: {COLORS['text_medium'].name()};
+            border: 1px solid {COLORS['border'].name()};
+            border-radius: {radius}px;
+            padding: 6px 14px;
+            font-family: "Microsoft YaHei";
+        }}
+        QPushButton:hover {{
+            background-color: {hover};
+            color: white;
+            border-color: {color};
+        }}
+    """
+
+
+def get_button_style(color_key="primary", text_color="text_white", radius=8) -> str:
+    """获取按钮样式（悬停变浅）"""
+    color = COLORS[color_key].name()
+    hover = button_hover_background(color_key)
     text = COLORS[text_color].name()
     return f"""
         QPushButton {{
@@ -113,7 +153,7 @@ def get_button_style(color_key="primary", text_color="text_white", radius=8) -> 
             font-family: "Microsoft YaHei";
         }}
         QPushButton:hover {{
-            background-color: {color_dark};
+            background-color: {hover};
         }}
         QPushButton:pressed {{
             background-color: {color};
@@ -174,9 +214,13 @@ def get_stylesheet() -> str:
     secondary = COLORS["secondary"].name()
     text_light = COLORS["text_light"].name()
     bg_warm = COLORS["bg_warm"].name()
+    dialog_bg = DIALOG_BG
     return f"""
     QMainWindow {{
         background-color: {bg};
+    }}
+    QDialog, QMessageBox {{
+        background-color: {dialog_bg};
     }}
     QWidget {{
         font-family: "Microsoft YaHei";

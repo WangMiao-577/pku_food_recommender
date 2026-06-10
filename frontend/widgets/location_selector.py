@@ -38,7 +38,7 @@ class MapLocationSelector(QComboBox):
         self.clear()
         self.addItem("请选择当前位置…", None)
         grouped = self.nav.list_nodes_by_category()
-        order = ["gate", "landmark", "landscape", "building", "garden", "sports"]
+        order = ["gate", "landmark", "landscape", "building", "canteen", "garden", "sports"]
         for cat in order:
             nodes = grouped.get(cat, [])
             if not nodes:

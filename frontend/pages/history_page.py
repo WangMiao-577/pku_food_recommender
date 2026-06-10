@@ -95,7 +95,7 @@ class HistoryPage(QWidget):
                 padding: 8px 20px;
             }}
             QPushButton:hover {{
-                background-color: #A85A52;
+                background-color: {COLORS['error'].lighter(115).name()};
             }}
         """)
         clear_btn.clicked.connect(self.on_clear)
