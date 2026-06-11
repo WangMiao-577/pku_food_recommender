@@ -1,4 +1,4 @@
-# 一键构建：PyInstaller + Inno Setup 安装包
+# Full build: PyInstaller + Inno Setup installer
 param(
     [switch]$Clean,
     [switch]$SkipInstaller
@@ -10,7 +10,7 @@ $Root = Split-Path -Parent $PSScriptRoot
 & (Join-Path $PSScriptRoot "build.ps1") @PSBoundParameters
 
 if ($SkipInstaller) {
-    Write-Host "已跳过安装包生成（-SkipInstaller）" -ForegroundColor Yellow
+    Write-Host "Skipped installer (-SkipInstaller)" -ForegroundColor Yellow
     exit 0
 }
 
@@ -23,17 +23,16 @@ $iscc = $isccCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
 
 if (-not $iscc) {
     Write-Host ""
-    Write-Host "未检测到 Inno Setup 6，已跳过安装包编译。" -ForegroundColor Yellow
-    Write-Host "可手动安装 Inno Setup 后运行:"
+    Write-Host "Inno Setup 6 not found. Install it, then run:" -ForegroundColor Yellow
     Write-Host "  ISCC.exe packaging\installer.iss"
     Write-Host ""
-    Write-Host "或仅分发文件夹: dist\PKUFoodRecommender"
-    Write-Host "并使用 create_shortcut.ps1 创建快捷方式。"
+    Write-Host "Or distribute folder: dist\PKUFoodRecommender"
     exit 0
 }
 
 & $iscc (Join-Path $PSScriptRoot "installer.iss")
-if ($LASTEXITCODE -ne 0) { throw "Inno Setup 编译失败" }
+if ($LASTEXITCODE -ne 0) { throw "Inno Setup compile failed" }
 
+$setup = Join-Path $Root "dist\PKUFoodRecommender_Setup_2.0.0.exe"
 Write-Host ""
-Write-Host "安装包已生成: $Root\dist\PKUFoodRecommender_Setup_2.0.0.exe" -ForegroundColor Green
+Write-Host "Installer ready: $setup" -ForegroundColor Green
