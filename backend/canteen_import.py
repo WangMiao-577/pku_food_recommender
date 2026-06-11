@@ -13,7 +13,14 @@ CANTEEN_META = {
     "燕南美食": {"canteen_id": "yannan", "cuisine_default": "融合"},
     "家园食堂": {"canteen_id": "jiayuan", "cuisine_default": "融合"},
     "畅春园": {"canteen_id": "changchun", "cuisine_default": "融合"},
+    "佟园": {"canteen_id": "tongyuan", "cuisine_default": "清真"},
+    "松林": {"canteen_id": "songlin", "cuisine_default": "融合"},
+    "学一食堂": {"canteen_id": "xueyi", "cuisine_default": "融合"},
+    "勺园": {"canteen_id": "shaoyuan", "cuisine_default": "融合"},
 }
+
+# 导航/展示时 location_hint 仅保留食堂名
+SIMPLE_LOCATION_CANTEENS = {"佟园", "松林"}
 
 # 导入时统一归并到的食堂名（源 JSON 中的别名 -> 标准名）
 CANTEEN_ALIASES = {
@@ -43,6 +50,11 @@ def parse_calories(raw) -> float:
     m = re.search(r"([\d.]+)\s*kcal", s, re.I)
     if m:
         return float(m.group(1))
+    m = re.search(r"([\d.]+)\s*千焦", s)
+    if m:
+        return round(float(m.group(1)) / 4.184, 1)
+    if isinstance(raw, (int, float)):
+        return float(raw)
     m = re.search(r"([\d.]+)", s)
     return float(m.group(1)) if m else 400.0
 
@@ -619,6 +631,432 @@ def merge_csv_canteen(
         )
         existing.append(dish)
         existing_names.add((target_canteen, name))
+        existing_ids.add(dish_id)
+        added += 1
+        idx += 1
+
+    path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
+    return added, skipped
+
+
+def _simple_location_hint(canteen: str, window: str) -> str:
+    if canteen in SIMPLE_LOCATION_CANTEENS:
+        return canteen
+    return window
+
+
+def parse_tongyuan_window(loc: str) -> str:
+    loc = (loc or "").strip()
+    if "风味小吃" in loc or "风味小食" in loc:
+        return "风味小吃"
+    if "清真" in loc:
+        return "清真档口"
+    if "夜宵" in loc:
+        return "夜宵"
+    if "午餐" in loc:
+        return "午餐"
+    return "民族餐厅"
+
+
+def parse_songlin_window(loc: str) -> str:
+    loc = (loc or "").strip()
+    for key in ("包子类", "小食类", "粥类", "饮品", "灯箱"):
+        if key in loc:
+            return key.replace("类", "")
+    if "燕园味道" in loc:
+        return "饮品"
+    return "快餐"
+
+
+def resolve_xueyi_shaoyuan_canteen(loc: str, last_canteen: str) -> str:
+    loc = (loc or "").strip()
+    if not loc or loc.startswith("图片"):
+        return last_canteen or "学一食堂"
+    if loc.startswith("勺") or "勺园" in loc:
+        return "勺园"
+    if "学一" in loc or "学医" in loc:
+        return "学一食堂"
+    return last_canteen or "学一食堂"
+
+
+def load_tongyuan_csv(csv_path: str, encoding: str = "utf-8-sig") -> List[Dict]:
+    """佟园：含营养数据与「周几有」列，合并同名同档口的多日记录"""
+    import csv
+    from backend.dish_availability import parse_weekday_schedule
+
+    merged: Dict[Tuple[str, str], Dict] = {}
+    current_loc = ""
+    with open(csv_path, encoding=encoding, newline="") as f:
+        reader = csv.reader(f)
+        next(reader, None)
+        for row in reader:
+            if not row or not any(str(c).strip() for c in row):
+                continue
+            if row[0].strip():
+                current_loc = row[0].strip()
+            name = row[1].strip() if len(row) > 1 else ""
+            if not name:
+                continue
+            day_text = row[-1].strip() if row else ""
+            key = (name, current_loc)
+            parsed_days = parse_weekday_schedule(day_text)
+            if key not in merged:
+                merged[key] = {
+                    "location": current_loc,
+                    "name": name,
+                    "ingredients": row[2].strip() if len(row) > 2 else "",
+                    "flavor_text": row[3].strip() if len(row) > 3 else "",
+                    "protein": parse_gram_value(row[4] if len(row) > 4 else ""),
+                    "fat": parse_gram_value(row[5] if len(row) > 5 else ""),
+                    "carbs": parse_gram_value(row[6] if len(row) > 6 else ""),
+                    "fiber": parse_gram_value(row[7] if len(row) > 7 else ""),
+                    "sodium": parse_gram_value(row[8] if len(row) > 8 else ""),
+                    "calories": parse_calories(row[14] if len(row) > 14 else ""),
+                    "day_schedule": day_text,
+                    "_weekdays": set() if parsed_days is None else set(parsed_days),
+                    "_daily": parsed_days is None,
+                }
+            else:
+                item = merged[key]
+                if parsed_days is None:
+                    item["_daily"] = True
+                    item["_weekdays"].clear()
+                elif not item["_daily"]:
+                    item["_weekdays"].update(parsed_days)
+                if day_text and day_text not in (item.get("day_schedule") or ""):
+                    item["day_schedule"] = f"{item.get('day_schedule', '')}、{day_text}".strip("、")
+
+    rows = []
+    for item in merged.values():
+        if item.pop("_daily"):
+            item["available_weekdays"] = None
+        else:
+            days = sorted(item.pop("_weekdays"))
+            item["available_weekdays"] = days if days else None
+        item.pop("day_schedule", None)
+        rows.append(item)
+    return rows
+
+
+def load_xueyi_shaoyuan_excel(xlsx_path: str) -> List[Dict]:
+    import openpyxl
+
+    rows = []
+    current_loc = ""
+    current_canteen = "学一食堂"
+    wb = openpyxl.load_workbook(xlsx_path, read_only=True)
+    ws = wb[wb.sheetnames[0]]
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        if not any(c for c in row if c):
+            continue
+        if row[0]:
+            current_loc = str(row[0]).strip()
+            current_canteen = resolve_xueyi_shaoyuan_canteen(current_loc, current_canteen)
+        name = str(row[1]).strip() if row[1] else ""
+        if not name or name == "菜品名称":
+            continue
+        cal_raw = row[5] if len(row) > 5 else 400
+        rows.append({
+            "canteen": current_canteen,
+            "location": current_loc,
+            "name": name,
+            "ingredients": str(row[2] or "").strip() if len(row) > 2 else "",
+            "flavor_text": str(row[3] or "").strip() if len(row) > 3 else "",
+            "nutrition_text": str(row[4] or "").strip() if len(row) > 4 else "",
+            "calories_raw": cal_raw,
+        })
+    return rows
+
+
+def load_songlin_excel(xlsx_path: str) -> List[Dict]:
+    import openpyxl
+
+    rows = []
+    current_loc = ""
+    wb = openpyxl.load_workbook(xlsx_path, read_only=True)
+    ws = wb[wb.sheetnames[0]]
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        if not any(c for c in row if c):
+            continue
+        if row[0]:
+            current_loc = str(row[0]).strip()
+        name = str(row[1]).strip() if row[1] else ""
+        if not name:
+            continue
+        rows.append({
+            "location": current_loc,
+            "name": name,
+            "ingredients": str(row[2] or "").strip() if len(row) > 2 else "",
+            "flavor_text": str(row[3] or "").strip() if len(row) > 3 else "",
+            "nutrition_text": str(row[4] or "").strip() if len(row) > 4 else "",
+            "calories_raw": row[5] if len(row) > 5 else "",
+        })
+    return rows
+
+
+def tongyuan_row_to_dish(
+    row: Dict,
+    dish_id: str,
+    window_numbers: Dict[str, int],
+) -> Dict:
+    canteen = "佟园"
+    window = parse_tongyuan_window(row.get("location", ""))
+    if window not in window_numbers:
+        window_numbers[window] = len(window_numbers) + 1
+
+    name = row["name"]
+    ingredients = row.get("ingredients", "")
+    flavor_text = row.get("flavor_text", "")
+    calories = row.get("calories") or 400
+    nutrition = {
+        "calories": int(calories),
+        "protein": row.get("protein", 0),
+        "fat": row.get("fat", 0),
+        "carbs": row.get("carbs", 0),
+        "fiber": row.get("fiber", 2),
+    }
+    price = infer_price_from_context(name, window, calories)
+    meta = CANTEEN_META[canteen]
+
+    dish = {
+        "id": dish_id,
+        "name": name,
+        "canteen": canteen,
+        "canteen_id": meta["canteen_id"],
+        "window": window,
+        "window_number": window_numbers[window],
+        "floor": 1,
+        "price": price,
+        "cuisine": infer_cuisine(window, canteen, flavor_text),
+        "flavor": parse_flavor_text(flavor_text) or infer_flavor(name, ingredients),
+        "cooking": "现做",
+        "appearance": 3,
+        "portion_size": "M" if calories < 350 else "L",
+        "prep_time": 8,
+        "image": "",
+        "tags": infer_tags(name, window, price),
+        "rating": 4.0,
+        "rating_count": 0,
+        "hours": {"lunch": True, "dinner": True, "late_night": False},
+        "related_dishes": [],
+        "location_hint": _simple_location_hint(canteen, window),
+        "ingredients": ingredients,
+        **nutrition,
+    }
+    if row.get("available_weekdays") is not None:
+        dish["available_weekdays"] = row["available_weekdays"]
+    if row.get("sodium"):
+        dish["sodium_mg"] = row["sodium"]
+    return dish
+
+
+def xueyi_shaoyuan_row_to_dish(
+    row: Dict,
+    dish_id: str,
+    window_numbers: Dict[str, int],
+) -> Dict:
+    canteen = row["canteen"]
+    window = (row.get("location") or "综合").strip()
+    if window not in window_numbers:
+        window_numbers[window] = len(window_numbers) + 1
+
+    name = row["name"]
+    ingredients = row.get("ingredients", "")
+    flavor_text = row.get("flavor_text", "")
+    calories = parse_calories(row.get("calories_raw", 400))
+    nutrition = infer_nutrition(calories)
+    price = infer_price_from_context(name, window, calories)
+    meta = CANTEEN_META.get(canteen, {"canteen_id": canteen, "cuisine_default": "融合"})
+    hint = f"{canteen}，{window}" if canteen not in SIMPLE_LOCATION_CANTEENS else canteen
+
+    dish = {
+        "id": dish_id,
+        "name": name,
+        "canteen": canteen,
+        "canteen_id": meta["canteen_id"],
+        "window": window,
+        "window_number": window_numbers[window],
+        "floor": 1,
+        "price": price,
+        "cuisine": infer_cuisine(window, canteen, flavor_text),
+        "flavor": parse_flavor_text(flavor_text) or infer_flavor(name, ingredients),
+        "cooking": "现做",
+        "appearance": 3,
+        "portion_size": "M" if calories < 350 else "L",
+        "prep_time": 8,
+        "image": "",
+        "tags": infer_tags(name, window, price),
+        "rating": 4.0,
+        "rating_count": 0,
+        "hours": {"lunch": True, "dinner": True, "late_night": False},
+        "related_dishes": [],
+        "location_hint": hint,
+        "ingredients": ingredients,
+        **nutrition,
+    }
+    if row.get("nutrition_text"):
+        dish["nutrition_notes"] = row["nutrition_text"]
+    return dish
+
+
+def songlin_row_to_dish(
+    row: Dict,
+    dish_id: str,
+    window_numbers: Dict[str, int],
+) -> Dict:
+    canteen = "松林"
+    window = parse_songlin_window(row.get("location", ""))
+    if window not in window_numbers:
+        window_numbers[window] = len(window_numbers) + 1
+
+    name = row["name"]
+    ingredients = row.get("ingredients", "")
+    flavor_text = row.get("flavor_text", "")
+    calories = parse_calories(row.get("calories_raw", 300))
+    nutrition = infer_nutrition(calories)
+    price = infer_price_from_context(name, window, calories)
+    if any(k in window for k in ("包子", "粥")):
+        price = min(price, 8.0) if price > 10 else price
+    meta = CANTEEN_META[canteen]
+
+    return {
+        "id": dish_id,
+        "name": name,
+        "canteen": canteen,
+        "canteen_id": meta["canteen_id"],
+        "window": window,
+        "window_number": window_numbers[window],
+        "floor": 1,
+        "price": price,
+        "cuisine": infer_cuisine(window, canteen, flavor_text),
+        "flavor": parse_flavor_text(flavor_text) or infer_flavor(name, ingredients),
+        "cooking": "现做",
+        "appearance": 3,
+        "portion_size": "S" if price <= 8 else "M",
+        "prep_time": 5,
+        "image": "",
+        "tags": infer_tags(name, window, price) or ["早餐"],
+        "rating": 4.0,
+        "rating_count": 0,
+        "hours": {"lunch": True, "dinner": True, "late_night": False},
+        "related_dishes": [],
+        "location_hint": _simple_location_hint(canteen, window),
+        "ingredients": ingredients,
+        **nutrition,
+    }
+
+
+def _remove_canteens(existing: List[Dict], names: set) -> List[Dict]:
+    return [d for d in existing if d.get("canteen") not in names]
+
+
+def merge_tongyuan_csv(
+    dishes_file: str,
+    csv_path: str,
+    *,
+    id_prefix: str = "ty",
+    replace_existing: bool = True,
+) -> Tuple[int, int]:
+    path = Path(dishes_file)
+    existing = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    if replace_existing:
+        existing = _remove_canteens(existing, {"佟园"})
+
+    raw_rows = load_tongyuan_csv(csv_path)
+    existing_names = {(d["canteen"], d["name"], d.get("window", "")) for d in existing}
+    existing_ids = {d["id"] for d in existing}
+    window_numbers: Dict[str, int] = {}
+    added = skipped = 0
+    idx = 1
+
+    for row in raw_rows:
+        window = parse_tongyuan_window(row.get("location", ""))
+        key = ("佟园", row["name"], window)
+        if key in existing_names:
+            skipped += 1
+            continue
+        dish_id, idx = _next_dish_id(id_prefix, idx, existing_ids)
+        dish = tongyuan_row_to_dish(row, dish_id, window_numbers)
+        existing.append(dish)
+        existing_names.add(key)
+        existing_ids.add(dish_id)
+        added += 1
+        idx += 1
+
+    path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
+    return added, skipped
+
+
+def merge_xueyi_shaoyuan_excel(
+    dishes_file: str,
+    xlsx_path: str,
+    *,
+    id_prefix_xueyi: str = "xy",
+    id_prefix_shaoyuan: str = "sy",
+    replace_existing: bool = True,
+) -> Dict[str, Tuple[int, int]]:
+    path = Path(dishes_file)
+    existing = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    if replace_existing:
+        existing = _remove_canteens(existing, {"学一食堂", "勺园"})
+
+    raw_rows = load_xueyi_shaoyuan_excel(xlsx_path)
+    existing_names = {(d["canteen"], d["name"], d.get("window", "")) for d in existing}
+    existing_ids = {d["id"] for d in existing}
+    window_numbers: Dict[str, int] = {}
+    stats = {"学一食堂": [0, 0], "勺园": [0, 0]}
+    idx_map = {"学一食堂": 1, "勺园": 1}
+    prefix_map = {"学一食堂": id_prefix_xueyi, "勺园": id_prefix_shaoyuan}
+
+    for row in raw_rows:
+        canteen = row["canteen"]
+        name = row["name"]
+        window = (row.get("location") or "综合").strip()
+        if (canteen, name, window) in existing_names:
+            stats[canteen][1] += 1
+            continue
+        prefix = prefix_map[canteen]
+        idx = idx_map[canteen]
+        dish_id, idx = _next_dish_id(prefix, idx, existing_ids)
+        dish = xueyi_shaoyuan_row_to_dish(row, dish_id, window_numbers)
+        existing.append(dish)
+        existing_names.add((canteen, name, window))
+        existing_ids.add(dish_id)
+        stats[canteen][0] += 1
+        idx_map[canteen] = idx + 1
+
+    path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
+    return {k: tuple(v) for k, v in stats.items()}
+
+
+def merge_songlin_excel(
+    dishes_file: str,
+    xlsx_path: str,
+    *,
+    id_prefix: str = "sl",
+    replace_existing: bool = True,
+) -> Tuple[int, int]:
+    path = Path(dishes_file)
+    existing = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    if replace_existing:
+        existing = _remove_canteens(existing, {"松林"})
+
+    raw_rows = load_songlin_excel(xlsx_path)
+    existing_names = {(d["canteen"], d["name"]) for d in existing}
+    existing_ids = {d["id"] for d in existing}
+    window_numbers: Dict[str, int] = {}
+    added = skipped = 0
+    idx = 1
+
+    for row in raw_rows:
+        name = row["name"]
+        if ("松林", name) in existing_names:
+            skipped += 1
+            continue
+        dish_id, idx = _next_dish_id(id_prefix, idx, existing_ids)
+        dish = songlin_row_to_dish(row, dish_id, window_numbers)
+        existing.append(dish)
+        existing_names.add(("松林", name))
         existing_ids.add(dish_id)
         added += 1
         idx += 1

@@ -8,7 +8,7 @@ import os
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QGraphicsDropShadowEffect, QFrame, QScrollArea, QGridLayout,
-    QSizePolicy, QSpacerItem, QComboBox, QLineEdit, QTabWidget
+    QSizePolicy, QSpacerItem, QComboBox, QLineEdit, QTabWidget,
 )
 from PyQt5.QtGui import QPixmap, QColor
 from PyQt5.QtCore import Qt, pyqtSignal
@@ -17,6 +17,7 @@ from backend.data_manager import CANTEENS
 from backend.paths import dish_image_path
 from frontend.watercolor_style import COLORS, get_font, get_button_style, CANTEEN_TAGS
 from frontend.ui_scale import grid_columns, scale_value, viewport_width, dish_dim
+from backend.dish_availability import availability_badge, is_available_today
 
 
 class CanteenCard(QFrame):
@@ -98,16 +99,27 @@ class DishSmallCard(QFrame):
         layout.setContentsMargins(10, 8, 10, 8)
         layout.setSpacing(6)
 
-        # 图片
-        self.img = QLabel()
+        # 图片（含「今日不出售」角标）
         iw, ih = scale_value(dish_dim(130)), scale_value(dish_dim(100), lo=dish_dim(72))
+        img_wrap = QFrame()
+        img_wrap.setFixedSize(iw + 4, ih + 4)
+        img_wrap.setStyleSheet("background: transparent; border: none;")
+        img_grid = QGridLayout(img_wrap)
+        img_grid.setContentsMargins(0, 0, 0, 0)
+        img_grid.setSpacing(0)
+
+        self.img = QLabel()
         self.img.setMinimumSize(iw, ih)
         self.img.setMaximumSize(iw + 20, ih + 16)
         self.img.setScaledContents(True)
-        self.img.setStyleSheet(f"""
+        unavailable = not is_available_today(self.dish)
+        img_style = f"""
             background-color: {COLORS['bg_warm'].name()};
             border-radius: 8px;
-        """)
+        """
+        if unavailable:
+            img_style += f"color: {COLORS['text_light'].name()};"
+        self.img.setStyleSheet(img_style)
 
         img_path = dish_image_path(self.dish.get("image", ""))
         if img_path.exists():
@@ -116,7 +128,23 @@ class DishSmallCard(QFrame):
             self.img.setText("(图片)")
             self.img.setAlignment(Qt.AlignCenter)
 
-        layout.addWidget(self.img, alignment=Qt.AlignCenter)
+        img_grid.addWidget(self.img, 0, 0)
+        badge_text = availability_badge(self.dish)
+        if badge_text:
+            badge = QLabel(badge_text)
+            badge.setFont(get_font(7, bold=True))
+            badge.setAlignment(Qt.AlignCenter)
+            badge.setStyleSheet(f"""
+                QLabel {{
+                    background: {COLORS['text_light'].name()};
+                    color: white;
+                    border-radius: 6px;
+                    padding: 2px 5px;
+                }}
+            """)
+            img_grid.addWidget(badge, 0, 0, Qt.AlignTop | Qt.AlignRight)
+
+        layout.addWidget(img_wrap, alignment=Qt.AlignCenter)
 
         # 名称
         name = QLabel(self.dish["name"])

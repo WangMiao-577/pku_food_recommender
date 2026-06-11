@@ -12,6 +12,7 @@ from typing import List, Dict, Tuple, Optional, Set
 
 from backend.data_manager import DataManager, CAMPUS_REGIONS, LOCATION_TO_REGIONS
 from backend.campus_navigation import CampusNavigationService
+from backend.dish_availability import is_available_today
 
 
 # ============ 常量配置 ============
@@ -351,7 +352,12 @@ class Recommender:
         return merged
 
     def _retrieve(self, ctx: Dict) -> List[Dict]:
-        all_dishes = [self._normalize_dish(d) for d in self.dm.get_all_dishes()]
+        all_dishes = [
+            self._normalize_dish(d) for d in self.dm.get_all_dishes()
+            if is_available_today(d)
+        ]
+        if not all_dishes:
+            all_dishes = [self._normalize_dish(d) for d in self.dm.get_all_dishes()]
         scene_pool = self._recall_scene(all_dishes, ctx.get("meal_scene"))
         demand_pool = self._recall_demand(all_dishes, ctx)
         mode_pool = self._recall_mode(all_dishes, ctx["recommend_mode"])
