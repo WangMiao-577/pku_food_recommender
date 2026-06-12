@@ -1,5 +1,17 @@
 [
   {
+    "id": "fp_0007_1781250844",
+    "dish_id": "jy3039",
+    "dish_name": "肥牛砂锅",
+    "canteen": "家园食堂",
+    "cuisine": "川",
+    "time": "2026-06-12T15:54:04.157271",
+    "mood": "neutral",
+    "companions": "alone",
+    "favorite": null,
+    "note": ""
+  },
+  {
     "id": "fp_0006_1781081629",
     "dish_id": "ynu059",
     "dish_name": "擂椒酸菜小笋饭",
@@ -57,18 +69,6 @@
     "mood": "neutral",
     "companions": "alone",
     "favorite": null,
-    "note": ""
-  },
-  {
-    "id": "fp_0005_1780645818",
-    "dish_id": "d007",
-    "dish_name": "石锅拌饭",
-    "canteen": "农园食堂",
-    "cuisine": "日韩",
-    "time": "2026-06-05T15:50:18.819895",
-    "mood": "good",
-    "companions": "alone",
-    "favorite": "perm",
     "note": ""
   }
 ]

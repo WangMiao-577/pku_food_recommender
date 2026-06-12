@@ -6,7 +6,7 @@
   },
   "goals": "无",
   "preferences": {
-    "distance": "就近优先",
+    "distance": "愿意多走",
     "queue": "接受排队"
   },
   "social": {
@@ -15,20 +15,20 @@
   },
   "disliked_ingredients": [],
   "created_at": "2026-05-18T17:59:51.570211",
-  "updated_at": "2026-06-11T23:54:55.865711",
+  "updated_at": "2026-06-12T16:01:50.056809",
   "default_mode": "explore",
   "preferred_flavors": [
-    "微辣"
+    "酸甜"
   ],
   "budget_range": {
     "min": 0,
     "max": 30
   },
   "meal_scenes": [
-    "独自慢食"
+    "独自速食"
   ],
   "nutrition_goals": "均衡",
-  "current_location": "西南门",
+  "current_location": "东侧门",
   "explore_stability_ratio": 0.3,
-  "current_location_node_id": 6
+  "current_location_node_id": 2
 }

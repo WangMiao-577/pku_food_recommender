@@ -10,10 +10,10 @@
     "api_base": "",
     "model": "qwen-plus"
   },
-  "app_mode": "offline",
-  "footprint_popup_last": "2026-06-05T15:18:23.116250",
-  "season_mode": "auto",
-  "season_manual": "summer",
+  "app_mode": "ai",
+  "footprint_popup_last": "2026-06-12T15:51:27.331218",
+  "season_mode": "winter",
+  "season_manual": "winter",
   "season_bg_opacity": 0.55,
-  "season_active": "summer"
+  "season_active": "winter"
 }
