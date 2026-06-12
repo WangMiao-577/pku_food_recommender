@@ -9,6 +9,9 @@ param(
 $ErrorActionPreference = "Stop"
 $exe = Join-Path $InstallDir "PKUFoodRecommender.exe"
 $icon = Join-Path $InstallDir "my_logo.ico"
+if (-not (Test-Path $icon)) {
+    $icon = Join-Path $InstallDir "_internal\my_logo.ico"
+}
 
 if (-not (Test-Path $exe)) {
     throw "未找到可执行文件: $exe"

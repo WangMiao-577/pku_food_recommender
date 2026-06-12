@@ -31,6 +31,7 @@ if (-not (Test-Path $exePath)) {
 
 Copy-Item (Join-Path $Root "packaging\create_shortcut.ps1") $outDir -Force
 Copy-Item (Join-Path $Root "packaging\README.txt") $outDir -Force -ErrorAction SilentlyContinue
+Copy-Item (Join-Path $Root "my_logo.ico") $outDir -Force
 
 Write-Host ""
 Write-Host "Build OK: $outDir" -ForegroundColor Green

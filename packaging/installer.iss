@@ -22,7 +22,7 @@ SolidCompression=yes
 WizardStyle=modern
 PrivilegesRequired=lowest
 ArchitecturesInstallIn64BitMode=x64
-UninstallDisplayIcon={app}\{#MyAppExeName}
+UninstallDisplayIcon={app}\my_logo.ico
 
 [Languages]
 Name: "chinesesimplified"; MessagesFile: "languages\ChineseSimplified.isl"
@@ -31,6 +31,8 @@ Name: "chinesesimplified"; MessagesFile: "languages\ChineseSimplified.isl"
 Name: "desktopicon"; Description: "创建桌面快捷方式"; GroupDescription: "附加图标:"; Flags: checkedonce
 
 [Files]
+; 快捷方式 IconFilename 需要安装根目录下的 .ico（PyInstaller 仅将其放入 _internal）
+Source: "..\my_logo.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\dist\PKUFoodRecommender\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]

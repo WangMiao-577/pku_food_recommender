@@ -10,7 +10,7 @@
     "api_base": "",
     "model": "qwen-plus"
   },
-  "app_mode": "ai",
+  "app_mode": "offline",
   "footprint_popup_last": "2026-06-05T15:18:23.116250",
   "season_mode": "auto",
   "season_manual": "summer",

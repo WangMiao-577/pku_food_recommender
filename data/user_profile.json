@@ -1,7 +1,7 @@
 {
   "constraints": {
     "taboos": [],
-    "budget_limit": 50,
+    "budget_limit": 30,
     "meal_pref": "正餐"
   },
   "goals": "无",
@@ -10,26 +10,25 @@
     "queue": "接受排队"
   },
   "social": {
-    "companions": 4,
+    "companions": 1,
     "room_code": ""
   },
   "disliked_ingredients": [],
   "created_at": "2026-05-18T17:59:51.570211",
-  "updated_at": "2026-06-11T19:47:44.324632",
-  "default_mode": "stable",
+  "updated_at": "2026-06-11T23:54:55.865711",
+  "default_mode": "explore",
   "preferred_flavors": [
-    "微辣",
-    "酸甜"
+    "微辣"
   ],
   "budget_range": {
     "min": 0,
-    "max": 50
+    "max": 30
   },
   "meal_scenes": [
-    "团体宴请"
+    "独自慢食"
   ],
   "nutrition_goals": "均衡",
-  "current_location": "东侧门",
+  "current_location": "西南门",
   "explore_stability_ratio": 0.3,
-  "current_location_node_id": 2
+  "current_location_node_id": 6
 }

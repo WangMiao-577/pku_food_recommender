@@ -3,7 +3,7 @@
 # 输出目录: dist/PKUFoodRecommender/
 
 import os
-from PyInstaller.utils.hooks import collect_submodules
+from PyInstaller.utils.hooks import collect_submodules, collect_all
 
 ROOT = os.path.abspath('.')
 
@@ -17,15 +17,28 @@ datas = [
     (os.path.join(ROOT, 'my_logo.ico'), '.'),
 ]
 
-hiddenimports = collect_submodules('backend') + collect_submodules('frontend') + [
-    'PIL', 'PIL.Image', 'requests',
-]
+# PIL(Pillow): 地图渲染需要 Image / ImageDraw / ImageFont 等完整子模块
+pillow_datas, pillow_binaries, pillow_hiddenimports = collect_all('PIL')
+numpy_datas, numpy_binaries, numpy_hiddenimports = collect_all('numpy')
+
+hiddenimports = (
+    collect_submodules('backend')
+    + collect_submodules('frontend')
+    + pillow_hiddenimports
+    + numpy_hiddenimports
+    + [
+        'PIL.Image',
+        'PIL.ImageDraw',
+        'PIL.ImageFont',
+        'requests',
+    ]
+)
 
 a = Analysis(
     ['main.py'],
     pathex=[ROOT],
-    binaries=[],
-    datas=datas,
+    binaries=pillow_binaries + numpy_binaries,
+    datas=datas + pillow_datas + numpy_datas,
     hiddenimports=hiddenimports,
     hookspath=[],
     hooksconfig={},
